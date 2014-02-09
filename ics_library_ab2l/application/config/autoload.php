@@ -52,7 +52,11 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
+<<<<<<< HEAD
+$autoload['libraries'] = array('database', 'session','Jquery_pagination','email');
+=======
 $autoload['libraries'] = array('database', 'session','Jquery_pagination');
+>>>>>>> 268f0ee5f26cb862545418d097590d4589baf09e
 
 
 /*
