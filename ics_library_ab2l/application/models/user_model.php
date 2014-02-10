@@ -115,5 +115,29 @@ class User_Model extends CI_Model
         }
 
 	}
+
+	public function loginAdmin($username, $password)
+	{
+		$data = array(
+			'username' => $this->username,
+			'password' => $this->password
+		);
+
+		//create query to connect user login database
+        $this->db->select('username, password');
+        $this->db->from('admin_account');
+        $this->db->where('username', $username);
+        $this->db->where('password', sha1($password));
+        $this->db->limit(1);
+         
+        //get query and processing
+        $query = $this->db->get();
+        if($query->num_rows() == 1) { 
+            return $query->result(); //if data is true
+        } else {
+            return false; //if data is wrong
+        }
+
+	}
 }
 

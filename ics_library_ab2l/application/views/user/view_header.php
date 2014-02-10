@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>ICS Library</title>
+		<title><?php echo $titlepage?></title>
 		<!--The full build of all the generic classes of the framework(Framework itself)-->
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
@@ -12,6 +12,10 @@
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
   		<script src="<?php echo  base_url() ?>js/main.js"></script>
   		<meta name="viewport" content="width=device-width"/>
+  		<?php
+  		 if($this->session->userdata('logged_in_type')=='admin')
+            				redirect('index.php/admin/controller_announcement', 'refresh');
+          ?>
   		<meta charset="utf-8"/>
 	</head>
 	<body class="background-black">
@@ -31,7 +35,9 @@
 					<div id="logindiv" class="col">
 
 					<?php	
-						if(!($this->session->userdata('logged_in'))){
+						 
+
+						if(!($this->session->userdata('logged_in') )){
 					$attributes = array('name' =>'user_login', 'id' => 'user_login');
     					 echo form_open('index.php/user/controller_verify_login', $attributes); ?>							
     						<div id="emailuname" class="col width-1of2">
@@ -43,14 +49,14 @@
 								<input type="password" name="password" />
 							</div>
 							<div id="loginbutton">
-								<input type="submit"/>
+								<input value ="Login"type="submit"/>
 							</div>
 						</form>
 						<?php
 							}
-							else{
-								//echo "<div class='cell float-right'><div class='cell'><p>Welcome Name(<a href='#''>Logout</a>)</p></div></div>";
-							}
+
+							
+							
 						?>
 					</div>
 				</div>

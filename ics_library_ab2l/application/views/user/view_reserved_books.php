@@ -16,12 +16,11 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 2%;">#</th>
-                                                    <th style="width: 20%;" nowrap="nowrap">Course Code</th>
+                                                    <th style="width: 10%;" nowrap="nowrap">Course Code</th>
                                                     <th style="width: 35%;" nowrap="nowrap">Title</th>
                                                     <th style="width: 22%;" nowrap="nowrap">Author</th>
                                                     <th style="width: 10%;" nowrap="nowrap">Type</th>
-                                                    <th style="width: 5%;" nowrap="nowrap">Rank</th>
-                                                    <th style="width: 10%;" nowrap="nowrap">Action</th>
+                                                    <th style="width: 13%;" nowrap="nowrap">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -34,9 +33,7 @@
                                                             echo "<td>".$row->title."</td>";
                                                             echo "<td>".$row->author."</td>";
                                                             echo "<td>".$row->type."</td>";
-                                                            echo "<td>".$row->rank."</td>";
-                                                            echo "<td><input type='button' class='background-red table-button' value='Cancel'></td>";
-                    
+                                                            echo "<td>".$row->status."</td>";
                                                         echo "</tr>";
                                                     }
                                                 ?>

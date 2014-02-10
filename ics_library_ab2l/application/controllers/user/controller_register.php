@@ -9,7 +9,9 @@ class Controller_register extends CI_Controller {
  
     function index() {
         $this->load->helper(array('form','html'));
-        $this->load->view("user/view_header");
+       
+        $data['titlepage']= "Register";
+        $this->load->view("user/view_header", $data);
         $this->load->view("user/view_register");
         $this->load->view("user/view_navigation");
         if($this->session->userdata('logged_in')){

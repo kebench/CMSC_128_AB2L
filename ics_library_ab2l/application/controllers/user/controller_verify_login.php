@@ -27,8 +27,13 @@ class Controller_verify_login extends CI_Controller {
             } 
         else {
                 //Go to private area
+           if($this->session->userdata('logged_in_type')=="user")
             redirect('index.php/user/controller_home', 'refresh');
-           }       
+           
+           else{
+                redirect('index.php/admin/controller_announcement', 'refresh');
+           } 
+        }   
      }
  
      function check_database($password) {
@@ -41,17 +46,39 @@ class Controller_verify_login extends CI_Controller {
              foreach($result as $row) {
                  //create the session
                  $sess_array = array(
-                     'username' => $row->username);
+                     'username' => $row->username
+
+                     );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
+                  $this->session->set_userdata('logged_in_type', "user");
                  }
           return TRUE;
-          } else {
+          } 
+          //if not in user tables
+          else {
+                //check if admin
+                 $result = $this->login->loginAdmin($username, $password);
+                  if($result) {
+                         $sess_array = array();
+                         foreach($result as $row) {
+                             //create the session
+                             $sess_array = array(
+                                 'username' => $row->username);
+                             //set session with value from database
+                             $this->session->set_userdata('logged_in', $sess_array);
+                             $this->session->set_userdata('logged_in_type', "admin");
+
+                             }
+                         return TRUE;
+                        }
+
+
               //if form validate false
               $this->form_validation->set_message('check_database', 'Invalid username or password');
               return FALSE;
           }
       }
 }
-/* End of file c_verifylogin.php */
-/* Location: ./application/controllers/c_verifylogin.php */
+/* End of file controller_verify_login.php */
+/* Location: ./application/controllers/user/controller_verify_login.php */

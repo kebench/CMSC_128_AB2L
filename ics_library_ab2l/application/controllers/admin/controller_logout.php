@@ -18,7 +18,7 @@ class Controller_logout extends CI_Controller {
          //remove all session data
          $this->session->unset_userdata('logged_in');
          $this->session->sess_destroy();
-         redirect('index.php/admin/controller_admin_login', 'refresh');
+         redirect('index.php/user/controller_home', 'refresh');
      }
  
 }

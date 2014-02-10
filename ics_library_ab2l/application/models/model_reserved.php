@@ -12,7 +12,7 @@ query used: select statement to get the necessary info about the reserved book
 function getAllReserved(){	
 	$sqlQuery="SELECT GROUP_CONCAT(DISTINCT bs.subject SEPARATOR ' , ') as subject,
                         GROUP_CONCAT(DISTINCT ba.author SEPARATOR ' and ') as author,
-                        b.title, b.type, u.first_name,u.middle_initial, u.last_name, u.account_number, br.rank, b.call_number
+                        b.title, b.type, u.first_name,u.middle_initial, u.last_name, u.account_number, b.call_number
                         FROM book b, book_reservation br, user_account u, book_subject bs, book_author ba
                         WHERE  b.call_number = br.call_number 
                                 AND b.call_number = ba.call_number

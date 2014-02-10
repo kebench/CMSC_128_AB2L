@@ -8,10 +8,12 @@ class controller_search_book extends CI_Controller{
 	}
 
 	function index(){
-		$data['title'] = 'Search Page';
+		
 		$data['borrower'] = $this->session->userdata('borrower');
 		$this->load->helper(array('form','html'));
-        $this->load->view("user/view_header");
+       
+		$data['titlepage']= "View Borrowed Books";
+        $this->load->view("user/view_header", $data);
         $this->load->view("user/view_search");
         $this->load->view("user/view_navigation");
         if($this->session->userdata('logged_in')){

@@ -10,7 +10,9 @@ class Controller_contact extends CI_Controller {
  
     function index() {
         $this->load->helper(array('form','html'));
-        $this->load->view("user/view_header");
+       
+        $data['titlepage']= "Contact Us";
+        $this->load->view("user/view_header", $data);
         $this->load->view("user/view_contact");
         $this->load->view("user/view_navigation"); 
         if($this->session->userdata('logged_in')){

@@ -20,7 +20,9 @@ class Controller_login extends CI_Controller {
     	}else{
 	        $this->load->helper(array('form','html'));
 	        $data['user'] = $this->session->userdata('logged_in');
-            $this->load->view('user/view_header',$data);
+           
+            $data['titlepage']= "ICS Library";
+            $this->load->view("user/view_header", $data);
             $this->load->view('user/view_login'); //load view for login
             $this->load->view('user/view_navigation');
             $this->load->view("user/view_not_logged"); 
