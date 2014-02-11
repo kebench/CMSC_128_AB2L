@@ -7,15 +7,24 @@ class Controller_view_users extends CI_Controller {
     	$data['parent'] = "Users";
     	$data['current'] = "View Users";
 
-        if($this->session->userdata('logged_in')){
-            $this->load->helper(array('form','html'));
-            $this->load->view("admin/view_header",$data);
-            $this->load->view("admin/view_aside");
-            $this->load->view("admin/view_users",$data);
-            $this->load->view("admin/view_footer");
-        }else{
-            redirect('index.php/admin/controller_admin_login', 'refresh');
-        }
+        $this->load->helper(array('form','html'));
+        $this->load->view("admin/view_header",$data);
+        $this->load->view("admin/view_aside");
+        $this->load->view("admin/view_users",$data);
+        $this->load->view("admin/view_footer");
+    }
+
+    function search_user(){
+        $this->load->model('model_users');
+        $data['results']=$this->model_users->userSearch($this->input->post('s_user'));
+        $data['parent'] = "Users";
+        $data['current'] = "Search Users";
+
+        $this->load->helper(array('form','html'));
+        $this->load->view("admin/view_header",$data);
+        $this->load->view("admin/view_aside");
+        $this->load->view("admin/view_users",$data);
+        $this->load->view("admin/view_footer");
     }
 }
 /* End of file home_controller.php */
