@@ -41,10 +41,25 @@ class Controller_book extends CI_Controller {
 		$data['title'] = $acc." :: Borrowed Books";
 		$this->load->model("model_get_list");
 		
-		$data['result'] = $this->model_get_list->book_borrowed($acc);
 		$this->load->view("user/view_header");
+
+		$data['result'] = $this->model_get_list->book_overdue($acc);
+        $data['message'] = "There is no overdue books!";
+		$data['header'] = "List of overdue books";
         $this->load->view("user/view_borrowed_books",$data);
+
+		$data['result'] = $this->model_get_list->book_borrowed($acc);
+		$data['header'] = "List of borrowed books";
+		$data['message'] = "There is no borrowed books!";
+        $this->load->view("user/view_borrowed_books",$data);
+
+        $data['result'] = $this->model_get_list->book_returned($acc);
+        $data['message'] = "There is no returned books!";
+		$data['header'] = "List of returned books";
+        $this->load->view("user/view_borrowed_books",$data);
+
         $this->load->view("user/view_navigation");
+
         if($this->session->userdata('logged_in')){
             $this->load->view("user/view_logged_in");
         }

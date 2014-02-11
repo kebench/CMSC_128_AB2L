@@ -1,5 +1,4 @@
 <div class="cell body">
-									<p class="tiny">View Borrowed Books</p>
 								</div>
 								 <div class="col">
                                 <div class="cell">
@@ -8,7 +7,7 @@
                                     ?>
                                     <div class="panel datasheet">
                                         <div class="header text-center background-red">
-                                            List of all books
+                                            <?php echo $header; ?>
                                         </div>
                                         <table class="body fixed">
                                             <thead>
@@ -17,10 +16,10 @@
                                                     <th style="width: 10%;" nowrap="nowrap">Course Code</th>
                                                     <th style="width: 25%;" nowrap="nowrap">Title</th>
                                                     <th style="width: 22%;" nowrap="nowrap">Author</th>
-                                                    <th style="width: 10%;" nowrap="nowrap">Type</th>
+                                                    <th style="width: 8%;" nowrap="nowrap">Type</th>
                                                     <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
                                                     <th style="width: 13%;" nowrap="nowrap">Date Due</th>
-                                                    <th style="width: 10%;" nowrap="nowrap">Status</th>
+                                                    <th style="width: 13%;" nowrap="nowrap">Date Returned</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -35,8 +34,9 @@
                                                         echo "<td>".$row->type."</td>";
                                                         echo "<td>".$row->date_borrowed."</td>";
                                                         echo "<td>".$row->due_date."</td>";
-                                                        echo "<td>".$row->status."</td>";
+                                                        echo "<td>".$row->date_returned."</td>";
                                                         echo "</tr>";
+                                                        $count++;
                                                     }
                                                 ?>
                                                 
@@ -53,7 +53,7 @@
                                         }
                                         else{
                                             echo "<hr>";
-                                            echo "<h2 class='color-grey'>There is no currently borrowed books!</h2>";
+                                            echo "<h2 class='color-grey'>$message</h2>";
                                             echo "<hr>";
                                         }
                                     ?>
