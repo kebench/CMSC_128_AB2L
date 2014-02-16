@@ -21,7 +21,7 @@
 						<li ><a href="<?php echo base_url() ?>index.php/admin/controller_book" class="nav-a">View Books</a></li>
 						<li><a href="<?php echo base_url() ?>index.php/admin/controller_outgoing_books" class="nav-a">View Outgoing Books</a></li>
 						<li><a href="<?php echo base_url() ?>index.php/admin/controller_reservation" class="nav-a">View Borrowed Books</a></li>
-						<li><a href="<?php echo base_url() ?>index.php/admin/controller_search" class="nav-a">Search</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_search_book" class="nav-a">Search</a></li>
 					</ul>
 				</div>
 			</div>
@@ -45,8 +45,11 @@
 				</div>
 				<div>
 					<ul class="nav-links">
-						<li><a href="<?php echo base_url() ?>index.php/admin/controller_view_logs" class="nav-a">View Logs</a></li>
-						<li><a href="<?php echo base_url() ?>index.php/admin/controller_view_logout" class="nav-a">Logout</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_announcement/viewForm" class="nav-a">Add Announcements</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_announcement" class="nav-a">View Announcements</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_stat" class="nav-a">View Statistics</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_log" class="nav-a">View Logs</a></li>
+						<li><a href="<?php echo base_url() ?>index.php/admin/controller_logout" class="nav-a">Logout</a></li>
 					</ul>
 				</div>
 			</div>

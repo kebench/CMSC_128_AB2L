@@ -11,7 +11,7 @@ class Controller_announcement extends Controller_log {
     		$this->load->helper(array('form','html'));
 	        $this->load->view("admin/view_header",$data);
 	        $this->load->view("admin/view_aside");
-	        $this->load->view("admin/view_announcements.php");
+	        $this->load->view("admin/view_announcements");
 	        $this->load->view("admin/view_footer");
     	}else{
 	        redirect('index.php/admin/controller_admin_login', 'refresh');
@@ -29,24 +29,26 @@ class Controller_announcement extends Controller_log {
 		$data['parent'] = "Admin";
     	$data['current'] = "Add Announcement";
     	$data['user'] = $this->session->userdata('logged_in');
-
-        if($this->session->userdata('logged_in')){
-    		$this->load->helper(array('form','html'));
-	        $this->load->view("admin/view_header",$data);
-	        $this->load->view("admin/view_aside");
-	        $this->load->view("admin/view_add_announcement.php");
-	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
+    	$this->load->helper(array('form','html'));
+	    $this->load->view("admin/view_header",$data);
+	    $this->load->view("admin/view_aside");
+	    $this->load->view("admin/view_add_announcement.php");
+	    $this->load->view("admin/view_footer");
 	}
 	
 	public function deleteAll(){
 		if(isset($_POST["delete_all"]))
 		{
-			//procedure to delete all announcements
-			//just empty the texy file
+			$fp = fopen('./application/announcements.txt', "w");
+		fclose($fp);
+		$this->add_log("Admin $session_user deleted all announcements", "Delete Announcements");
+		header("refresh:0;url=../call_delete");
 		}
+	}
+
+	public function call_delete(){
+		echo "<script>alert('You have deleted all the announcements');</script>";
+		redirect('index.php/admin/controller_announcement/viewForm','refresh');
 	}
 	
 	public function writeToFile(){
@@ -79,7 +81,7 @@ class Controller_announcement extends Controller_log {
 				//$counter++;
 				$this->add_log("Admin 1 added a new announcement", "Add Announcement");
 				unset($_POST["add"]);
-				header("refresh:0;url=");
+				redirect('index.php/admin/controller_announcement','refresh');
 			}
 			
 		}
@@ -129,10 +131,33 @@ class Controller_announcement extends Controller_log {
 			$entry['id'] = $id;
 			$entry['title'] = $title;
 			$entry['content'] = $content;
-		
-			$this->load->view("view_edit_announcement", $entry);
+
+			$entry['parent'] = "Admin";
+	    	$entry['current'] = "Edit Announcement";
+
+    		$this->load->helper(array('form','html'));
+	        $this->load->view("admin/view_header",$entry);
+	        $this->load->view("admin/view_aside");
+	        $this->load->view("admin/view_edit_announcements",$entry);
+	        $this->load->view("admin/view_footer");
 		}else if(isset($_POST["delete"])){
-			echo "Put the function for deleting announcement here";
+			$txt_file = file_get_contents('./application/announcements.txt');
+			$id = htmlspecialchars($_POST["date"]);
+			$announcements = explode("*", trim($txt_file, "*"));	//separate the announcements
+			foreach($announcements as $announcement){	//find the announcement to be deleted
+				if(strpos($announcement, $id)!== false)				
+					$index = array_search($announcement, $announcements);
+			}
+			unset($announcements[$index]);	//delete the element
+			$new="";
+			foreach($announcements as $announcement){
+				$new .= "*".$announcement;
+			}
+			$fp = fopen('./application/announcements.txt', "w");
+			fwrite($fp, $new);
+			fclose($fp);
+			$this->add_log("Admin $session_user deleted an announcement", "Update Announcement");
+			redirect('index.php/admin/controller_announcement','refresh');
 		}
 	}
 	
@@ -144,22 +169,37 @@ class Controller_announcement extends Controller_log {
 			$new_title = htmlspecialchars($_POST["title"]);	
 			$new_content = nl2br(htmlspecialchars($_POST["content"]));
 			$new_date = date('M-d-Y');
-			$new_time = date("G:i:s");
+			$new_time = date("H:i:s");
 				
 			if(trim($new_content) == '')
 			{
 				$status = 0;
 				echo "You did not fill out the required fields.";
 			}
-
+			
 			if($status == 1){
+				$txt_file = file_get_contents('./application/announcements.txt');
+				$id = htmlspecialchars($_POST["date"]);
+				$announcements = explode("*", trim($txt_file, "*"));	//separate the announcements
+				foreach($announcements as $announcement){	//find the announcement to be deleted
+					if(strpos($announcement, $id)!== false)				
+						$index = array_search($announcement, $announcements);
+				}
+				unset($announcements[$index]);	//delete the element
+				$new="";
+				foreach($announcements as $announcement){
+					$new .= "*".$announcement;
+				}
+				$fp = fopen('./application/announcements.txt', "w");
+				fclose($fp);
+
 				$fp = fopen('./application/announcements.txt', "a");
 				$savestring = "*" . $new_date ."-". $new_time . "^" . $new_title . "#" . $new_content;
 				fwrite($fp, $savestring);
+				fwrite($fp, $new);
 				fclose($fp);
-			//	echo "<p>Your data has been updated!</p>";
-				$this->add_log("Admin 1 updated an announcement", "Update Announcement");
-				header("refresh:0;url=../controller_announcement/");
+				$this->add_log("Admin $session_user updated an announcement", "Update Announcement");
+				redirect('index.php/admin/controller_announcement','refresh');
 			}
 		}
 	}

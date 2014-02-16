@@ -11,7 +11,7 @@ class Model_add_admin extends CI_Model {
   $data=array(
 	  'admin_key'=>$this->input->post('admin_key'),
     'first_name'=>$this->input->post('fname'),
-    'middle_initial'=>$this->input->post('minit'),
+    'middle_name'=>$this->input->post('minit'),
     'last_name'=>$this->input->post('lname'),
    
     'email'=>$this->input->post('eadd'),

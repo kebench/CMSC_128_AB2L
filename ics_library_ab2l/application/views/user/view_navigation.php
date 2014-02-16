@@ -7,7 +7,8 @@
 		<nav class="col width-fill menu">
 			<ul class="links nav left navigation-links">
 				<li class=""><a href="<?php echo base_url()?>">Home</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/user/controller_search">Search</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/user/controller_search_book">Search</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/user/controller_books">View Books</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/user/controller_stat">Book Statistics</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/user/controller_faq">FAQS</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/user/controller_contact">Contact Us</a></li>	

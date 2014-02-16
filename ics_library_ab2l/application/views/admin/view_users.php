@@ -38,10 +38,13 @@
 							*/
 
 							if($stat === "approve"){
-							echo "<td><a href=''>"."Registered"."</td>";
+							echo "<td>Registered</td>";
 							}
 							else{
-								echo "<td>"."<input type = 'button' class='background-red' value = 'Confirm'>"."</td>";	//'Validate' button. Functionality not included here.
+								echo "<form action='controller_view_users/approve_user' method='POST'>";
+                                echo "<input type='hidden' name='account_number1' value='$row->account_number'/>";
+                                echo "<td>"."<input type ='submit' class='background-red' name='approve' value = 'Confirm'>"."</td>";   //'Validate' button. Functionality not included here.
+                                echo "</form>";	//'Validate' button. Functionality not included here.
 						    }
 							
 							echo "</tr>";

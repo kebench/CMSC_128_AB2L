@@ -1,13 +1,13 @@
 <div class="body width-fill background-white">
-					<div class="cell">
+                    <div class="cell">
                         <div class="page-header cell">
                                         <h1>Admin <small>View Books</small></h1>
                         </div>
-						<div class="panel datasheet cell">
-	                        <div class="header background-red">
-	                            List of all books
-	                        </div>
-	                        <table class="body">
+                        <div class="panel datasheet cell">
+                            <div class="header background-red">
+                                List of all books
+                            </div>
+                            <table class="body">
                                 <thead>
                                     <tr>
                                         <th style="width: 3%;">#</th>
@@ -28,35 +28,43 @@
                                         $count = 1;
                                         foreach($query as $row){
                                             echo "<tr>";
-                                            echo "
-                                                <td>{$count}</td>
-                                                <td>{$row->call_number}</td>
-                                                <td>{$row->title}</td>";
-                                            $data['query1'] = $this->model_book->get_book_authors($row->call_number);
+                                            echo "<td>$count</td>";
+                                            $data['query1'] = $this->model_book->get_book_call_numbers($row->id);
+                                            $call_number="";
+                                            foreach($data['query1'] as $call_number_list){
+                                                $call_number .= "{$call_number_list->call_number}; ";
+                                            }
+                                            echo "<td>{$call_number}</td>
+                                            <td>{$row->title}</td>";
+                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
                                             $authors ="";
                                             foreach($data['query1'] as $authors_list){
-                                                $authors = $authors."{$authors_list->author},";
+                                                $authors .= "{$authors_list->author}; ";
                                             }
                                             echo "<td>{$authors}</td>";
-                                            $data['query1'] = $this->model_book->get_book_subjects($row->call_number);
+                                            $data['query1'] = $this->model_book->get_book_subjects($row->id);
                                             $subjects ="";
                                             foreach($data['query1'] as $subjects_list){
-                                                $subjects .= "{$subjects_list->subject}, ";
+                                                $subjects .= "{$subjects_list->subject}; ";
                                             }
                                             echo "<td>{$subjects}</td>";
                                             echo "<td>{$row->year_of_pub}</td>
                                             <td>{$row->type}</td>
                                             <td>{$row->no_of_available}/{$row->quantity}</td>
+
                                             <td>
-                                            <form action=\"../admin/controller_book/edit/\" method=\"post\">
-                                                <input type='hidden' name='call_number' value='{$row->call_number}' />
-                                                <input type=\"submit\" class='background-red' name=\"edit\" value=\"Edit\"></a>
-                                            </form></td>
+                                            <form action=\"../admin/controller_book/edit/\" method='post'>
+                                                <input type=\"hidden\" name=\"call_number\" value=\"{$row->id}\" />
+                                                <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
+                                            </form>
+                                            </td>
                                             <td>
-                                            <form action=\"../index.php/controller_book/delete/\" method=\"post\">
-                                                <input type='hidden' name='call_number' value='{$row->call_number}' />
-                                                <input type=\"button\" class='background-red' name=\"delete\" value=\"Delete\" ></a></td>
-                                            </form>";
+                                            <form action=\"controller_book/delete/\" method='post'>
+                                                <input type=\"hidden\"  name=\"call_number\" value=\"{$row->id}\" />
+                                                <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
+                                            </form>
+                                            </td>
+                                            </tr>";
 
                                             echo "</tr>";
                                             $count++;
@@ -74,6 +82,6 @@
                                     <form action="<?php echo base_url(); ?>index.php/admin/controller_add_books" method='post'>
                                             <input type='submit' name='add' value='Add Book' enabled/>
                                     </form>
-	                    </div>
-	                </div>
-	            </div>
+                        </div>
+                    </div>
+                </div>

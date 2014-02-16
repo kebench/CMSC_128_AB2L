@@ -17,7 +17,8 @@ class Controller_book extends CI_Controller {
 		$this->load->model("model_get_list");
 		
 		$data['result'] = $this->model_get_list->get_list($acc,"reserved");
-        $this->load->view("user/view_header");
+		$data['titlepage'] = "Reserved books";
+        $this->load->view("user/view_header",$data);
         $this->load->view("user/view_reserved_books",$data);
         $this->load->view("user/view_navigation");
         if($this->session->userdata('logged_in')){
@@ -40,9 +41,10 @@ class Controller_book extends CI_Controller {
 		$session_data = $this->session->userdata('logged_in');
 		$acc = $session_data['username'];						
 		$data['title'] = $acc." :: Borrowed Books";
+		$data['titlepage'] = "Borrowed Books";
 		$this->load->model("model_get_list");
 		
-		$this->load->view("user/view_header");
+		$this->load->view("user/view_header",$data);
 
 		$data['result'] = $this->model_get_list->get_list($acc,"overdue");
         $data['message'] = "There is no overdue books!";

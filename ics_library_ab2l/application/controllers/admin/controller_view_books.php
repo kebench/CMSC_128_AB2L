@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Controller_view_books extends CI_Controller {
+include_once("controller_log.php");
+class Controller_view_books extends Controller_log {
  
     function index() {
     	$data['parent'] = "Books";

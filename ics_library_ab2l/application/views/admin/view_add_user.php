@@ -9,9 +9,20 @@
                                         <div class="cell panel">
                                             <div class="body">
                                                 <div class="cell">
+                                                    <div class="color-red width-fill" style="font-weight: bold;"><p>
+                                                        <?php 
+                                                            if(isset($msg)){
+                                                                echo $msg;
+                                                             }
+
+                                                     ?></p>
+                                                    </div>
                                                     <div class="col">
                                                         <div class="cell">
-                                                            <form name = "myform">
+                                                              <?php 
+                                                                $attributes = array('name' => 'regForm');
+
+                                                                echo form_open("index.php/admin/controller_add_user/registration", $attributes); ?>
 
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
@@ -21,20 +32,21 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" id="firstname" name="firstname" placeholder="Your first name"  data-required="true">&nbsp;<span name="helpfname" class="color-red"></span><br/>
+                                                                            <input type="text" name="fname" class="background-white" id = "fname" placeholder="Your first name" required  /><span class="cell" name = "valFname"></span>
                                                                         </div>
                                                                     </div>
+                                                                    <span>
                                                                 </div>
 
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="firstname">Middle name<span class="color-red"> *</span></label>
+                                                                            <label for="firstname">Middle Initial<span class="color-red"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" id="middlename" id="middlename" placeholder="Your middle name"  data-required="true">&nbsp;<span name="helpmname" class="color-red"></span><br/>
+                                                                            <input type="text" name="minit" class="background-white" id = "minit" placeholder="Your middle initial" required/><span name = "valInitial"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -47,33 +59,112 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" id="lastname" name="lastname" placeholder="Your last name" data-required="true">&nbsp;<span name="helplname" class="color-red"></span><br/>
+                                                                            <input type="text" name="lname" class="background-white" id = "lname" placeholder="Your last name" required/><span name = "valLname"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
-                                                                 <div class="col">
+
+                                                                <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="email">Email Address<span class="color-red"> *</span></label>
+                                                                            </br><label for="classification">Classification <span class="color-red"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="email" id="email" name="email" placeholder="Your email address" data-required="true">&nbsp;<span name="helpemail" class="color-red"></span><br/>
+                                                                            <br/>
+                                                                            <select id = "classi" name = "classi" onclick = "checker()" >
+                                                                            <option value="student">Student</option>
+                                                                            <option value="faculty">Faculty</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="Classification is required">
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
-                                                                 <div class="col">
+                                                                 <div class="col" id= "numDiv">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="username">Username<span class="color-red"> *</span></label>
+                                                                            <label for="studno" id = "labelNum">Student Number<span class="color-red"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" id="username" name="username" placeholder="Your username" data-required="true">&nbsp;<span name="helpusername" class="color-red"></span><br/>
+                                                                            <input type="text" name="stdNum" class="background-white" placeholder="Your ID number" id = "stdNum" required/><span name = "valNumber"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                    
+                                                                <div class="col" id= "collegeDiv">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            </br><label for="college">College <span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <br/>
+                                                                            <select id = "college" name = "college" onfocus = "courseChecker()" onclick = "courseChecker()"><span name = "valCollege"></span>
+            
+                                                                            <option value="CA">CA</option>
+                                                                            <option value="CAS">CAS</option>
+                                                                            <option value="CDC">CDC</option>
+                                                                            
+                                                                            <option value="CEAT">CEAT</option>
+                                                                            <option value="CEM">CEM</option>
+                                                                            <option value="CFNR">CFNR</option>
+                                                                            <option value="CHE">CHE</option>
+
+                                                                            <option value="CVM">CVM</option>
+                                                                            <!--option value="SESAM">SESAM</option>
+                                                                            <option value="GS">GS</option>
+                                                                            <option value="CPAf">CPAf</option-->
+                                                                            
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="College is required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col" id= "courseDiv">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            </br><label for="college">Course <span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                <div class="col width-fill">
+                                                                        <div class="cell"><br/>
+                                                                            <select id = "course" name = "course" onfocus = "courseChecker()" >
+          
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="Course is required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col" id = "divEadd">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Email Address<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="email" class="background-white" name="eadd" placeholder="Your email address" id = "eadd" required/><span name = "valEmail"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -81,12 +172,38 @@
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="password">Password<span class="color-red"> *</span></label>
+                                                                            <label for="occupation">Username:<span class="color-red"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="password" id="password" name="password" placeholder="Your password" data-required="true">&nbsp;<span name="helppassword" class="color-red"></span><br/>
+                                                                            <input type="text" class="background-white" name="uname" id = "uname" required/><span name = "valUser"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Password:<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="password" class="background-white" name="pass" id = "pass" required/><span name = "valPass"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Confirm Password:<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required/><span name = "valCpass"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -96,7 +213,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <br/><input type="submit" value="Submit" class="button"/>
+                                                                            </br><input type="submit" value="Submit"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -111,3 +228,5 @@
                             </div>
                         </div>
 				</div>
+            <script src="<?php echo base_url() ?>js/formValidation.js"></script>
+            <script src="<?php echo base_url() ?>js/register_validation.js"></script>

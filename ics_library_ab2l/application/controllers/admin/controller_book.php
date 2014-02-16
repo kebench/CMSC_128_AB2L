@@ -5,21 +5,18 @@ class Controller_book extends Controller_log {
 
 	public function index()
 	{
+		//$session_user = $this->checklogin();
 		$this->load->model('model_book');
 		$data['query'] = $this->model_book->select_all_book_info();
 		$data['parent'] = "Books";
     	$data['current'] = "View Books";
     	$data['user'] = $this->session->userdata('logged_in');
 
-        if($this->session->userdata('logged_in')){
-    		$this->load->helper(array('form','html'));
-	        $this->load->view("admin/view_header",$data);
-	        $this->load->view("admin/view_aside");
-	        $this->load->view('admin/view_books', $data);
-	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
+    	$this->load->helper(array('form','html'));
+	    $this->load->view("admin/view_header",$data);
+	    $this->load->view("admin/view_aside");
+	    $this->load->view('admin/view_books', $data);
+	    $this->load->view("admin/view_footer");
 		
 	}
 	/*ADD BOOK FUNCTIONS*/
@@ -108,11 +105,12 @@ class Controller_book extends Controller_log {
 	
 	//DELETE
 	function delete(){
-		$session_user = $this->checklogin();
+		//$session_user = $this->checklogin();
+		$this->load->model('model_book');
 		$call_number = $_POST['call_number'];
 		$this->model_book->delete_book($call_number);
 		$this->add_log("$session_user deleted book with Call Number: $call_number", "Delete Book");
-		header("refresh:0;url=../");
+		redirect('index.php/admin/controller_book', 'refresh');
 
 		
 	}

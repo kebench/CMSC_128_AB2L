@@ -10,7 +10,7 @@
                                         <table class="body fixed">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 2%;">#</th>
+                                                    <th style="width: 5%;">#</th>
                                                     <th style="width: 15%;" nowrap="nowrap">Course Code</th>
                                                     <th style="width: 35%;" nowrap="nowrap">Title</th>
                                                     <th style="width: 22%;" nowrap="nowrap">Author</th>
@@ -25,6 +25,7 @@
                                                     foreach($result as $row){
                                                         echo "<tr>";
                                                         echo "<td>$count</td>";
+                                                        $this->load->model('model_get_list');
                                                         $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
                                                         $subject="";
                                                         foreach($data['multi_valued'] as $subject_list){

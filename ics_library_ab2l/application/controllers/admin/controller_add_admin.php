@@ -14,15 +14,11 @@ class Controller_add_admin extends Controller_log{
         $data['parent'] = "Users";
         $data['current'] = "Add Admin";
 
-        if($this->session->userdata('logged_in')){
-            $this->load->helper(array('form','html'));
-            $this->load->view("admin/view_header",$data);
-            $this->load->view("admin/view_aside");
-            $this->load->view("admin/view_add_admin");
-            $this->load->view("admin/view_footer");
-        }else{
-            redirect('index.php/admin/controller_admin_login', 'refresh');
-        }
+        $this->load->helper(array('form','html'));
+        $this->load->view("admin/view_header",$data);
+        $this->load->view("admin/view_aside");
+        $this->load->view("admin/view_add_admin");
+        $this->load->view("admin/view_footer");
     }
     
     function registration(){
@@ -39,8 +35,9 @@ class Controller_add_admin extends Controller_log{
         $this->form_validation->set_rules('parent_key', 'Parent Key', 'trim|required|alpha|xss_clean');
 
         if($this->form_validation->run() == FALSE){
-            echo "<script>alert('ERROR! $msg')</script>";
-            header('refresh:0;url=');
+            echo validation_errors();
+            echo "<script>alert('ERROR!')</script>";
+            redirect('index.php/admin/controller_add_admin','refresh');
         }
         else{
             $this->model_add_admin->add_admin();
@@ -50,7 +47,7 @@ class Controller_add_admin extends Controller_log{
     }
     function redirectPage(){
         if(isset($_POST['cancelAdd'])){
-            header("refresh:0;url='controller_admin_login'");
+            redirect('index.php/admin/controller_view_users','refresh');
         }
     }
 }

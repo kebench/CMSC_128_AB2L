@@ -1,0 +1,13 @@
+*Add/View/Edit/Delete/Delete All Announcements in admin
+*Add new user in admin
+*Add new admin
+*View statistics(user and admin)
+*View borrowed books(admin) + Return(though some problems regarding incrementation after returning the book. Kay Yanyan na yung pag-ayos dun. Kulang pa din yung notify + extend)
+*View reserved/outgoing books(admin) + confirmation of borrowing the book
+*Search books in admin
+*Edit books in admin(not yet finish)
+*Delete books in admin
+*Add books(not yet finish)
+*User account confirmation
+*View logs
+

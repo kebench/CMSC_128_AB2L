@@ -1,3 +1,41 @@
+<script type="text/javascript">
+			window.onload=function() {
+				myform.content.onblur=validate_content;
+				myform.onsubmit=process_add;
+			}
+					
+			function validate_content() {
+				msg="Invalid input: ";
+				str=myform.content.value;
+					
+				if(str=="")
+				msg+="The content field is empty! There's no sense posting this kind of announcement!<br/>";
+				if(msg=="Invalid input: ")
+				msg="";
+				else {
+					document.getElementsByName("help_content")[0].style.fontSize="10px";
+					document.getElementsByName("help_content")[0].style.fontFamily="verdana";
+					document.getElementsByName("help_content")[0].style.color="red";
+				}
+				document.getElementsByName("help_content")[0].innerHTML=msg;
+				if(msg=="")
+					return true;
+			}
+
+			
+			function process_add() {
+				if (validate_content()) {
+					<?php
+						if(isset($_POST['submit'])){
+							
+						}
+					?>
+				}
+				else 
+					return false;
+			}
+		</script>
+
 <div class="body width-fill background-white">
 					<div class="col">
                             <div class="cell">

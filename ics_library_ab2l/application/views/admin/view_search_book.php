@@ -28,6 +28,9 @@
 </script>
 <div class="body width-fill background-white">
 	<div class="cell">
+		<div class="page-header cell">
+                                        <h1>Admin <small>Search Books</small></h1>
+         </div>
 		<div id="accordion">
 			<h3>Basic Search<h3>
 			<div class="col body">
@@ -40,8 +43,9 @@
 						<option value="tag_name">Tag</option>
 					</select>
 					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value);" />
-					<div class="autosuggest" id="autosuggest_list"></div>
 					<input type="button" value="Basic Search" onclick="get_data(search_form.id);" class="form-elements"/>
+					<div class="autosuggest" id="autosuggest_list"></div>
+					
 				</form>
 			</div>
 			<h3>Advanced Search<h3>

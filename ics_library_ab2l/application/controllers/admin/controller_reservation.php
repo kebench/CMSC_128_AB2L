@@ -15,7 +15,8 @@ class Controller_reservation extends CI_Controller{
 	/*Function to show all borrowed book information stored in the database */
 	public function get_All(){
 		$this->load->model('model_reservation');
-		$data['query'] = $this->model_reservation->show_all_user_book_reservation();
+		$data['query'] = $this->model_reservation->show_all_user_book_reservation('borrowed');
+		$data['overdue'] = $this->model_reservation->show_all_user_book_reservation('overdue');
 		$data['parent'] = "Books";
     	$data['current'] = "View Borrowed Books";
 

@@ -16,16 +16,12 @@
 			$data['log'] = $this->model_log->get_log();
 			$data['parent'] = "Admin";
     		$data['current'] = "View Logs";
-
-    	if($this->session->userdata('logged_in')){
+    		
     		$this->load->helper(array('form','html'));
 	        $this->load->view("admin/view_header",$data);
 	        $this->load->view("admin/view_aside");
 	        $this->load->view("admin/view_log",$data);
 	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
 		
 		}
 

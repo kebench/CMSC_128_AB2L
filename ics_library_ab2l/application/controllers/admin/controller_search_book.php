@@ -52,7 +52,7 @@ class Controller_search_book extends CI_Controller {
 		$config['per_page'] = '5';
 		$config['div'] = '#list_area';
 		$config['additional_param']  = 'serialize_form()';
-		$page=$this->uri->segment(3);		// splits the URI segment by /
+		$page=$this->uri->segment(4);		// splits the URI segment by /
 		//fetches data from database.
 		$row = $this->model_search_book->fetch_book_data($data,$config['per_page'],$page);
 		//display data from database

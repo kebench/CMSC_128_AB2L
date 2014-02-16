@@ -11,31 +11,27 @@
 	                            <thead>
 	                                <tr>
 	                                    <th style="width: 2%;">#</th>
-	                                    <th style="width: 10%;">Call Number</th>
-	                                    <th style="width: 10%;">Course Number</th>
-	                                    <th style="width: 20%;">Title</th>
-	                                    <th style="width: 15%;">Author</th>
-	                                    <th style="width: 10%;">Type</th>
-	                                    <th style="width: 10%;">Borrower's Account Number</th>
-	                                    <th style="width: 20%;">Borrower</th>
+	                                    <th style="width: 10%;">Borrower's Acct No</th>
+	                                    <th style="width: 10%;">Borrower's Name</th>
+	                                    <th style="width: 20%;">Book Call Number</th>
+										<th style="width: 10%;">Status</th>
 	                                    <th style="width: 10%;"></th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
 	                            	<?php
 	                            	$count = 1;
-	                                foreach($results as $row) {
-										echo "<tr>";
-										echo "<td>{$count}</td>";
-										echo "<td>{$row->call_number}</td>";
-										echo "<td>{$row->subject}</td>";
-										echo "<td>{$row->title}</td>";
-										echo "<td>{$row->author}</td>";
-										echo "<td>{$row->type}</td>";
-										echo "<td>{$row->account_number}</td>";
-										$fullName = $row->first_name." ".$row->middle_initial." ".$row->last_name;		//concat the first, middle, and last name into full name
-										echo "<td>{$fullName}</td>";
-										echo "<td>"."<input type = 'submit' class='background-red' value = 'Confirm'>"."</td>";				//button to be clicked if the reservation will be approved; functionality of this not included
+	                                foreach($query as $row) {
+										echo "<tr>
+											<td>$count</td>
+											<td>{$row->account_number}</td>
+											<td>{$row->first_name} {$row->middle_initial} {$row->last_name}</td>
+											<td>{$row->call_number}</td>
+											<td>{$row->status}</td>";
+										echo "<td><form action='controller_outgoing_books/reserve/' method='post'>
+											<input type='hidden' name='res_number' value='{$row->res_number}' />
+											<input type='submit' class='background-red' name='reserve' value='Confirm' />
+										</form></td>";				//button to be clicked if the reservation will be approved; functionality of this not included
 										echo "</tr>";
 
 										$count++;
