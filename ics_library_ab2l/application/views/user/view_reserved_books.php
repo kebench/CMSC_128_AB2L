@@ -1,3 +1,13 @@
+<script>
+    function doconfirm()
+    {
+        confirm=confirm("Are you sure to cancel your reservation?");
+
+        if(confirm!=true)
+            return false;
+    }
+</script>
+
 <div class="cell body">
 									<p class="tiny">View Reserved Books</p>
 								</div>
@@ -16,11 +26,12 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 2%;">#</th>
-                                                    <th style="width: 10%;" nowrap="nowrap">Course Code</th>
+                                                    <th style="width: 20%;" nowrap="nowrap">Course Code</th>
                                                     <th style="width: 35%;" nowrap="nowrap">Title</th>
                                                     <th style="width: 22%;" nowrap="nowrap">Author</th>
                                                     <th style="width: 10%;" nowrap="nowrap">Type</th>
-                                                    <th style="width: 13%;" nowrap="nowrap">Status</th>
+                                                    <th style="width: 5%;" nowrap="nowrap">Rank</th>
+                                                    <th style="width: 10%;" nowrap="nowrap">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -29,12 +40,34 @@
                                                     foreach($result as $row){//subject,title,author,type,status,call_number
                                                         echo "<tr>";
                                                             echo "<td>$count</td>";
-                                                            echo "<td>".$row->subject."</td>";
+
+                                                            $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
+                                                            $subjects = "";
+                                                            foreach ($data['multi_valued'] as $subject_list){
+                                                                $subjects = $subjects."{$subject_list->subject},";
+                                                            }
+                                                            echo "<td>".$subjects."</td>";
                                                             echo "<td>".$row->title."</td>";
-                                                            echo "<td>".$row->author."</td>";
+                                                            
+                                                            $data['multi_valued'] = $this->model_get_list->get_book_authors($row->id);
+                                                            $authors="";
+                                                            foreach($data['multi_valued'] as $authors_list){
+                                                                $authors = $authors."{$authors_list->author},";
+                                                            }
+                                                            echo "<td>".$authors."</td>";
+                                                            
                                                             echo "<td>".$row->type."</td>";
-                                                            echo "<td>".$row->status."</td>";
+                                                            echo "<td>".$row->rank."</td>"; 
+                                                            echo "<td> 
+                                                                    <form  action=\"cancel/\" method=\"post\">
+                                                                        <input type='hidden' name='res_number' value='{$row->res_number}'/>
+                                                                        <input type='hidden' name='call_number' value='{$row->call_number}'/>
+                                                                        <input type='hidden' name='rank' value='{$row->rank}'/>
+                                                                        <input type=\"submit\" onClick=\"return doconfirm();\" class='background-red' name=\"cancel_reservation\" value=\"Cancel\" /></td>
+                                                                    </form>
+                                                                </td>";
                                                         echo "</tr>";
+                                                        $count++;
                                                     }
                                                 ?>
                                             </tbody>

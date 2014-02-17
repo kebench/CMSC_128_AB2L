@@ -20,22 +20,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               <?php
+                                                <?php
                                                     $count = 1;
-                                                    foreach($result as $row){//subject,title,author,type,status,call_number
+                                                    foreach($result as $row){
                                                         echo "<tr>";
-                                                            echo "<td>$count</td>";
-                                                            echo "<td>".$row->subject."</td>";
-                                                            echo "<td>".$row->title."</td>";
-                                                            echo "<td>".$row->author."</td>";
-                                                            echo "<td>".$row->type."</td>";
-                                                            echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
-                                                            echo "<td><input type='button' class='background-red table-button' value='Borrow Book'></td>";
+                                                        echo "<td>$count</td>";
+                                                        $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
+                                                        $subject="";
+                                                        foreach($data['multi_valued'] as $subject_list){
+                                                            $subject = $subject."{$subject_list->subject},";
+                                                        }
+                                                        echo "<td>".$subject."</td>";
+                                                        echo "<td>".$row->title."</td>";
+                                                        $data['multi_valued'] = $this->model_get_list->get_book_authors($row->id);
+                                                        $authors="";
+                                                        foreach($data['multi_valued'] as $authors_list){
+                                                            $authors = $authors."{$authors_list->author},";
+                                                        }
+                                                        echo "<td>".$authors."</td>";
+                                                        echo "<td>".$row->type."</td>";
+                                                        echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
+                                                        echo "<td><input type='button' class='background-red table-button' value='Borrow Book'></td>";
                                                         echo "</tr>";
                                                         $count++;
                                                     }
                                                 ?>
-                                            </tbody>
+                                </tbody>
                                         </table>
                                         <div class="footer pagination">
                                             <ul class="nav">
