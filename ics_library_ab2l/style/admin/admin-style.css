@@ -232,3 +232,9 @@ background-color: white;
 	margin-right: 5em;
 	width: 4em
 }
+
+.validate{
+	font-size: 10px;
+	font-family: verdana;
+	color: red;
+}

@@ -37,17 +37,17 @@ class Controller_add_admin extends Controller_log{
         if($this->form_validation->run() == FALSE){
             echo validation_errors();
             echo "<script>alert('ERROR!')</script>";
-            redirect('index.php/admin/controller_add_admin','refresh');
+            //redirect('index.php/admin/controller_add_admin','refresh');
         }
         else{
             $this->model_add_admin->add_admin();
             echo "<script>alert('You have successfully added another admin account');</script>";
-            redirect('index.php/admin/controller_book', 'refresh');
+            //redirect('index.php/admin/controller_book', 'refresh');
         }
     }
     function redirectPage(){
         if(isset($_POST['cancelAdd'])){
-            redirect('index.php/admin/controller_view_users','refresh');
+            //redirect('index.php/admin/controller_view_users','refresh');
         }
     }
 }

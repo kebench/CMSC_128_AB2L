@@ -32,20 +32,20 @@
                                             $data['query1'] = $this->model_book->get_book_call_numbers($row->id);
                                             $call_number="";
                                             foreach($data['query1'] as $call_number_list){
-                                                $call_number .= "{$call_number_list->call_number}; ";
+                                                $call_number .= "{$call_number_list->call_number}<br/> ";
                                             }
                                             echo "<td>{$call_number}</td>
                                             <td>{$row->title}</td>";
                                             $data['query1'] = $this->model_book->get_book_authors($row->id);
                                             $authors ="";
                                             foreach($data['query1'] as $authors_list){
-                                                $authors .= "{$authors_list->author}; ";
+                                                $authors .= "{$authors_list->author}<br/> ";
                                             }
                                             echo "<td>{$authors}</td>";
                                             $data['query1'] = $this->model_book->get_book_subjects($row->id);
                                             $subjects ="";
                                             foreach($data['query1'] as $subjects_list){
-                                                $subjects .= "{$subjects_list->subject}; ";
+                                                $subjects .= "{$subjects_list->subject}<br/> ";
                                             }
                                             echo "<td>{$subjects}</td>";
                                             echo "<td>{$row->year_of_pub}</td>

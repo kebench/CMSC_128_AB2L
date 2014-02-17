@@ -32,7 +32,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="fname" class="background-white" id = "fname" placeholder="Your first name" required  /><span class="cell" name = "valFname"></span>
+                                                                            <input type="text" name="fname" class="background-white" id = "fname" placeholder="Your first name" required  /><span class="cell validate" name = "valFname"></span>
                                                                         </div>
                                                                     </div>
                                                                     <span>
@@ -46,7 +46,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="minit" class="background-white" id = "minit" placeholder="Your middle initial" required/><span name = "valInitial"></span>
+                                                                            <input type="text" name="minit" class="background-white" id = "minit" placeholder="Your middle initial" required/><span class="cell validate" name = "valInitial"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -59,7 +59,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="lname" class="background-white" id = "lname" placeholder="Your last name" required/><span name = "valLname"></span>
+                                                                            <input type="text" name="lname" class="background-white" id = "lname" placeholder="Your last name" required/><span class="cell validate" name = "valLname"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -68,7 +68,7 @@
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            </br><label for="classification">Classification <span class="color-red"> *</span></label>
+                                                                            </br><label for="classification">Classification <span class="color-red cell validate"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
@@ -90,12 +90,12 @@
                                                                  <div class="col" id= "numDiv">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="studno" id = "labelNum">Student Number<span class="color-red"> *</span></label>
+                                                                            <label for="studno" id = "labelNum">Student Number<span class="color-red cell validate"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="stdNum" class="background-white" placeholder="Your ID number" id = "stdNum" required/><span name = "valNumber"></span>
+                                                                            <input type="text" name="stdNum" class="background-white" placeholder="Your ID number" id = "stdNum" required/><span class="cell validate" name = "valNumber"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -110,7 +110,7 @@
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
                                                                             <br/>
-                                                                            <select id = "college" name = "college" onfocus = "courseChecker()" onclick = "courseChecker()"><span name = "valCollege"></span>
+                                                                            <select id = "college" name = "college" onfocus = "courseChecker()" onclick = "courseChecker()"><span class="cell validate" name = "valCollege"></span>
             
                                                                             <option value="CA">CA</option>
                                                                             <option value="CAS">CAS</option>
@@ -139,7 +139,7 @@
                                                                 <div class="col" id= "courseDiv">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            </br><label for="college">Course <span class="color-red"> *</span></label>
+                                                                            </br><label for="college">Course <span class="color-red cell validate"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                 <div class="col width-fill">
@@ -159,12 +159,12 @@
                                                                 <div class="col" id = "divEadd">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="occupation">Email Address<span class="color-red"> *</span></label>
+                                                                            <label for="occupation">Email Address<span class="color-red cell validate"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="email" class="background-white" name="eadd" placeholder="Your email address" id = "eadd" required/><span name = "valEmail"></span>
+                                                                            <input type="email" class="background-white" name="eadd" placeholder="Your email address" id = "eadd" required/><span class="cell validate" name = "valEmail"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -177,7 +177,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" class="background-white" name="uname" id = "uname" required/><span name = "valUser"></span>
+                                                                            <input type="text" class="background-white" name="uname" id = "uname" required/><span class="cell validate" name = "valUser"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -190,7 +190,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="password" class="background-white" name="pass" id = "pass" required/><span name = "valPass"></span>
+                                                                            <input type="password" class="background-white" name="pass" id = "pass" required/><span class="cell validate" name = "valPass"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -203,7 +203,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required/><span name = "valCpass"></span>
+                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required/><span class="cell validate" name = "valCpass"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

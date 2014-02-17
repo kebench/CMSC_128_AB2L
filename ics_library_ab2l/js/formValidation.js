@@ -18,70 +18,70 @@
 			
 	function validateFname(){
 		str=regForm.fname.value;
-		msg="";
+		msg="Invalid Input: ";
 		
-		if (str=="") msg+="Required";
-		else if (!str.match(/^[A-Z|a-z|\s]{3,50}$/))  msg+="Invalid Input";
+		if (str=="") msg+="First name is required!";
+		else if (!str.match(/^[A-Z|a-z|\s]{3,50}$/))  msg+="Must be between 3-50 alpha character!<br/>";
 		else if(msg="Invalid input") msg="";
 		document.getElementsByName("valFname")[0].innerHTML=msg;
 		if(msg=="") return true;
 	}	
 	function validateMinitial(){
 		str=regForm.minit.value;
-		msg="";
+		msg="Invalid Input: ";
 		
-		if (str=="") msg+="Required";
-		else if (!str.match(/^[A-Z]{1,3}\.$/))  msg+="Invalid Input";
+		if (str=="") msg+="Middle Initial is required!";
+		else if (!str.match(/^[A-Z]{1,3}\.$/))  msg+="Must be between 1-3 capital alpha character ended by period!<br/>";
 		else if(msg="Invalid input") msg="";
 		document.getElementsByName("valInitial")[0].innerHTML=msg;
 		if(msg=="") return true;
 	}
 	function validateLname(){
 				str=regForm.lname.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^[A-Z|a-z\s]{2,50}$/))  msg+="Invalid Input";
+				if (str=="") msg+="Last name is required!";
+				else if (!str.match(/^[A-Z|a-z\s]{2,50}$/))  msg+="Must be between 2-50 alpha character!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valLname")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}
 	function validateNumber(){
 				str=regForm.stdNum.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^[0-9]{4}\-[0-9]{5}$/))  msg+="Invalid Input";
+				if (str=="") msg+="Student Number is required!";
+				else if (!str.match(/^[0-9]{4}\-[0-9]{5}$/))  msg+="Must be in the format of 20xx-xxxxx!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valNumber")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}
 	function validateCollege(){
 				str=regForm.college.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^[A-Z]{2,4}$/))  msg+="Invalid Input";
+				if (str=="") msg+="College is required!";
+				else if (!str.match(/^[A-Z]{2,4}$/))  msg+="Must be an acronym!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valCollege")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}
 	function validateCourse(){
 				str=regForm.course.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^[A-Z]{4,8}$/))  msg+="Invalid Input";
+				if (str=="") msg+="Course is required!";
+				else if (!str.match(/^[A-Z]{4,8}$/))  msg+="Must be an acronym!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valCourse")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}
 	function validateClassification(){
 				str=regForm.classi.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^(student|faculty)$/))  msg+="Invalid Input";
+				if (str=="") msg+="Classification is required!";
+				else if (!str.match(/^(student|faculty)$/))  msg+="Must be a student or faculty!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valClass")[0].innerHTML=msg;
 				if(msg=="") return true;
@@ -89,20 +89,20 @@
 			
 	function validateEmail(){
 				str=regForm.eadd.value;
-				msg="";
+				msg="Invalid Input: ";
 			
-				if (str=="") msg+="Required";
-				else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./))  msg+="Invalid Input";
+				if (str=="") msg+="Email is required!";
+				else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./))  msg+="Must be in the form: name@domain.extension!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valEmail")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}
 	function validateUser(){
 				str=regForm.uname.value;
-				msg="";
+				msg="Invalid Input: ";
 				
-				if (str=="") msg+="Required";
-				else if (!str.match(/^[A-Z|a-z|0-9]{3,20}$/))  msg+="Invalid Input";
+				if (str=="") msg+="Username is required!";
+				else if (!str.match(/^[A-Z|a-z|0-9]{3,20}$/))  msg+="Must be between 3-20 alpha numeric character!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valUser")[0].innerHTML=msg;
 				if(msg=="") return true;
@@ -112,9 +112,9 @@
 				str=regForm.pass.value;
 				msg="";
 
-				if (str=="") msg+="Required";
-				else if (str.match(/^([a-z]+|\d+)$/))  msg+="Strength: Weak";
-				else if (str.match(/^[a-zA-z]+$/))  msg+="Strength: Medium";
+				if (str=="") msg+="Password is required!";
+				else if (str.match(/^([a-z]+|\d+)$/))  msg+="Invalid Input: Strength: Weak";
+				else if (str.match(/^[a-zA-z]+$/))  msg+="Invalid Input: Strength: Medium";
 				else if (str.match(/^[a-zA-z0-9]+$/))  msg+="Strength: Strong";
 				else if(msg="") msg="";
 				document.getElementsByName("valPass")[0].innerHTML=msg;
@@ -123,9 +123,9 @@
 	function validateCpass(){
 			str=regForm.pass.value;
 			str2=regForm.cpass.value;
-			msg="";
+			msg="Invalid Input: ";
 			
-			if(str2=="") msg+="Required";
+			if(str2=="") msg+="Confirmation of password is required!";
 			else if (str2!=str){
 				msg+="Password Mismatch"
 			}

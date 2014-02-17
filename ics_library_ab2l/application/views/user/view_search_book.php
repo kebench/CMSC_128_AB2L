@@ -40,8 +40,8 @@
 						<option value="tag_name">Tag</option>
 					</select>
 					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value);" />
+					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('user');"/><br/><br/><br/>
 					<div class="autosuggest" id="autosuggest_list"></div>
-					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('user');"/>
 				</form>
 			</div>
 			<h3>Advanced Search<h3>

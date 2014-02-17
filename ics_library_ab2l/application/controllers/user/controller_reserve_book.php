@@ -7,7 +7,7 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function index(){
-		$data['page_title'] = 'Reservation Page';
+		$data['titlepage'] = 'Reservation Page';
 		$data['id'] = urldecode($this->session->userdata('id'));
 		$row=$this->model_reserve_book->fetch_book($data['id']);
 		if($row->num_rows()>0){
@@ -49,7 +49,7 @@ class Controller_reserve_book extends CI_Controller{
 
 	function verify_login($id){
 		if($this->session->userdata('logged_in') == FALSE){
-			echo "This should redirect to login page";
+			redirect('index.php/user/controller_login','refresh');
 		}
 		else{
 			$id = urldecode($id);
@@ -80,7 +80,7 @@ class Controller_reserve_book extends CI_Controller{
 				redirect('index.php/user/controller_reserve_book/success');
 			}
 			else{
-				echo "kulang na";
+				echo "<script>alert('There is not enough book available');</script>";
 			}
 		}
 		else{
@@ -92,6 +92,7 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function success(){
-		echo "Success!";
+		echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
+		redirect('index.php/user/controller_book/user_reserved_list','refresh');
 	}
 }

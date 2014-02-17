@@ -167,5 +167,14 @@ class Controller_reservation extends CI_Controller{
 		}//END OF notify_all
 		
 	}//END OF send_email()
+
+	public function extend(){
+        $res_number=$_POST['res_number'];
+        $this->load->model('model_reservation');
+        $this->model_reservation->update_book_reservation($res_number, "extend");
+        redirect('index.php/admin/controller_reservation/get_All','refresh');
+    }//END OF extend()
+
+
 }
 ?>

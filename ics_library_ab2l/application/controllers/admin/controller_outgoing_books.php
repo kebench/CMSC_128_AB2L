@@ -97,21 +97,21 @@ class Controller_outgoing_books extends Controller_log{
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "extend");
-        header("refresh:0;url=../");
+        redirect('index.php/admin/controller_reservation','refresh');
     }//END OF extend()
     
     public function return_book(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "returned");
-        header("refresh:0;url=../");
+        redirect('index.php/admin/controller_reservation','refresh');
     }//END OF return_book()
     
     public function reserve(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "reserved");
-        header("refresh:0;url=../");
+       redirect('index.php/admin/controller_reservation','refresh');
     }//END OF reserve()
     
     public function cancel(){

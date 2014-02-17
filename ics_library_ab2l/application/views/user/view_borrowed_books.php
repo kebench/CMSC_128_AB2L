@@ -35,7 +35,7 @@
                                 $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
                                 $subjects = "";
                                 foreach ($data['multi_valued'] as $subject_list)
-                                    $subjects = $subjects."{$subject_list->subject},";
+                                    $subjects = $subjects."{$subject_list->subject}<br/>";
                                 echo "<td>".$subjects."</td>";            
                                             
                                 echo "<td>".$row->title."</td>";

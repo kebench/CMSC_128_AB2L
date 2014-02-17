@@ -29,7 +29,7 @@
                                                         $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
                                                         $subject="";
                                                         foreach($data['multi_valued'] as $subject_list){
-                                                            $subject = $subject."{$subject_list->subject},";
+                                                            $subject = $subject."{$subject_list->subject}<br/>";
                                                         }
                                                         echo "<td>".$subject."</td>";
                                                         echo "<td>".$row->title."</td>";
@@ -41,7 +41,13 @@
                                                         echo "<td>".$authors."</td>";
                                                         echo "<td>".$row->type."</td>";
                                                         echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
-                                                        echo "<td><input type='button' class='background-red table-button' value='Borrow Book'></td>";
+                                                        if($row->no_of_available != 0)
+                                                            echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
+                                                            <input type='submit' class='background-red table-button' value='Reserve Book'>
+                                                        </form>
+                                                        </td>";
+                                                        else
+                                                            echo "<td>No Available Book</td>";
                                                         echo "</tr>";
                                                         $count++;
                                                     }

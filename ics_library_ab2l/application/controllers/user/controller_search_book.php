@@ -100,27 +100,38 @@ class Controller_search_book extends CI_Controller {
 	public function print_books($row){
 		//display data from database
 		if($row->num_rows()>0){
-			echo "<div class='book_details'><table border='5'>";
-			echo "<tr><td>Title</td>";
-			echo "<td>Author/s</td>";
-			echo "<td>Year of Publication</td>";
-			echo "<td>Type</td>";
-			echo "<td></td></tr>";
+			echo "<div class='panel datasheet'>
+					  <div class='header text-center background-red'>
+                                            List of Searched Books
+                      </div>
+                      <table class='body fixed'>
+                      <thead>
+                          <tr>
+                            <th style='width: 5%;'>#</th>
+                            <th style='width: 35%;' nowrap='nowrap'>Title</th>
+                            <th style='width: 22%;' nowrap='nowrap'>Author</th>
+                            <th style='width: 8%;' nowrap='nowrap'>Type</th>
+                            <th style='width: 10%;' nowrap='nowrap'>Availability</th>
+                            <th style='width: 13%;' nowrap='nowrap'>Action</th>
+                          </tr>
+                       </thead>";
+             $count=1;
 			foreach($row->result() as $book_details){
-				echo "<tr><td>$book_details->title</td>";
+				echo "<tr>
+						<td>$count</td>
+						<td>$book_details->title</td>";
 				echo "<td>";
 				$arow = $this->model_search_book->fetch_book_author($book_details->id);
 				//display data from database
 				if($arow->num_rows()>0){
 					foreach($arow->result() as $abook_details){
-						echo "$abook_details->author<br/>";
+						echo "$abook_details->author ";
 					}
 				}
 				echo "</td>";
-				echo "<td>$book_details->year_of_pub</td>";
 				echo "<td>$book_details->type</td>";
+				echo "<td>$book_details->no_of_available</td>";
 				echo "<td>";
-				if($this->session->userdata('logged_in')){
 					if($book_details->no_of_available == 0){	//if book is not available
 						//put the transaction code here
 						//WAITLIST TRANSACTION CODE HERE
@@ -128,11 +139,12 @@ class Controller_search_book extends CI_Controller {
 					}else{	
 						//and if book is available
 						//RESERVE TRANSACTION CODE HERE
-						echo "<a href='/ics_library_ab2l/index.php/user/controller_reserve_book/verify_login/$book_details->id'><input type='button' name='reservebutton' id='reservebutton' value='Reserve Book'></a>";
+						echo "<form action='controller_reserve_book/verify_login/$book_details->id' method='post'>
+							<input type='submit' class='background-red style='font-size: 1.5em;' value='Reserve Book'/>
+						</form>";
 					}
-					
-				}
 				echo "</td></tr>";
+				$count++;
 			}
 			echo "</table></div>";
 		}else{

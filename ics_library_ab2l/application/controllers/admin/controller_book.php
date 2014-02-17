@@ -25,21 +25,29 @@ class Controller_book extends Controller_log {
 	}
 	
 	public function call_add(){
+			$session_user = $this->session->userdata('logged_in')['username'];
+
 		if(isset($_POST['submit'])){
-			$call_number = htmlspecialchars($_POST['call_number']);
+			$call_number = $_POST['call_number'];
 			$title = htmlspecialchars($_POST['title1']);
 			$author = $_POST['author'];
 			$subject = $_POST['subject'];
 			$year_of_pub = htmlspecialchars($_POST['year_of_pub']);
 			$type = htmlspecialchars($_POST['type1']);
-			$no_of_available = htmlspecialchars($_POST['quantity']);
-			$quantity = htmlspecialchars($_POST['quantity']);
+			$quantity = sizeof($call_number);
+			$no_of_available = $quantity;
 			$book_stat = 0;
+			
 			$this->load->model("model_book");
 			$this->model_book->insert_book_info($call_number, $title, $year_of_pub, $type, $no_of_available, $quantity, $book_stat, $author, $subject);
 			
-			$this->add_log("Admin 1 added a new book: $call_number", "Add Book");
-			header("refresh:0;url=call_success");
+			
+			$type = "Add Book";
+			foreach ($call_number as $value) {
+				$message = "Admin $session_user added a new book: $value";
+				$this->add_log($message,$type );	
+			}
+			$this->call_success();
 		}
 	}
 
@@ -54,10 +62,11 @@ class Controller_book extends Controller_log {
 	/*UPDATE book*/
 	//EDIT
 	function edit(){
-		$call_number = $_POST['call_number'];
-		//$call_number = str_replace("%20", " ", $call_number);
+		$session_user = $this->session->userdata('logged_in')['username'];
+
+		$id = $_POST['id'];
 		$this->load->model('model_book');
-		$book = $this->model_book->get_by_id($call_number);
+		$book = $this->model_book->get_by_id($id);
 		$data['book'] = $book;
 
 		$data['query'] = $this->model_book->select_all_book_info();
@@ -65,21 +74,18 @@ class Controller_book extends Controller_log {
     	$data['current'] = " Books";
     	$data['user'] = $this->session->userdata('logged_in');
 
-        if($this->session->userdata('logged_in')){
-    		$this->load->helper(array('form','html'));
-	        $this->load->view("admin/view_header",$data);
-	        $this->load->view("admin/view_aside");
-	        $this->load->view('admin/view_edit_book', $data);
-	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
+		$this->load->helper(array('form','html'));
+		$this->load->view("admin/view_header",$data);
+		$this->load->view("admin/view_aside");
+		$this->load->view('admin/view_edit_book', $data);
+		$this->load->view("admin/view_footer");
 	}
 
 	function edit_book(){
-		$session_user=$this->session->userdata('username');
+		$session_user = $this->session->userdata('logged_in')['username'];
+
 		$this->load->model('model_book');
-		$call_number = $this->input->post('call_number1');
+		$id = $this->input->post('id');
 		$book = array(
 			'title' => $this->input->post('title'),
 			'year_of_pub' => $this->input->post('year_of_pub'),
@@ -87,25 +93,28 @@ class Controller_book extends Controller_log {
 			'type' => $this->input->post('type'),
 			'quantity' => $this->input->post('quantity'),
 		);
-		
+		$call_numbers = $this->input->post('call_number');
 		$book_authors = $this->input->post('author');
 		$book_subjects = $this->input->post('subject');
-		$this->model_book->edit_book($call_number, $book, $book_authors, $book_subjects);
-		$this->add_log("$session_user updated book with Call Number: $call_number", "Updated Book");
-		var_dump($book);
-		header("refresh:0;url=edit_success");
+		
+		$this->model_book->edit_book($id, $book, $call_numbers, $book_authors, $book_subjects);
+		$this->add_log("Admin $session_user updated book with ID Number: $id", "Update Book");
+		$this->edit_success();
 
 	}
 
 	function edit_success(){
+		$session_user = $this->session->userdata('logged_in')['username'];
+
 		echo "<script>
-				alert('You have successfully edit a book');
+				alert('You have successfully updated a book.');
 			</script>";
-			header("refresh:0;url=../controller_book");	}
+		header("refresh:0;url=../");
+	}
 	
 	//DELETE
 	function delete(){
-		//$session_user = $this->checklogin();
+		$session_user = $this->session->userdata('logged_in')['username'];
 		$this->load->model('model_book');
 		$call_number = $_POST['call_number'];
 		$this->model_book->delete_book($call_number);
