@@ -40,19 +40,19 @@ function set_activity(activity_name) {
 }
 
 //get the data of the books after clicking the search button
-function get_data(str){
-	//document.write(str);
+function get_data1(str){
+	
 	$('#autosuggest_list').fadeOut(500);
 	$('#list_area').addClass('loading');
 		
 		$.ajax({
 		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
-		url: "http://localhost/ics_library_ab2l/index.php/admin/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: "http://localhost/ics_library_ab2l/index.php/"+str+"/controller_search_book/get_book_data1",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
 		
 //		url: "http://localhost/kebench/index.php/search/get_book_data",
 		type: 'POST',
 		async: false,
-		data: serialize_form(str),
+		data: serialize_form1(),
 		success: function(result){
 			$('#list_area').html(result);
 			$('#list_area').fadeIn(1000);
@@ -62,9 +62,39 @@ function get_data(str){
 
 }
 
+function get_data2(str){
+	
+	$('#autosuggest_list').fadeOut(500);
+	$('#list_area').addClass('loading');
+		
+		$.ajax({
+		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: "http://localhost/ics_library_ab2l/index.php/"+str+"/controller_search_book/get_book_data2",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		
+//		url: "http://localhost/kebench/index.php/search/get_book_data",
+		type: 'POST',
+		async: false,
+		data: serialize_form2(),
+		success: function(result){
+			$('#list_area').html(result);
+			$('#list_area').fadeIn(1000);
+			$('#list_area').removeClass('loading');
+		}
+		});
+
+}
 //serializes the form enebling all the inputs to have a value of an empty string if forms.value is equal to " ".
 //This will be used in sending data inputs in Ajax
-function serialize_form(str)
+function serialize_form1()
 {
-	return $('#'+str+'').serialize();
+//	document.write(str);
+	return $("#search_form").serialize();
+}
+
+//serializes the form enebling all the inputs to have a value of an empty string if forms.value is equal to " ".
+//This will be used in sending data inputs in Ajax
+function serialize_form2()
+{
+//	document.write(str);
+	return $("#search2_form").serialize();
 }

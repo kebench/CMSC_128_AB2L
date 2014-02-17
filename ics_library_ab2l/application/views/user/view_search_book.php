@@ -41,7 +41,7 @@
 					</select>
 					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value);" />
 					<div class="autosuggest" id="autosuggest_list"></div>
-					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('admin');"/>
+					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('user');"/>
 				</form>
 			</div>
 			<h3>Advanced Search<h3>
@@ -108,7 +108,7 @@
 						</div>
 					</div>
 					<div class="cell width-1of3">
-						<input type="button" value="Advanced Search" class="form-elements" onclick="get_data2('admin');" />
+						<input type="button" value="Advanced Search" class="form-elements" onclick="get_data2('user');" />
 					</div>
 				</form>
 			</div>

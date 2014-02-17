@@ -9,32 +9,32 @@
 		 //querry must be refined so that it can support tags such as tags that are found in tags table
 		function find_suggestion($str, $category){
 			if($category == "author"){
-				$this->db->select('DISTINCT '.$category.'
+				$this->db->select("DISTINCT $category
 					FROM book_author 
-					WHERE '.$category.' LIKE \'%'.$str.'%\'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
-					', FALSE);
+					", FALSE);
 			}
 			else if($category == "subject"){
-				$this->db->select('DISTINCT '.$category.'
+				$this->db->select("DISTINCT $category
 					FROM book_subject 
-					WHERE '.$category.' LIKE \'%'.$str.'%\'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
-					', FALSE);
+					", FALSE);
 			}
 			else if($category == "tag_name"){
-				$this->db->select('DISTINCT '.$category.'
+				$this->db->select("DISTINCT $category
 					FROM tag 
-					WHERE '.$category.' LIKE \'%'.$str.'%\'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
-					', FALSE);
+					", FALSE);
 			}
 			else{
-				$this->db->select('DISTINCT '.$category.'
+				$this->db->select("DISTINCT $category
 					FROM book 
-					WHERE '.$category.' LIKE \'%'.$str.'%\'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
-					', FALSE);
+					", FALSE);
 			}
 			return $this->db->get();
 		}
@@ -60,71 +60,74 @@
 			$query='id, title, year_of_pub, type, no_of_available
 				FROM book
 				WHERE ';
+			$str = $data['str'];
 			if($data['str'] !== ""){
 				if($data['category'] == "author"){
-					$query=$query.'id in
+					$query=$query."id in
 						(SELECT id
 						FROM book_author
-						WHERE author LIKE \'%'.$data['str'].'%\'
-						ORDER BY levenshtein('.$data['category'].', \'%'.$data['str'].'%\'))';
+						WHERE author LIKE '%$str%'
+						ORDER BY levenshtein(".$data['category'].", '$str'))";
+					
 				}
 				else if($data['category'] == "subject"){
-					$query=$query.'id in
+					$query=$query."id in
 						(SELECT id
 						FROM book_subject
-						WHERE subject LIKE \'%'.$data['str'].'%\'
-						ORDER BY levenshtein('.$data['category'].', \'%'.$data['str'].'%\'))';
+						WHERE subject LIKE '%$str%'
+						ORDER BY levenshtein(".$data['category'].", '$str'))";
 				}
 				else if($data['category'] == "tag_name"){
-					$query=$query.'id in
+					$query=$query."id in
 						(SELECT id
 						FROM tag
-						WHERE tag_name LIKE \'%'.$data['str'].'%\'
-						ORDER BY levenshtein('.$data['category'].', \'%'.$data['str'].'%\'))';
+						WHERE tag_name LIKE '%$str%'
+						ORDER BY levenshtein(".$data['category'].", '$str'))";
 				}
 				else{
-					$query=$query.$data['category'].' LIKE \'%'.$data['str'].'%\'
-						ORDER BY levenshtein('.$data['category'].', \'%'.$data['str'].'%\')';	
+					$query=$query.$data['category']." LIKE '%$str%'
+						ORDER BY levenshtein(".$data['category'].", '$str')";	
 				}
 			}
 				
 			else{	//if $data['str'] is an empty string move to advance search inputs. This will call addOr to add an 'or' phrase if there are multiple inputs from the form, which is determined using orCheck variable
 				
 				if(isSet($data['title'])){
-					$query=$query.'title LIKE \'%'.$data['title'].'%\'ORDER BY levenshtein(title, \'%'.$data['title'].'%\')';
+					$str = mysql_real_escape_string($data['title']);
+					$query = $query." title LIKE '%$str%'";
 					$andCheck=true;
 				}
 				if(isSet($data['year_of_pub'])){
+					$str = mysql_real_escape_string($data['year_of_pub']);
 					$query=$this->model_search_book->addAnd($query,$andCheck);
-					$andCheck=false;
-					$query=$query.'year_of_pub LIKE \'%'.$data['year_of_pub'].'%\'ORDER BY levenshtein(year_of_pub, \'%'.$data['year_of_pub'].'%\')';
+					$query=$query."year_of_pub LIKE '%$str%'";
 					$andCheck=true;
 				}
 				if(isSet($data['author'])){
+					$str = mysql_real_escape_string($data['author']);
 					$query=$this->model_search_book->addAnd($query,$andCheck);
-					$andCheck=false;
-					$query=$query.'id in
+					$query=$query."id in
 					(SELECT id
 					FROM book_author
-					WHERE author LIKE \'%'.$data['author'].'%\'ORDER BY levenshtein(author, \'%'.$data['author'].'%\'))';
+					WHERE author LIKE '%$str%')";
 					$andCheck=true;
 				}
 				if(isSet($data['subject'])){
+					$str = mysql_real_escape_string($data['subject']);
 					$query=$this->model_search_book->addAnd($query,$andCheck);
-					$andCheck=false;
-					$query=$query.'id in
+					$query=$query."id in
 					(SELECT id
 					FROM book_subject
-					WHERE subject LIKE \'%'.$data['subject'].'%\'ORDER BY levenshtein(subject, \'%'.$data['subject'].'%\'))';
+					WHERE subject LIKE '%$str%')";
 					$andCheck=true;
 				}
 				if(isSet($data['tag_name'])){
+					$str = mysql_real_escape_string($data['tag_name']);
 					$query=$this->model_search_book->addAnd($query,$andCheck);
-					$andCheck=false;
-					$query=$query.'id in
+					$query=$query."id in
 					(SELECT id
 					FROM tag
-					WHERE tag_name LIKE \'%'.$data['tag_name'].'%\'ORDER BY levenshtein(tag_name, \'%'.$data['tag_name'].'%\'))';
+					WHERE tag_name LIKE '%$str%')";
 					$andCheck=true;
 				}
 			}
