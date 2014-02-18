@@ -19,7 +19,7 @@
         ?>
 
         var options = {
-          title: 'Book Statistics'
+          title: 'Book Statistics - Top 10 Most Borrowed Books'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

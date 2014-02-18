@@ -4,11 +4,11 @@ Add new admin
 View statistics(user and admin)
 *View borrowed books(admin) + Return(incrementation fixed)
 View reserved/outgoing books(admin) + confirmation of borrowing the book
-Search books in admin
-Search books in user
+Search books in admin (may bug pa)
+Search books in user (may bug pa)
 search user
-borrow book in admin
-borrow book in user
+borrow book in admin (di pa nachecheck yung number ng book na currently borrowed pa ng user)
+borrow book in user (di pa nachecheck yung number ng book na currently borrowed pa ng user)
 Edit books in admin(not yet finish)
 Delete books in admin
 Add books(not yet finish)

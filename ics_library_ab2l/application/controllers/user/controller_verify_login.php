@@ -25,12 +25,12 @@ class Controller_verify_login extends CI_Controller {
             } 
         else {
                 //Go to private area
-           if($this->session->userdata('logged_in_type')=="user")
-            redirect('index.php/user/controller_home', 'refresh');
-           
-           else{
-                redirect('index.php/admin/controller_announcement', 'refresh');
-           } 
+           if($this->session->userdata('logged_in_type')=="user"){
+            if($this->session->userdata('id')){
+              redirect('index.php/user/controller_reserve_book');
+            }
+            else redirect('index.php/user/controller_home', 'refresh');
+           }
         }   
      }
  

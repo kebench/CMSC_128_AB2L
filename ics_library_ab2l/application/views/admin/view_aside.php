@@ -2,7 +2,7 @@
 	<aside id="side-navigation" class="border-top width-1of4">
 		<div class="col width-1of1">
 			<div class="cell width-1of1">
-				<?php echo form_open('admin/controller_view_users/search_user'); ?>
+				<?php echo form_open(base_url().'index.php/admin/controller_view_users/search_user'); ?>
 					<input id="search_bar" type="search" name="s_user" class="col width-7of8" placeholder="Search..." required/>
 					<input id="search_submit" type="submit" value="" class="width-fit"/>
 				</form>

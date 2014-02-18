@@ -38,7 +38,7 @@
 							*/
 
 							if($stat === "approve"){
-							echo "<td>Registered</td>";
+							echo "<td><a href='".base_url()."index.php/admin/controller_view_users/borrow/$row->account_number'>Click to borrow</a></td>";
 							}
 							else{
 								echo "<form action='controller_view_users/approve_user' method='POST'>";

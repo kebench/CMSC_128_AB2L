@@ -48,15 +48,16 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function verify_login($id){
-		if($this->session->userdata('logged_in') == FALSE){
-			redirect('index.php/user/controller_login','refresh');
-		}
-		else{
-			$id = urldecode($id);
+		$id = urldecode($id);
 			$newdata = array(
 				'id' => $id
 				);
 			$this->session->set_userdata($newdata);
+			
+		if($this->session->userdata('logged_in') == FALSE){
+			redirect('index.php/user/controller_login');
+		}
+		else{
 			redirect('index.php/user/controller_reserve_book');
 		}
 	}
@@ -76,7 +77,7 @@ class Controller_reserve_book extends CI_Controller{
 			}
 			if($no_of_available > 0){
 				$this->model_reserve_book->add_reservation($data);
-				$this->session->unset_userdata('call_number');
+				$this->session->unset_userdata('id');
 				redirect('index.php/user/controller_reserve_book/success');
 			}
 			else{
@@ -84,7 +85,7 @@ class Controller_reserve_book extends CI_Controller{
 			}
 		}
 		else{
-				$this->session->unset_userdata('call_number');
+				$this->session->unset_userdata('id');
 				redirect('index.php/user/controller_search_book');
 			
 		}

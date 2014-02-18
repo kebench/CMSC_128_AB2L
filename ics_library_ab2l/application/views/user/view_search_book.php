@@ -1,9 +1,10 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<script src="http://localhost/ics_library_ab2l/js/module/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="http://localhost/ics_library_ab2l/js/module/jquery/global.js" type="text/javascript"></script>
+<script src="<?php echo  base_url() ?>js/module/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="<?php echo  base_url() ?>js/module/jquery/global.js" type="text/javascript"></script>
 <script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
 	
-<script type>
+<script type = "text/javascript">
+	var base_url = "<?php echo base_url() ?>";
 	$(function() {
 	$( "#accordion" ).accordion({
    		heightStyle: "content"
@@ -39,7 +40,7 @@
 						<option value="year_of_pub">Publication</option>
 						<option value="tag_name">Tag</option>
 					</select>
-					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value);" />
+					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value, 'user');" />
 					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('user');"/><br/><br/><br/>
 					<div class="autosuggest" id="autosuggest_list"></div>
 				</form>

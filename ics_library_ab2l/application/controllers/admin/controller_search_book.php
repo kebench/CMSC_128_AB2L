@@ -46,7 +46,7 @@ class Controller_search_book extends CI_Controller {
 		// getting the number of rows for of a query for computing the total row
 		$row_number=$this->model_search_book->fetch_book_data($data,0,0);
 		//configuration of the ajax pagination  library.
-		$config['base_url'] = 'http://localhost/ics_library_ab2l/index.php/admin/controller_search_book/get_book_data2';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
+		$config['base_url'] = base_url().'index.php/admin/controller_search_book/get_book_data2';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
 		$config['total_rows'] = $row_number->num_rows();
 		$config['per_page'] = '5';
 		$config['div'] = '#list_area';
@@ -72,7 +72,7 @@ class Controller_search_book extends CI_Controller {
 		// getting the number of rows for of a query for computing the total row
 		$row_number=$this->model_search_book->fetch_book_data($data,0,0);
 		//configuration of the ajax pagination  library.
-		$config['base_url'] = 'http://localhost/ics_library_ab2l/index.php/admin/controller_search_book/get_book_data1';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
+		$config['base_url'] = base_url().'index.php/admin/controller_search_book/get_book_data1';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
 		$config['total_rows'] = $row_number->num_rows();
 		$config['per_page'] = '5';
 		$config['div'] = '#list_area';
@@ -123,7 +123,7 @@ class Controller_search_book extends CI_Controller {
 					}else{	
 						//and if book is available
 						//RESERVE TRANSACTION CODE HERE
-						echo "<a href='/ics_library_ab2l/index.php/admin/controller_reserve_book/verify_login/$book_details->id'><input type='button' name='reservebutton' id='reservebutton' value='Reserve Book'></a>";
+						echo "<a href='".base_url()."index.php/admin/controller_reserve_book/verify_login/$book_details->id'><input type='button' name='reservebutton' id='reservebutton' value='Reserve Book'></a>";
 					}
 					
 				}

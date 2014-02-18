@@ -1,4 +1,4 @@
-function autosuggest(str, category){
+function autosuggest(str, category, user){
 	if (str.length == 0) {
 		$('#autosuggest_list').fadeOut(500);
 		$('#sinput').removeClass('loading');
@@ -10,7 +10,7 @@ function autosuggest(str, category){
 		// Ajax request to CodeIgniter controller "ajax" method "autosuggest"
 	    // post the str parameter value
 	    $.ajax({
-		url: "http://localhost/ics_library_ab2l/index.php/admin/controller_search_book/autosuggest",					//no need to edit this
+		url: base_url+"index.php/"+user+"/controller_search_book/autosuggest",					//no need to edit this
 		type: 'POST',
 		async: false,
 		data:{
@@ -47,7 +47,7 @@ function get_data1(str){
 		
 		$.ajax({
 		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
-		url: "http://localhost/ics_library_ab2l/index.php/"+str+"/controller_search_book/get_book_data1",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data1",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
 		
 //		url: "http://localhost/kebench/index.php/search/get_book_data",
 		type: 'POST',
@@ -69,7 +69,7 @@ function get_data2(str){
 		
 		$.ajax({
 		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
-		url: "http://localhost/ics_library_ab2l/index.php/"+str+"/controller_search_book/get_book_data2",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data2",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
 		
 //		url: "http://localhost/kebench/index.php/search/get_book_data",
 		type: 'POST',

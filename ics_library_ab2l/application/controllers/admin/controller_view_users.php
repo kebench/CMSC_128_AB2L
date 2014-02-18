@@ -16,7 +16,6 @@ class Controller_view_users extends CI_Controller {
 
     function search_user(){
         $this->load->model('model_users');
-        echo $this->input->post('s_user');
         $data['results']=$this->model_users->userSearch($this->input->post('s_user'));
         $data['parent'] = "Users";
         $data['current'] = "Search Users";
