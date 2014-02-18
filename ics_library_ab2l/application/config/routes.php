@@ -40,6 +40,7 @@
 
 //$route['default_controller'] = "admin/controller_admin_login";
 $route['default_controller'] = "user/controller_home";
+$route['user/profile'] = "user/controller_home";
 
 
 $route['404_override'] = '';
