@@ -48,12 +48,21 @@
 			}
 	function validateNumber(){
 				str=regForm.stdNum.value;
-				msg="Invalid Input: ";
+				flag  = document.getElementById("classi").value;
 				
-				if (str=="") msg+="Student Number is required!";
-				else if (!str.match(/^[0-9]{4}\-[0-9]{5}$/))  msg+="Must be in the format of 20xx-xxxxx!<br/>";
-				else if(msg="Invalid input") msg="";
-				document.getElementsByName("valNumber")[0].innerHTML=msg;
+				msg="Invalid Input: ";
+				if(flag==="student"){
+					if (str=="") msg+="Student number is required";
+					else if (!str.match(/^[0-9]{4}\-[0-9]{5}$/))  msg+="Must be xxxx-xxxxx";
+					else if(msg="Invalid input") msg="";
+					document.getElementsByName("valNumber")[0].innerHTML=msg;
+				}
+				else{
+					if (str=="") msg+="Employee number is required";
+					else if (!str.match(/^[0-9]{10}$/) )  msg+="Must be xxxxxxxxxx";
+					else if(msg="Invalid input") msg="";
+					document.getElementsByName("valNumber")[0].innerHTML=msg;
+				}
 				if(msg=="") return true;
 			}
 	function validateCollege(){

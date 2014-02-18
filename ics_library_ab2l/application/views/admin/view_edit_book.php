@@ -246,9 +246,12 @@
                                                                     <div class="col width-fit">
                                                                         <div class="cell">
                                                                             <?php 
-                                                                                $authors = $this->model_book->get_book_authors($book[0]->call_number);
+                                                                                $authors = $this->model_book->get_book_authors($book[0]->id);
+                                                                                $count = 0;
                                                                                 foreach ($authors as $author) {
-                                                                                    echo '<input type = "text" name = "author[]" value="'.$author->author.'"><br/>';
+                                                                                    echo '<input type = "text" name = "author[]" value="'.$author->author.'">';
+                                                                                    $count++;
+
                                                                                 }
                                                                             ?>&nbsp;<span name="help_author" class="color-red"></span>
                                                                             <input type="button" class="row1 cell" value="Add author" onclick="addRow_author(this, false)">
@@ -267,7 +270,12 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type = "text" name = "call_number" value="<?php echo $book[0]->call_number ;?>" disabled />&nbsp;<span name="help_call_number" class="color-red"></span><br/>
+                                                                           <?php 
+                                                                            $call_numbers = $this->model_book->get_book_call_numbers($book[0]->id);
+                                                                            foreach ($call_numbers as $call_number) {
+                                                                                echo '<input type = "text" name = "call_number[]" value="'.$call_number->call_number.'" /><br/>';
+                                                                            }
+                                                                            ?>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -281,7 +289,7 @@
                                                                     <div class="col width-fit">
                                                                         <div class="cell">
                                                                             <?php 
-                                                                            $subjects = $this->model_book->get_book_subjects($book[0]->call_number);
+                                                                            $subjects = $this->model_book->get_book_subjects($book[0]->id);
                                                                             foreach ($subjects as $subject) {
                                                                                 echo '<input type = "text" name = "subject[]" value="'.$subject->subject.'" /><br/>';
                                                                             }
@@ -366,7 +374,7 @@
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
                                                                             </br><input type = "submit" name = "submit" value = "Submit" onclick="process_add()">
-                                                                            <input type = "hidden" name = "call_number1" value="<?php echo $book[0]->call_number ;?>" />
+                                                                            <input type = "hidden" name = "call_number1" value="<?php echo $book[0]->id ;?>" />
                                                                         </div>
                                                                     </div>
                                                                 </div>

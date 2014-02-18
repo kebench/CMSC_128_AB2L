@@ -31,6 +31,7 @@ class Controller_verify_login extends CI_Controller {
             }
             else redirect('index.php/user/controller_home', 'refresh');
            }
+           else redirect('index.php/admin/controller_announcement', 'refresh');
         }   
      }
  

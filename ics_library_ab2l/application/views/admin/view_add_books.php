@@ -16,7 +16,7 @@
                                 
                             if(str=="")
                             msg+="Title is required!<br/>";
-                            if(!str.match(/^[a-zA-Z0-9\ ]+[a-zA-Z0-9\ ]*$/))
+                            if(!str.match(/^.+.*$/))
                             msg+="Must be between 1-100 alpha numeric character!<br/>";
                             if(msg=="Invalid input: ")
                             msg="";

@@ -1,12 +1,9 @@
-function disabler(){
-var courseBox = document.getElementById('course');
-var collegeBox = document.getElementById('college');
-var NumBox = document.getElementById('stdNum');
+$(document).ready(function() {
+$('#courseDiv').hide();
+$('#collegeDiv').hide();
+$('#numDiv').hide();	
+});
 
-courseBox.disabled = true;
-collegeBox.disabled = true;
-NumBox.disabled = true;
-}
 
 function checker(){
 var selected = document.getElementById('classi').value;
@@ -14,24 +11,37 @@ var collegeBox = document.getElementById('college')
 var NumBox = document.getElementById('stdNum');
 var NumLabel = document.getElementById('labelNum');
 
+$('#collegeDiv').show();
+$('#numDiv').show();
 
 if(selected === 'faculty'){
 	collegeBox.disabled = false;
 	NumBox.disabled = false;
-	NumLabel.innerHTML = 'Faculty Number: ';
+	NumLabel.innerHTML = 'Employee Number (XXXXXXXXXX): ';
+	NumLabel.placeholder = 'Your Faculty Number: ';
+$('#courseDiv').hide();
+
 }
 else{
 	collegeBox.disabled = false;
 	NumBox.disabled = false;
-	NumLabel.innerHTML = 'Student Number: ';
+	NumLabel.innerHTML = 'Student Number (XXXX-XXXXX): ';
+	NumLabel.placeholder = 'Your Student Number: ';
+	
+	$('#courseDiv').show();
 }
-//alert(checker);
+
+
 }
+
+
 function courseChecker(){
 var selected = document.getElementById('college').value;
 var obj = document.getElementById('course')
 obj.disabled = false;
 var length = obj.options.length;
+
+
 
 while (obj.hasChildNodes())
     obj.removeChild(obj.firstChild);
