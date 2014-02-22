@@ -6,17 +6,22 @@
 		<!--The full build of all the generic classes of the framework(Framework itself)-->
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		<script src="<?php echo  base_url() ?>bootstrap/js/bootstrap.js"></script> 
   		<script src="<?php echo  base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
   		<script src="<?php echo  base_url() ?>js/main.js"></script>
+
   		<meta name="viewport" content="width=device-width"/>
   		<?php
   		 if($this->session->userdata('logged_in_type')=='admin')
             				redirect('index.php/admin/controller_announcement', 'refresh');
           ?>
   		<meta charset="utf-8"/>
+  		<script type="text/javascript">
+  			var base_url= "<?php echo  base_url() ?>"
+  		</script>
 	</head>
 	<body class="background-black">
 		<div id="main-container" class="site-center background-white">
