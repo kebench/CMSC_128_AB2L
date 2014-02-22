@@ -28,6 +28,8 @@ class Controller_view_users extends CI_Controller {
     }
 
     function approve_user(){
+        if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
          if(isset($_POST['approve'])){
              if(isset($_POST['account_number1'])){
                  $this->load->model('model_user');
@@ -45,6 +47,8 @@ class Controller_view_users extends CI_Controller {
      }
  
      function remove_user(){
+        if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
          if(isset($_POST['remove2'])){
              if(isset($_POST['account_number2'])){
                  $this->model_user->remove_user($_POST['account_number2']);
@@ -60,6 +64,8 @@ class Controller_view_users extends CI_Controller {
      }
  
      function email_confirm_account($account_number){  
+        if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
          $this->load->model('model_user');
          $config = array(
          'protocol'  => 'smtp',
@@ -108,6 +114,8 @@ class Controller_view_users extends CI_Controller {
          }
         }
     function borrow($borrower){
+        if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
         $arr = array(
             'borrower' => $borrower
             );

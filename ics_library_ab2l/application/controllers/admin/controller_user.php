@@ -20,19 +20,16 @@ class Controller_user extends Controller_log{
     	$data['parent'] = "Users";
     	$data['current'] = "View Users";
 
-        if($this->session->userdata('logged_in')){
             $this->load->helper(array('form','html'));
             $this->load->view("admin/view_header",$data);
             $this->load->view("admin/view_aside");
             $this->load->view("admin/view_users",$data);
             $this->load->view("admin/view_footer");
-        }else{
-            redirect('index.php/admin/controller_admin_login', 'refresh');
-        }
-
 	}
 
 	function approve_user(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST['approve'])){
 			if(isset($_POST['account_number1'])){
 				$this->load->model('model_user');
@@ -46,6 +43,8 @@ class Controller_user extends Controller_log{
 	}
 
 	function remove_user(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST['remove2'])){
 			if(isset($_POST['account_number2'])){
 				$this->model_user->remove_user($_POST['account_number2']);
@@ -61,6 +60,8 @@ class Controller_user extends Controller_log{
 	}
 
 	function email_confirm_account($account_number){	
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		$config = array(
 		'protocol'  => 'smtp',
 		'smtp_host' => 'ssl://smtp.googlemail.com',

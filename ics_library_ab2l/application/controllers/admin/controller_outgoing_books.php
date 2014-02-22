@@ -8,20 +8,16 @@ class Controller_outgoing_books extends Controller_log{
         $data['current'] = "Outgoing Books";
         $data['query'] = $this->model_reservation->show_all_user_book_reservation("reserved");   
         
-        if($this->session->userdata('logged_in')){
             $this->load->view("admin/view_header",$data);
             $this->load->view("admin/view_aside");
             $this->load->view('admin/view_outgoing_books', $data);
             $this->load->view("admin/view_footer");
-        }else{
-            redirect('index.php/admin/controller_admin_login', 'refresh');
-        }
-
     }
 
     /*The function send_email is to send the email to the borrower with overdue materials*/
     public function send_email(){
-        //$session_user = $this->checklogin();
+        if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
         if(isset($_POST['notify_all'])){
             $config = array(
             'protocol'  => 'smtp',

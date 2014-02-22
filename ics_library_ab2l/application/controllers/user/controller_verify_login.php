@@ -31,7 +31,7 @@ class Controller_verify_login extends CI_Controller {
             }
             else redirect('index.php/user/controller_home', 'refresh');
            }
-           else redirect('index.php/admin/controller_announcement', 'refresh');
+           else redirect('index.php/admin/controller_admin_home', 'refresh');
         }   
      }
  
@@ -45,12 +45,14 @@ class Controller_verify_login extends CI_Controller {
              foreach($result as $row) {
                  //create the session
                  $sess_array = array(
-                     'username' => $row->username
-
+                     'username' => $row->username,
+                     'fname' => $row->first_name,
+                     'mname' =>$row->middle_name,
+                     'lname'=>$row->last_name
                      );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
-                  $this->session->set_userdata('logged_in_type', "user");
+                 $this->session->set_userdata('logged_in_type', "user");
                  }
           return TRUE;
           } 
@@ -63,7 +65,10 @@ class Controller_verify_login extends CI_Controller {
                          foreach($result as $row) {
                              //create the session
                              $sess_array = array(
-                                 'username' => $row->username);
+                                 'username' => $row->username,
+                                 'fname' => $row->first_name,
+                                 'mname' =>$row->middle_name,
+                                 'lname'=>$row->last_name);
                              //set session with value from database
                              $this->session->set_userdata('logged_in', $sess_array);
                              $this->session->set_userdata('logged_in_type', "admin");

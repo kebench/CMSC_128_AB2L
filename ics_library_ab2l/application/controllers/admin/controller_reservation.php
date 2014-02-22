@@ -20,20 +20,18 @@ class Controller_reservation extends CI_Controller{
 		$data['parent'] = "Books";
     	$data['current'] = "View Borrowed Books";
 
-        if($this->session->userdata('logged_in')){
     		 $this->load->helper(array('form','html'));
 	        $this->load->view("admin/view_header",$data);
 	        $this->load->view("admin/view_aside");
 	        $this->load->view('admin/view_reserved_books', $data);	
 	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
 		
 	}//END OF get_All()
 	
 	/*The function send_email is to send the email to the borrower with overdue materials*/
 	public function send_email(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST['notify'])){
 			if(isset($_POST['email'])){
 				$config = array(
@@ -169,6 +167,8 @@ class Controller_reservation extends CI_Controller{
 	}//END OF send_email()
 
 	public function extend(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "extend");

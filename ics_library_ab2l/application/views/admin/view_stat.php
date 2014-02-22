@@ -26,9 +26,13 @@
         chart.draw(data, options);
       }
     </script>
-<div id="main-container" class="body width-fill">
+
+<div id="thisbody" id="main-container" class="body width-fill">
           <div class="col">
                             <div class="cell">
+                              <div class="page-header cell">
+           <h1>Admin <small>Statistics Page</small></h1>
+</div>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
     </div>
   </div>

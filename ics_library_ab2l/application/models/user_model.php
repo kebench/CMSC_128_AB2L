@@ -100,7 +100,7 @@ class User_Model extends CI_Model
 		);
 
 		//create query to connect user login database
-        $this->db->select('username, password');
+        $this->db->select('username, password,first_name,middle_initial,last_name');
         $this->db->from('user_account');
         $this->db->where('username', $username);
         $this->db->where('password', sha1($password));
@@ -124,7 +124,7 @@ class User_Model extends CI_Model
 		);
 
 		//create query to connect user login database
-        $this->db->select('username, password');
+        $this->db->select('username, password,first_name,middle_name,last_name');
         $this->db->from('admin_account');
         $this->db->where('username', $username);
         $this->db->where('password', sha1($password));

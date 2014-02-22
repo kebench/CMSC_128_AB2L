@@ -11,29 +11,21 @@ class Controller_admin_home extends CI_Controller {
  
     function index() {
         $this->load->helper(array('form','html'));
-        if($this->session->userdata('logged_in'))
-        {
-            $session_data = $this->session->userdata('logged_in');
-            $data['username'] = $session_data['username'];   
-            
-
-            $this->form_validation->set_rules('new_user_name', 'username', 'callback_new_username_check');
-            $this->load->view("admin/view_admin_header");
-            $this->load->view("admin/view_admin_home", $data);    
-      
-        } else {
-        //If no session, redirect to login page
-            redirect('admin/controller_admin_login', 'refresh');
-        }
+        $data['parent'] = "Admin";
+        $data['current'] = "Home";
+         $this->load->model("model_reservation");
+        $data['reserved'] = $this->model_reservation->show_all_user_book_reservation("reserved");
+        $data['overdue'] = $this->model_reservation->show_all_user_book_reservation('overdue');
+        $this->load->model("model_stat");
+        $data['stat'] = $this->model_stat->get_stat();
+        $this->load->model('model_users');
+        $data['users']=$this->model_users->getAllUsers();
+        
+        $this->load->view("admin/view_header",$data);
+        $this->load->view("admin/view_aside");
+        $this->load->view('admin/view_admin_home', $data);
+        $this->load->view("admin/view_footer");
     }
- 
-   
-    function logout() {
-         //remove all session data
-         $this->session->unset_userdata('logged_in');
-         $this->session->sess_destroy();
-         redirect('admin/controller_admin_home', 'refresh');
-     }
  
 }
 /* End of file controller_admin_home.php */

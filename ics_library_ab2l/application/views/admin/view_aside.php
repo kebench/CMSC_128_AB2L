@@ -1,4 +1,4 @@
-<div class="main-content">
+<div id="thisbody" id="mainbody" class="main-content">
 	<aside id="side-navigation" class="border-top width-1of4">
 		<div class="col width-1of1">
 			<div class="cell width-1of1">
@@ -10,6 +10,17 @@
 			<hr>
 		</div>
 		<div class="col width-fill">
+			<div class="cell">
+				<div class="collap-links">
+				<h4 class="nav-title width-fit">Home</h4>
+				<a class="nav-status float-right">HIDE</a>
+				</div>
+				<div>
+					<ul class="nav-links">
+						<li ><a href="<?php echo base_url() ?>index.php/admin/controller_admin_home" class="nav-a">Home</a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="cell">
 				<div class="collap-links">
 				<h4 class="nav-title width-fit">BOOKS</h4>
