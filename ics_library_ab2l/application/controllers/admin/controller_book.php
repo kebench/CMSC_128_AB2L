@@ -26,7 +26,8 @@ class Controller_book extends Controller_log {
 	
 	public function call_add(){
 			$session_user = $this->session->userdata('logged_in')['username'];
-
+			if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST['submit'])){
 			$call_number = $_POST['call_number'];
 			$title = htmlspecialchars($_POST['title1']);
@@ -63,7 +64,8 @@ class Controller_book extends Controller_log {
 	//EDIT
 	function edit(){
 		$session_user = $this->session->userdata('logged_in')['username'];
-
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		$id = $_POST['id'];
 		$this->load->model('model_book');
 		$book = $this->model_book->get_by_id($id);
@@ -83,7 +85,8 @@ class Controller_book extends Controller_log {
 
 	function edit_book(){
 		$session_user = $this->session->userdata('logged_in')['username'];
-
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		$this->load->model('model_book');
 		$id = $this->input->post('id');
 		$book = array(
@@ -114,6 +117,8 @@ class Controller_book extends Controller_log {
 	
 	//DELETE
 	function delete(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		$session_user = $this->session->userdata('logged_in')['username'];
 		$this->load->model('model_book');
 		$call_number = $_POST['call_number'];

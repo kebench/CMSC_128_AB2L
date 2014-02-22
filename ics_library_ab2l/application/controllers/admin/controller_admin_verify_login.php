@@ -12,6 +12,7 @@ class Controller_admin_verify_login extends CI_Controller {
     }
  
     function index() {
+        
         $this->form_validation->set_rules('username', 'username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
          $data['i']= "fds";

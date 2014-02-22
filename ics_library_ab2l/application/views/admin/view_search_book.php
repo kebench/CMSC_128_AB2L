@@ -27,7 +27,7 @@
    		
  });
 </script>
-<div class="body width-fill background-white">
+<div id="thisbody" class="body width-fill background-white">
 	<div class="cell">
 		<div id="accordion">
 			<h3>Basic Search<h3>

@@ -42,6 +42,8 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function verify_login($id){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if($this->session->userdata('logged_in') == FALSE){
 			echo "This should redirect to login page";
 		}
@@ -56,6 +58,8 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function confirm_reservation(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if($this->session->userdata('id') != FALSE && $this->session->userdata('borrower') != FALSE){
 			$data['id'] = $this->session->userdata('id');
 			$data['borrower'] = $this->session->userdata('borrower');

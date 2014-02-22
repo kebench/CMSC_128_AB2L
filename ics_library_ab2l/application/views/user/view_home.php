@@ -1,30 +1,16 @@
 <div class="cell">
 									<br/>
-									<div id = "carousel">
-										<div class="span13">
-											<div id="slider" class="carousel slide">
-												<div class="carousel-inner">
-													<div class="item active">
-														<img src="<?php echo base_url(); ?>images/home/uplb1.jpg" div="imgsize"></img>
-													</div>
-													<div class="item">
-														<img src="<?php echo base_url(); ?>images/home/ics.jpg" div="imgsize"></img>
-													</div>
-													<div class="item">	
-														<img src="<?php echo base_url(); ?>images/home/lib1.jpg" div="imgsize"></img>						
-													</div>
-													<div class="item">
-														<img src="<?php echo base_url(); ?>images/home/lib2.jpg" div="imgsize"></img>
-													</div>
-													<div class="item">		
-														<img src="<?php echo base_url(); ?>images/home/lib3.jpg" div="imgsize"></img>
-													</div>
-												</div>
-											<a class="left carousel-control" href="#slider" data-slide="prev">&lsaquo;</a>
-											<a class="right carousel-control" href="#slider" data-slide="next">&rsaquo;</a>
-											</div>
-										</div>
-									</div>
+									<div id="wrapper">
+								        <div class="slider-wrapper theme-default">
+								            <div id="slider" class="slider">
+								                <img src="<?php echo base_url();?>images/home/uplb.jpg" data-thumb="<?php echo base_url();?>images/home/uplb.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/lib1.jpg" data-thumb="<?php echo base_url();?>images/home/lib1.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/lib2.jpg" data-thumb="<?php echo base_url();?>images/home/lib2.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/lib3.jpg" data-thumb="<?php echo base_url();?>images/home/lib3.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/ics.jpg" data-thumb="<?php echo base_url();?>images/home/ics.jpg" alt=""/>
+								            </div>
+								        </div>
+								    </div>
 
 
 									<h4 id="news">News and Updates</h4>
@@ -65,3 +51,8 @@
 		                                </div>
 		                            </div>
 							</div>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/slider/jquery.nivo.slider.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$('#slider').nivoSlider();
+});</script>

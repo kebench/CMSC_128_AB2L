@@ -11,19 +11,17 @@ class Controller_add_user extends CI_Controller {
     	$data['parent'] = "Users";
     	$data['current'] = "Add Users";
 
-        if($this->session->userdata('logged_in')){
     		$this->load->helper(array('form','html'));
 	        $this->load->view("admin/view_header",$data);
 	        $this->load->view("admin/view_aside");
 	        $this->load->view("admin/view_add_user");
 	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
     }
 
     public function registration()
     {
+          if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
           $this->load->library('form_validation');
           // field name, error message, validation rules
           $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
@@ -59,15 +57,11 @@ class Controller_add_user extends CI_Controller {
         $data['parent'] = "Users";
         $data['current'] = "Add Users";
 
-        if($this->session->userdata('logged_in')){
             $this->load->helper(array('form','html'));
             $this->load->view("admin/view_header",$data);
             $this->load->view("admin/view_aside");
             $this->load->view("admin/view_add_user",$data);
             $this->load->view("admin/view_footer");
-        }else{
-            redirect('index.php/admin/controller_admin_login', 'refresh');
-        }
     }
 }
 /* End of file home_controller.php */

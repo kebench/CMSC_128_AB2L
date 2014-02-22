@@ -22,6 +22,8 @@ class Controller_add_admin extends Controller_log{
     }
     
     function registration(){
+        if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
         $this->load->library('form_validation');
         // field name, error message, validation rules
         $this->form_validation->set_rules('admin_key', 'Administrator Key', 'trim|required|alpha|xss_clean');
@@ -46,6 +48,8 @@ class Controller_add_admin extends Controller_log{
         }
     }
     function redirectPage(){
+        if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
         if(isset($_POST['cancelAdd'])){
             //redirect('index.php/admin/controller_view_users','refresh');
         }

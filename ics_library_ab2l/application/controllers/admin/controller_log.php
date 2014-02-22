@@ -26,6 +26,8 @@
 		}
 
 		function add_log($message, $type){
+			if($this->session->userdata('logged_in_type')!="admin")
+            	redirect('index.php/user/controller_login', 'refresh');
 			$this->load->model('model_log');
 			$this->model_log->add_log($message, $type);
 		}

@@ -7,15 +7,12 @@ class Controller_announcement extends Controller_log {
 	{
 		$data['parent'] = "Admin";
     	$data['current'] = "View Announcement";
-		if($this->session->userdata('logged_in')){
+    	
     		$this->load->helper(array('form','html'));
 	        $this->load->view("admin/view_header",$data);
 	        $this->load->view("admin/view_aside");
 	        $this->load->view("admin/view_announcements");
 	        $this->load->view("admin/view_footer");
-    	}else{
-	        redirect('index.php/admin/controller_admin_login', 'refresh');
-    	}
 	}
 	
 	public function viewForm(){
@@ -37,6 +34,8 @@ class Controller_announcement extends Controller_log {
 	}
 	
 	public function deleteAll(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST["delete_all"]))
 		{
 			$fp = fopen('./application/announcements.txt', "w");
@@ -53,7 +52,8 @@ class Controller_announcement extends Controller_log {
 	
 	public function writeToFile(){
 		$status = 1;
-
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST["add"]))
 		{
 			$title = htmlspecialchars($_POST["title"]);	
@@ -79,7 +79,8 @@ class Controller_announcement extends Controller_log {
 				fclose($fp);
 				echo "<p>Your data has been saved in a text file!</p>";
 				//$counter++;
-				$this->add_log("Admin 1 added a new announcement", "Add Announcement");
+				$session_user = $this->session->userdata('logged_in')['username'];
+				$this->add_log("Admin $session_user added a new announcement", "Add Announcement");
 				unset($_POST["add"]);
 				redirect('index.php/admin/controller_announcement','refresh');
 			}
@@ -88,6 +89,8 @@ class Controller_announcement extends Controller_log {
 	}
 	
 	public function find(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST["edit"]))
 		{
 			$id = htmlspecialchars($_POST["date"]);
@@ -163,7 +166,8 @@ class Controller_announcement extends Controller_log {
 	
 	public function saveChanges(){
 		$status = 1;
-
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST["save"]))
 		{
 			$new_title = htmlspecialchars($_POST["title"]);	

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 
 <html>
+	<?php
+  		 if($this->session->userdata('logged_in_type')!="admin")
+            				redirect('index.php/user/controller_login', 'refresh');
+    ?>
 	<head>
 		<title>Admin Page</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>style/admin/build-full.css" media="all"/>
@@ -8,7 +12,21 @@
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		<script src="<?php echo base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
 		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
+		<script>
+			$(document).ready(function(){
+				$heightbody = $("#thisbody").css("height");
+				$heightaside = $("aside").css("height");
+				console.log($heightbody);
+				console.log($heightaside);
+				if($heightbody > $heightaside){
+					console.log("enter");
+					$("#side-navigation").css("height",$heightbody);
+				}
+			});
+		</script>
 	</head>
+
+
 	<body>
 		<div class="body main-content">
 			<header id="main-header" class="site-header background-">
@@ -34,7 +52,12 @@
 				<div  class="col width-1of4 shadow-right secondary-header border-bottom">
 					<div class="col">
 						<img id="icon-user" src="<?php echo base_url() ?>images/icn_user.png"/>
-						<p id="user-name"> ADMIN (<a href="<?php echo base_url() ?>index.php/admin/controller_logout">Logout</a>)</p>
+						<p id="user-name">
+							<?php  
+								$session_data = $this->session->userdata('logged_in');
+            					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
+            					?>
+					(<a href="<?php echo base_url() ?>index.php/admin/controller_logout">Logout</a>)</p>
 					</div>
 				</div>
 				<div class="col width-fill border-bottom secondary-header shadow-bottom">

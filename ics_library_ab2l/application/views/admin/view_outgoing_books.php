@@ -1,8 +1,11 @@
-<div class="body width-fill background-white">
+<div id="thisbody" class="body width-fill background-white">
 					<div class="cell">
 						<div class="page-header cell">
                                         <h1>Admin <small>Outgoing Books</small></h1>
                                     </div>
+                        <?php
+                            if($query != NULL){
+                        ?>
 						<div class="panel datasheet cell">
 	                        <div class="header background-red">
 	                            List of outgoing books
@@ -46,5 +49,13 @@
 	                            </ul>
 	                        </div>
 	                    </div>
+	                    <?php
+	                    	}
+	                    	else{
+	                    		echo "<hr>";
+                                echo "<h2 class='color-grey'>There is no currently outgoing books!</h2>";
+                                echo "<hr>";
+	                    	}
+	                    ?>
 	                </div>				
 	            </div>

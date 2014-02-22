@@ -3,7 +3,7 @@
    	$( "#accordion" ).accordion({ heightStyle: "content" });
  });
 </script>
-<div class="body width-fill background-white">
+<div id="thisbody" class="body width-fill background-white">
 					<div class="cell">
 						<div class="page-header cell">
                                         <h1>Admin <small>Search Books</small></h1>
