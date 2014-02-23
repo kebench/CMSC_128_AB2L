@@ -170,7 +170,7 @@
 	                    	}
 	                    ?>
 	                    <div class="panel datasheet cell">
-				            <div class="header">
+				            <div class="header background-red">
 				                List of Users
 				            </div>
 				            <table class="body">

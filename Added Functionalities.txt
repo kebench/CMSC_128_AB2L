@@ -16,8 +16,9 @@ User account confirmation
 View logs
 Reservation of books by user
 Cancellation of reserve book of user
-+Carousel in home. Fixed
-+Admin home
-+Added full name in session in login.
-+Checking if login to all the pages
+Carousel in home. Fixed
+Admin home
+Added full name in session in login.
+Checking if login to all the pages
++I edited announcement.. :)
 

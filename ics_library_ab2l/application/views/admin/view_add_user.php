@@ -7,6 +7,9 @@
                                 <div class="col width-fill">
                                     <div class="col">
                                         <div class="cell panel">
+                                            <div class="header gradient">
+                                               User Registration Form
+                                            </div>
                                             <div class="body">
                                                 <div class="cell">
                                                     <div class="color-red width-fill" style="font-weight: bold;"><p>
