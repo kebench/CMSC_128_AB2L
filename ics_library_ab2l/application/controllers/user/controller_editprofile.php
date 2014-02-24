@@ -62,7 +62,7 @@ class controller_editprofile extends CI_Controller {
                      else echo 'userNo';
               }
             else echo 'userNo';
-            return true;
+            
     }
 }
 /* End of file controller_editprofile.php */

@@ -19,9 +19,7 @@
             				redirect('index.php/admin/controller_announcement', 'refresh');
           ?>
   		<meta charset="utf-8"/>
-  		<script type="text/javascript">
-  			var base_url= "<?php echo  base_url() ?>"
-  		</script>
+  		<script type="text/javascript">var base_url= "<?php echo  base_url() ?>"</script>
 	</head>
 	<body class="background-black">
 		<div id="main-container" class="site-center background-white">

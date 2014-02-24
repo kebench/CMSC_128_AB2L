@@ -24,17 +24,16 @@
                                     <div class="cell">
                                        
                                     <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em><a id = "edit_username">Edit</a>
-                                    <?php if($submitted= true): ?>
-
+                                    
                                     <form id= 'form_username' method= 'post' action = 'controller_editprofile/edit_username'>
                                     <span id="label_username1">Username:</span><input type = 'text' id= 'input_username'name = 'new_username'><span id = "helpusername"></span><br>
-                                    <span>Enter password:</span><input type= 'text' id ='pword_for_username' name ='pword_for_username'><br>
+                                    <span>Enter password:</span><input type= "password" id ='pword_for_username' name ='pword_for_username'><br>
                                      <input type='button' id = "cancel_username" value= 'Cancel'>
                                     <input type='submit' onClick="return validate_new_un" value= 'Save'><br>
                                     </form>
                                     
 
-                                    <?php endif?>
+                                
                                     <br/>
                                     <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
                                     <span>College:</span><em><?php echo  $user_details->college?></em><br/>
@@ -43,7 +42,7 @@
 
                                     <form id= 'form_email' method= 'post' action = 'controller_editprofile/edit_email'>
                                     <span id="label_email1">Email Address:</span><input type = 'text' id= 'input_email'name = 'new_email' value="<?php echo  $user_details->email?>"><span id = "helpemail"></span><br>
-                                    <span>Enter password:</span><input type= 'text' id ='pword_for_email' name ='pword_for_email'><br>
+                                    <span>Enter password:</span><input type= 'password' id ='pword_for_email' name ='pword_for_email'><br>
                                      <input type='button' id = "cancel_email" value= 'Cancel'>
                                     <input type='submit' disabled= "return false" value= 'Save'>
                                     </form>
