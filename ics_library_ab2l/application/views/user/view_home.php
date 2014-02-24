@@ -53,6 +53,6 @@
 							</div>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/slider/jquery.nivo.slider.js"></script>
 <script type="text/javascript">
-$(window).load(function() {
+$(window).ready(function() {
 	$('#slider').nivoSlider();
 });</script>

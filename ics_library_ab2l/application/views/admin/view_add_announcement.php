@@ -43,23 +43,34 @@
                                         <h1>Admin <small>Add Announcement</small></h1>
                                     </div>
                                 <div class="col width-fill">
-                                	<div class="cell  panel">
-                                		<div class="cell">
-                                			<p class="tiny">Note- all fields are required</p>
+                                	<div class="cell panel" style="border: 1px solid #9BA0AF;">
+                                		<div class="header gradient">
+                                				<h4 style="text-weight: normal; font-family: Arial;">Post another announcements</h4>
                                 		</div>
                                 		<div class="cell">		
-										<div id="add">
+										<div id="add" class="cell">
 											<form action="" method="post">
-												<label>Title:</label><br/>
-												<input type="text" name="title" id="title" class="background-white" style="margin-left: 1em; width:25em" placeholder="Title" required="required" /><br/><br/>
-												<label>Announcement Content:</label><br/>
-												<textarea cols="40" rows="5" name="content" class="background-white" style="margin-left: 1em; width:30em" id="content" placeholder="Content" required="required"></textarea><br /><br/>
-												<input type="submit" name="add" style="margin-left:18em" id="add" value="Add Anouncement"/>
+												<div class="panel cell" style="background: #f6f6f6;border: 1px solid #9BA0AF;">
+													<div class="cell">
+														<label>ANNOUNCEMENT TITLE</label><br/>
+														<input type="text" name="title" id="title" class="background-white" style="width: 95%; margin-left: 3%;" placeholder="Title" required="required" /><br/><br/>
+													</div>
+												</div>
+												<div class="cell panel" style="background: #f6f6f6; margin-top: 1.5em; border: 1px solid #9BA0AF;">
+													<div class="cell">
+													<label>ANNOUNCEMENT CONTENTS</label><br/>
+													<textarea cols="40" rows="5" name="content" class="background-white" style="width: 95%; margin-left: 3%;" id="content" placeholder="Content" required="required"></textarea><br /><br/>
+													
+													</div>
+												</div>
 												<br/><br/>
-												<!--<input type="submit" name="cancel" id="cancel" value="Cancel"/>-->
-											</form>
 										</div>
 									 </div>
+									 <div class="footer width-fill" style="border-top: 1px solid #9BA0AF;">
+									 				<a href="<?php echo base_url(); ?>index.php/admin/controller_admin_home"><input type="button"  name="cancel" id="add" class="float-right" value="Cancel" style="margin: 0px 5px 0px 5px;"/></a>
+													<input type="submit" name="add" id="add" class="float-right" value="Add Anouncement"/>
+									</div>
+									</form>
 								</div>
 							</div>
                         </div>

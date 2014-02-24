@@ -117,6 +117,9 @@
                                 <div class="col width-fill">
                                     <div class="col">
                                         <div class="cell panel">
+                                            <div class="header gradient">
+                                                Admin Registration Form
+                                            </div>
                                             <div class="body">
                                                 <div class="cell">
                                                     <div class="col">

@@ -252,6 +252,9 @@
                                 <div class="col width-fill">
                                     <div class="col">
                                         <div class="cell panel">
+                                            <div class="header gradient">
+                                                Admin Add Book Form
+                                            </div>
                                             <p class="tiny cell">Note: *- required fields</p>
                                             <div class="body">
                                                 <div class="cell">
