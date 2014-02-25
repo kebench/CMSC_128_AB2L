@@ -47,7 +47,7 @@ class Controller_verify_login extends CI_Controller {
                  $sess_array = array(
                      'username' => $row->username,
                      'fname' => $row->first_name,
-                     'mname' =>$row->middle_name,
+                     'mname' =>$row->middle_initial,
                      'lname'=>$row->last_name
                      );
                  //set session with value from database

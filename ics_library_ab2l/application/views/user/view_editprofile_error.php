@@ -24,17 +24,16 @@
                                     <div class="cell">
                                        
                                     <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em><a id = "edit_username">Edit</a>
-                                    <?php if($submitted= true): ?>
-
+                                    
                                     <form id= 'form_username' method= 'post' action = 'controller_editprofile/edit_username'>
                                     <span id="label_username1">Username:</span><input type = 'text' id= 'input_username'name = 'new_username'><span id = "helpusername"></span><br>
                                     <span>Enter password:</span><input type= "password" id ='pword_for_username' name ='pword_for_username'><br>
                                      <input type='button' id = "cancel_username" value= 'Cancel'>
-                                    <input type='submit' onclick="return validate_new_un" value= 'Save'><br>
+                                    <input type='submit' onClick="return validate_new_un" value= 'Save'><br>
                                     </form>
                                     
 
-                                    <?php endif?>
+                                
                                     <br/>
                                     <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
                                     <span>College:</span><em><?php echo  $user_details->college?></em><br/>
@@ -129,10 +128,9 @@
     //to check if the new username is still available
     function getResult(name){
                // var baseurl = <?php echo base_url()?>;
-               var bool= false;
                 $('#helpusername').addClass('preloader');
                 $("#helpusername").text("Checking availability...");
-                bool=$.ajax({
+                $.ajax({
                     url : base_url + 'index.php/user/controller_editprofile/check_username/' + name,
                     cache : false,
                     success : function(response){
@@ -141,20 +139,18 @@
                         if(response == 'userOk'){
                             $('#helpusername').removeClass('userNo').addClass('userOk');
                             $('#helpusername').text("Username available!");
-                            
+                            return true;
                            // alert("Username available");
                         }
                         else{
                             $('#helpusername').removeClass('userOk').addClass('userNo');;
                             $("#helpusername").text("Username not available.");
-                           
+                            return false;
                         }
                     }
                 })
 
-               alert(bool);
-                //return bool;
-
+                
             }
 
          $("#edit_email").click(function(){
