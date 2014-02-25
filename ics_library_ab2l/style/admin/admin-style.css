@@ -238,3 +238,18 @@ background-color: white;
 	font-family: verdana;
 	color: red;
 }
+
+#success{
+	background: url('../../images/s.png');
+	border-radius: 5px;
+	border: 1px solid #577b09;
+}
+
+#check{
+	background-image: url('../../images/check.png');
+	background-size: contain;
+	background-position: left center;
+	background-repeat: no-repeat;
+	text-indent: 3em;
+	color: #577b09;
+}

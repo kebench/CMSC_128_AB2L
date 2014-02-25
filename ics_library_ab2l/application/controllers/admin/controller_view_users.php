@@ -2,10 +2,16 @@
 class Controller_view_users extends CI_Controller {
  
     function index() {
-    	$this->load->model('model_users');
-		$data['results']=$this->model_users->getAllUsers();
-    	$data['parent'] = "Users";
-    	$data['current'] = "View Users";
+    	$this->viewUser(null);
+    }
+
+    function viewUser($msg){
+        $this->load->model('model_users');
+        $data['results']=$this->model_users->getAllUsers();
+        $data['parent'] = "Users";
+        $data['current'] = "View Users";
+        if($msg != null)
+            $data['message'] = "You have successfully approved the account of a user with account_number:".$msg;
 
         $this->load->helper(array('form','html'));
         $this->load->view("admin/view_header",$data);
@@ -35,15 +41,17 @@ class Controller_view_users extends CI_Controller {
                  $this->load->model('model_user');
                  $this->model_user->approve_user($_POST['account_number1']);
                  $this->email_confirm_account($_POST['account_number1']);
-                 header('refresh:0;url=call_confirm');
+                 $account_num = $_POST['account_number1'];
+                 $message = $account_num;
+                 $this->call_confirm($message);
              }
              unset($_POST['approve']);
          }
      }
  
-     function call_confirm(){
-         echo "<script>alert('You have confirmed an account!')</script>";
-         redirect('index.php/admin/controller_view_users','refresh');
+     function call_confirm($msg){
+         echo "<script>alert('You have confirmed the account of $msg')</script>";
+         redirect('index.php/admin/controller_view_users/viewUser/'.$msg,'refresh');
      }
  
      function remove_user(){
@@ -66,7 +74,7 @@ class Controller_view_users extends CI_Controller {
      function email_confirm_account($account_number){  
         if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
-         $this->load->model('model_user');
+         
          $config = array(
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -84,12 +92,12 @@ class Controller_view_users extends CI_Controller {
          $from_name='Sample ICS Library';
          
          //Get user account in database
-         $data['query'] = $this->model_user->get_acct($account_number);
- 
-         $first_name=$data['query']['first_name'];
-         $mi=$data['query']['middle_initial'];
-         $last_name=$data['query']['last_name'];
-         $to=$data['query']['email'];
+         $this->load->model('model_user');
+         $query['query'] = $this->model_user->get_acct($account_number);
+         $first_name= $query['query'][0]->first_name;
+         $mi=$query['query'][0]->middle_initial;
+         $last_name=$query['query'][0]->last_name;
+         $to=$query['query'][0]->email;
  
          $message = "Dear {$first_name} {$mi}. {$last_name},<br/>";
          $message .= "&nbsp;Your account has been approved. ";

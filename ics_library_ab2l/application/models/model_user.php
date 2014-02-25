@@ -8,17 +8,20 @@ class Model_user extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_acct($account_number=FALSE)	//select statements
+	public function get_acct($account_number)	//select statements
 	{
-		if ($account_number === FALSE)
+		/*if ($account_number === FALSE)
 		{
 			$query = $this->db->get('user_account');
 			$this->db->order_by("status", "desc");
 			return $query->result();
-		}
+		}*/
 		// may value na account number
-		$query = $this->db->get_where('user_account', array('account_number' => $account_number));
-		$this->db->order_by("status", "desc");
+		//$query = $this->db->get_where('user_account', array('account_number' => $account_number));
+		//$this->db->order_by("status", "desc");
+		$query = $this->db->query("SELECT *
+			FROM user_account
+			WHERE account_number = '$account_number' ");
 		return $query->result();
 	}
 	

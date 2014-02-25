@@ -3,6 +3,21 @@
                         <div class="page-header cell">
                                         <h1>Admin <small>View Books</small></h1>
                         </div>
+                        <?php
+                            if(isset($message)){
+                        ?>
+                        <div id="success" class="widht-fill">
+                            <div id="check" class="cell">
+                                <p>
+                                <?php
+                                    echo $message;          
+                                ?>
+                                </p>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        ?>
                         <div class="panel datasheet cell">
                             <div class="header background-red">
                                 List of all books
@@ -52,19 +67,21 @@
                                             <td>{$row->type}</td>
                                             <td>{$row->no_of_available}/{$row->quantity}</td>
 
-                                            <td>
-                                            <form action=\"../admin/controller_book/edit/\" method='post'>
-                                                <input type=\"hidden\" name=\"id\" value=\"{$row->id}\" />
-                                                <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
-                                            </form>
-                                            </td>
-                                            <td>
-                                            <form action=\"controller_book/delete/\" method='post'>
-                                                <input type=\"hidden\"  name=\"id\" value=\"{$row->id}\" />
-                                                <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
-                                            </form>
-                                            </td>
-                                            </tr>";
+                                            <td>";
+                                            $base = base_url();
+                                                echo "<form action='$base/index.php/admin/controller_book/edit/' method='post'>
+                                                    <input type=\"hidden\" name=\"id\" value=\"{$row->id}\" />
+                                                    <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
+                                                </form>
+                                                </td>
+                                                <td>
+                                                <form action='$base/index.php/admin/controller_book/delete/' method='post'>
+                                                    <input type=\"hidden\"  name=\"id\" value=\"{$row->id}\" />
+                                                    <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
+                                                </form>
+                                                </td>
+                                                </tr>";
+
 
                                             echo "</tr>";
                                             $count++;
@@ -80,7 +97,7 @@
                                 </ul>
                             </div>
                                     <form action="<?php echo base_url(); ?>index.php/admin/controller_add_books" method='post'>
-                                            <input type='submit' name='add' value='Add Book' enabled/>
+                                            <input type='submit' name='add' class="float-right" value='Add Book' enabled/>
                                     </form>
                         </div>
                     </div>
