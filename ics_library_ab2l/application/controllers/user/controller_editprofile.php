@@ -10,7 +10,7 @@ class controller_editprofile extends CI_Controller {
 
     function index() {
         $this->load->helper(array('form','html'));
-        if($this->session->userdata('logged_in')){
+       if($this->model_check_session->check_session() == TRUE){
                $data['username']= $this->session->userdata('logged_in')['username'];
                 //get the details of the user
                $user_details = $this->model_viewUser->get_info($data['username']);

@@ -1,6 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Controller_book extends CI_Controller {
+
+	function __construct() {
+        parent::__construct();
+        $this->load->model('model_check_session','',TRUE);
+        $this->load->helper('url');
+        $this->load->library(array('form_validation','session'));
+    }
 	
 	public function index()
 	{
@@ -9,7 +16,7 @@ class Controller_book extends CI_Controller {
 	}
 	public function user_reserved_list(){
 		$this->load->helper(array('form','html'));
-		if($this->session->userdata('logged_in')){
+		if($this->model_check_session->check_session() == TRUE){
 		
 		$session_data = $this->session->userdata('logged_in');
 		$acc = $session_data['username'];						
@@ -36,7 +43,7 @@ class Controller_book extends CI_Controller {
 	
 	public function user_borrowed_list(){
 		
-		if($this->session->userdata('logged_in')){
+		if($this->model_check_session->check_session() == TRUE){
 		
 		$session_data = $this->session->userdata('logged_in');
 		$acc = $session_data['username'];						
