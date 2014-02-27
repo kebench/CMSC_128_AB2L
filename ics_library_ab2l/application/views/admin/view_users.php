@@ -3,6 +3,13 @@
         <div class="page-header cell">
            <h1>Admin <small>View Users</small></h1>
         </div>
+        <?php if(isset($message)){ ?>
+        <div>
+            <?php echo $message ?>
+        </div>
+        <?php
+            }
+        ?>
 		<div class="panel datasheet cell">
             <div class="header background-red">
                 List of Users
@@ -39,12 +46,12 @@
 								If status is already 'approve', meaning the account was already validated,
 								'Registered' will be displayed on the said column. 
 							*/
-
+                            $base = base_url();
 							if($stat === "approve"){
 							echo "<td><a href='".base_url()."index.php/admin/controller_view_users/borrow/$row->account_number'>Click to borrow</a></td>";
 							}
 							else{
-								echo "<form action='controller_view_users/approve_user' method='POST'>";
+								echo "<form action='$base/index.php/admin/controller_view_users/approve_user' method='POST'>";
                                 echo "<input type='hidden' name='account_number1' value='$row->account_number'/>";
                                 echo "<td>"."<input type ='submit' class='background-red' name='approve' value = 'Confirm'>"."</td>";   //'Validate' button. Functionality not included here.
                                 echo "</form>";	//'Validate' button. Functionality not included here.

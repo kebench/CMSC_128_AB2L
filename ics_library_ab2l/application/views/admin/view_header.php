@@ -9,7 +9,7 @@
 		<title>Admin Page</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>style/admin/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>style/admin/admin-style.css" media="all"/>
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css">
 		<script src="<?php echo base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
 		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
 		<script>

@@ -19,7 +19,7 @@ class Controller_admin_home extends CI_Controller {
         $this->load->model("model_stat");
         $data['stat'] = $this->model_stat->get_stat();
         $this->load->model('model_users');
-        $data['users']=$this->model_users->getAllUsers();
+        $data['users']=$this->model_users->getPendingUsers();
         
         $this->load->view("admin/view_header",$data);
         $this->load->view("admin/view_aside");

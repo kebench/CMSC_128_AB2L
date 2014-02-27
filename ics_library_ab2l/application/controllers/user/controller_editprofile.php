@@ -50,20 +50,6 @@ class controller_editprofile extends CI_Controller {
             $value['info'] = $this->modelviewUser->getInfo($number);
             $this->load->view('viewAccount',$value);
         }
-
-    public function check_username( $username){
-            $this->db->where('username',$username);
-            $query = $this->db->get('user_account')->num_rows();
-            if($query == 0 ){
-                    $this->db->where('username',$username);
-                    $query = $this->db->get('admin_account')->num_rows();
-                     if($query == 0 )
-                       echo 'userOk';
-                     else echo 'userNo';
-              }
-            else echo 'userNo';
-            
-    }
 }
 /* End of file controller_editprofile.php */
 /* Location: ./application/controllers/user/controller_editprofile.php */

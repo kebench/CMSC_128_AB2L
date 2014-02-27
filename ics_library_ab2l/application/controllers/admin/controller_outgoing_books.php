@@ -3,15 +3,21 @@ include_once("controller_log.php");
 class Controller_outgoing_books extends Controller_log{
  
     function index() {
+        $this->outgoing_books(null);
+    }
+
+    function outgoing_books($msg){
         $this->load->model('model_reservation');
         $data['parent'] = "Books";
         $data['current'] = "Outgoing Books";
-        $data['query'] = $this->model_reservation->show_all_user_book_reservation("reserved");   
+        $data['query'] = $this->model_reservation->show_all_user_book_reservation("reserved");
+        if($msg != null)
+            $data['message'] = "You have successfully confirm the book with reservation number:".$msg;
         
-            $this->load->view("admin/view_header",$data);
-            $this->load->view("admin/view_aside");
-            $this->load->view('admin/view_outgoing_books', $data);
-            $this->load->view("admin/view_footer");
+        $this->load->view("admin/view_header",$data);
+        $this->load->view("admin/view_aside");
+        $this->load->view('admin/view_outgoing_books', $data);
+        $this->load->view("admin/view_footer");
     }
 
     /*The function send_email is to send the email to the borrower with overdue materials*/
@@ -93,21 +99,22 @@ class Controller_outgoing_books extends Controller_log{
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "extend");
-        redirect('index.php/admin/controller_reservation','refresh');
+        redirect('index.php/admin/controller_reservation/getAll/extend','refresh');
     }//END OF extend()
     
     public function return_book(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "returned");
-        redirect('index.php/admin/controller_reservation','refresh');
+        redirect('index.php/admin/controller_reservation/get_All/return','refresh');
     }//END OF return_book()
     
     public function reserve(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "reserved");
-       redirect('index.php/admin/controller_reservation','refresh');
+
+       redirect('index.php/admin/controller_outgoing_books/outgoing_books/'.$res_number,'refresh');
     }//END OF reserve()
     
     public function cancel(){

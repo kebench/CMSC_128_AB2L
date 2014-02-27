@@ -4,7 +4,7 @@
            <h1>Admin <small>View Announcements</small></h1>
         </div>
 <?php
-
+ $base = base_url();
 /*
 Uses explode to split the file, array_shift to remove the first element and returns its value,
 and info to get row data.
@@ -35,7 +35,7 @@ foreach($rows as $row => $data)
 
 		echo "<div class='panel cell'>";
 		echo "<div class='gradient header'>Title: {$info[$row1]['title']}
-		<form action='controller_announcement/find/' class='float-right' method='post'>
+		<form action='$base/index.php/admin/controller_announcement/find/' class='float-right' method='post'>
 				<input type='hidden' name='date' ' value='{$info[$row]['date']}' />
 				<input type='submit' name='edit' style='height:1.5em; font-size: 10px; line-height: 0px;' value='Edit' enabled/>
 				<input type='submit' name='delete' value='Delete' style='height:1.5em; font-size:10px; line-height: 0px;' onclick=\"return confirm('Are you sure you want to delete this announcement?')\" enabled/>

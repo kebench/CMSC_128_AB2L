@@ -7,7 +7,7 @@
                                 <div class="col width-fill">
                                     <div class="col">
                                         <div class="cell panel">
-                                            <div class="header gradient">
+                                            <div class="header background-red">
                                                User Registration Form
                                             </div>
                                             <div class="body">
@@ -23,9 +23,10 @@
                                                     <div class="col">
                                                         <div class="cell">
                                                               <?php 
+                                                                $base = base_url();
                                                                 $attributes = array('name' => 'regForm');
 
-                                                                echo form_open("index.php/admin/controller_add_user/registration", $attributes); ?>
+                                                                echo form_open("$base/index.php/admin/controller_add_user/registration", $attributes); ?>
 
                                                                 <div class="col">
                                                                     <div class="col width-1of4">

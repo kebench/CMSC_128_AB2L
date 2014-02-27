@@ -23,6 +23,15 @@ function userSearch($s_user){
 
 	return $query->result();
 }
+
+function getPendingUsers(){
+	$sqlQuery = "SELECT account_number, first_name, middle_initial, last_name, 
+					course, email,classification, status FROM user_account
+					where status ='pending'
+					ORDER BY status desc";
+	$query = $this->db->query($sqlQuery);
+	return $query->result();
+	}
 }
 
 ?>

@@ -173,6 +173,7 @@
                             rowContainer.appendChild(document.createTextNode(" ")); // add space
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
 
                         }
 
@@ -207,6 +208,7 @@
                             rowContainer.appendChild(document.createTextNode(" ")); // add space
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
                         }
 
                         function addRow_callno(element, indentFlag){
@@ -240,6 +242,7 @@
                             rowContainer.appendChild(document.createTextNode(" ")); // add space
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
 
                         }
 </script>
@@ -251,8 +254,17 @@
                                     </div>
                                 <div class="col width-fill">
                                     <div class="col">
+                                        <?php
+                                            if(isset($message)){
+                                        ?>
+                                        <div>
+                                            <?php echo $message; ?>
+                                        </div>
+                                        <?php
+                                            }
+                                        ?>
                                         <div class="cell panel">
-                                            <div class="header gradient">
+                                            <div class="header background-red">
                                                 Admin Add Book Form
                                             </div>
                                             <p class="tiny cell">Note: *- required fields</p>
