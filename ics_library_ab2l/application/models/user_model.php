@@ -139,5 +139,45 @@ class User_Model extends CI_Model
         }
 
 	}
+
+	//for user
+	public function check_password($username, $password){
+		$this->db->select('username, password');
+        $this->db->from('user_account');
+        $this->db->where('username', $username);
+        $this->db->where('password', sha1($password));
+        $this->db->limit(1);
+         
+        //get query and processing
+        $query = $this->db->get();
+        if($query->num_rows() == 1) { 
+            return true; //if data is true
+        } else {
+            return false; //if data is wrong
+        }
+	}
+	public function update_username($old, $new){
+		
+		  $this->db->where('username',$new);
+            $query = $this->db->get('user_account')->num_rows();
+            if($query == 0 ){
+                    $this->db->where('username',$new);
+                    $query = $this->db->get('admin_account')->num_rows();
+                     if($query == 0 ){
+
+                     $data = array(
+		               'username'=> $new
+		            );
+
+					$this->db->where('username', $old);
+					$this->db->update('user_account', $data); 
+  						return true;
+
+                     }
+                       
+                     else return false;
+              }
+            else return false;
+	}
 }
 

@@ -22,19 +22,26 @@
                                
                                 <div class="col">
                                     <div class="cell">
-                                       
+                                        <?php echo validation_errors();
+                                            if ($this->session->flashdata('success_username') != ''): 
+                                                echo "<p>".$this->session->flashdata('success_username')."</p>"; 
+                                            endif;   
+                                            if ($this->session->flashdata('error_username1') != ''): 
+                                                echo $this->session->flashdata('error_username1'); 
+                                            endif; 
+                                         ?>
                                     <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em><a id = "edit_username">Edit</a>
-                                    <?php if($submitted= true): ?>
-
-                                    <form id= 'form_username' method= 'post' action = 'controller_editprofile/edit_username'>
-                                    <span id="label_username1">Username:</span><input type = 'text' id= 'input_username'name = 'new_username'><span id = "helpusername"></span><br>
+                                    
+                                     
+                                    <form id= 'form_username' method= 'post'  action = 'controller_editprofile/edit_username'>
+                                    <span id="label_username1">Username:</span><input  type = 'text' id= 'input_username'name = 'new_username' required><span id = "helpusername"></span><br>
                                     <span>Enter password:</span><input type= "password" id ='pword_for_username' name ='pword_for_username'><br>
-                                     <input type='button' id = "cancel_username" value= 'Cancel'>
-                                    <input type='submit' onclick="return validate_new_un" value= 'Save'><br>
+                                     <input type='button' id = "cancel_username" value= 'Cancel' required>
+                                    <input type='submit' name = "sub" onclick= "return validate_username()" value= 'Save'><br>
                                     </form>
                                     
 
-                                    <?php endif?>
+                                  
                                     <br/>
                                     <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
                                     <span>College:</span><em><?php echo  $user_details->college?></em><br/>
@@ -64,10 +71,33 @@
     <script src="<?php echo base_url() ?>js/validation.js"></script>
      <script >
      name = $("#username").text();
-    // alert(name);
+    success = "<?php echo $this->session->flashdata('success')?>";
+    error_username="<?php echo $this->session->flashdata('error_username')?>";
+  
+    error_email = "";
         $( document ).ready(function(){   
-         $('#form_username').hide();
-          $('#form_email').hide();
+       
+          if(error_username == '' ){
+
+                $('#form_username').hide();
+                $('#form_email').hide();
+
+          }
+          else if( error_username== "error"){
+                $('#form_username').show();
+                $("#label_username").text("Edit Username");
+                $("#username").hide();
+                $('#form_email').hide();
+                 $("#edit_username").hide();
+          }
+          else if(error_email== ""){
+                $('#form_username').hide();
+                $('#form_email').hide();
+          }
+          else{
+                $('#form_email').show();
+          }
+
          //if the edit username is clicked, the form for updating the username will be visible
          $("#edit_username").click(function(){
 
@@ -92,6 +122,15 @@
          //for checking if the new username already exist
           $('#input_username').on('blur', validate_new_un);
 
+
+   window.validate_username = function() { 
+
+        if($("#pword_for_username").val().trim()!= ""){
+            return bool =validate_new_un();
+        }
+        else return false;
+   }
+
     function validate_new_un(){
 
             //validation of the input
@@ -114,15 +153,14 @@
                 else if(msg="Invalid input"){
                  msg="";
                  if(getResult(str)){
-                    return false;
+                    return true;
                  }
-                 else return true;
+                 else return false;
                 }
                 //document.getElementsByName("valUser")[0].innerHTML=msg;
                
             //ajax for checking if the username already exist
-            return false;
-            
+            return false;  
            
     }        
 
@@ -132,9 +170,10 @@
                var bool= false;
                 $('#helpusername').addClass('preloader');
                 $("#helpusername").text("Checking availability...");
-                bool=$.ajax({
+                $.ajax({
                     url : base_url + 'index.php/user/controller_editprofile/check_username/' + name,
                     cache : false,
+                    async:false,
                     success : function(response){
 
                         $('#helpusername').delay(1000).removeClass('preloader');
@@ -142,18 +181,18 @@
                             $('#helpusername').removeClass('userNo').addClass('userOk');
                             $('#helpusername').text("Username available!");
                             
-                           // alert("Username available");
+                          bool= true;
                         }
                         else{
                             $('#helpusername').removeClass('userOk').addClass('userNo');;
                             $("#helpusername").text("Username not available.");
-                           
+                           bool= false;
                         }
                     }
                 })
 
-               alert(bool);
-                //return bool;
+              
+                return bool;
 
             }
 
