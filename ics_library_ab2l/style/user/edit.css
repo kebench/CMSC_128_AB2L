@@ -1,0 +1,13 @@
+/*style for the edit profile page*/
+
+.preloader{
+	color: gray;
+}
+
+.userOk{
+	color: green;
+}
+
+.userNo{
+	color:red;
+}
