@@ -5,6 +5,7 @@
 		<title><?php echo $titlepage?></title>
 		<!--The full build of all the generic classes of the framework(Framework itself)-->
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css"><!--source: http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css-->
   		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/slider.css" type="text/css" media="screen" />
@@ -62,8 +63,6 @@
 						<?php
 							}
 
-							
-							
 						?>
 					</div>
 				</div>

@@ -111,7 +111,7 @@
 				msg="Invalid Input: ";
 				
 				if (str=="") msg+="Username is required!";
-				else if (!str.match(/^[A-Z|a-z|0-9]{3,20}$/))  msg+="Must be between 3-20 alpha numeric character!<br/>";
+				else if (!str.match(/^[A-Z|a-z|0-9]{5,20}$/))  msg+="Must be between 3-20 alpha numeric character!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valUser")[0].innerHTML=msg;
 				if(msg=="") return true;

@@ -156,6 +156,20 @@ class User_Model extends CI_Model
             return false; //if data is wrong
         }
 	}
+
+	public function update_email($new_email, $username){
+
+
+        $data = array(
+           'email'=> $new_email
+        );
+
+		$this->db->where('username', $username);
+		$this->db->update('user_account', $data); 
+		return true;
+
+               
+	}
 	public function update_username($old, $new){
 		
 		  $this->db->where('username',$new);

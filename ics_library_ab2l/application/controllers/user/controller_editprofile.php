@@ -13,6 +13,7 @@ class controller_editprofile extends CI_Controller {
     function index() {
         $this->load->helper(array('form','html'));
 
+
         if($this->session->userdata('logged_in')){
                
 
@@ -32,8 +33,6 @@ class controller_editprofile extends CI_Controller {
             $data['name']= $data['user_details']->first_name." ".$data['user_details']->middle_initial.". ". $data['user_details']->last_name;
               $data['titlepage']= $data['name'];
         }
-        else
-             redirect('index.php/user/controller_login', 'refresh');
        
 
       
@@ -48,6 +47,10 @@ class controller_editprofile extends CI_Controller {
   
         $this->load->view("user/view_footer");
     }
+
+    else
+             redirect('index.php/user/controller_login', 'refresh');
+
 }
 
     public function viewInfo($number){
@@ -58,6 +61,9 @@ class controller_editprofile extends CI_Controller {
         }
 
 
+      /**
+        functions for editing username
+    */
     public function check_username( $username){
             $this->db->where('username',$username);
             $query = $this->db->get('user_account')->num_rows();
@@ -166,6 +172,77 @@ class controller_editprofile extends CI_Controller {
           }
     }
 
+
+    /**
+    functions for editing email
+    */
+
+
+    public function edit_email(){
+        $this->load->library('form_validation');
+        $old_username= $this->session->userdata('logged_in')['username'];
+        $this->form_validation->set_rules('new_email', 'email', 'trim|required|min_length[5]|max_length[30]|callback_emailRegex|xss_clean');
+        $this->form_validation->set_rules('pword_for_email', 'password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric|callback_check_database1');
+       
+        //check if the password is right
+        if($this->form_validation->run() == FALSE) {
+           
+            $var = validation_errors();
+            $this->session->set_flashdata('error_email1', $var);
+             $this->session->set_flashdata('error_email','error');
+            redirect('index.php/user/controller_editprofile', 'refresh');
+
+            
+            } 
+        else {
+              
+            //update email
+
+            $username= $this->session->userdata('logged_in')['username'];
+            $new_email = $this->input->post('new_email');
+            $update_email=$this->user_model->update_email($new_email, $username); 
+          
+
+           if($this->session->userdata('logged_in_type')=="user"){
+            if($this->session->userdata('id')){
+              redirect('index.php/user/controller_reserve_book');
+            }
+            else{ 
+                $this->session->set_flashdata('success_username', 'Successfully edited your email.');
+                redirect('index.php/user/controller_editprofile', 'refresh');
+                
+                }
+            }
+           else redirect('index.php/admin/controller_admin_home', 'refresh');
+        }   
+
+    }
+
+    public function check_database1($password){
+        $this->load->model("user_model");
+        $username= $this->session->userdata('logged_in')['username'];
+        
+        $result= $this->check_password($username,$password);
+        if($result== true){
+           return true;
+            
+        }
+        else{
+
+            $this->form_validation->set_message('check_database1', 'Wrong password.');
+            return false;
+        }
+
+    }
+
+    public function email_Regex($email){
+        if (preg_match('/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./', $email) ) {
+            return TRUE;
+          } else {
+            return FALSE;
+            $this->form_validation->set_message('email_Regex', 'Invalid email.');
+          }
+    }
 
 }
 /* End of file controller_editprofile.php */
