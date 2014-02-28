@@ -2,28 +2,14 @@
 
 include_once("controller_log.php");
 class Controller_book extends Controller_log {
-
 	public function index()
 	{
-		$this->viewBook(null);	
-		
-	}
-
-	public function viewBook($msg){
+		//$session_user = $this->checklogin();
 		$this->load->model('model_book');
 		$data['query'] = $this->model_book->select_all_book_info();
 		$data['parent'] = "Books";
     	$data['current'] = "View Books";
     	$data['user'] = $this->session->userdata('logged_in');
-    	if($msg != null){
-    		if($msg === "edit"){
-    			$data['message'] = "You have successfully edited a book";
-    		}
-    		else if($msg === "delete"){
-    			$data['message'] = "You have successfuly deleted a book";
-    		}
-    	}
-    		
 
     	$this->load->helper(array('form','html'));
 	    $this->load->view("admin/view_header",$data);
@@ -58,21 +44,20 @@ class Controller_book extends Controller_log {
 			
 			$type = "Add Book";
 			foreach ($call_number as $value) {
-				$message = "Admin $session_user added a new book: $value";
-				$this->add_log($message,$type );	
+				$message = "Admin $session_user added a new book with Call Number: $value";
+				$this->add_log($message,$type);	
 			}
-			$this->call_success($title);
+			$this->call_success();
 		}
 	}
 
-	public function call_success($title){
+	public function call_success(){
 			echo "<script>
 				alert('You have successfully add a book');
 			</script>";
-			redirect('index.php/admin/controller_add_books/add_book/'.$title, 'refresh');
+			redirect('index.php/admin/controller_add_books', 'refresh');
 	}
 	
-	/*UPDATE book*/
 	/*UPDATE book*/
 	//EDIT
 	function edit(){
@@ -101,7 +86,7 @@ class Controller_book extends Controller_log {
 		if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
 		$this->load->model('model_book');
-		$id = $this->input->post('call_number1');
+		$id = $this->input->post('id');
 		$book = array(
 			'title' => $this->input->post('title'),
 			'year_of_pub' => $this->input->post('year_of_pub'),
@@ -115,17 +100,17 @@ class Controller_book extends Controller_log {
 		
 		$this->model_book->edit_book($id, $book, $call_numbers, $book_authors, $book_subjects);
 		$this->add_log("Admin $session_user updated book with ID Number: $id", "Update Book");
-		$this->edit_success($book['title']);
+		$this->edit_success();
 
 	}
 
-	function edit_success($title){
+	function edit_success(){
 		$session_user = $this->session->userdata('logged_in')['username'];
-		$msg = "edit";
+
 		echo "<script>
-				alert('You have successfully updated the book $title');
+				alert('You have successfully updated a book.');
 			</script>";
-		redirect('index.php/admin/controller_book/viewBook/'.$msg,'refresh');
+		header("refresh:0;url=../controller_book");
 	}
 	
 	//DELETE
@@ -134,12 +119,13 @@ class Controller_book extends Controller_log {
             redirect('index.php/user/controller_login', 'refresh');
 		$session_user = $this->session->userdata('logged_in')['username'];
 		$this->load->model('model_book');
-		$call_number = $_POST['id'];
-		$this->model_book->delete_book($call_number);
-		$this->add_log("$session_user deleted book with Call Number: $call_number", "Delete Book");
-		
-		$msg = "delete";
-		redirect('index.php/admin/controller_book/viewBook/'.$msg, 'refresh');
+		$id = $_POST['id'];
+		$this->add_log("Admin $session_user deleted book with ID Number: $id", "Delete Book");
+		$this->model_book->delete_book($id);
+		echo "<script>
+				alert('You have successfully deleted a book.');
+			</script>";
+		redirect('index.php/admin/controller_book', 'refresh');
 	}
 
 

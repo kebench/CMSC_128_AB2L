@@ -40,7 +40,7 @@
 					<div class="col">
                             <div class="cell">
                                     <div class="page-header cell">
-                                        <h1>Admin <small>Add Announcement</small></h1>
+                                        <h1>Admin <small>Edit Announcement</small></h1>
                                     </div>
                                 <div class="col width-fill">
                                 	<div class="cell panel" style="border: 1px solid #9BA0AF;">
@@ -49,17 +49,17 @@
                                 		</div>
                                 		<div class="cell">		
 										<div id="add" class="cell">
-											<form action="" method="post">
+											<form action="../controller_announcement/saveChanges" method="post">
 												<div class="panel cell" style="background: #f6f6f6;border: 1px solid #9BA0AF;">
 													<div class="cell">
 														<label>ANNOUNCEMENT TITLE</label><br/>
-														<input type="text" name="title" id="title" class="background-white" style="width: 95%; margin-left: 3%;" placeholder="Title" required="required" /><br/><br/>
+														<input type="text" name="title" id="title" class="background-white" style="width: 95%; margin-left: 3%;" value="<?php echo $title;?>" required="required" /><br/><br/>
 													</div>
 												</div>
 												<div class="cell panel" style="background: #f6f6f6; margin-top: 1.5em; border: 1px solid #9BA0AF;">
 													<div class="cell">
 													<label>ANNOUNCEMENT CONTENTS</label><br/>
-													<textarea cols="40" rows="5" name="content" class="background-white" style="width: 95%; margin-left: 3%;" id="content" placeholder="Content" required="required"></textarea><br /><br/>
+													<textarea cols="40" rows="5" name="content" class="background-white" style="width: 95%; margin-left: 3%;" id="content" required="required"><?php echo $content;?></textarea><br /><br/>
 													
 													</div>
 												</div>
@@ -67,11 +67,14 @@
 										</div>
 									 </div>
 									 <div class="footer width-fill" style="border-top: 1px solid #9BA0AF;">
-										<input type="button"  name="cancel" id="cancel" class="float-right" value="Cancel" style="margin: 0px 5px 0px 5px;"/>
-										<input type="submit" name="add" id="add" class="float-right" value="Add Anouncement"/>
-									</div>
+													<input type="button"  name="cancel" id="cancel" class="float-right" value="Cancel" onclick="return confirm('Are you sure you want to cancel editing this announcement?')" style="margin: 0px 5px 0px 5px;"/>
+													<input type = "hidden" name = "date" id = "date" value = "<?php echo $id;?>" />
+													<input type="submit" name="save" class='float-right' id="save" value="Save Changes" style="margin: 0px 5px 10px 18em;" />
 									</form>
+									</div>	
 								</div>
+							</div>
+                        </div>
 							</div>
                         </div>
 				</div>

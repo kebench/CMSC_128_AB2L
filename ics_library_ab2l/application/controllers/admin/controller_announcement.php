@@ -13,27 +13,27 @@ class Controller_announcement extends Controller_log {
 	        $this->load->view("admin/view_aside");
 	        $this->load->view("admin/view_announcements");
 	        $this->load->view("admin/view_footer");
-	        $this->load->model('model_check_session');
 	}
 	
 	public function viewForm(){
 		//$this->load->view("admin/view_add_announcement.php");
-		 if($this->model_check_session->check_admin_session() == TRUE){
+		$data['parent'] = "Admin";
+    	$data['current'] = "Add Announcement";
+    	$data['user'] = $this->session->userdata('logged_in');
+    	$this->load->helper(array('form','html'));
+	    $this->load->view("admin/view_header",$data);
+	    $this->load->view("admin/view_aside");
+	    $this->load->view("admin/view_add_announcement.php");
+	    $this->load->view("admin/view_footer");
+		
+		if(isset($_POST["add"]))
+		{
+			$this->writeToFile();
+		}else if(isset($_POST["cancel"])){
+			header("refresh:0;url=../controller_announcement");
+		}
 
-			if(isset($_POST["add"]))
-			{
-				$this->writeToFile();
-			}
-
-			$data['parent'] = "Admin";
-	    	$data['current'] = "Add Announcement";
-	    	$data['user'] = $this->session->userdata('logged_in');
-	    	$this->load->helper(array('form','html'));
-		    $this->load->view("admin/view_header",$data);
-		    $this->load->view("admin/view_aside");
-		    $this->load->view("admin/view_add_announcement.php");
-		    $this->load->view("admin/view_footer");
-		  }  
+		
 	}
 	
 	public function deleteAll(){
@@ -42,15 +42,12 @@ class Controller_announcement extends Controller_log {
 		if(isset($_POST["delete_all"]))
 		{
 			$fp = fopen('./application/announcements.txt', "w");
-		fclose($fp);
-		$this->add_log("Admin $session_user deleted all announcements", "Delete Announcements");
-		header("refresh:0;url=../call_delete");
+			fclose($fp);
+			$session_user = $this->session->userdata('logged_in')['username'];
+			$this->add_log("Admin $session_user deleted all announcements.", "Delete Announcements");
+			echo "<script>alert('You have deleted all the announcements');</script>";
+			header("refresh:0;url=../controller_announcement");
 		}
-	}
-
-	public function call_delete(){
-		echo "<script>alert('You have deleted all the announcements');</script>";
-		redirect('index.php/admin/controller_announcement/viewForm','refresh');
 	}
 	
 	public function writeToFile(){
@@ -80,10 +77,10 @@ class Controller_announcement extends Controller_log {
 				fwrite($fp, $savestring);
 				fwrite($fp, $txt_file);
 				fclose($fp);
-				echo "<p>Your data has been saved in a text file!</p>";
+				echo "<script>alert('You have successfully added a new announcement.');</script>";
 				//$counter++;
 				$session_user = $this->session->userdata('logged_in')['username'];
-				$this->add_log("Admin $session_user added a new announcement", "Add Announcement");
+				$this->add_log("Admin $session_user added a new announcement.", "Add Announcement");
 				unset($_POST["add"]);
 				redirect('index.php/admin/controller_announcement','refresh');
 			}
@@ -101,7 +98,7 @@ class Controller_announcement extends Controller_log {
 			$txt_file = file_get_contents('./application/announcements.txt');
 			$rows = explode("*", $txt_file);
 			array_shift($rows);
-			echo $id;
+
 			foreach($rows as $row => $data)
 			{
 				$data1 = explode("^",$data);
@@ -137,15 +134,16 @@ class Controller_announcement extends Controller_log {
 			$entry['id'] = $id;
 			$entry['title'] = $title;
 			$entry['content'] = $content;
-
+			
 			$entry['parent'] = "Admin";
 	    	$entry['current'] = "Edit Announcement";
-
-    		$this->load->helper(array('form','html'));
-	        $this->load->view("admin/view_header",$entry);
-	        $this->load->view("admin/view_aside");
-	        $this->load->view("admin/view_edit_announcements",$entry);
-	        $this->load->view("admin/view_footer");
+			
+			$this->load->helper(array('form','html'));
+			$this->load->view("admin/view_header", $entry);
+			$this->load->view("admin/view_aside");
+			$this->load->view("admin/view_edit_announcement", $entry);
+			$this->load->view("admin/view_footer");
+			
 		}else if(isset($_POST["delete"])){
 			$txt_file = file_get_contents('./application/announcements.txt');
 			$id = htmlspecialchars($_POST["date"]);
@@ -162,8 +160,10 @@ class Controller_announcement extends Controller_log {
 			$fp = fopen('./application/announcements.txt', "w");
 			fwrite($fp, $new);
 			fclose($fp);
-			$this->add_log("Admin $session_user deleted an announcement", "Update Announcement");
-			redirect('index.php/admin/controller_announcement','refresh');
+			$session_user = $this->session->userdata('logged_in')['username'];
+			$this->add_log("Admin $session_user deleted an announcement.", "Delete Announcement");
+			echo "<script>alert('You have deleted an announcement.');</script>";
+			header("refresh:0;url=..");
 		}
 	}
 	
@@ -205,9 +205,14 @@ class Controller_announcement extends Controller_log {
 				fwrite($fp, $savestring);
 				fwrite($fp, $new);
 				fclose($fp);
+				$session_user = $this->session->userdata('logged_in')['username'];
 				$this->add_log("Admin $session_user updated an announcement", "Update Announcement");
-				redirect('index.php/admin/controller_announcement','refresh');
+				echo "<script>alert('You have updated an announcement.');</script>";
+				header("refresh:0;url=..");
 			}
+		}
+		else if(isset($_POST["cancel"])){
+			header("refresh:0;url=..");
 		}
 	}
 }

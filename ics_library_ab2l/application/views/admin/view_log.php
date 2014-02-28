@@ -18,18 +18,20 @@
                                 </thead>
                                 <tbody>
                                     <?php
-
                                         $count = 1;
-											$date = "";
-											foreach ($log as $iLog){
-												echo "<tr><td>$count</td>";
+										$date = "";
+										foreach ($log as $iLog):
+											echo "<tr><td>$count</td>";
+											if($date == $iLog['date']){
+												echo "<td></td>";
+											}else{
 												echo "<td>".$iLog['date']."</td>";
-												echo "<td>".$iLog['message']."</td>";
-												echo "<td>".$iLog['time']."</td></tr>";
-												$date = $iLog['date'];
-												$count++;
-											} 
-                                        
+											}
+											echo "<td>".$iLog['message']."</td>";
+											echo "<td>".$iLog['time']."</td></tr>";
+											$date = $iLog['date'];
+											$count++;
+										endforeach
                                     ?>
                                 </tbody>
                             </table>
