@@ -6,9 +6,9 @@
 		                        	<li class="color-black">&#169 2013 ICS UPLB</li>
 		                            <li><a href="<?php echo base_url(); ?>">ICS Library System</a></li>
 		                            <li><a href="#">Sitemap</a></li>
-		                            <li><a href="search.html">Search</a></li>
+		                            <li><a href="<?php echo base_url(); ?>/index.php/user/controller_search_book">Search</a></li>
 		                            <li><a href="#">FAQ</a></li>
-		                            <li><a href="contact.html">Contact</a></li>
+		                            <li><a href="<?php echo base_url(); ?>/index.php/user/controller_contact">Contact</a></li>
 		                            <li><a href="#">User Manual</a></li>
 		                        </ul>
 	                   		 </div>
