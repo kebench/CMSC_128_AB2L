@@ -7,12 +7,17 @@ class controller_editprofile extends CI_Controller {
             $this->load->helper('url');
             $this->load->model('model_viewUser');
              $this->load->model('user_model');
+              $this->load->model('model_check_session');
         }
 
     function index() {
         $this->load->helper(array('form','html'));
+
         if($this->session->userdata('logged_in')){
                
+
+       if($this->model_check_session->check_session() == TRUE){
+
                $data['username']= $this->session->userdata('logged_in')['username'];
                 $data['start']= "true";
                 //get the details of the user
@@ -43,6 +48,7 @@ class controller_editprofile extends CI_Controller {
   
         $this->load->view("user/view_footer");
     }
+}
 
     public function viewInfo($number){
             //$data['title']= 'Home';
@@ -50,6 +56,7 @@ class controller_editprofile extends CI_Controller {
             $value['info'] = $this->modelviewUser->getInfo($number);
             $this->load->view('viewAccount',$value);
         }
+
 
     public function check_username( $username){
             $this->db->where('username',$username);
@@ -158,6 +165,8 @@ class controller_editprofile extends CI_Controller {
             $this->form_validation->set_message('username_Regex', 'Invalid input.');
           }
     }
+
+
 }
 /* End of file controller_editprofile.php */
 /* Location: ./application/controllers/user/controller_editprofile.php */

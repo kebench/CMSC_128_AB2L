@@ -32,7 +32,7 @@ class Controller_register extends CI_Controller {
           $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|xss_clean');
 
            $this->form_validation->set_rules('stdNum', 'Student Number', 'trim|required|min_length[10]|alpha_dash|xss_clean');
-          $this->form_validation->set_rules('college', 'College', 'trim|min_length[3]|alpha|xss_clean');
+          $this->form_validation->set_rules('college', 'College', 'trim|min_length[2]|alpha|xss_clean');
           $this->form_validation->set_rules('course', 'Course', 'trim|min_length[3]|xss_clean');
           $this->form_validation->set_rules('classi', 'Classification', 'trim|alpha|xss_clean');
           

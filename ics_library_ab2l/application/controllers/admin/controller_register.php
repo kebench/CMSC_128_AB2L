@@ -5,26 +5,28 @@ class Controller_register extends CI_Controller {
     {
       parent::__construct();
       $this->load->model('model_register');
+      $this->load->model('model_check_session');
     }
  
     function index() {
         $this->load->helper(array('form','html'));
-       
-        $data['titlepage']= "Register";
-        $this->load->view("user/view_header", $data);
-        $this->load->view("user/view_register");
-        $this->load->view("user/view_navigation");
-        if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        }  
-        $this->load->view("user/view_footer");
+        
+       if($this->model_check_session->check_admin_session() == TRUE){
+          $data['titlepage']= "Register";
+          $this->load->view("user/view_header", $data);
+          $this->load->view("user/view_register");
+          $this->load->view("user/view_navigation");
+          if($this->session->userdata('logged_in')){
+              $this->load->view("user/view_logged_in");
+          }
+          else{
+               $this->load->view("user/view_not_logged");
+          }  
+          $this->load->view("user/view_footer");
+      }
     }
 
-    public function registration()
-    {
+    public function registration(){
           $this->load->library('form_validation');
           // field name, error message, validation rules
           $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
@@ -53,6 +55,7 @@ class Controller_register extends CI_Controller {
             $data['msg'] = "You successfully registered an account. You may proceed to ICS library to activate it! ";
             $this->success($data);
           }
+        
     }
 
     function success($data) {

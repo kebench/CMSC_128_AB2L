@@ -13,24 +13,27 @@ class Controller_announcement extends Controller_log {
 	        $this->load->view("admin/view_aside");
 	        $this->load->view("admin/view_announcements");
 	        $this->load->view("admin/view_footer");
+	        $this->load->model('model_check_session');
 	}
 	
 	public function viewForm(){
 		//$this->load->view("admin/view_add_announcement.php");
+		 if($this->model_check_session->check_admin_session() == TRUE){
 
-		if(isset($_POST["add"]))
-		{
-			$this->writeToFile();
-		}
+			if(isset($_POST["add"]))
+			{
+				$this->writeToFile();
+			}
 
-		$data['parent'] = "Admin";
-    	$data['current'] = "Add Announcement";
-    	$data['user'] = $this->session->userdata('logged_in');
-    	$this->load->helper(array('form','html'));
-	    $this->load->view("admin/view_header",$data);
-	    $this->load->view("admin/view_aside");
-	    $this->load->view("admin/view_add_announcement.php");
-	    $this->load->view("admin/view_footer");
+			$data['parent'] = "Admin";
+	    	$data['current'] = "Add Announcement";
+	    	$data['user'] = $this->session->userdata('logged_in');
+	    	$this->load->helper(array('form','html'));
+		    $this->load->view("admin/view_header",$data);
+		    $this->load->view("admin/view_aside");
+		    $this->load->view("admin/view_add_announcement.php");
+		    $this->load->view("admin/view_footer");
+		  }  
 	}
 	
 	public function deleteAll(){

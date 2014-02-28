@@ -7,19 +7,23 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css"><!--source: http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css-->
-		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
   		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/slider.css" type="text/css" media="screen" />
   		<link rel="stylesheet" href="<?php echo base_url(); ?>default/default.css" type="text/css" media="screen" />
   		<script src="<?php echo  base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
   		<script src="<?php echo  base_url() ?>js/main.js"></script>
   		<meta name="viewport" content="width=device-width"/>
+  		<style>
+  			body{
+				width: 1366px;
+			}
+  		</style>
   		<?php
   		 if($this->session->userdata('logged_in_type')=='admin')
             				redirect('index.php/admin/controller_announcement', 'refresh');
           ?>
+          <script type="text/javascript">var base_url= "<?php echo  base_url() ?>"</script>
   		<meta charset="utf-8"/>
-  		<script type="text/javascript">var base_url= "<?php echo  base_url() ?>"</script>
 	</head>
 	<body class="background-black">
 		<div id="main-container" class="site-center background-white">

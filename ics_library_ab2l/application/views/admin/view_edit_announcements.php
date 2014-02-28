@@ -35,7 +35,9 @@
 					return false;
 			}
 		</script>
-
+<?php
+	$base = base_url();
+?>
 <div id="thisbody" class="body width-fill background-white">
 					<div class="col">
                             <div class="cell">
@@ -45,7 +47,7 @@
                                 <div class="col width-fill">
                                 	<div class="cell panel" style="border: 1px solid #9BA0AF;">
                                 		<div class="header gradient">
-                                				<h4 style="text-weight: normal; font-family: Arial;">Post another announcements</h4>
+                                				<h4 style="text-weight: normal; font-family: Arial;">Edit announcements</h4>
                                 		</div>
                                 		<div class="cell">		
 										<div id="add" class="cell">

@@ -17,8 +17,11 @@
 					</div>
 					<div class="col background-red">
 						<div id="form_cont" class="cell background-white">
-							<?php	$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
-     						echo form_open('index.php/admin/controller_admin_verify_login', $attributes); ?>
+							<?php
+								$base = base_url();
+
+								$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
+     						echo form_open('$base/index.php/admin/controller_admin_verify_login', $attributes); ?>
 								<label class="color-black label_field">Username:</label>
 								<br/>
 								<input type = "text" class="field background-white" name= "username" required= "required"  >

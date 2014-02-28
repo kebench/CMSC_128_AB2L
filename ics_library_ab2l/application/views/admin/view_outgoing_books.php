@@ -4,6 +4,15 @@
                                         <h1>Admin <small>Outgoing Books</small></h1>
                                     </div>
                         <?php
+                        	if(isset($message)){
+                        ?>
+                        <div>
+                        	<?php echo $message; ?>
+                        </div>
+                        <?php
+                        	}
+                        ?>
+                        <?php
                             if($query != NULL){
                         ?>
 						<div class="panel datasheet cell">
@@ -24,6 +33,7 @@
 	                            <tbody>
 	                            	<?php
 	                            	$count = 1;
+	                            	$base = base_url();
 	                                foreach($query as $row) {
 										echo "<tr>
 											<td>$count</td>
@@ -31,7 +41,7 @@
 											<td>{$row->first_name} {$row->middle_initial} {$row->last_name}</td>
 											<td>{$row->call_number}</td>
 											<td>{$row->status}</td>";
-										echo "<td><form action='controller_outgoing_books/reserve/' method='post'>
+										echo "<td><form action='$base/index.php/admin/controller_outgoing_books/reserve/' method='post'>
 											<input type='hidden' name='res_number' value='{$row->res_number}' />
 											<input type='submit' class='background-red' name='reserve' value='Confirm' />
 										</form></td>";				//button to be clicked if the reservation will be approved; functionality of this not included

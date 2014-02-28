@@ -172,6 +172,7 @@
                             rowContainer.appendChild(document.createTextNode(" ")); // add space
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
 
                         }
 
@@ -206,6 +207,7 @@
                             rowContainer.appendChild(document.createTextNode(" ")); // add space
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
                         }
 </script>
 <div id="thisbody" class="body width-fill background-white">
@@ -217,7 +219,7 @@
                                 <div class="col width-fill">
                                     <div class="col">
                                         <div class="cell panel">
-                                            <div class="header gradient">
+                                            <div class="header background-red">
                                                Admin Edit Book Form
                                             </div>
                                             <p class="tiny cell">Note: *- required fields</p>
@@ -250,15 +252,17 @@
                                                                         <div class="cell">
                                                                             <?php 
                                                                                 $authors = $this->model_book->get_book_authors($book[0]->id);
-                                                                                $count = 0;
+                                                                                $counter = 0;
+                                                                                $count = count($authors);
                                                                                 foreach ($authors as $author) {
                                                                                     echo '<input type = "text" name = "author[]" value="'.$author->author.'">';
-                                                                                    $count++;
-
+                                                                                    if($counter < $count-1){
+                                                                                        echo '<br/>';
+                                                                                    }
+                                                                                    $counter++;
                                                                                 }
                                                                             ?>&nbsp;<span name="help_author" class="color-red"></span>
                                                                             <input type="button" class="row1 cell" value="Add author" onclick="addRow_author(this, false)">
-                                                                            
                                                                             <br/>
                                                                         </div>
                                                                     </div>
@@ -275,8 +279,14 @@
                                                                         <div class="cell">
                                                                            <?php 
                                                                             $call_numbers = $this->model_book->get_book_call_numbers($book[0]->id);
+                                                                            $counter = 0;
+                                                                            $count = count($call_numbers);
                                                                             foreach ($call_numbers as $call_number) {
-                                                                                echo '<input type = "text" name = "call_number[]" value="'.$call_number->call_number.'" /><br/>';
+                                                                                echo '<input type = "text" name = "call_number[]" value="'.$call_number->call_number.'" />';
+                                                                                if($counter < $count-1){
+                                                                                    echo '<br/>';
+                                                                                } 
+                                                                                $counter++;
                                                                             }
                                                                             ?>
                                                                         </div>
@@ -293,8 +303,14 @@
                                                                         <div class="cell">
                                                                             <?php 
                                                                             $subjects = $this->model_book->get_book_subjects($book[0]->id);
+                                                                            $counter = 0;
+                                                                            $count = count($subjects);
                                                                             foreach ($subjects as $subject) {
-                                                                                echo '<input type = "text" name = "subject[]" value="'.$subject->subject.'" /><br/>';
+                                                                                echo '<input type = "text" name = "subject[]" value="'.$subject->subject.'" />';
+                                                                                if($counter < $count-1){
+                                                                                    echo '<br/>';
+                                                                                } 
+                                                                                $counter++;
                                                                             }
                                                                             ?>
                                                                             &nbsp;<span name="help_subject" class="color-red"></span>

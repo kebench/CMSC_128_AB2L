@@ -1,16 +1,30 @@
 <div class="cell">
 									<br/>
-									<div id="wrapper">
-								        <div class="slider-wrapper theme-default">
-								            <div id="slider" class="slider">
-								                <img src="<?php echo base_url();?>images/home/uplb.jpg" data-thumb="<?php echo base_url();?>images/home/uplb.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib1.jpg" data-thumb="<?php echo base_url();?>images/home/lib1.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib2.jpg" data-thumb="<?php echo base_url();?>images/home/lib2.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib3.jpg" data-thumb="<?php echo base_url();?>images/home/lib3.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/ics.jpg" data-thumb="<?php echo base_url();?>images/home/ics.jpg" alt=""/>
-								            </div>
-								        </div>
-								    </div>
+									<div id = "carousel">
+										<div class="span13">
+											<div id="slider" class="carousel slide">
+												<div class="carousel-inner">
+													<div class="item active">
+														<img src="<?php echo base_url(); ?>images/home/uplb1.jpg" div="imgsize"></img>
+													</div>
+													<div class="item">
+														<img src="<?php echo base_url(); ?>images/home/ics.jpg" div="imgsize"></img>
+													</div>
+													<div class="item">	
+														<img src="<?php echo base_url(); ?>images/home/lib1.jpg" div="imgsize"></img>						
+													</div>
+													<div class="item">
+														<img src="<?php echo base_url(); ?>images/home/lib2.jpg" div="imgsize"></img>
+													</div>
+													<div class="item">		
+														<img src="<?php echo base_url(); ?>images/home/lib3.jpg" div="imgsize"></img>
+													</div>
+												</div>
+											<a class="left carousel-control" href="#slider" data-slide="prev">&lsaquo;</a>
+											<a class="right carousel-control" href="#slider" data-slide="next">&rsaquo;</a>
+											</div>
+										</div>
+									</div>
 
 
 									<h4 id="news">News and Updates</h4>
@@ -34,15 +48,44 @@
 																	</br><a id="reglinka" href="typography-form.html">Sign up now!</a>
 		                                                        </div>
 
-		                                                        <div class="cell hidden-tab" id="tabcontent2">
-		                                                            <h4 id="announce">Announcement for non-UPLB users</h4>
-																	<p>The UP Los Baños  Main Library will not accept NON-UPLB users from January 7, 2014 to January 19, 2014 to give priority to our students to use our facilities during their semi-final and final examinations scheduled on the said period.</p>
-																	<p>Effective 2nd Semester SY 2013-2014 the designated day of UPLB for NON-UPLB users will be changed from Friday to Monday only.</p>
-		                                                        </div>
+		                                                      <?php
 
-		                                                        <div class="cell hidden-tab" id="tabcontent3">
-		                                                            </br></br><h4 id="news2">New Books Available!</h4></br></br>
-		                                                        </div>
+																$counter = 0;
+																$count = 2;
+																$txt_file = file_get_contents('./application/announcements.txt');
+																$rows = explode("*", $txt_file);
+																array_shift($rows);
+
+		                                               		
+																if($rows != NULL){
+																foreach($rows as $row => $data)
+																{
+																	$counter = $counter + 1;
+																	$data1 = explode("^",$data);
+																	$info[$row]['date'] = $data1[0]; 
+																	$info[$row]['tc'] = $data1[1];
+
+																	if($counter>5) break;
+																	//echo 'Date: ' . ($date=$info[$row]['date']) . '<br />';
+
+																	array_shift($data1);
+
+																	foreach($data1 as $row1 => $data2)
+																	{
+																		$row_data = explode('#', $data2);
+																		$info[$row1]['title'] = $row_data[0];
+																		$info[$row1]['content'] = $row_data[1];
+
+																		echo "<div class=\"cell hidden-tab\" id=\"tabcontent".$count."\">";
+																		echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
+																		echo "<p>{$info[$row1]['content']}</p><br/>";
+																		echo "</div>";
+																		$count++;
+																	}
+																}
+																}
+																?>
+
 		                                                    </div>
 		                                                </div>
 		                                            </div>
@@ -51,8 +94,3 @@
 		                                </div>
 		                            </div>
 							</div>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/slider/jquery.nivo.slider.js"></script>
-<script type="text/javascript">
-$(window).ready(function() {
-	$('#slider').nivoSlider();
-});</script>

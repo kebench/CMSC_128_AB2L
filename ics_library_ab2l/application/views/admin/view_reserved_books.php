@@ -4,6 +4,15 @@
                                         <h1>Admin <small>View Borrowed Books</small></h1>
                         </div>
                         <?php
+                            if(isset($message)){
+                        ?>
+                        <div>
+                            <?php echo $message; ?>
+                        </div>
+                        <?php
+                            }
+                        ?>
+                        <?php
                             if($overdue != NULL){
                         ?>
 						<div class="panel datasheet cell">
@@ -29,6 +38,7 @@
                                 <?php
                                     $date = date("Y-m-d");
                                     $count = 1;
+                                    $base = base_url();
                                     foreach($overdue as $row){
                                         echo "<tr>
                                                 <td>$count</td>
@@ -39,24 +49,24 @@
                                                 <td>{$row->due_date}</td>";
                                         if(($row->status=="overdue") && ($row->date_notif != $date)){   //If overdue and not yet notified today
                                             echo "<td>
-                                            <form action='controller_outgoing_books/send_email' method='post'>
+                                            <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post'>
                                                 <input type='hidden' name='email' value='{$row->email}' />
                                                 <input type='hidden' name='account_number' value='{$row->account_number}' />
                                                 <input type='submit' class='background-red' name='notify' value='Notify' enabled/>
                                             </form></td>";
                                         }elseif(($row->status=="overdue") && ($row->date_notif == $date)){  //If overdue and has already been notified today
                                             echo "<td>
-                                            <form action='controller_outgoing_books/send_email' method='post'>
+                                            <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post'>
                                                 <input type='hidden' name='email' value='{$row->email}' />
                                                 <input type='hidden' name='account_number' value='{$row->account_number}' />
                                                 <input type='submit' name='notify' value='Notified' disabled/>
                                             </form></td>";
                                         }
-                                        echo "<td><form action='controller_reservation/extend' method='post'>
+                                        echo "<td><form action='$base/index.php/admin/controller_reservation/extend' method='post'>
                                                 <input type='hidden' name='res_number' value='{$row->res_number}' />
                                                 <input type='submit' class='background-red' name='extend' value='Extend' />
                                                 </form></td>";
-                                        echo "<td><form action='controller_outgoing_books/return_book/' method='post'>
+                                        echo "<td><form action='$base/index.php/admin/controller_outgoing_books/return_book/' method='post'>
                                                 <input type='hidden' name='res_number' value='{$row->res_number}' />
                                                 <input type='submit' class='background-red' name='return' value='Return' />
                                             </form></td>";
@@ -72,7 +82,7 @@
                                     <li><a href="#">Next</a></li>
                                 </ul>
                             </div>
-                                <form action='controller_outgoing_books/send_email' method='post' class="float-right">
+                                <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post' class="float-right">
                                    <input type='submit' name='notify_all' value='Notify All' enabled/>
                                 </form>
 	                    </div>
