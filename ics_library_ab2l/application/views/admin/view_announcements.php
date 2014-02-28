@@ -4,7 +4,7 @@
            <h1>Admin <small>View Announcements</small></h1>
         </div>
 <?php
- $base = base_url();
+
 /*
 Uses explode to split the file, array_shift to remove the first element and returns its value,
 and info to get row data.
@@ -35,7 +35,7 @@ foreach($rows as $row => $data)
 
 		echo "<div class='panel cell'>";
 		echo "<div class='gradient header'>Title: {$info[$row1]['title']}
-		<form action='$base/index.php/admin/controller_announcement/find/' class='float-right' method='post'>
+		<form action='controller_announcement/find' class='float-right' method='post'>
 				<input type='hidden' name='date' ' value='{$info[$row]['date']}' />
 				<input type='submit' name='edit' style='height:1.5em; font-size: 10px; line-height: 0px;' value='Edit' enabled/>
 				<input type='submit' name='delete' value='Delete' style='height:1.5em; font-size:10px; line-height: 0px;' onclick=\"return confirm('Are you sure you want to delete this announcement?')\" enabled/>
@@ -55,14 +55,12 @@ foreach($rows as $row => $data)
 }
 }
 else{
-	echo "<div class='cell'><h2>There is no Announcements!</h2></div><hr/>";
+	echo "<div class='cell'><h2>There is no announcement to display!</h2></div><hr/>";
 }
-
-
-	echo "<form action='controller_announcement/deleteAll/' class='float-right' style='margin-left: 5px;' method='post'>
+	echo "<form action='controller_announcement/deleteAll' class='float-right' style='margin-left: 5px;' method='post'>
 			<input type='submit' name='delete_all' value='Delete All Announcements' onclick=\"return confirm('Are you sure you want to delete all announcements?\\nThis cannot be undone!')\"enabled/>
 		</form>
-		<form action='controller_announcement/viewForm/' class='float-right' method='post'>
+		<form action='controller_announcement/viewForm' class='float-right' method='post'>
 			<input type='submit' name='new' value='Add New Announcement' enabled/>
 		</form>
 

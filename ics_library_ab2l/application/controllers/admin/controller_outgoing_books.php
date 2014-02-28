@@ -3,21 +3,15 @@ include_once("controller_log.php");
 class Controller_outgoing_books extends Controller_log{
  
     function index() {
-        $this->outgoing_books(null);
-    }
-
-    function outgoing_books($msg){
         $this->load->model('model_reservation');
         $data['parent'] = "Books";
         $data['current'] = "Outgoing Books";
-        $data['query'] = $this->model_reservation->show_all_user_book_reservation("reserved");
-        if($msg != null)
-            $data['message'] = "You have successfully confirm the book with reservation number:".$msg;
+        $data['query'] = $this->model_reservation->show_all_user_book_reservation("reserved");   
         
-        $this->load->view("admin/view_header",$data);
-        $this->load->view("admin/view_aside");
-        $this->load->view('admin/view_outgoing_books', $data);
-        $this->load->view("admin/view_footer");
+            $this->load->view("admin/view_header",$data);
+            $this->load->view("admin/view_aside");
+            $this->load->view('admin/view_outgoing_books', $data);
+            $this->load->view("admin/view_footer");
     }
 
     /*The function send_email is to send the email to the borrower with overdue materials*/
@@ -91,7 +85,7 @@ class Controller_outgoing_books extends Controller_log{
                 }
             }
             $date = date("Y-m-d");
-            $this->add_log("$session_user sent notification email to all borrowers with overdue materials for $date", "Notify Users");
+            $this->add_log("Admin $session_user sent notification email to all borrowers with overdue materials for $date", "Notify Users");
         }//END OF notify_all
     }
     
@@ -99,29 +93,28 @@ class Controller_outgoing_books extends Controller_log{
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "extend");
-        redirect('index.php/admin/controller_reservation/getAll/extend','refresh');
+        redirect('index.php/admin/controller_reservation','refresh');
     }//END OF extend()
     
     public function return_book(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "returned");
-        redirect('index.php/admin/controller_reservation/get_All/return','refresh');
+        redirect('index.php/admin/controller_reservation','refresh');
     }//END OF return_book()
     
     public function reserve(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "reserved");
-
-       redirect('index.php/admin/controller_outgoing_books/outgoing_books/'.$res_number,'refresh');
+		redirect('index.php/admin/controller_reservation','refresh');
     }//END OF reserve()
     
     public function cancel(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->delete_book_reservation($res_number);
-        header("refresh:0;url=../");
+        header("refresh:0;url=..");
     }//END OF cancel()
     
     public function remove_unclaimed(){
@@ -133,5 +126,5 @@ class Controller_outgoing_books extends Controller_log{
         }
     }
 }
-/* End of file home_controller.php */
-/* Location: ./application/controllers/user/controller_home.php */
+/* End of file controller_outgoing_books.php*/
+/* Location: ./application/controllers/admin/controller_outgoing_books.php */
