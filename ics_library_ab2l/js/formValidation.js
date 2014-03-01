@@ -1,6 +1,5 @@
 	window.onload=function(){
-	//	alert("HEYA POTATO");
-	//			alert("Imma at formValidation.js");
+	
 
 				regForm.fname.onblur=validateFname;
 				regForm.minit.onblur=validateMinitial;
@@ -8,12 +7,12 @@
 				regForm.stdNum.onblur=validateNumber;
 				//regForm.college.onblur=validateCollege;
 				//regForm.course.onblur=validateCourse;
-				//regForm.classi.onblur=validateClassification;
+				regForm.classi.onblur=validateClassification;
 				regForm.eadd.onblur=validateEmail;
 				regForm.uname.onblur=validateUser;
 				regForm.pass.onblur=validatePass;
 				regForm.cpass.onblur=validateCpass;
-				regForm.onsubmit=validateAll;
+				
 			}
 			
 	function validateFname(){
@@ -21,7 +20,7 @@
 		msg="Invalid Input: ";
 		
 		if (str=="") msg+="First name is required!";
-		else if (!str.match(/^[A-Z|a-z|\s]{3,50}$/))  msg+="Must be between 3-50 alpha character!<br/>";
+		else if (!str.match(/^[A-Za-z|\s]{3,50}$/))  msg+="Must be between 3-50 alpha character!<br/>";
 		else if(msg="Invalid input") msg="";
 		document.getElementsByName("valFname")[0].innerHTML=msg;
 		if(msg=="") return true;
@@ -31,7 +30,7 @@
 		msg="Invalid Input: ";
 		
 		if (str=="") msg+="Middle Initial is required!";
-		else if (!str.match(/^[A-Z]{1,3}\.$/))  msg+="Must be between 1-3 capital alpha character ended by period!<br/>";
+		else if (!str.match(/^[a-zA-Z0-9]{1,3}$/))  msg+="Must be between 1-3 capital alpha character.<br/>";
 		else if(msg="Invalid input") msg="";
 		document.getElementsByName("valInitial")[0].innerHTML=msg;
 		if(msg=="") return true;
@@ -110,11 +109,33 @@
 				str=regForm.uname.value;
 				msg="Invalid Input: ";
 				
+
+				if (str==""){
+					msg+="Username is required!";
+					document.getElementsByName("valUser")[0].innerHTML=msg;
+				}
+				else if (!str.match(/^[A-Za-z][A-Za-z0-9._]{4,20}$/)){
+				  msg+="Must be between 4-20 alpha numeric character!<br/>";
+					document.getElementsByName("valUser")[0].innerHTML=msg;
+				}
+				else if(msg="Invalid input"){
+					msg="";
+					document.getElementsByName("valUser")[0].innerHTML=msg;
+					if(getResult(str))
+					{}
+
+				}
+
+				
+
 				if (str=="") msg+="Username is required!";
 				else if (!str.match(/^[A-Z|a-z|0-9]{3,20}$/))  msg+="Must be between 3-20 alpha numeric character!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valUser")[0].innerHTML=msg;
+
 				if(msg=="") return true;
+				else return false;
+
 			}
 	
 	function validatePass(){
@@ -122,12 +143,13 @@
 				msg="";
 
 				if (str=="") msg+="Password is required!";
-				else if (str.match(/^([a-z]+|\d+)$/))  msg+="Invalid Input: Strength: Weak";
-				else if (str.match(/^[a-zA-z]+$/))  msg+="Invalid Input: Strength: Medium";
-				else if (str.match(/^[a-zA-z0-9]+$/))  msg+="Strength: Strong";
+				else if (str.match(/^[a-z]{5,20}$/))  msg+="Strength: Weak";
+				else if (str.match(/^[a-zA-Z]{5,20}$/))  msg+=" Strength: Medium";
+				else if (str.match(/^[a-zA-z0-9]{5,20}$/))  msg+="Strong";
 				else if(msg="") msg="";
 				document.getElementsByName("valPass")[0].innerHTML=msg;
-				if(msg=="Strength: Strong") return true;
+				if(msg!= "Password is required!") return true;
+				else return false;
 		}		
 	function validateCpass(){
 			str=regForm.pass.value;
@@ -143,10 +165,51 @@
 			return true;
 		}
 	function validateAll(){
-		if(validateFname()&&validateMinitial()&&validateLname()&&validateNumber()&&/*validateCollege()&&validateCourse()&&
+		if(validateFname()&&validateMinitial()&&validateLname()&&validateNumber()&&validateClassification()&&/*validateCollege()&&validateCourse()&&
 		   validateClassification()&&*/validateEmail()&&validateUser()&&validatePass()&&validateCpass())
 		{
 			return true;
 		}
 		else{return false;}
-	}	
+
+
+
+	return true;
+
+	}
+
+
+
+       $( document ).ready(function(){   
+       
+       	 window.getResult = 	function (name){
+               // var baseurl = <?php echo base_url()?>;
+               var bool= false;
+                $('#span_un').append("<span id = 'helpusername'></span>");
+                $("#helpusername").text("Checking availability...");
+                $.ajax({
+                    url : base_url + 'index.php/user/controller_editprofile/check_username/' + name,
+                    cache : false,
+                    async:false,
+                    success : function(response){
+
+                        $('#helpusername').delay(1000).removeClass('preloader');
+                        if(response == 'userOk'){
+                            $('#helpusername').removeClass('userNo').addClass('userOk');
+                            $('#helpusername').text("Username available!");
+                            
+                          bool= true;
+                        }
+                        else{
+                            $('#helpusername').removeClass('userOk').addClass('userNo');;
+                            $("#helpusername").text("Username not available.");
+                           bool= false;
+                        }
+                    }
+                })
+
+              
+                return bool;
+
+            }
+       })
