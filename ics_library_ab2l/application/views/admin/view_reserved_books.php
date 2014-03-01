@@ -36,14 +36,10 @@
                                                 <td>{$row->call_number}</td>
                                                 <td>{$row->date_borrowed}</td>
                                                 <td>{$row->due_date}</td>";
-											if($row->due_date > $date){
-												echo "<td></td>";
-											}else{
-		                                        echo "<td><form action='controller_reservation/extend' method='post'>
-		                                                <input type='hidden' name='res_number' value='{$row->res_number}' />
-		                                                <input type='submit' class='background-red' name='extend' value='Extend' />
-		                                                </form></td>";
-												}
+										echo "<td><form action='controller_reservation/extend' method='post'>
+												<input type='hidden' name='res_number' value='{$row->res_number}' />
+												<input type='submit' class='background-red' name='extend' value='Extend' />
+												</form></td>";
 										echo	"<td><form action='controller_outgoing_books/return_book/' method='post'>
                                                 <input type='hidden' name='res_number' value='{$row->res_number}' />
                                                 <input type='submit' class='background-red' name='return' value='Return' />
@@ -107,10 +103,14 @@
                                                 <td>{$row->call_number}</td>
                                                 <td>{$row->date_borrowed}</td>
                                                 <td>{$row->due_date}</td>";
-                                        echo "<td><form action='$base/index.php/admin/controller_reservation/extend' method='post'>
-                                                <input type='hidden' name='res_number' value='{$row->res_number}' />
-                                                <input type='submit' class='background-red' name='extend' value='Extend' />
-                                                </form></td>";
+										if($row->due_date != $date){
+											echo "<td></td>";
+										}else{
+											echo "<td><form action='controller_reservation/extend' method='post'>
+												<input type='hidden' name='res_number' value='{$row->res_number}' />
+												<input type='submit' class='background-red' name='extend' value='Extend' />
+												</form></td>";
+										}
                                         echo "<td><form action='$base/index.php/admin/controller_outgoing_books/return_book/' method='post'>
                                                 <input type='hidden' name='res_number' value='{$row->res_number}' />
                                                 <input type='submit' class='background-red' name='return' value='Return' />

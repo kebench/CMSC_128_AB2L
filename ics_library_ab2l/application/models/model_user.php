@@ -43,6 +43,16 @@ class Model_user extends CI_Model {
 			FROM user_account
 			WHERE account_number='{$account_number}'");
 	}
+	
+	public function deactivate_users(){
+		$this->db->select('account_number');
+		$query = $this->db->get('user_account');
+		foreach($query->result() as $user){
+			$this->db->query("UPDATE user_account 
+			SET status='pending', date_notif='' 
+			WHERE account_number='{$user->account_number}'");
+		}
+	}
 
 }
 ?>

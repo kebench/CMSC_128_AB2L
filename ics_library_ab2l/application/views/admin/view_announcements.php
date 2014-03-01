@@ -22,7 +22,7 @@ foreach($rows as $row => $data)
 	$info[$row]['date'] = $data1[0]; 
 	$info[$row]['tc'] = $data1[1];
 
-	if($counter>5) break;
+	if($counter>10) break;
 	//echo 'Date: ' . ($date=$info[$row]['date']) . '<br />';
 
 	array_shift($data1);

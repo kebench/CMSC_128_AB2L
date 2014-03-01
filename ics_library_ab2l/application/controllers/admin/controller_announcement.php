@@ -71,20 +71,28 @@ class Controller_announcement extends Controller_log {
 			//overwrite the text file with the new announcement
 
 			if($status == 1){
-				$txt_file = file_get_contents('./application/announcements.txt');
-				$fp = fopen('./application/announcements.txt', "w");
 				$savestring = "*" . $date ."-". $time . "^" . $title . "#" . $content;
+				$txt_file = file_get_contents('./application/announcements.txt');
+				$announcements = explode("*", trim($txt_file, "*"));	//separate the announcements
+				foreach($announcements as $announcement){	//remove announcements older anouncements
+					$index = array_search($announcement, $announcements);
+					if($index > 3)	
+						unset($announcements[$index]);
+				}
+				$new="";
+				foreach($announcements as $announcement){
+					$new .= "*".$announcement;
+				}
+				$fp = fopen('./application/announcements.txt', "w");
 				fwrite($fp, $savestring);
-				fwrite($fp, $txt_file);
+				fwrite($fp, $new);
 				fclose($fp);
 				echo "<script>alert('You have successfully added a new announcement.');</script>";
-				//$counter++;
 				$session_user = $this->session->userdata('logged_in')['username'];
 				$this->add_log("Admin $session_user added a new announcement.", "Add Announcement");
 				unset($_POST["add"]);
 				redirect('index.php/admin/controller_announcement','refresh');
 			}
-			
 		}
 	}
 	

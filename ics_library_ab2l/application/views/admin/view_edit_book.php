@@ -152,7 +152,7 @@
                             // create text field
                             var textfield = document.createElement("input");
                             textfield.type = "text";
-                            textfield.setAttribute("name","authors[]");
+                            textfield.setAttribute("name","author[]");
                             textfield.setAttribute("placeholder","Author's Name");
                             textfield.setAttribute("required","required");
                             textfield.setAttribute("class","background-white");
@@ -173,6 +173,39 @@
                             rowContainer.appendChild(button1);
                             rowContainer.appendChild(document.createElement("BR")); // add line break
 
+                        }
+						
+						function addRow_call_number(element, indentFlag){
+                            var maxFieldWidth = "500";
+                            var elementClassName = element.className; // this is the class name of the button that was clicked
+                            var fieldNumber = elementClassName.substr(3, elementClassName.length);
+
+                            var newFieldNumber = ++fieldNumber;
+                            var rowContainer = element.parentNode; // get the surrounding div so we can add new elements
+
+                            // create text field
+                            var textfield = document.createElement("input");
+                            textfield.type = "text";
+                            textfield.setAttribute("name", "call_number[]");
+                            textfield.setAttribute("placeholder","Book Call Number");
+                            textfield.setAttribute("required","required");
+                            textfield.setAttribute("class","background-white");
+                            
+
+                            // create buttons
+                            var button1 = document.createElement("input");
+                            button1.type = "button";
+                            button1.setAttribute("value", "Add Copy");
+                            button1.setAttribute("onclick", "addRow_call_number(this, false)");
+                            button1.className = "row" + newFieldNumber;
+
+
+                            // add elements to page
+                            rowContainer.removeChild(element);
+                            rowContainer.appendChild(textfield);
+                            rowContainer.appendChild(document.createTextNode(" ")); // add space
+                            rowContainer.appendChild(button1);
+                            rowContainer.appendChild(document.createElement("BR")); // add line break
                         }
 
                         function addRow_subj(element, indentFlag){
@@ -252,11 +285,10 @@
                                                                                 $authors = $this->model_book->get_book_authors($book[0]->id);
                                                                                 $count = 0;
                                                                                 foreach ($authors as $author) {
-                                                                                    echo '<input type = "text" name = "author[]" value="'.$author->author.'">';
+                                                                                    echo '<input type = "text" name = "author[]" value="'.$author->author.'"><br />';
                                                                                     $count++;
-
                                                                                 }
-                                                                            ?>&nbsp;<span name="help_author" class="color-red"></span>
+                                                                            ?><span name="help_author" class="color-red"></span>
                                                                             <input type="button" class="row1 cell" value="Add author" onclick="addRow_author(this, false)">
                                                                             
                                                                             <br/>
@@ -278,7 +310,8 @@
                                                                             foreach ($call_numbers as $call_number) {
                                                                                 echo '<input type = "text" name = "call_number[]" value="'.$call_number->call_number.'" /><br/>';
                                                                             }
-                                                                            ?>
+                                                                            ?><span name="help_call_number" class="color-red"></span>
+																			<input type="button" class="row1 cell" value="Add copy" onclick="addRow_call_number(this, false)">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -297,7 +330,7 @@
                                                                                 echo '<input type = "text" name = "subject[]" value="'.$subject->subject.'" /><br/>';
                                                                             }
                                                                             ?>
-                                                                            &nbsp;<span name="help_subject" class="color-red"></span>
+                                                                            <span name="help_subject" class="color-red"></span>
                                                                             <input type="button" class="row2 cell" value="Add subject" onclick="addRow_subj(this, false)"/>
                                                                             <br/>
                                                                         </div>

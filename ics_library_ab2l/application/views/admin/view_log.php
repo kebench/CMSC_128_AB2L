@@ -5,7 +5,7 @@
                         </div>
 						<div class="panel datasheet cell">
 	                        <div class="header background-red">
-	                            List of all Logs
+	                            List of all Logs &nbsp; <a href="<?php echo base_url();?>index.php/admin/controller_log/today">Today</a>
 	                        </div>
 	                        <table class="body">
                                 <thead>
@@ -22,14 +22,14 @@
 										$date = "";
 										foreach ($log as $iLog):
 											echo "<tr><td>$count</td>";
-											if($date == $iLog['date']){
+											if($date == $iLog->date){
 												echo "<td></td>";
 											}else{
-												echo "<td>".$iLog['date']."</td>";
+												echo "<td>".$iLog->date."</td>";
 											}
-											echo "<td>".$iLog['message']."</td>";
-											echo "<td>".$iLog['time']."</td></tr>";
-											$date = $iLog['date'];
+											echo "<td>".$iLog->message."</td>";
+											echo "<td>".$iLog->time."</td></tr>";
+											$date = $iLog->date;
 											$count++;
 										endforeach
                                     ?>

@@ -128,7 +128,7 @@
                                                                 $base = base_url();
                                                                 $this->load->helper('form');
                                                                  $attributes = array('name' => 'regForm');
-                                                                echo form_open('$base/index.php/admin/controller_add_admin/registration',$attributes); 
+                                                                echo form_open("$base/index.php/admin/controller_add_admin/registration",$attributes); 
                                                             ?>
 
                                                                 <div class="col">

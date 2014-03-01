@@ -28,10 +28,10 @@ class Controller_book extends Controller_log {
 			if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
 		if(isset($_POST['submit'])){
-			$call_number = $_POST['call_number'];
+			$call_number = array_unique ($_POST['call_number']);
 			$title = htmlspecialchars($_POST['title1']);
-			$author = $_POST['author'];
-			$subject = $_POST['subject'];
+			$author = array_unique ($_POST['author']);
+			$subject = array_unique ($_POST['subject']);
 			$year_of_pub = htmlspecialchars($_POST['year_of_pub']);
 			$type = htmlspecialchars($_POST['type1']);
 			$quantity = sizeof($call_number);
@@ -94,10 +94,9 @@ class Controller_book extends Controller_log {
 			'type' => $this->input->post('type'),
 			'quantity' => $this->input->post('quantity'),
 		);
-		$call_numbers = $this->input->post('call_number');
-		$book_authors = $this->input->post('author');
-		$book_subjects = $this->input->post('subject');
-		
+		$call_numbers = array_unique ($this->input->post('call_number'));
+		$book_authors = array_unique ($this->input->post('author'));
+		$book_subjects = array_unique ($this->input->post('subject'));
 		$this->model_book->edit_book($id, $book, $call_numbers, $book_authors, $book_subjects);
 		$this->add_log("Admin $session_user updated book with ID Number: $id", "Update Book");
 		$this->edit_success();

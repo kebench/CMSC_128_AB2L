@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
-class Controller_verify_login extends CI_Controller {
+include_once("/application/controllers/admin/controller_log.php");	//necessary para malagay sa ADMIN_LOGS yung paglog-in ng admin
+class Controller_verify_login extends Controller_log {
     function __construct() {
         parent::__construct();
         //load session and connect to database
@@ -31,7 +31,15 @@ class Controller_verify_login extends CI_Controller {
             }
             else redirect('index.php/user/controller_home', 'refresh');
            }
-           else redirect('index.php/admin/controller_admin_home', 'refresh');
+           else{
+			$session_user = $this->session->userdata('logged_in')['username'];
+			$this->add_log("Admin $session_user logged in.", "Admin Login");
+			//the remove_unclaimed() and update_reservation_status() are better implemented as procedures in the database
+			$this->remove_unclaimed();
+			$this->update_reservation_status();
+			redirect('index.php/admin/controller_admin_home', 'refresh');
+		   
+		   }
         }   
      }
  

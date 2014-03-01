@@ -114,17 +114,10 @@ class Controller_outgoing_books extends Controller_log{
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->delete_book_reservation($res_number);
-        header("refresh:0;url=..");
+        redirect('index.php/admin/controller_outgoing_books','refresh');
     }//END OF cancel()
     
-    public function remove_unclaimed(){
-        $data['query'] = $this->model_reservation->show_all_user_book_reservation("waitlist");
-        foreach($data['query'] as $reservation){
-            if($reservation->due_date <= date("Y-m-d")){
-                $this->model_reservation->delete_book_reservation($reservation->res_number);
-            }
-        }
-    }
+
 }
 /* End of file controller_outgoing_books.php*/
 /* Location: ./application/controllers/admin/controller_outgoing_books.php */

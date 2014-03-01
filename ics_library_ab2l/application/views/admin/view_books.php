@@ -69,13 +69,13 @@
 
                                             <td>";
                                             $base = base_url();
-                                                echo "<form action='$base/index.php/admin/controller_book/edit/' method='post'>
+                                                echo "<form action='$base"."index.php/admin/controller_book/edit/' method='post'>
                                                     <input type=\"hidden\" name=\"id\" value=\"{$row->id}\" />
                                                     <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
                                                 </form>
                                                 </td>
                                                 <td>
-                                                <form action='$base/index.php/admin/controller_book/delete/' method='post'>
+                                                <form action='$base"."index.php/admin/controller_book/delete/' method='post'>
                                                     <input type=\"hidden\"  name=\"id\" value=\"{$row->id}\" />
                                                     <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
                                                 </form>

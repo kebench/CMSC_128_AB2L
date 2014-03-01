@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Controller_view_users extends CI_Controller {
+include_once('controller_log.php');
+class Controller_view_users extends Controller_log {
  
     function index() {
     	$this->viewUser(null);
@@ -38,12 +39,10 @@ class Controller_view_users extends CI_Controller {
                 redirect('index.php/user/controller_login', 'refresh');
          if(isset($_POST['approve'])){
              if(isset($_POST['account_number1'])){
-                 $this->load->model('model_user');
-                 $this->model_user->approve_user($_POST['account_number1']);
                  $this->email_confirm_account($_POST['account_number1']);
                  $account_num = $_POST['account_number1'];
                  $message = $account_num;
-                 $this->call_confirm($message);
+                 //$this->call_confirm($message);
              }
              unset($_POST['approve']);
          }
@@ -78,7 +77,7 @@ class Controller_view_users extends CI_Controller {
          $config = array(
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
-         'smtp_port' => 465, //25
+         'smtp_port' => 25, //465
          'smtp_user' => 'samplemail128@gmail.com',
          'smtp_pass' => 'cmsc128ab2l',
          'mailtype'  => 'html', 
@@ -87,13 +86,14 @@ class Controller_view_users extends CI_Controller {
          'newline'   => "\r\n",
          'crlf'      => "\n"
          );//config for the email
-         $subject='Account Approval';
+         $subject='Re: ICS Library Account Approval';
          $from_email='samplemail128@gmail.com';
          $from_name='Sample ICS Library';
          
          //Get user account in database
          $this->load->model('model_user');
          $query['query'] = $this->model_user->get_acct($account_number);
+		 print_r($query['query'] );
          $first_name= $query['query'][0]->first_name;
          $mi=$query['query'][0]->middle_initial;
          $last_name=$query['query'][0]->last_name;
@@ -105,7 +105,7 @@ class Controller_view_users extends CI_Controller {
          $message .= "&nbsp;For inquiries, please contact the ICS Library librarian.<br/>";
          $message .= "&nbsp;Thank you!<br/>";
          $message .= "&nbsp;ICS Library Administrator";
- 
+			echo $message;
          $this->load->library('email', $config);
          $this->email->set_newline("\r\n");
          $this->email->from($from_email, $from_name);
@@ -113,14 +113,37 @@ class Controller_view_users extends CI_Controller {
          $this->email->subject($subject);
          $this->email->message($message);
          //Send the email
-         if($this->email->send()){
+    /*     if($this->email->send()){
              $this->load->view("admin/view_success_validate_user");
-             //edit parameters of add_log to the specific function that your function is doing
-             //first parameter: message
-             //second parameter: type
-             $this->add_log("Admin 1 verified account of $account_number", "Verify User");
-         }
+             $this->load->model('model_user');
+             $this->model_user->approve_user($_POST['account_number1']);
+			 $session_user = $this->session->userdata('logged_in')['username'];
+             $this->add_log("Admin $session_user verified account of $account_number", "Verify User");
+         }	*/
         }
+		
+	function deactivate(){
+		if($this->session->userdata('logged_in_type')!="admin")
+            redirect('index.php/user/controller_login', 'refresh');
+		if(isset($_POST['deactivate'])){
+             $this->load->model('model_reservation');
+			 $overdue = count($this->model_reservation->show_all_user_book_reservation("overdue"));
+			 $borrowed = count($this->model_reservation->show_all_user_book_reservation("borrowed"));
+			 $count = $overdue + $borrowed;
+			 if($count === 0){	//no more books at hand of users, all books are returned in th library
+             $this->load->model('model_user');
+             $this->model_user->deactivate_users();
+			 echo "<script>alert('You have successfully deactivated the accounts of all users.')</script>";
+			 $session_user = $this->session->userdata('logged_in')['username'];
+             $this->add_log("Admin $session_user deactivated all user accounts.", "Deactivate Users");
+			 }else{
+				echo "<script>alert('You cannot deactivate all user accounts yet. Some users still have books on loan. Make sure all users have returned their borrowed materials before deactivating all user accounts.')</script>";
+			 }
+             unset($_POST['deactivate']);
+         }
+		redirect('index.php/admin/controller_view_users','refresh');
+	}
+	
     function borrow($borrower){
         if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');

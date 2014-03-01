@@ -51,7 +51,7 @@
 							echo "<td><a href='".base_url()."index.php/admin/controller_view_users/borrow/$row->account_number'>Click to borrow</a></td>";
 							}
 							else{
-								echo "<form action='$base/index.php/admin/controller_view_users/approve_user' method='POST'>";
+								echo "<form action='$base"."index.php/admin/controller_view_users/approve_user' method='POST'>";
                                 echo "<input type='hidden' name='account_number1' value='$row->account_number'/>";
                                 echo "<td>"."<input type ='submit' class='background-red' name='approve' value = 'Confirm'>"."</td>";   //'Validate' button. Functionality not included here.
                                 echo "</form>";	//'Validate' button. Functionality not included here.
@@ -69,6 +69,9 @@
                     <li><a href="#">Next</a></li>
                 </ul>
             </div>
+			<form action='controller_view_users/deactivate' method='POST' class="float-right">
+				<input type ='submit' class='background-white' name='deactivate' value = 'Deactivate All User Accounts' onclick="confirm('Are you sure you want to deactivate all user accounts? This cannot be undone!')">
+			</form>
         </div>
     </div>
 </div>

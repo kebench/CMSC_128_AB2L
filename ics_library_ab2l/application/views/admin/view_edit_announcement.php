@@ -59,7 +59,7 @@
 												<div class="cell panel" style="background: #f6f6f6; margin-top: 1.5em; border: 1px solid #9BA0AF;">
 													<div class="cell">
 													<label>ANNOUNCEMENT CONTENTS</label><br/>
-													<textarea cols="40" rows="5" name="content" class="background-white" style="width: 95%; margin-left: 3%;" id="content" required="required"><?php echo $content;?></textarea><br /><br/>
+													<textarea cols="40" rows="5" name="content" class="background-white" style="width: 95%; margin-left: 3%;" id="content" required="required"><?php echo $content;?></textarea><span name="help_content" class="color-red"><br /><br/>
 													
 													</div>
 												</div>
@@ -67,9 +67,10 @@
 										</div>
 									 </div>
 									 <div class="footer width-fill" style="border-top: 1px solid #9BA0AF;">
-													<input type="button"  name="cancel" id="cancel" class="float-right" value="Cancel" onclick="return confirm('Are you sure you want to cancel editing this announcement?')" style="margin: 0px 5px 0px 5px;"/>
+													<a href="<?php echo base_url(); ?>index.php/admin/controller_announcement"><input type="button"  name="cancel" id="cancel" class="float-right" value="Cancel" onclick="return confirm('Are you sure you want to cancel editing this announcement?')" style="margin: 0px 5px 0px 5px;"/></a>
 													<input type = "hidden" name = "date" id = "date" value = "<?php echo $id;?>" />
 													<input type="submit" name="save" class='float-right' id="save" value="Save Changes" style="margin: 0px 5px 10px 18em;" />
+													
 									</form>
 									</div>	
 								</div>

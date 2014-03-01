@@ -6,16 +6,16 @@
 			$this->load->database();
 		}
 
-		public function get_log($log_number=FALSE)	//select statements
+		public function get_log($today)	//select statements
 		{
-			if ($log_number === FALSE)
+			if ($today === FALSE)
 			{
 				$query = $this->db->get('admin_log'); //table name
-				return $query->result_array();
+				return $query->result();
+			}else{
+				$query = $this->db->get_where('admin_log', array('date' => $today));
+				return $query->result();
 			}
-			// may value na account number
-			$query = $this->db->get_where('admin_log', array('log_number' => $log_number));
-			return $query->row_array();
 		}
 		public function add_log($message, $type)
 		{

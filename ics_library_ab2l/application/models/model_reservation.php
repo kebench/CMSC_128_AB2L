@@ -14,7 +14,6 @@ class Model_reservation extends CI_Model {
 		WHERE br.account_number=ua.account_number
 		AND br.status='$status'");
 		return $query->result();
-		return $query->result();
 	}
 	
 	/*return user account and reservation details*/
@@ -63,6 +62,7 @@ class Model_reservation extends CI_Model {
 		
 		return $query->result();
 	}
+	
 	public function change_book_status($call_number, $action){
 		$this->db->select('id');
 		$this->db->where('call_number', $call_number);
@@ -109,11 +109,15 @@ class Model_reservation extends CI_Model {
 				'status' => "$action",
 				'date_returned' => "$now"
 			);
+		}else if($action == "auto"){
+			$data = array(
+				'status' => "overdue"
+			);
 		}
 		$this->db->where('res_number', $res_number);
 		$this->db->update('book_reservation', $data);
 		
-		if($action !== "extend"){
+		if($action !== "extend" && $action !== "auto"){
 			$this->db->select('call_number');
 			$this->db->where('res_number', $res_number);
 			$call_number = $this->db->get('book_reservation')->result();
@@ -125,7 +129,7 @@ class Model_reservation extends CI_Model {
 		//automatic removal of 1 month pending requests
 		$query = $this->db->query("DELETE 
 			FROM book_reservation
-			WHERE (status = 'waitlist') AND (datediff(curdate(), due_date) >= 3)");
+			WHERE (status = 'reserved') AND (datediff(curdate(), due_date) >= 3)");
 	}
 	
 	public function delete_book_reservation($res_number){

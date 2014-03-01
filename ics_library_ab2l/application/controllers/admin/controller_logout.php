@@ -1,6 +1,8 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Controller_logout extends CI_Controller {
+include_once("controller_log.php");
+class Controller_logout extends Controller_log {
+
     function __construct() {
         parent::__construct();
         $this->load->model('admin_model','',TRUE);
@@ -16,6 +18,8 @@ class Controller_logout extends CI_Controller {
    
     function logout() {
          //remove all session data
+		 $username = $this->session->userdata('logged_in')['username'];
+		$this->add_log("Admin $username logged out.", "Admin Login");
          $this->session->unset_userdata('logged_in');
          $this->session->unset_userdata('logged_in_type');
          $this->session->sess_destroy();
