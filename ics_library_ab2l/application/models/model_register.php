@@ -15,9 +15,9 @@ $holder = $this->input->post('classi');
  
  if($holder === 'student'){
     $data=array(
-    'first_name'=>$this->input->post('fname'),
-    'middle_initial'=>$this->input->post('minit'),
-    'last_name'=>$this->input->post('lname'),
+    'first_name'=>strtoupper($this->input->post('fname')),
+    'middle_initial'=>strtoupper($this->input->post('minit')),
+    'last_name'=>strtoupper($this->input->post('lname')),
     
     'account_number'=>$this->input->post('stdNum'),
     
@@ -36,9 +36,9 @@ $this->db->insert('user_account',$data);
  }
  else{
    $data=array(
-    'first_name'=>$this->input->post('fname'),
-    'middle_initial'=>$this->input->post('minit'),
-    'last_name'=>$this->input->post('lname'),
+    'first_name'=>strtoupper($this->input->post('fname')),
+    'middle_initial'=>strtoupper($this->input->post('minit')),
+    'last_name'=>strtoupper($this->input->post('lname')),
     
     'account_number'=>$this->input->post('stdNum'),
     

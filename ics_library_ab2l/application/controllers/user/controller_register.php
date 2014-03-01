@@ -38,7 +38,7 @@ class Controller_register extends CI_Controller {
           
           $this->form_validation->set_rules('eadd', 'Your Email', 'trim|required|valid_email');
 
-          $this->form_validation->set_rules('uname', 'Username', 'trim|required|min_length[4]|alpha_dash|xss_clean');
+          $this->form_validation->set_rules('uname', 'Username', 'trim|required|min_length[4]|xss_clean|callback_usernameRegex');
           $this->form_validation->set_rules('pass', 'Password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric');
           $this->form_validation->set_rules('cpass', 'Password Confirmation', 'trim|required|matches[pass]');
 
@@ -52,6 +52,15 @@ class Controller_register extends CI_Controller {
             $this->model_register->add_user();
             $data['msg'] = "You successfully registered an account. You may proceed to ICS library to activate it! ";
             $this->success($data);
+          }
+    }
+
+    public function username_Regex($username){
+        if (preg_match('/^[A-Za-z][A-Za-z0-9._]{4,20}$/', $username) ) {
+            return TRUE;
+          } else {
+            return FALSE;
+            $this->form_validation->set_message('username_Regex', 'Invalid input.');
           }
     }
 

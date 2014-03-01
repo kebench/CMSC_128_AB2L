@@ -73,7 +73,7 @@
                     msg+="Enter a new username."
                     $("#helpusername").text(msg);
                 }
-                else if (!str.match(/^[A-Za-z][A-Za-z0-9._]{2,20}$/)){
+                else if (!str.match(/^[A-Za-z][A-Za-z0-9._]{4,20}$/)){
                     msg="Invalid characters.";
                 
                 }

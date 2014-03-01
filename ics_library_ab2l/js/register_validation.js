@@ -6,6 +6,8 @@ $('#numDiv').hide();
 
 
 function checker(){
+
+$(".valClass").text("");
 var selected = document.getElementById('classi').value;
 var collegeBox = document.getElementById('college')
 var NumBox = document.getElementById('stdNum');
