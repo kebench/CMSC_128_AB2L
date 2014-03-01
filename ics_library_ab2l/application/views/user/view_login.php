@@ -1,3 +1,5 @@
+<div id="main-body" class="site-body" ><!--style="background-image:url('<?php echo base_url();?>images/library.jpg'); height:100vh;"-->
+                <div class="site-center">
 <div class="cell body">
 	<p class="tiny">Login Page</p>
 </div>
@@ -38,4 +40,6 @@
 		</div>
 	</div>
 
+</div>
+</div>
 </div>

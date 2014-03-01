@@ -1,3 +1,5 @@
+<div id="main-body" class="site-body">
+                <div class="site-center">
 <div class="cell body">
                                     <p class="tiny">Sign-up</p>
                                 </div>
@@ -9,10 +11,15 @@
                                         <div class="cell panel">
                                             <div id="regform" class="body">
                                                 <div class="cell">
-                                                    <div class="color-red width-fill" style="font-weight: bold;"><p>
+                                                    <div class="width-fill" style="font-weight: bold;"><p>
                                                         <?php 
                                                             if(isset($msg)){
-                                                                echo $msg;
+                                                                if($msg === "You successfully registered an account. You may proceed to ICS library to activate it!"){
+                                                                    echo "<div class='color-green'>$msg</div>";
+                                                                }
+                                                                else{
+                                                                     echo "<div class='color-red'>$msg</div>";
+                                                                }
                                                              }
 
                                                      ?></p>
@@ -230,5 +237,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
             <script src="<?php echo base_url() ?>js/formValidation.js"></script>
             <script src="<?php echo base_url() ?>js/register_validation.js"></script>

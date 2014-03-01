@@ -5,15 +5,15 @@
                         </div>
 						<div class="panel datasheet cell">
 	                        <div class="header background-red">
-	                            List of all Logs &nbsp; <a href="<?php echo base_url();?>index.php/admin/controller_log/today">Today</a>
+	                            List of all Logs &nbsp; <a class="float-right" href="<?php echo base_url();?>index.php/admin/controller_log/today"><button style="font-size: 10px;">View Today's Log</button></a>
 	                        </div>
 	                        <table class="body">
-                                <thead>
+                                <thead s>
                                     <tr>
-                                        <th style="width: 3%;">#</th>
-                                        <th style="width: 10%;">Date</th>
-                                        <th style="width: 25%;">Message</th>
-                                        <th style="width: 15%;">Time</th>
+                                        <th style="width: 3%; text-align:center;">#</th>
+                                        <th style="width: 10%; text-align:center;">Date</th>
+                                        <th style="width: 25%; text-align:center;">Message</th>
+                                        <th style="width: 15%; text-align:center;">Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>

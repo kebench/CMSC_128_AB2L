@@ -1,210 +1,234 @@
+<div id="main-body" class="site-body">
+                <div class="site-center">
 <div class="cell body">
-               
-    </div>
-    <div class="col">
-        <div class="cell">
-            <div class="col width-fill">
-                <div class="col">
-                   
-                    <div class="cell panel">
-                        <div id="regform" class="body">
-                            <div class="cell">
-                                <div class="color-red width-fill" style="font-weight: bold;"><p>
-                                    <?php 
-                                        if(isset($msg)){
-                                            echo $msg;
-                                         }
-
-                                 ?>
-
-                                  <h4><?php echo $name?></h4>
+               <p class="tiny">Edit Profile</p>
                                 </div>
-                               
-                                <div class="col">
-                                    <div class="cell">
-                                       
-                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em><a id = "edit_username">Edit</a>
-                                   
-                                   <?php echo validation_errors(); ?>
+						<div class="col">
+                            <div class="cell">
+                                <div class="col width-fill">
+                                    <div class="col">
+                                    	<h4>Sign-up Form</h4>
+                                        <div class="cell panel">
+                                            <div id="regform" class="body">
+                                                <div class="cell">
+                                                    <div class="color-red width-fill" style="font-weight: bold;"><p>
+                                                        <?php 
+                                                            if(isset($msg)){
+                                                                echo $msg;
+                                                             }
 
-                                   
-                                    <form id= 'form_username' method= 'post'  action = 'controller_editprofile/edit_username'>
-                                    <span id="label_username1">Username:</span><input  type = 'text' id= 'input_username'name = 'new_username' required><span id = "helpusername"></span><br>
-                                    <span>Enter password:</span><input type= "password" id ='pword_for_username' name ='pword_for_username'><br>
-                                     <input type='button' id = "cancel_username" value= 'Cancel' >
-                                    <input type='submit' name = "sub" onclick= "return validate_username()" value= 'Save'><br>
-                                    </form>
-                                    
+                                                     ?></p>
+                                                    </div>
+                                                	<p class="tiny">* - required field</p>
+                                                    <div class="col">
+                                                        <div class="cell">
+                                                           <?php 
+                                                                $attributes = array('name' => 'regForm');
 
-                               
-                                    <br/>
-                                    <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
-                                    <span>College:</span><em><?php echo  $user_details->college?></em><br/>
-                                    <span>Course:</span><em><?php echo  $user_details->course?></em><br/>
-                                    <span id="label_email">Email:</span><em id= "email"><?php echo  $user_details->email?></em><a id = "edit_email">Edit</a><br>
-                                   
-                                    <?php echo validation_errors(); ?>
-                                    <form id= 'form_email' method= 'post' action = 'controller_editprofile/edit_email'>
-                                    <span id="label_email1">Email Address:</span><input type = 'text' id= 'input_email'name = 'new_email' value="<?php echo  $user_details->email?>" required><span id = "helpemail"></span><br>
-                                    <span>Enter password:</span><input type= 'password' id ='pword_for_email' name ='pword_for_email' required><br>
-                                     <input type='button' id = "cancel_email" value= 'Cancel'>
-                                    <input type='submit' disabled= "return false" value= 'Save'>
-                                    </form>
-                                    
-                                    
-                                    <span>Status:</span><em><?php echo  $user_details->status?></em><br/>
+                                                                echo form_open("index.php/user/controller_register/registration", $attributes); ?>
 
-                            
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="firstname">First name<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" name="fname" class="background-white" id = "fname" placeholder="Your first name" required onfocus = "disabler()" /><span name = "valFname"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="firstname">Middle Initial<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" name="minit" class="background-white" id = "minit" placeholder="Your middle initial" required/><span name = "valInitial"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="lastname">Last name<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" name="lname" class="background-white" id = "lname" placeholder="Your last name" required/><span name = "valLname"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                 <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="studno">Student Number<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" name="stdNum" class="background-white" placeholder="Your student number" id = "stdNum" required/><span name = "valNumber"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            </br><label for="classification">Classification <span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <br/>
+                                                                            <select id = "classi" name = "classi" onclick = "checker()" >
+                                                                            <option value="student">Student</option>
+                                                                            <option value="faculty">Faculty</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="Classification is required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            </br><label for="college">College <span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <br/>
+                                                                            <select id = "college" name = "college" onclick = "courseChecker()" ><span name = "valCollege"></span>
+            
+                                                                            <option value="CA">CA</option>
+                                                                            <option value="CAS">CAS</option>
+                                                                            <option value="CDC">CDC</option>
+                                                                            
+                                                                            <option value="CEAT">CEAT</option>
+                                                                            <option value="CEM">CEM</option>
+                                                                            <option value="CFNR">CFNR</option>
+                                                                            <option value="CHE">CHE</option>
+
+                                                                            <option value="CVM">CVM</option>
+                                                                            <!--option value="SESAM">SESAM</option>
+                                                                            <option value="GS">GS</option>
+                                                                            <option value="CPAf">CPAf</option-->
+                                                                            
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="College is required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            </br><label for="college">Course <span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                <div class="col width-fill">
+                                                                        <div class="cell"><br/>
+                                                                            <select id = "course" name = "course" >
+          
+
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input style="display:none;" data-required="true" data-error-message="Course is required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Email Address<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="email" class="background-white" name="eadd" placeholder="Your email address" id = "eadd" required/><span name = "valEmail"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Username:<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" class="background-white" name="uname" id = "uname" required/><span name = "valUser"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Password:<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="password" class="background-white" name="pass" id = "pass" required/><span name = "valPass"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="occupation">Confirm Password:<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required/><span name = "valCpass"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            </br><button class="button" type="submit">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <script src="<?php echo base_url() ?>js/validation.js"></script>
-     <script >
-     name = $("#username").text();
-    // alert(name);
-   var error_email = "<?php echo $error_email?>";
-   var error_username =  "<?php echo $error_username?>";
-
-
-
-        $( document ).ready(function(){   
-            if(error_username= "true"){
-                 $('#form_username').show();
-                 $('#form_email').hide();
-                 $("#input_username").val(name);
-            }
-            else{
-               $('#form_username').hide();
-               $('#form_email').show;
-             }
-         //if the edit username is clicked, the form for updating the username will be visible
-         $("#edit_username").click(function(){
-
-             $('#form_username').slideDown();
-            $("#input_username").val(name);
-            
-            $("#label_username").text("Edit Username");
-            $("#username").hide();
-            $("#edit_username").hide();
-
-        });
-         //cancel edit username
-         $("#cancel_username").click(function(){
-
-            $('#form_username').slideUp();
-            $("#label_username").text("Username:");
-            $("#username").show();
-            $("#edit_username").show();
-
-        });
-         //for checking if the new username already exist
-          $('#input_username').on('blur', validate_new_un);
-
-
-   window.validate_username = function() { 
-
-        if($("#pword_for_username").val().trim()!= ""){
-            return bool =validate_new_un();
-        }
-        else return false;
-   }
-
-    function validate_new_un(){
-
-            //validation of the input
-            msg= "Invalid input.";
-            check= false;
-                str= $('#input_username').val().trim();
-                $('#input_username').val(str);
-                if (str==""){ msg+="Username is required!";
-                     $("#helpusername").text(msg);
-                }
-                else if(str==name){
-                    msg+="Enter a new username."
-                    $("#helpusername").text(msg);
-                }
-                else if (!str.match(/^[A-Za-z][A-Za-z0-9._]{2,20}$/)){
-                    msg="Invalid characters.";
-                
-                }
-                //if valid, check username availability
-                else if(msg="Invalid input"){
-                 msg="";
-                 if(getResult(str)){
-                    return true;
-                 }
-                 else return false;
-                }
-                //document.getElementsByName("valUser")[0].innerHTML=msg;
-               
-            //ajax for checking if the username already exist
-            return false;
-            
-           
-    }        
-
-    //to check if the new username is still available
-    function getResult(name){
-               // var baseurl = <?php echo base_url()?>;
-               var bool= false;
-                $('#helpusername').addClass('preloader');
-                $("#helpusername").text("Checking availability...");
-                $.ajax({
-                    url : base_url + 'index.php/user/controller_editprofile/check_username/' + name,
-                    cache : false,
-                    async:false,
-                    success : function(response){
-
-                        $('#helpusername').delay(1000).removeClass('preloader');
-                        if(response == 'userOk'){
-                            $('#helpusername').removeClass('userNo').addClass('userOk');
-                            $('#helpusername').text("Username available!");
-                            
-                          bool= true;
-                        }
-                        else{
-                            $('#helpusername').removeClass('userOk').addClass('userNo');;
-                            $("#helpusername").text("Username not available.");
-                           bool= false;
-                        }
-                    }
-                })
-
-              
-                return bool;
-
-            }
-
-         $("#edit_email").click(function(){
-
-            
-             $('#form_email').slideDown();
-
-           
-            $("#label_email").text("Edit email");
-            $("#email").hide();
-            $("#edit_email").hide();
-
-        });
-         //cancel edit email
-         $("#cancel_email").click(function(){
-
-             $('#form_email').slideUp();
-            $("#label_email").text("Email Address:");
-            $("#email").show();
-            $("#edit_email").show();
-
-        });
-          
-
-      });
-
-
-     </script>
+            <script src="<?php echo base_url() ?>js/validation.js"></script>

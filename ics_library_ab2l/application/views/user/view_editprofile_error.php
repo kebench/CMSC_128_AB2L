@@ -1,5 +1,7 @@
+<div id="main-body" class="site-body">
+        <div class="site-center">
 <div class="cell body">
-               
+        <p class="tiny">Edit Profile</p>
     </div>
     <div class="col">
         <div class="cell">
@@ -23,11 +25,11 @@
                                 <div class="col">
                                     <div class="cell">
                                        
-                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em><a id = "edit_username">Edit</a>
+                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em> (<a id = "edit_username">Edit</a>)
                                     
                                     <form id= 'form_username' method= 'post' action = 'controller_editprofile/edit_username'>
                                     <span id="label_username1">Username:</span><input type = 'text' id= 'input_username'name = 'new_username'><span id = "helpusername"></span><br>
-                                    <span>Enter password:</span><input type= "password" id ='pword_for_username' name ='pword_for_username'><br>
+                                    <span>Enter password:</span><input type= "password" id ='pword_for_username' class="background-white" name ='pword_for_username' required><br>
                                      <input type='button' id = "cancel_username" value= 'Cancel'>
                                     <input type='submit' onClick="return validate_new_un" value= 'Save'><br>
                                     </form>
@@ -42,7 +44,7 @@
 
                                     <form id= 'form_email' method= 'post' action = 'controller_editprofile/edit_email'>
                                     <span id="label_email1">Email Address:</span><input type = 'text' id= 'input_email'name = 'new_email' value="<?php echo  $user_details->email?>"><span id = "helpemail"></span><br>
-                                    <span>Enter password:</span><input type= 'password' id ='pword_for_email' name ='pword_for_email'><br>
+                                    <span>Enter password:</span><input type= 'password' id ='pword_for_email' class="background-white" name ='pword_for_email'required ><br>
                                      <input type='button' id = "cancel_email" value= 'Cancel'>
                                     <input type='submit' disabled= "return false" value= 'Save'>
                                     </form>
@@ -60,6 +62,8 @@
             </div>
         </div>
     </div>
+  </div>
+</div>
     <script src="<?php echo base_url() ?>js/validation.js"></script>
      <script >
      name = $("#username").text();

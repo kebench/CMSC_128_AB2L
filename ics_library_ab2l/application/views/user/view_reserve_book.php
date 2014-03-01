@@ -1,3 +1,5 @@
+<div id="main-body" class="site-body">
+                <div class="site-center">
 <div class='cell'>
 	<div>
 		<p class='tiny'>Book Reservation Details</p>
@@ -34,5 +36,7 @@
 				</div>
 		</div>
 	</div>
+</div>
+</div>
 </div>
 </div>

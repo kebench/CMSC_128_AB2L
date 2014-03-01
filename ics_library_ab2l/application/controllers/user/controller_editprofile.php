@@ -42,8 +42,6 @@ class controller_editprofile extends CI_Controller {
         }
         else
              redirect('index.php/user/controller_login', 'refresh');
-        $this->load->view("user/view_navigation");
-        $this->load->view("user/view_logged_in");
   
         $this->load->view("user/view_footer");
     }

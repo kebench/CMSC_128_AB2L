@@ -37,13 +37,6 @@ class Controller_reserve_book extends CI_Controller{
         $this->load->helper(array('form','html'));
         $this->load->view("user/view_header",$data);
         $this->load->view("user/view_reserve_book", $data);
-        $this->load->view("user/view_navigation");
-         if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        }  
         $this->load->view("user/view_footer");
 	}
 
