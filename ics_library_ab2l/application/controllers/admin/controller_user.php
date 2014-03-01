@@ -5,6 +5,7 @@ class Controller_user extends Controller_log{
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('model_check_session');
 	}
 	
 	public function index(){
@@ -16,15 +17,17 @@ class Controller_user extends Controller_log{
 	}
 
 	function show_all(){
-		$data['acct'] = $this->model_user->get_acct();
-    	$data['parent'] = "Users";
-    	$data['current'] = "View Users";
+		 if($this->model_check_session->check_admin_session() == TRUE){
+			$data['acct'] = $this->model_user->get_acct();
+	    	$data['parent'] = "Users";
+	    	$data['current'] = "View Users";
 
-            $this->load->helper(array('form','html'));
-            $this->load->view("admin/view_header",$data);
-            $this->load->view("admin/view_aside");
-            $this->load->view("admin/view_users",$data);
-            $this->load->view("admin/view_footer");
+	            $this->load->helper(array('form','html'));
+	            $this->load->view("admin/view_header",$data);
+	            $this->load->view("admin/view_aside");
+	            $this->load->view("admin/view_users",$data);
+	            $this->load->view("admin/view_footer");
+	     }       
 	}
 
 	function approve_user(){

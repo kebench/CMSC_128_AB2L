@@ -30,6 +30,7 @@ class Controller_book extends Controller_log {
 	    $this->load->view("admin/view_aside");
 	    $this->load->view('admin/view_books', $data);
 	    $this->load->view("admin/view_footer");
+		
 	}
 	/*ADD BOOK FUNCTIONS*/
 	function add_book(){
