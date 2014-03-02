@@ -66,7 +66,22 @@
                                     </form>
                                     
                                     <span>Status:</span><em><?php echo  $user_details->status?></em><br/>
-
+                                    <a>Change Password</a>
+                                    <?php echo validation_errors();
+                                            if ($this->session->flashdata('success_password') != ''): 
+                                                echo "<p>".$this->session->flashdata('success_password')."</p>"; 
+                                            endif;   
+                                            if ($this->session->flashdata('error_password1') != ''): 
+                                                echo $this->session->flashdata('error_password1'); 
+                                            endif; 
+                                         ?>
+                                     <form id= 'form_password' method= 'post' action = 'controller_editprofile/edit_password'>
+                                   
+                                    <span>Enter current password:</span><input type= 'password' id ='current_password' class="background-white" name ='current_password' required><br>
+                                    <span>Enter new password:</span><input type= 'password' id ='new_password' class="background-white" name ='new_password' required><br>
+                                    <span>Confirm password:</span><input type= 'password' id ='confirm_password' class="background-white" name ='confirm_password' required><br>
+                                     <input type='button' id = "cancel_password" value= 'Cancel'>
+                                    <input type='submit'  onclick= "return  validate_password()" value= 'Save'><br/><br/>
                             
 
                                     </div>

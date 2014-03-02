@@ -170,6 +170,20 @@ class User_Model extends CI_Model
 
                
 	}
+
+	public function update_password($new_password, $username){
+
+
+        $data = array(
+           'password'=> sha1($new_password)
+        );
+
+		$this->db->where('username', $username);
+		$this->db->update('user_account', $data); 
+		return true;
+
+               
+	}
 	public function update_username($old, $new){
 		
 		  $this->db->where('username',$new);

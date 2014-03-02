@@ -242,6 +242,76 @@ class controller_editprofile extends CI_Controller {
           }
     }
 
+
+    /**
+    Edit password
+    */
+
+    public function edit_password(){
+        $this->load->library('form_validation');
+        $username= $this->session->userdata('logged_in')['username'];
+        $this->form_validation->set_rules('current_password', 'password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric|callback_check_database1');
+        $this->form_validation->set_rules('new_password', 'password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric|callback_check_new');
+        $this->form_validation->set_rules('confirm_password', 'password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric|callback_check_match');
+       
+        if($this->form_validation->run() == FALSE) {
+           
+
+            $var = validation_errors();
+            $this->session->set_flashdata('error_password1', $var);
+             $this->session->set_flashdata('error_password','error');
+              redirect('index.php/user/controller_editprofile', 'refresh');
+            
+            } 
+        else {
+              
+            //update email
+
+            $username= $this->session->userdata('logged_in')['username'];
+            $new_password = $this->input->post('new_password');
+            $update_password=$this->user_model->update_password($new_password, $username); 
+          
+
+           if($this->session->userdata('logged_in_type')=="user"){
+           
+                $this->session->set_flashdata('success_username', 'Successfully updated password.');
+                redirect('index.php/user/controller_editprofile', 'refresh');
+                
+                
+            }
+           else redirect('index.php/admin/controller_admin_home', 'refresh');
+        }   
+
+    }
+
+    public function check_new($new_password){
+         $username= $this->session->userdata('logged_in')['username'];
+
+         //check if the new password is the same with the previous password
+
+         $check_password=$this->user_model->check_password( $username,$new_password); 
+
+         if($check_password){
+            $this->form_validation->set_message('check_new', 'Enter new password.');
+            return false;
+         }
+         else{
+            return true;
+         }
+    }
+
+    public function check_match($confirm_password){
+        $new= $this->input->post('new_password');
+
+        if($new == $confirm_password){
+            return true;
+        }
+        else{
+            $this->form_validation->set_message('check_match', 'Password mismatch.');
+            return false;
+        }
+    }
+
 }
 /* End of file controller_editprofile.php */
 /* Location: ./application/controllers/user/controller_editprofile.php */
