@@ -56,7 +56,7 @@
 																	<label class="color-black" for="subject">* Subject:</label>
 																</div>
 																<div class="col width-fill">
-																	<input type="text" id="subject" name="subject" required="required" class="width-1of1 background-white float-right"/>
+																	<input type="text" id="subject" name="subject" pattern=".{1,50}" required="required" class="width-1of1 background-white float-right"/>
 																</div>
 															</div>
 															<div class="cell">

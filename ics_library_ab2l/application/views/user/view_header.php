@@ -16,16 +16,7 @@
   		<script src="<?php echo  base_url() ?>js/main.js"></script>
   		<meta name="viewport" content="width=device-width"/>
   		<style type="text/css">
-  			.grad{
-				background: rgb(255,255,255); /* Old browsers */
-				background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-			}
+  			
 			#main-body{
 				background-image:url('<?php echo base_url();?>images/g.jpg'); 
 				background-size: 200px 130px;
@@ -52,20 +43,21 @@
 					<div class="width-fit grad float-right" style="border-radius: 0px 0px 5px 5px;">
 						<div style="padding: 3px 3px 5px 3px;" class="color-black" >
 							<?php
-								if(!$this->session->userdata('logged_in')){
+								if(!$this->session->userdata('logged_in') ){
 							?>
 							<form action='<?php echo base_url(); ?>index.php/user/controller_verify_login' method="POST">
 								<input type="text" placeholder="Username" name="username" required="required" class="login float-left background-white"/>
 								<input type="password" placeholder="Password" name="password" required="required" class="login float-left background-white"/>
 								<input type="submit" value="Submit" class="login float-left" style="background: #656565; color:white;"/>
 								<br/>
-								<a href="<?php echo base_url(); ?>index.php/user/controller_register" class="float-right" style="color:#656565;">Not yet a member? Register Here!</a></p>
+								<a href="<?php echo base_url(); ?>index.php/user/controller_register" class="float-right" style="color:white;">Not yet a member? Register Here!</a></p>
 							</form>
 							<?php
 								}
-								else{
+							
+								else if($this->session->userdata('logged_in') ){
 							?>
-							<p style="background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat"><?php
+							<p style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat"><?php
 								$session_data = $this->session->userdata('logged_in');
             					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
 							?>
