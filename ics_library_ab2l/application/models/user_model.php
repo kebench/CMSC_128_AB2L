@@ -116,6 +116,29 @@ class User_Model extends CI_Model
 
 	}
 
+
+	public function admin_key($admin_key)
+	{
+		$data = array(
+			'admin_key' => $this->admin_key
+		);
+
+		//create query to connect user login database
+        $this->db->select('username, password,first_name,middle_name,last_name');
+        $this->db->from('admin_account');
+        $this->db->where('admin_key', $admin_key);
+        $this->db->limit(1);
+         
+        //get query and processing
+        $query = $this->db->get();
+        if($query->num_rows() == 1) { 
+            return $query->result(); //if data is true
+        } else {
+            return false; //if data is wrong
+        }
+
+	}
+
 	public function loginAdmin($username, $password)
 	{
 		$data = array(

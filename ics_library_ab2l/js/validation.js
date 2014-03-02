@@ -21,6 +21,24 @@ function validate_login(){
 	return false;
 }
 
+function validate_admin_key(){
+	
+	admin_key= admin_login.admin_key.value;
+	errorusername= "Invalid characters";
+	
+
+	if(admin_key.match(/^[A-Za-z0-9]{8}$/)){
+	
+		return true;
+	}
+	else{
+		document.getElementById('helpadminkey').innerHTML= errorusername;
+		
+	}
+	
+	return false;
+}
+
 
 //validate admin login fields (username and password)
 
