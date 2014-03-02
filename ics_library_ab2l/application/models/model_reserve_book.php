@@ -22,7 +22,7 @@
 		}
 		
 		function fetch_book($id){
-			$query="title, id, year_of_pub, type, no_of_available
+			$query="title, id, year_of_pub, type, no_of_available, book_stat
 			FROM book
 			WHERE id LIKE $id";
 			//execute query
@@ -99,6 +99,13 @@
 				}
 			}
 
+			$row = $this->model_reserve_book->fetch_book($data['id']);
+			if($row->num_rows() > 0){
+				foreach ($row->result() as $book_details) {
+					$book_stat = $book_details->book_stat;
+				}
+			}
+
 			if($no_of_available <= 0){
 				$row = $this->model_reserve_book->fetch_breservation_rank($data['call_number']);
 				$rank = $row->num_rows();
@@ -122,8 +129,10 @@
 			$this->db->insert('book_reservation', $newdata);
 
 			$no_of_available--;
+			$book_stat++;
 			$newdata2 = array(
-				'no_of_available' => $no_of_available
+				'no_of_available' => $no_of_available,
+				'book_stat' => $book_stat
 				);
 			$this->db->where('id', $data['id']);
 			$this->db->update('book', $newdata2);
@@ -154,7 +163,8 @@
 		function fetch_user_reservation($account_number){
 			$query="*
 			FROM book_reservation
-			WHERE account_number LIKE '".$account_number."'";
+			WHERE account_number LIKE '".$account_number."'
+			AND status LIKE 'borrowed'";
 			//execute query
 			$this->db->select($query,FALSE);
 			

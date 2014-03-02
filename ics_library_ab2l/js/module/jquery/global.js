@@ -1,3 +1,11 @@
+var sinput;
+var category;
+var title;
+var author;
+var subject;
+var year_of_pub;
+var tag_name;
+var search_type;
 function autosuggest(str, category, user){
 	if (str.length == 0) {
 		$('#autosuggest_list').fadeOut(500);
@@ -30,6 +38,7 @@ function autosuggest(str, category, user){
 }
 
 // triggered by an onclick from any of the li's in the autosuggest list
+
 // wait and fade the autosuggest list
 // then display the activity details
 function set_activity(activity_name) {
@@ -44,15 +53,18 @@ function get_data1(str){
 	
 	$('#autosuggest_list').fadeOut(500);
 	$('#list_area').addClass('loading');
-		
+		sinput=$('#sinput').val();
+		category=$('#category').val();
+		search_type="basic";
+		//alert(input);
 		$.ajax({
 		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
-		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data1",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
 		
 //		url: "http://localhost/kebench/index.php/search/get_book_data",
 		type: 'POST',
 		async: false,
-		data: serialize_form1(),
+		data: serialize_form(),
 		success: function(result){
 			$('#list_area').html(result);
 			$('#list_area').fadeIn(1000);
@@ -66,15 +78,21 @@ function get_data2(str){
 	
 	$('#autosuggest_list').fadeOut(500);
 	$('#list_area').addClass('loading');
+		title=$('#title').val();
+		author=$('#author').val();
+		subject=$('#subject').val();
+		year_of_pub = $('#year_of_pub').val();
+		tag_name = $('#tag_name').val();
 		
+		search_type = "advanced";
 		$.ajax({
 		//url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
-		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data2",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+		url: base_url+"index.php/"+str+"/controller_search_book/get_book_data",		//EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
 		
 //		url: "http://localhost/kebench/index.php/search/get_book_data",
 		type: 'POST',
 		async: false,
-		data: serialize_form2(),
+		data: serialize_form(),
 		success: function(result){
 			$('#list_area').html(result);
 			$('#list_area').fadeIn(1000);
@@ -85,16 +103,21 @@ function get_data2(str){
 }
 //serializes the form enebling all the inputs to have a value of an empty string if forms.value is equal to " ".
 //This will be used in sending data inputs in Ajax
-function serialize_form1()
+function serialize_form()
 {
 //	document.write(str);
-	return $("#search_form").serialize();
-}
-
-//serializes the form enebling all the inputs to have a value of an empty string if forms.value is equal to " ".
-//This will be used in sending data inputs in Ajax
-function serialize_form2()
-{
-//	document.write(str);
-	return $("#search2_form").serialize();
+	if(search_type=="basic"){
+		$('#sinput').val(sinput);
+		$('#category').val(category);
+		//alert(category);
+		return $("#search_form").serialize();
+	}
+	else{
+		$('#title').val(title);
+		$('#author').val(author);
+		$('#subject').val(subject);
+		$('#year_of_pub').val(year_of_pub);
+		$('#tag_name').val(tag_name);
+		return $("#search2_form").serialize();
+	}
 }

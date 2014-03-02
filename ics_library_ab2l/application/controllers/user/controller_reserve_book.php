@@ -69,24 +69,33 @@ class Controller_reserve_book extends CI_Controller{
 			foreach ($row->result() as $value) {
 				$data['borrower'] = $value->account_number;
 			}
-			$row = $this->model_reserve_book->fetch_book($data['id']);
-			if($row->num_rows() == 1){
-				foreach ($row->result() as $value) {
-					$no_of_available = $value->no_of_available;
+			$num_borrowed = $this->model_reserve_book->fetch_user_reservation($data['borrower'])->num_rows();
+			if($num_borrowed < 3){
+				$row = $this->model_reserve_book->fetch_book($data['id']);
+				if($row->num_rows() == 1){
+					foreach ($row->result() as $value) {
+						$no_of_available = $value->no_of_available;
+					}
+				}
+				if($no_of_available > 0){
+					$this->model_reserve_book->add_reservation($data);
+					$this->session->unset_userdata('id');
+					redirect('index.php/user/controller_reserve_book/success');
+				}
+				else{
+					echo "<script>alert('There is not enough book available');</script>";
+					redirect('index.php/user/controller_reserve_book', 'refresh');
 				}
 			}
-			if($no_of_available > 0){
-				$this->model_reserve_book->add_reservation($data);
-				$this->session->unset_userdata('id');
-				redirect('index.php/user/controller_reserve_book/success');
-			}
 			else{
-				echo "<script>alert('There is not enough book available');</script>";
+				echo "<script>alert('A user is allowed to borrow at most 3 books');</script>";
+					redirect('index.php/user/controller_reserve_book', 'refresh');
 			}
+			
 		}
 		else{
 				$this->session->unset_userdata('id');
-				redirect('index.php/user/controller_search_book');
+				redirect('index.php/user/controller_reserve_book', 'refresh');
 			
 		}
 		
