@@ -1,20 +1,3 @@
-<script>
-
-var now;
-function tabInterval(){
-	var current = jQuery.now();
-	console.log(current - now);
-	if(current - now === 1){
-		var c = $('#tabs.ul').children('.active');
-		c.removeClass('active');
-		c.next().addClass('active');
-		
-	}
-	now = current;
-		tabInterval();
-}
-</script>
-
 <div id="main-body" class="site-body" style="">
 				<div class="cell site-center" style="border-radius: 10px 10px 10px 10px;">
 				<div class="cell body">
@@ -138,7 +121,5 @@ function tabInterval(){
 <script type="text/javascript">
 $(window).ready(function() {
 	$('#slider').nivoSlider();
-	now = jQuery.now();
-	tabInterval();
 });
 </script>
