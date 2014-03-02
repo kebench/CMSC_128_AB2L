@@ -1,3 +1,20 @@
+<script>
+
+var now;
+function tabInterval(){
+	var current = jQuery.now();
+	console.log(current - now);
+	if(current - now === 1){
+		var c = $('#tabs.ul').children('.active');
+		c.removeClass('active');
+		c.next().addClass('active');
+		
+	}
+	now = current;
+		tabInterval();
+}
+</script>
+
 <div id="main-body" class="site-body" style="">
 				<div class="cell site-center" style="border-radius: 10px 10px 10px 10px;">
 				<div class="cell body">
@@ -29,11 +46,11 @@
 		                                                <div class="cell tab-block top-nav">
 		                                                    <div class="tabs">
 		                                                        <ul class="nav">
-		                                                        	<li class="active"><a href="#tabs-1">1</a></li>
+		                                                        	
 		                                                        	<?php
 
 																		$counter = 0;
-																		$count = 2;
+																		$count = 1;
 																		$txt_file = file_get_contents('./application/announcements.txt');
 																		$rows = explode("*", $txt_file);
 																		array_shift($rows);
@@ -52,6 +69,9 @@
 
 																				foreach($data1 as $row1 => $data2)
 																				{
+																					if($count==1)
+																						echo "<li class=\"active\"><a href=\"#tabs-1\">1</a></li>";
+																					else
 																					echo "<li><a href='#tabs-".$count."'>".$count."</a></li>";
 					                                                            
 																					$count++;
@@ -64,15 +84,12 @@
 		                                                        </ul>
 		                
 		                                                    <div class="tab-content">
-		                                                        <div class="cell" id="tabs-1">
-		                                                            <h4 id="news1">Not yet registered?</h4>
-																	</br><a id="reglinka" href="typography-form.html">Sign up now!</a>
-		                                                        </div>
+		                                                 
 
 		                                                      <?php
 
 																$counter = 0;
-																$count = 2;
+																$count = 1;
 																$txt_file = file_get_contents('./application/announcements.txt');
 																$rows = explode("*", $txt_file);
 																array_shift($rows);
@@ -97,10 +114,17 @@
 																			$info[$row1]['title'] = $row_data[0];
 																			$info[$row1]['content'] = $row_data[1];
 
+																			if($count==1){
+																				echo "<div class=\"cell\" id=\"tabs-".$count."\">";
+																			echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
+																			echo "<p>{$info[$row1]['content']}</p><br/>";
+																			echo "</div>";
+																		}else{
 																			echo "<div class=\"cell hidden-tab\" id=\"tabs-".$count."\">";
 																			echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
 																			echo "<p>{$info[$row1]['content']}</p><br/>";
 																			echo "</div>";
+																		}
 																			$count++;
 																		}
 																	}
@@ -121,5 +145,7 @@
 <script type="text/javascript">
 $(window).ready(function() {
 	$('#slider').nivoSlider();
+	now = jQuery.now();
+	tabInterval();
 });
 </script>

@@ -49,6 +49,34 @@
 											<div>
 												<p>Immediately inform the ICS librarian and ask her of what action you should do or find a way to replace it.</p>
 											</div>
+											<h3>12.) Can I borrow after creating/registering an account?</h3>
+											<div>
+												<p>All accounts must first be validated before you can log in and reserve a book.
+												To validate your account, you must present your validated ID and/or Form 5 to
+												the ICS library.</p>
+											</div>
+											<h3>13.) I am not a BSCS student, can I still borrow a book?</h3>
+											<div>
+												<p>Yes, you can! Just like ICS constituents, you must first register an account and
+												validate it at the ICS Library.</p>
+											</div>
+											<h3>14.) When will my account be validated/activated?</h3>
+											<div>
+												<p>Accounts are validated once you have presented your ID and/or Form 5 to the ICS librarian.</p>
+											</div>
+											<h3>15.) I can't log in to my account, what will I do?</h3>
+											<div>
+												<p>It's either:
+												a. Your account has not yet been validated yet.<br/>
+												b. It is the end of the semester and borrowing of books is no longer available.<br/>
+												
+												For other cases and log in problems, you may see the ICS librarian during office hours.</p>
+											</div>
+											<h3>16.) When is the ICS Library open?</h3>
+											<div>
+												<p>The ICS library is open every Monday -Friday 8 AM -5 PM.</p>
+											</div>
+
 											
 				    		</div>
 				    	<div class="cell">

@@ -133,7 +133,7 @@ class Controller_search_book extends CI_Controller {
 						//and if book is available
 						//RESERVE TRANSACTION CODE HERE
 						echo "<form action='controller_reserve_book/verify_login/$book_details->id' method='post'>
-							<input type='submit' class='background-red table-button' value='Reserve Book'>
+							<input type='submit' class='background-red style='font-size: 1.5em;' value='Reserve Book'/>
 						</form>";
 					}
 				echo "</td></tr>";

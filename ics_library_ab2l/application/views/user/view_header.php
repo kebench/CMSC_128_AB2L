@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class="site-header" id="sticker" style="background-image:url('<?php echo base_url();?>images/navigation.png'); box-shadow: 2px 2px 10px -2px #000000;z-index: 5;">
-					<div id="navigation" class="width-6of8 center">
+					<div id="navigation" class="width-5of8 center">
 						<ul>
 							<a  href="<?php echo base_url(); ?>"><li <?php if($titlepage === "ICS Library Home") echo 'id="active"'?> >Home</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_books"><li <?php if($titlepage === "View all books") echo 'id="active"'?>>View Books</li></a>
@@ -87,24 +87,6 @@
 							<a href="<?php echo base_url(); ?>index.php/user/controller_faq"><li <?php if($titlepage === "Frequently Asked Questions") echo 'id="active"'?>>FAQs</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_contact"><li <?php if($titlepage === "Contact Us") echo 'id="active"'?>>Contacts</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_stat"><li <?php if($titlepage === "Book Statistics") echo 'id="active"'?>>Statistics</li></a>
-							<?php
-								if(!$this->session->userdata('logged_in')){
-							?>
-								<a href="<?php echo base_url(); ?>index.php/user/controller_login"><li <?php if($titlepage === "Login") echo 'id="active"'?>>Login</li></a>
-							<?php
-								}
-								else{
-							?>
-								<a href="#" id="myaccount"><li>My Account</li></a>
-								<ul id="dropdown" style="display:none; position:absolute;">
-									<a href=""><li>View Profile</li></a>
-									<a href=""><li>Reserved Book</li></a>
-									<a href=""><li>Borrowed Book</li></a>
-									<a href=""><li>Logout</li></a>
-								</ul>
-							<?php
-								}
-							?>
 						</ul>
 					</div>
 			</div>
