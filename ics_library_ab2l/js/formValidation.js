@@ -91,7 +91,7 @@
 				if (str=="") msg+="Classification is required!";
 				else if (!str.match(/^(student|faculty)$/))  msg+="Must be a student or faculty!<br/>";
 				else if(msg="Invalid input") msg="";
-				document.getElementsByName("valClass")[0].innerHTML=msg;
+				//document.getElementsByName("valClass")[0].innerHTML=msg;
 				if(msg=="") return true;
 			}	
 			
@@ -122,19 +122,15 @@
 					msg="";
 					document.getElementsByName("valUser")[0].innerHTML=msg;
 					if(getResult(str))
-					{}
+					{
+						msg="";
+					}
 
 				}
 
-				
-
-				if (str=="") msg+="Username is required!";
-				else if (!str.match(/^[A-Z|a-z|0-9]{3,20}$/))  msg+="Must be between 3-20 alpha numeric character!<br/>";
-				else if(msg="Invalid input") msg="";
-				document.getElementsByName("valUser")[0].innerHTML=msg;
-
 				if(msg=="") return true;
 				else return false;
+
 
 			}
 	
@@ -201,7 +197,7 @@
                           bool= true;
                         }
                         else{
-                            $('#helpusername').removeClass('userOk').addClass('userNo');;
+                            $('#helpusername').removeClass('userOk').addClass('color-red');;
                             $("#helpusername").text("Username not available.");
                            bool= false;
                         }
