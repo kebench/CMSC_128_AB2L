@@ -1,8 +1,29 @@
-<div class="cell">
-									<br/>
-									<div id="wrapper">
+<script>
+
+var now;
+function tabInterval(){
+	var current = jQuery.now();
+	console.log(current - now);
+	if(current - now === 1){
+		var c = $('#tabs.ul').children('.active');
+		c.removeClass('active');
+		c.next().addClass('active');
+		
+	}
+	now = current;
+		tabInterval();
+}
+</script>
+
+<div id="main-body" class="site-body" style="">
+				<div class="cell site-center" style="border-radius: 10px 10px 10px 10px;">
+				<div class="cell body">
+									<p class="tiny">Home</p>
+				</div>
+				<div class="width-full">
+									<div id="wrapper" class="width-3of5 float-left">
 								        <div class="slider-wrapper theme-default">
-								            <div id="slider" class="slider">
+								            <div id="slider" class="slider" style="height:300px">
 								                <img src="<?php echo base_url();?>images/home/uplb.jpg" data-thumb="<?php echo base_url();?>images/home/uplb.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/lib1.jpg" data-thumb="<?php echo base_url();?>images/home/lib1.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/lib2.jpg" data-thumb="<?php echo base_url();?>images/home/lib2.jpg" alt=""/>
@@ -13,36 +34,96 @@
 								    </div>
 
 
-									<h4 id="news">News and Updates</h4>
 
-									<div class="col">
-		                                <div class="cell panel">
+									<div class="col width-2of5 float-left">
+		                                <div class="cell panel" style="box-shadow: 3px 2px 10px -2px #000000;">
+		                                	<div class="header" style="background:#656565;">
+		                                		<h4 id="news" style="color:white;">News and Updates</h4>
+		                                	</div>
 		                                    <div class="body">
 		                                        <div class="cell">
 		                                            <div class="col">
 		                                                <div class="cell tab-block top-nav">
 		                                                    <div class="tabs">
 		                                                        <ul class="nav">
-		                                                            <li class="active"><a href="#tabcontent1">1</a></li>
-		                                                            <li><a href="#tabcontent2">2</a></li>
-		                                                            <li><a href="#tabcontent3">3</a></li>
+		                                                        	<li class="active"><a href="#tabs-1">1</a></li>
+		                                                        	<?php
+
+																		$counter = 0;
+																		$count = 2;
+																		$txt_file = file_get_contents('./application/announcements.txt');
+																		$rows = explode("*", $txt_file);
+																		array_shift($rows);
+
+				                                               		
+																		if($rows != NULL){
+																			foreach($rows as $row => $data)
+																			{
+																				$counter = $counter + 1;
+																				$data1 = explode("^",$data);
+																				$info[$row]['date'] = $data1[0]; 
+																				$info[$row]['tc'] = $data1[1];
+
+																				if($counter>5) break;
+																				array_shift($data1);
+
+																				foreach($data1 as $row1 => $data2)
+																				{
+																					echo "<li><a href='#tabs-".$count."'>".$count."</a></li>";
+					                                                            
+																					$count++;
+																				}
+																			
+																			}
+																		}
+																	?>
+		                                                            
 		                                                        </ul>
-		                                                    </div>
+		                
 		                                                    <div class="tab-content">
-		                                                        <div class="cell" id="tabcontent1">
+		                                                        <div class="cell" id="tabs-1">
 		                                                            <h4 id="news1">Not yet registered?</h4>
 																	</br><a id="reglinka" href="typography-form.html">Sign up now!</a>
 		                                                        </div>
 
-		                                                        <div class="cell hidden-tab" id="tabcontent2">
-		                                                            <h4 id="announce">Announcement for non-UPLB users</h4>
-																	<p>The UP Los Baños  Main Library will not accept NON-UPLB users from January 7, 2014 to January 19, 2014 to give priority to our students to use our facilities during their semi-final and final examinations scheduled on the said period.</p>
-																	<p>Effective 2nd Semester SY 2013-2014 the designated day of UPLB for NON-UPLB users will be changed from Friday to Monday only.</p>
-		                                                        </div>
+		                                                      <?php
 
-		                                                        <div class="cell hidden-tab" id="tabcontent3">
-		                                                            </br></br><h4 id="news2">New Books Available!</h4></br></br>
-		                                                        </div>
+																$counter = 0;
+																$count = 2;
+																$txt_file = file_get_contents('./application/announcements.txt');
+																$rows = explode("*", $txt_file);
+																array_shift($rows);
+
+		                                               		
+																if($rows != NULL){
+																	foreach($rows as $row => $data)
+																	{
+																		$counter = $counter + 1;
+																		$data1 = explode("^",$data);
+																		$info[$row]['date'] = $data1[0]; 
+																		$info[$row]['tc'] = $data1[1];
+
+																		if($counter>5) break;
+																		//echo 'Date: ' . ($date=$info[$row]['date']) . '<br />';
+
+																		array_shift($data1);
+
+																		foreach($data1 as $row1 => $data2)
+																		{
+																			$row_data = explode('#', $data2);
+																			$info[$row1]['title'] = $row_data[0];
+																			$info[$row1]['content'] = $row_data[1];
+
+																			echo "<div class=\"cell hidden-tab\" id=\"tabs-".$count."\">";
+																			echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
+																			echo "<p>{$info[$row1]['content']}</p><br/>";
+																			echo "</div>";
+																			$count++;
+																		}
+																	}
+																}
+																?>
+																</div>
 		                                                    </div>
 		                                                </div>
 		                                            </div>
@@ -50,9 +131,14 @@
 		                                    </div>
 		                                </div>
 		                            </div>
-							</div>
+		    </div>
+</div>
+</div>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/slider/jquery.nivo.slider.js"></script>
 <script type="text/javascript">
 $(window).ready(function() {
 	$('#slider').nivoSlider();
-});</script>
+	now = jQuery.now();
+	tabInterval();
+});
+</script>

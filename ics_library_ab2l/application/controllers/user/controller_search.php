@@ -7,13 +7,6 @@ class Controller_search extends CI_Controller {
         $data['titlepage']= "Search Books";
         $this->load->view("user/view_header", $data);
         $this->load->view("user/view_search");
-        $this->load->view("user/view_navigation");
-        if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        }  
         $this->load->view("user/view_footer");
     }
 }

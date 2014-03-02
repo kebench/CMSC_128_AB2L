@@ -27,6 +27,8 @@
    		
  });
 </script>
+<div id="main-body" class="site-body" style="">
+				<div class="cell site-center" style="border-radius: 10px 10px 10px 10px;">
 <div class="body width-fill background-white">
 	<div class="cell">
 		<div id="accordion">
@@ -116,4 +118,6 @@
 		</div>
     </div>
 	<div id="list_area"></div>
+</div>
+</div>
 </div>

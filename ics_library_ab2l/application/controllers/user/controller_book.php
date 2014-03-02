@@ -27,13 +27,6 @@ class Controller_book extends CI_Controller {
 		$data['titlepage'] = "Reserved books";
         $this->load->view("user/view_header",$data);
         $this->load->view("user/view_reserved_books",$data);
-        $this->load->view("user/view_navigation");
-        if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        }  
         $this->load->view("/user/view_footer");
         }else{
         //If no session, redirect to login page
@@ -67,15 +60,6 @@ class Controller_book extends CI_Controller {
         $data['message'] = "There is no returned books!";
 		$data['header'] = "List of returned books";
         $this->load->view("user/view_borrowed_books",$data);
-
-        $this->load->view("user/view_navigation");
-
-        if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        }  
         $this->load->view("/user/view_footer");
 		}else{
         //If no session, redirect to login page

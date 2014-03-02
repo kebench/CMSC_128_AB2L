@@ -1,3 +1,5 @@
+<div id="main-body" class="site-body">
+                <div class="site-center">
 <div class="cell body">
 									<p class="tiny">View Books</p>
 								</div>
@@ -63,3 +65,5 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>

@@ -41,11 +41,6 @@
 						<div class="col width-3of4">
 						<h1 id="current-page" class="title col">Admin Portal</h1>
 						</div>
-						<div class="col width-fill">
-							<a id="visit" href="#">
-								<div id="visit-div" class=" width-2of4">Visit Page</div>
-							</a>
-						</div>
 				</div>
 			</header>
 			<header id="secondary-head" class="grad">

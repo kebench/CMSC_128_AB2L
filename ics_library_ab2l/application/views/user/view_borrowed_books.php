@@ -1,3 +1,5 @@
+<div id="main-body" class="site-body">
+                <div class="site-center">
 <div class="cell body"> </div>
     <div class="col">
         <div class="cell">
@@ -78,3 +80,5 @@
                 ?>
                                 </div>
                             </div>
+    </div>
+</div>
