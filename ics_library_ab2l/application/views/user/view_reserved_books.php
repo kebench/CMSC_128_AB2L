@@ -68,7 +68,7 @@
                                                                         <input type='hidden' name='res_number' value='{$row->res_number}'/>
                                                                         <input type='hidden' name='call_number' value='{$row->call_number}'/>
                                                                         <input type='hidden' name='rank' value='{$row->rank}'/>
-                                                                        <input type=\"submit\" onClick=\"return doconfirm();\" class='background-red' name=\"cancel_reservation\" value=\"Cancel\" /></td>
+                                                                        <input type=\"submit\" onClick=\"return doconfirm();\" class='background-red table-button' name=\"cancel_reservation\" value=\"Cancel\" /></td>
                                                                     </form>
                                                                 </td>";
                                                         echo "</tr>";
