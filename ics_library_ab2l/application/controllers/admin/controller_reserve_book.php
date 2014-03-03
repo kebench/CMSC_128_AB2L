@@ -63,22 +63,34 @@ class Controller_reserve_book extends CI_Controller{
 		if($this->session->userdata('id') != FALSE && $this->session->userdata('borrower') != FALSE){
 			$data['id'] = $this->session->userdata('id');
 			$data['borrower'] = $this->session->userdata('borrower');
-			$row = $this->model_reserve_book->fetch_book($data['id']);
-			if($row->num_rows() == 1){
-				foreach ($row->result() as $value) {
-					$no_of_available = $value->no_of_available;
-				}
+			$row = $this->model_reserve_book->fetch_user($data['borrower']);
+			foreach ($row->result() as $value) {
+				$data['borrower'] = $value->account_number;
 			}
-			if($no_of_available > 0){
-				$this->model_reserve_book->add_reservation($data);
-				$this->session->unset_userdata('call_number');
-				if($this->session->userdata('logged_as_admin')){
-					$this->session->unset_userdata('borrower');
+			$num_borrowed = $this->model_reserve_book->fetch_user_reservation($data['borrower'])->num_rows();
+			if($num_borrowed < 3){
+				$row = $this->model_reserve_book->fetch_book($data['id']);
+				if($row->num_rows() == 1){
+					foreach ($row->result() as $value) {
+						$no_of_available = $value->no_of_available;
+					}
 				}
-				redirect('index.php/admin/controller_reserve_book/success');
+				if($no_of_available > 0){
+					$this->model_reserve_book->add_reservation($data);
+					$this->session->unset_userdata('call_number');
+					if($this->session->userdata('logged_as_admin')){
+						$this->session->unset_userdata('borrower');
+					}
+					redirect('index.php/admin/controller_reserve_book/success');
+				}
+				else{
+					echo "<script>alert('There is not enough book available');</script>";
+					redirect('index.php/admin/controller_reserve_book', 'refresh');
+				}
 			}
 			else{
-				echo "kulang na";
+				echo "<script>alert('A user is allowed to borrow at most 3 books');</script>";
+					redirect('index.php/admin/controller_reserve_book', 'refresh');
 			}
 		}
 		else{
@@ -101,6 +113,7 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function success(){
-		echo "Success!";
+		echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
+		redirect('index.php/admin/controller_outgoing_books','refresh');
 	}
 }
