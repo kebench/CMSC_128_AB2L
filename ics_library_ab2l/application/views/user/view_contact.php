@@ -34,13 +34,13 @@
 													<div class="cell">
 														<h3 class="color-black">Email Us</h3>
 
-														<form action="controller_contact/emailsender" method="POST" class="width-3of4">
+														<form action="" method="POST" class="width-3of4">
 															<div class="cell">
 																<div class="col width-1of3">
 																	<label class="color-black" for="name">* Name:</label>
 																</div>
 																<div class="col width-fill">
-																	<input type="text" id="sender_name" name="sender_name" pattern="[A-Z]{1}[a-z]*[\-]?[a-z]*[\.]?[\ ]?([A-Z]{1}[a-z]*[\-]?[a-z]*[\.]?[\ ]?)*" required="required" class="width-1of1 background-white float-right"/>
+																	<input type="text" id="name" pattern="[A-Z]{1}[a-z]*[\-]?[a-z]*[\.]?[\ ]?([A-Z]{1}[a-z]*[\-]?[a-z]*[\.]?[\ ]?)*" required="required" class="width-1of1 background-white float-right"/>
 																</div>
 															</div>
 															<div class="cell">
@@ -48,27 +48,27 @@
 																	<label class="color-black" for="email">* Email:</label>
 																</div>
 																<div class="col width-fill">
-																	<input type="email" id="sender_email" name="sender_email" required="required" class="width-1of1 background-white float-right"/>
+																	<input type="email" id="email" required="required" class="width-1of1 background-white float-right"/>
 																</div>
 															</div>
 															<div class="cell">
 																<div class="col width-1of3">
-																	<label class="color-black" for="subject">* Subject:</label>
+																	<label class="color-black" for="contactnum">* Contact Number:</label>
 																</div>
 																<div class="col width-fill">
-																	<input type="text" id="subject" name="subject" required="required" class="width-1of1 background-white float-right"/>
+																	<input type="text" id="contactnum" pattern="[0]{1}[9]{1}[0-9]{9}" required="required" class="width-1of1 background-white float-right"/>
 																</div>
 															</div>
 															<div class="cell">
 																<div class="width-1of3">
-																	<label class="color-black" for="message">*Comments/Suggestion/Inquiries:</label>
+																	<label class="color-black" for="contactnum">*Comments/Suggestion/Inquiries:</label>
 																</div>
 																<div class="col">
-																	<textarea name="message" rows="5" cols="50" required="required" class="float-right background-white"></textarea>
+																	<textarea rows="5" cols="50" required="required" class="float-right background-white"></textarea>
 																</div>
 															</div>
 															<div class="cell">
-																<input type="submit" name="submit" class="float-right"/>
+																<input type="submit" class="float-right"/>
 															</div>
 															<div class="cell">
 																<p class="tiny">* - required field</p>

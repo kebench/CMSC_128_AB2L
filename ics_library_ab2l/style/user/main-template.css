@@ -304,14 +304,40 @@ table.fixed { table-layout:fixed; }
 table td{
 	word-wrap:break-word;
 }
+
+table tr{
+	background: url('../../images/none.png');
+	transition: all 1s;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+}
+
+table tr:hover {
+	background: url('../../images/hover.png');
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+}
+
+td{
+		text-align:center;
+}
+
 .table-button{
 	height: 2em;
-	margin-bottom: 20%;
 	position:relative;
 }
 .table-button:hover{
 	box-shadow: 5px 5px 10px #000;
-	height: 100%;
+	transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
 }
 
 .faq{
@@ -336,20 +362,62 @@ table td{
 	color: gray;
 }
 
-#navigation ul{
+#navigation > ul{
 	list-style: none;
+	position: relative;
 }
-#navigation ul li{
+
+#navigation > ul li{
 	float:left;
 	padding: 0.3em 3em 0.3em 3em;
 }
-#navigation ul a{
+#navigation > ul a{
 	color: white;
 	font-weight: bold;
 }
-#navigation ul li:hover{
+#navigation > ul li:hover{
 	transition: background 1s;
 	background:#9d261d;
+}
+
+#navigation ul ul{
+	position:absolute;
+	opacity: 0;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	width: 15em;
+	background: url('../../images/navigation.png');
+}
+
+#navigation ul li ul li{
+	float:none;
+	list-style: none;
+	position: relative;
+	top: 0.4em;
+	
+	height: 0;
+	transition: height 1s, background 1s;
+	-webkit-transition: height 1s,background 1s ;
+	-moz-transition: height 1s,background 1s;
+	-o-transition: height 1s,background 1s;
+	-ms-transition: height 1s,background 1s;
+}
+
+#navigation ul li:hover ul{
+	opacity: 1;
+}
+
+#navigation ul li:hover ul li{
+	height: 1.5em;
+	line-height: 1em;
+	transition: height 1s, background 1s;
+	-webkit-transition: height 1s,background 1s ;
+	-moz-transition: height 1s,background 1s;
+	-o-transition: height 1s,background 1s;
+	-ms-transition: height 1s,background 1s;
 }
 .center{
 	margin:0 auto;

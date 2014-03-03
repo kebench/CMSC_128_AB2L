@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>style/admin/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>style/admin/admin-style.css" media="all"/>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css">
+		<link rel="icon" href="<?php echo base_url();?>images/ics_icon.png"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
 		<script src="<?php echo base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
 		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
