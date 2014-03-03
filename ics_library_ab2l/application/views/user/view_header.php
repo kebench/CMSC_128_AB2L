@@ -39,6 +39,9 @@
 					</div>
 					<div class="width-fit float-right">
 						<div style="padding: 3px 3px 5px 3px;" class="color-black" >
+							<?php if($titlepage !== "Admin Key")
+								{
+							?>
 							<?php
 								if(!$this->session->userdata('logged_in') ){
 							?>
@@ -59,10 +62,11 @@
 								$session_data = $this->session->userdata('logged_in');
             					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
 							?>
-							(<a href='<?php echo base_url(); ?>index.php/user/controller_editprofile'>Edit Profile</a>) | <a href='<?php echo base_url(); ?>index.php/user/controller_book/user_borrowed_list'>Borrowed Books</a> | <a href='<?php echo base_url(); ?>index.php/user/controller_book/user_reserved_list'>Reserved Books</a> | <a href='<?php echo base_url(); ?>index.php/user/controller_logout'>Logout</a>
+							(<a href='<?php echo base_url(); ?>index.php/user/controller_logout'>Logout</a>)
 							</p>
 							<?php
 								}
+							}
 							?>
 						</div>
 					</div>
@@ -87,10 +91,10 @@
 							?>
 								<a href="#" id="myaccount"><li>My Account
 									<ul class="">
-										<a href=""><li>View Profile</li></a>
-										<a href=""><li>Reserved Books</li></a>
-										<a href=""><li>Borrowed Books</li></a>
-										<a href=""><li>Logout</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_editprofile"><li>View Profile</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_reserved_list"><li>Reserved Books</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_borrowed_list"><li>Borrowed Books</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_logout"><li>Logout</li></a>
 									</ul>
 								</li>
 								</a>

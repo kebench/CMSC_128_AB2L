@@ -119,9 +119,6 @@ class User_Model extends CI_Model
 
 	public function admin_key($admin_key)
 	{
-		$data = array(
-			'admin_key' => $this->admin_key
-		);
 
 		//create query to connect user login database
         $this->db->select('username, password,first_name,middle_name,last_name');

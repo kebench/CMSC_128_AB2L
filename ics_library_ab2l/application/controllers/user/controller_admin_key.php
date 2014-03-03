@@ -21,7 +21,7 @@ class Controller_admin_key extends CI_Controller {
 	        $this->load->helper(array('form','html'));
 	        $data['user'] = $this->session->userdata('logged_in');
            
-            $data['titlepage']= "ICS Library";
+            $data['titlepage']= "Admin Key";
             $this->load->view("user/view_header", $data);
             $this->load->view('user/view_admin_key'); //load view for login
             $this->load->view('user/view_footer');
