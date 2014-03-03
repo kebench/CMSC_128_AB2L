@@ -31,7 +31,8 @@ class Controller_book extends Controller_log {
 	public function get_book_data1(){
         $this->input->post('serialised_form');
         $sort_by = addslashes($this->input->post('sort_by')); 
-        $data['result_all']  = $this->model_get_list->select_all_book_info($sort_by,NULL,0,0);
+        $order_by = addslashes($this->input->post('order_by')); 
+        $data['result_all']  = $this->model_get_list->select_all_book_info($sort_by,$order_by,NULL,0,0);
 
         //configuration of the ajax pagination  library.
         $config['base_url'] = base_url().'index.php/admin/controller_book/get_book_data1';        //EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
@@ -42,7 +43,7 @@ class Controller_book extends Controller_log {
 
         $page=$this->uri->segment(4);       // splits the URI segment by /
         
-        $data['result'] = $this->model_get_list->select_all_book_info($sort_by,$data['result_all'],$config['per_page'],$page);
+        $data['result'] = $this->model_get_list->select_all_book_info($sort_by,$order_by,$data['result_all'],$config['per_page'],$page);
         $this->jquery_pagination->initialize($config);
         //$this->pagination->initialize($config);
         $data['links'] = $this->jquery_pagination->create_links();
@@ -55,15 +56,15 @@ class Controller_book extends Controller_log {
                 <thead>
                     <tr>
                         <th style'width: 5%;'>#</th>
-                        <th style='width: 10%;'>Call Number</th>
-                                        <th style='width: 10%;'>Subject</th>
-                                        <th style='width: 50%;'>Material</th>
-                                        <th style='width: 7%;'>Type</th>
-                                        <th style='width: 5%;'>Qty</th>
+                        <th style='width: 10%;'><center>Call Number</center></th>
+                                        <th style='width: 10%;'><center>Subject</center></th>
+                                        <th style='width: 50%;'><center>Material</center></th>
+                                        <th style='width: 7%;'><center>Type</center></th>
+                                        <th style='width: 5%;'><center>Qty</center></th>
                                         <th style='width: 8%;'></th>
                                         <th style='width: 8%;'></th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>";
                                     
                                         $count = 1;
