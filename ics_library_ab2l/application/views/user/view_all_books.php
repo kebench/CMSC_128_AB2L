@@ -50,9 +50,7 @@
                                               <option value="desc">Descending</option>
                                         </select>
 
-
-                                    </form></center>
-                    
+                                    </form><br/></center>
                                     <div class="panel datasheet">
                                         <div class="header text-center background-red">
                                             List of all books

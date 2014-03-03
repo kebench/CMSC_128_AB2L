@@ -16,9 +16,8 @@
                 <thead>
                     <tr>
                         <th style="width: 2%;">#</th>
-                        <th style="width: 15%;" nowrap="nowrap">Course Code</th>
-                        <th style="width: 25%;" nowrap="nowrap">Title</th>
-                        <th style="width: 22%;" nowrap="nowrap">Author</th>
+                        <th style="width: 15%;" nowrap="nowrap">Subject</th>
+                        <th style="width: 45%;" nowrap="nowrap">Material</th>
                         <th style="width: 8%;" nowrap="nowrap">Type</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Due</th>
@@ -40,15 +39,20 @@
                                     $subjects = $subjects."{$subject_list->subject}<br/>";
                                 echo "<td>".$subjects."</td>";            
                                             
-                                echo "<td>".$row->title."</td>";
-                                                                
+                                echo "<td><b>$row->title</b> <br/>";
                                 $data['multi_valued'] = $this->model_get_list->get_book_authors($row->id);
                                 $authors="";
-                                foreach($data['multi_valued'] as $authors_list)
-                                $authors = $authors."{$authors_list->author},";
-                                echo "<td>".$authors."</td>";
-                                                                
-                                echo "<td>".$row->type."</td>";
+                                foreach($data['multi_valued'] as $authors_list){
+                                    $authors = $authors."{$authors_list->author},";
+                                }
+                                echo "$authors ($row->year_of_pub)</td>";
+
+                                if ($row->type == "BOOK"){
+                                    echo "<td><center><img width = 30px height = 30px src='../../../images/type_book.png'/></center></td>";
+                                }
+                                else
+                                    //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
+                                    echo "<td><img width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
                                 echo "<td>".$row->date_borrowed."</td>";
                                 echo "<td>".$row->due_date."</td>";
                                 echo "<td>".$row->date_returned."</td>";
@@ -62,10 +66,7 @@
             </table>
             
             <div class="footer pagination">
-                <ul class="nav">
-                    <li><a href="#">Prev</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
+                
             </div>
 
         </div>
