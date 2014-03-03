@@ -1,11 +1,11 @@
 <?php
 	class Model_get_list extends CI_Model{
 
-	public function select_all_book_info($sort_by,$data, $limit,$start){
-		$query=$this->db->order_by($sort_by)->get('book');
+	public function select_all_book_info($sort_by,$order_by,$data, $limit,$start){
+		$query=$this->db->order_by($sort_by,$order_by)->get('book');
 
 		if($limit>0){	
-			$query=$this->db->order_by($sort_by)->limit($limit,$start)->get('book');
+			$query=$this->db->order_by($sort_by,$order_by)->limit($limit,$start)->get('book');
 
 		}
 

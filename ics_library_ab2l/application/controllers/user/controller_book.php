@@ -7,8 +7,13 @@ class Controller_book extends CI_Controller {
         $this->load->model('model_check_session','',TRUE);
         $this->load->helper('url');
         $this->load->library(array('form_validation','session'));
+        $this->load->library('Jquery_pagination');
+        $this->load->model('model_get_list');
+            $this->load->model('model_book');
+            $this->load->library('pagination');
     }
-	
+
+
 	public function index()
 	{
 		

@@ -31,7 +31,8 @@ class Controller_book extends Controller_log {
 	public function get_book_data1(){
         $this->input->post('serialised_form');
         $sort_by = addslashes($this->input->post('sort_by')); 
-        $data['result_all']  = $this->model_get_list->select_all_book_info($sort_by,NULL,0,0);
+        $order_by = addslashes($this->input->post('order_by')); 
+        $data['result_all']  = $this->model_get_list->select_all_book_info($sort_by,$order_by,NULL,0,0);
 
         //configuration of the ajax pagination  library.
         $config['base_url'] = base_url().'index.php/admin/controller_book/get_book_data1';        //EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
@@ -42,7 +43,7 @@ class Controller_book extends Controller_log {
 
         $page=$this->uri->segment(4);       // splits the URI segment by /
         
-        $data['result'] = $this->model_get_list->select_all_book_info($sort_by,$data['result_all'],$config['per_page'],$page);
+        $data['result'] = $this->model_get_list->select_all_book_info($sort_by,$order_by,$data['result_all'],$config['per_page'],$page);
         $this->jquery_pagination->initialize($config);
         //$this->pagination->initialize($config);
         $data['links'] = $this->jquery_pagination->create_links();
@@ -55,15 +56,15 @@ class Controller_book extends Controller_log {
                 <thead>
                     <tr>
                         <th style'width: 5%;'>#</th>
-                        <th style='width: 10%;'>Call Number</th>
-                                        <th style='width: 50%;'>Material</th>
-                                        <th style='width: 10%;'>Subject</th>
-                                        <th style='width: 7%;'>Type</th>
-                                        <th style='width: 5%;'>Qty</th>
+                        <th style='width: 10%;'><center>Call Number</center></th>
+                                        <th style='width: 10%;'><center>Subject</center></th>
+                                        <th style='width: 50%;'><center>Material</center></th>
+                                        <th style='width: 7%;'><center>Type</center></th>
+                                        <th style='width: 5%;'><center>Qty</center></th>
                                         <th style='width: 8%;'></th>
                                         <th style='width: 8%;'></th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>";
                                     
                                         $count = 1;
@@ -75,26 +76,29 @@ class Controller_book extends Controller_log {
                                             foreach($data['query1'] as $call_number_list){
                                                 $call_number .= "{$call_number_list->call_number}<br/> ";
                                             }
-                                            echo "<td>{$call_number}</td>";
-                                            echo "<td><b>{$row->title}</b>";
-                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
-                                            $authors ="";
-                                            foreach($data['query1'] as $authors_list){
-                                                $authors .= "{$authors_list->author}<br/> ";
-                                            }
-                                            echo "{$authors},{$row->year_of_pub}</td>";
+                                            echo "<td>{$call_number}</td>"; 
                                             $data['query1'] = $this->model_book->get_book_subjects($row->id);
                                             $subjects ="";
                                             foreach($data['query1'] as $subjects_list){
                                                 $subjects .= "{$subjects_list->subject}<br/> ";
                                             }
                                             echo "<td>{$subjects}</td>";
-                                            if ($row->type == "BOOK"){
-                                    echo "<td><center><img width = 30px height = 30px src='http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png'/></center></td>";
-                                }
+                                            echo "<td><b>{$row->title}</b><br/>";
+                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
+                                            $authors ="";
+                                            foreach($data['query1'] as $authors_list){
+                                                $authors .= "{$authors_list->author},";
+                                            }
+                                           	echo"{$authors} ({$row->year_of_pub})</td>";
+                                           
+                                            //image source: http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png
+			                                if ($row->type == "BOOK"){
+			                                    echo "<td><center><img width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
+			                                }
 
-                                else
-                                    echo "<td><img width = 30px height = 30px src='http://www.webweaver.nu/clipart/img/education/diploma.png' /></td>";
+			                                else
+                                           		 //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
+			                                	 echo "<td><img width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
 
                                             echo "<td>{$row->no_of_available}/{$row->quantity}</td>
@@ -238,3 +242,4 @@ class Controller_book extends Controller_log {
 
 }
  ?>
+

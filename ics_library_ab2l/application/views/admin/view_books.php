@@ -52,12 +52,16 @@ function serialize_form1()
                                         <select id = "sort_by" name ="sort_by" onchange = "get_data1();" onload = "get_data1();">
                                               <option value="id">Subject</option>
                                               <option value="id">Author</option>
-                                              <option value="title">Title</option>
+                                              <option selected="selected"value="title">Title</option>
                                               <option value="type">Type</option>
                                               <option value="no_of_available">Availability</option>
                                         </select>
+                                         <select id = "order_by" name ="order_by" onchange = "get_data1();">
+                                              <option value="asc">Ascending</option>
+                                              <option value="desc">Descending</option>
+                                        </select>
 
-                                    </form><br/></center>
+                                    </form></center>
                         <div class="panel datasheet cell">
                             <div class="header background-red">
                                 List of all books
