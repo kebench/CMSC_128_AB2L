@@ -53,13 +53,23 @@
 															</div>
 															<div class="cell">
 																<div class="col width-1of3">
-																	<label class="color-black" for="contactnum">* Contact Number:</label>
+																	<label class="color-black" for="contactnum">* Contact:</label>
 																</div>
 																<div class="col width-fill">
-																	<input type="text" id="subject" name="subject" pattern=".{1,50}" required="required" class="width-1of1 background-white float-right"/>
+																	
 																	<input type="text" id="contactnum" pattern="[0]{1}[9]{1}[0-9]{9}" required="required" class="width-1of1 background-white float-right"/>
 																</div>
 															</div>
+															<div class="cell">
+																<div class="col width-1of3">
+																	<label class="color-black" for="contactnum">* Subject:</label>
+																</div>
+																<div class="col width-fill">
+																	
+																	<input type="text" id="subject" name="subject" pattern=".{1,50}" required="required" class="width-1of1 background-white float-right"/>
+																</div>
+															</div>
+															
 															<div class="cell">
 																<div class="width-1of3">
 																	<label class="color-black" for="contactnum">*Comments/Suggestion/Inquiries:</label>

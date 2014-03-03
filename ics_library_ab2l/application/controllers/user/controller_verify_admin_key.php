@@ -35,7 +35,7 @@ class Controller_verify_admin_key extends Controller_log {
         }   
      }
  
-     function check_database($admin_key) {
+     function check_database() {
          //Field validation succeeded.  Validate against database
          $admin_key = $this->input->post('admin_key');
          //query the database
