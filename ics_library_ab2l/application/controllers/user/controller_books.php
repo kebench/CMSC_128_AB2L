@@ -83,12 +83,11 @@ class Controller_books extends CI_Controller {
                                 echo "$authors $row->year_of_pub</td>";
 
                                 if ($row->type == "BOOK"){
-                                    echo "<td><center><img width = 30px height = 30px src='http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png'/></center></td>";
+                                    echo "<td><center><img width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
                                 }
-
                                 else
-                                    echo "<td><img width = 30px height = 30px src='http://www.webweaver.nu/clipart/img/education/diploma.png' /></td>";
-
+                                    //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
+                                    echo "<td><img width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
                                 echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
                                 if($row->no_of_available != 0)

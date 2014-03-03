@@ -56,8 +56,8 @@ class Controller_book extends Controller_log {
                     <tr>
                         <th style'width: 5%;'>#</th>
                         <th style='width: 10%;'>Call Number</th>
-                                        <th style='width: 50%;'>Material</th>
                                         <th style='width: 10%;'>Subject</th>
+                                        <th style='width: 50%;'>Material</th>
                                         <th style='width: 7%;'>Type</th>
                                         <th style='width: 5%;'>Qty</th>
                                         <th style='width: 8%;'></th>
@@ -75,26 +75,29 @@ class Controller_book extends Controller_log {
                                             foreach($data['query1'] as $call_number_list){
                                                 $call_number .= "{$call_number_list->call_number}<br/> ";
                                             }
-                                            echo "<td>{$call_number}</td>";
-                                            echo "<td><b>{$row->title}</b>";
-                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
-                                            $authors ="";
-                                            foreach($data['query1'] as $authors_list){
-                                                $authors .= "{$authors_list->author}<br/> ";
-                                            }
-                                            echo "{$authors},{$row->year_of_pub}</td>";
+                                            echo "<td>{$call_number}</td>"; 
                                             $data['query1'] = $this->model_book->get_book_subjects($row->id);
                                             $subjects ="";
                                             foreach($data['query1'] as $subjects_list){
                                                 $subjects .= "{$subjects_list->subject}<br/> ";
                                             }
                                             echo "<td>{$subjects}</td>";
-                                            if ($row->type == "BOOK"){
-                                    echo "<td><center><img width = 30px height = 30px src='http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png'/></center></td>";
-                                }
+                                            echo "<td><b>{$row->title}</b><br/>";
+                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
+                                            $authors ="";
+                                            foreach($data['query1'] as $authors_list){
+                                                $authors .= "{$authors_list->author},";
+                                            }
+                                           	echo"{$authors} ({$row->year_of_pub})</td>";
+                                           
+                                            //image source: http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png
+			                                if ($row->type == "BOOK"){
+			                                    echo "<td><center><img width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
+			                                }
 
-                                else
-                                    echo "<td><img width = 30px height = 30px src='http://www.webweaver.nu/clipart/img/education/diploma.png' /></td>";
+			                                else
+                                           		 //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
+			                                	 echo "<td><img width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
 
                                             echo "<td>{$row->no_of_available}/{$row->quantity}</td>
@@ -238,3 +241,4 @@ class Controller_book extends Controller_log {
 
 }
  ?>
+
