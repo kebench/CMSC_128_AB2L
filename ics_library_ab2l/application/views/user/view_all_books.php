@@ -1,3 +1,31 @@
+<script type="text/javascript">
+        var base_url = "<?php echo base_url() ?>";
+        window.onload = get_data1;
+
+ function get_data1(){  
+        $.ajax({
+        //url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",        //EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+        url: base_url+"index.php/user/controller_books/get_book_data1",     //EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+        
+        type: 'POST',
+        async: false,
+        data: serialize_form1(),
+        success: function(result){
+            $('#change_here').html(result);
+            $('#change_here').fadeIn(1000);
+            $('#change_here').removeClass('loading');
+        }
+        });
+
+}
+
+function serialize_form1()
+{
+//  document.write(str);
+    return $("#sort_list").serialize();
+}
+</script>
+
 <div id="main-body" class="site-body">
                 <div class="site-center">
 <div class="cell body">
@@ -5,65 +33,31 @@
 								</div>
 								 <div class="col">
                                 <div class="cell">
+
+                                    <center><form method="post" id="sort_list" name="sort_list" action="<?php echo site_url("application/controllers/user/controller_books/sort_by()"); ?>">
+                                        <b> Sort List By: </b> 
+                                        <select id = "sort_by" name ="sort_by" onchange = "get_data1();" onload = "get_data1();">
+                                              <option value="id">Subject</option>
+                                              <option value="id">Author</option>
+                                              <option value="title">Title</option>
+                                              <option value="type">Type</option>
+                                              <option value="no_of_available">Availability</option>
+                                        </select>
+
+                                    </form><br/></center>
+                    
                                     <div class="panel datasheet">
                                         <div class="header text-center background-red">
                                             List of all books
                                         </div>
-                                        <table class="body fixed">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 5%;">#</th>
-                                                    <th style="width: 15%;" nowrap="nowrap">Course Code</th>
-                                                    <th style="width: 35%;" nowrap="nowrap">Title</th>
-                                                    <th style="width: 22%;" nowrap="nowrap">Author</th>
-                                                    <th style="width: 8%;" nowrap="nowrap">Type</th>
-                                                    <th style="width: 10%;" nowrap="nowrap">Availability</th>
-                                                    <th style="width: 13%;" nowrap="nowrap">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                    $count = 1;
-                                                    foreach($result as $row){
-                                                        echo "<tr>";
-                                                        echo "<td>$count</td>";
-                                                        $this->load->model('model_get_list');
-                                                        $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
-                                                        $subject="";
-                                                        foreach($data['multi_valued'] as $subject_list){
-                                                            $subject = $subject."{$subject_list->subject}<br/>";
-                                                        }
-                                                        echo "<td>".$subject."</td>";
-                                                        echo "<td>".$row->title."</td>";
-                                                        $data['multi_valued'] = $this->model_get_list->get_book_authors($row->id);
-                                                        $authors="";
-                                                        foreach($data['multi_valued'] as $authors_list){
-                                                            $authors = $authors."{$authors_list->author},";
-                                                        }
-                                                        echo "<td>".$authors."</td>";
-                                                        echo "<td>".$row->type."</td>";
-                                                        echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
-                                                        if($row->no_of_available != 0)
-                                                            echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
-                                                            <input type='submit' class='background-red table-button' value='Reserve Book'>
-                                                        </form>
-                                                        </td>";
-                                                        else
-                                                            echo "<td>No Available Book</td>";
-                                                        echo "</tr>";
-                                                        $count++;
-                                                    }
-                                                ?>
-                                </tbody>
-                                        </table>
-                                        <div class="footer pagination">
-                                            <ul class="nav">
-                                                <li><a href="#">Prev</a></li>
-                                                <li><a href="#">Next</a></li>
-                                            </ul>
+                                        <div id = "change_here">
+                                        
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+

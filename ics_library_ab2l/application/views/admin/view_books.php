@@ -1,3 +1,31 @@
+<script type="text/javascript">
+        var base_url = "<?php echo base_url() ?>";
+        window.onload = get_data1;
+
+        function get_data1(){  
+        $.ajax({
+        //url: "http://localhost/zurbano_module/index.php/controller_search_book/get_book_data",        //EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+        url: base_url+"index.php/admin/controller_book/get_book_data1",     //EDIT THIS URL IF YOU ARE USING A DIFFERENT ONE. This url refers to the path where search/get_book_data is found
+        
+        type: 'POST',
+        async: false,
+        data: serialize_form1(),
+        success: function(result){
+            $('#change_here').html(result);
+            $('#change_here').fadeIn(1000);
+            $('#change_here').removeClass('loading');
+        }
+        });
+
+}
+
+function serialize_form1()
+{
+//  document.write(str);
+    return $("#sort_list").serialize();
+}
+</script>
+
 <div id="thisbody" class="body width-fill background-white">
                     <div id="whoscell" class="cell">
                         <div class="page-header cell">
@@ -18,84 +46,24 @@
                         <?php
                             }
                         ?>
+
+                         <center><form method="post" id="sort_list" name="sort_list" action="<?php echo site_url("application/controllers/user/controller_books/sort_by()"); ?>">
+                                        <b> Sort List By: </b> 
+                                        <select id = "sort_by" name ="sort_by" onchange = "get_data1();" onload = "get_data1();">
+                                              <option value="id">Subject</option>
+                                              <option value="id">Author</option>
+                                              <option value="title">Title</option>
+                                              <option value="type">Type</option>
+                                              <option value="no_of_available">Availability</option>
+                                        </select>
+
+                                    </form><br/></center>
                         <div class="panel datasheet cell">
                             <div class="header background-red">
                                 List of all books
                             </div>
-                            <table class="body">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 3%;">#</th>
-                                        <th style="width: 10%;">Call Number</th>
-                                        <th style="width: 25%;">Title</th>
-                                        <th style="width: 15%;">Author</th>
-                                        <th style="width: 10%;">Subject</th>
-                                        <th style="width: 10%;">Year</th>
-                                        <th style="width: 15%;">Type</th>
-                                        <th style="width: 5%;">Qty</th>
-                                        <th style="width: 8%;"></th>
-                                        <th style="width: 8%;"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-
-                                        $count = 1;
-                                        foreach($query as $row){
-                                            echo "<tr>";
-                                            echo "<td>$count</td>";
-                                            $data['query1'] = $this->model_book->get_book_call_numbers($row->id);
-                                            $call_number="";
-                                            foreach($data['query1'] as $call_number_list){
-                                                $call_number .= "{$call_number_list->call_number}<br/> ";
-                                            }
-                                            echo "<td>{$call_number}</td>
-                                            <td>{$row->title}</td>";
-                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
-                                            $authors ="";
-                                            foreach($data['query1'] as $authors_list){
-                                                $authors .= "{$authors_list->author}<br/> ";
-                                            }
-                                            echo "<td>{$authors}</td>";
-                                            $data['query1'] = $this->model_book->get_book_subjects($row->id);
-                                            $subjects ="";
-                                            foreach($data['query1'] as $subjects_list){
-                                                $subjects .= "{$subjects_list->subject}<br/> ";
-                                            }
-                                            echo "<td>{$subjects}</td>";
-                                            echo "<td>{$row->year_of_pub}</td>
-                                            <td>{$row->type}</td>
-                                            <td>{$row->no_of_available}/{$row->quantity}</td>
-
-                                            <td>";
-                                            $base = base_url();
-                                                echo "<form action='$base"."index.php/admin/controller_book/edit/' method='post'>
-                                                    <input type=\"hidden\" name=\"id\" value=\"{$row->id}\" />
-                                                    <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
-                                                </form>
-                                                </td>
-                                                <td>
-                                                <form action='$base"."index.php/admin/controller_book/delete/' method='post'>
-                                                    <input type=\"hidden\"  name=\"id\" value=\"{$row->id}\" />
-                                                    <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
-                                                </form>
-                                                </td>
-                                                </tr>";
-
-
-                                            echo "</tr>";
-                                            $count++;
-                                        }
-                                        
-                                    ?>
-                                </tbody>
-                            </table>
-                            <div class="footer pagination">
-                                <ul class="nav">
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>
+                            <div id = "change_here"> </div>
+                            
                                     <form action="<?php echo base_url(); ?>index.php/admin/controller_add_books" method='post'>
                                             <input type='submit' name='add' class="float-right" value='Add Book' enabled/>
                                     </form>

@@ -1,7 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include_once("controller_log.php");
-class Controller_book extends Controller_log {
+class Controller_book extends Controller_log {   
+ function __construct(){
+            parent::__construct();
+            $this->load->helper("url");
+            $this->load->library('Jquery_pagination');
+            $this->load->model('model_get_list');
+            $this->load->model('model_book');
+            $this->load->library('pagination');
+    }
+
 	public function index()
 	{
 		//$session_user = $this->checklogin();
@@ -14,10 +23,109 @@ class Controller_book extends Controller_log {
     	$this->load->helper(array('form','html'));
 	    $this->load->view("admin/view_header",$data);
 	    $this->load->view("admin/view_aside");
-	    $this->load->view('admin/view_books', $data);
+	    $this->load->view('admin/view_books');
 	    $this->load->view("admin/view_footer");
 		
 	}
+
+	public function get_book_data1(){
+        $this->input->post('serialised_form');
+        $sort_by = addslashes($this->input->post('sort_by')); 
+        $data['result_all']  = $this->model_get_list->select_all_book_info($sort_by,NULL,0,0);
+
+        //configuration of the ajax pagination  library.
+        $config['base_url'] = base_url().'index.php/admin/controller_book/get_book_data1';        //EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
+        $config['total_rows'] = count($data['result_all']);
+        $config['per_page'] = '10';
+        $config['div'] = '#change_here';
+        $config['additional_param']  = 'serialize_form1()';
+
+        $page=$this->uri->segment(4);       // splits the URI segment by /
+        
+        $data['result'] = $this->model_get_list->select_all_book_info($sort_by,$data['result_all'],$config['per_page'],$page);
+        $this->jquery_pagination->initialize($config);
+        //$this->pagination->initialize($config);
+        $data['links'] = $this->jquery_pagination->create_links();
+        $this->print_books($data['result'],$data['links']);
+       
+    }
+
+    public function print_books($result, $links){
+		echo" <table class='body'>
+                <thead>
+                    <tr>
+                        <th style'width: 5%;'>#</th>
+                        <th style='width: 10%;'>Call Number</th>
+                                        <th style='width: 50%;'>Material</th>
+                                        <th style='width: 10%;'>Subject</th>
+                                        <th style='width: 7%;'>Type</th>
+                                        <th style='width: 5%;'>Qty</th>
+                                        <th style='width: 8%;'></th>
+                                        <th style='width: 8%;'></th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+                                    
+                                        $count = 1;
+                                        foreach($result as $row){
+                                            echo "<tr>";
+                                            echo "<td>$count</td>";
+                                            $data['query1'] = $this->model_book->get_book_call_numbers($row->id);
+                                            $call_number="";
+                                            foreach($data['query1'] as $call_number_list){
+                                                $call_number .= "{$call_number_list->call_number}<br/> ";
+                                            }
+                                            echo "<td>{$call_number}</td>";
+                                            echo "<td><b>{$row->title}</b>";
+                                            $data['query1'] = $this->model_book->get_book_authors($row->id);
+                                            $authors ="";
+                                            foreach($data['query1'] as $authors_list){
+                                                $authors .= "{$authors_list->author}<br/> ";
+                                            }
+                                            echo "{$authors},{$row->year_of_pub}</td>";
+                                            $data['query1'] = $this->model_book->get_book_subjects($row->id);
+                                            $subjects ="";
+                                            foreach($data['query1'] as $subjects_list){
+                                                $subjects .= "{$subjects_list->subject}<br/> ";
+                                            }
+                                            echo "<td>{$subjects}</td>";
+                                            if ($row->type == "BOOK"){
+                                    echo "<td><center><img width = 30px height = 30px src='http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png'/></center></td>";
+                                }
+
+                                else
+                                    echo "<td><img width = 30px height = 30px src='http://www.webweaver.nu/clipart/img/education/diploma.png' /></td>";
+
+
+                                            echo "<td>{$row->no_of_available}/{$row->quantity}</td>
+
+                                            <td>";
+                                            $base = base_url();
+                                                echo "<form action='$base"."index.php/admin/controller_book/edit/' method='post'>
+                                                    <input type=\"hidden\" name=\"id\" value=\"{$row->id}\" />
+                                                    <input type='submit' class='background-red' name='edit' value='Edit' enabled/>
+                                                </form>
+                                                </td>
+                                                <td>
+                                                <form action='$base"."index.php/admin/controller_book/delete/' method='post'>
+                                                    <input type=\"hidden\"  name=\"id\" value=\"{$row->id}\" />
+                                                    <input type='submit' name='delete' class='background-red' value='Delete' onclick=\"return confirm('Are you sure you want to delete this book entry?\\nThis cannot be undone!')\" enabled/>
+                                                </form>
+                                                </td>
+                                                </tr>";
+
+
+                                            echo "</tr>";
+                                            $count++;
+                                        }
+                                   
+                              echo"  </tbody>
+                            </table>
+                            <div class='footer pagination'>";
+                                echo $links;
+                            echo"</div>";
+
+    }
 	/*ADD BOOK FUNCTIONS*/
 	function add_book(){
 		$this->load->view("view_add_book");
