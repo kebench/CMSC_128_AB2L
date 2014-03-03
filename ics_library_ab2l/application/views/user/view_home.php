@@ -1,20 +1,3 @@
-<script>
-
-var now;
-function tabInterval(){
-	var current = jQuery.now();
-	console.log(current - now);
-	if(current - now === 1){
-		var c = $('#tabs.ul').children('.active');
-		c.removeClass('active');
-		c.next().addClass('active');
-		
-	}
-	now = current;
-		tabInterval();
-}
-</script>
-
 <div id="main-body" class="site-body" style="">
 				<div class="cell site-center" style="border-radius: 10px 10px 10px 10px;">
 				<div class="cell body">
@@ -24,11 +7,18 @@ function tabInterval(){
 									<div id="wrapper" class="width-3of5 float-left">
 								        <div class="slider-wrapper theme-default">
 								            <div id="slider" class="slider" style="height:300px">
-								                <img src="<?php echo base_url();?>images/home/uplb.jpg" data-thumb="<?php echo base_url();?>images/home/uplb.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib1.jpg" data-thumb="<?php echo base_url();?>images/home/lib1.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib2.jpg" data-thumb="<?php echo base_url();?>images/home/lib2.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/lib3.jpg" data-thumb="<?php echo base_url();?>images/home/lib3.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/ics.jpg" data-thumb="<?php echo base_url();?>images/home/ics.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/1.jpg" data-thumb="<?php echo base_url();?>images/home/1.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/2.jpg" data-thumb="<?php echo base_url();?>images/home/2.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/3.jpg" data-thumb="<?php echo base_url();?>images/home/3.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/4.jpg" data-thumb="<?php echo base_url();?>images/home/4.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/5.jpg" data-thumb="<?php echo base_url();?>images/home/5.jpg" alt=""/>
+								            	<img src="<?php echo base_url();?>images/home/6.jpg" data-thumb="<?php echo base_url();?>images/home/6.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/7.jpg" data-thumb="<?php echo base_url();?>images/home/7.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/8.jpg" data-thumb="<?php echo base_url();?>images/home/8.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/9.jpg" data-thumb="<?php echo base_url();?>images/home/9.jpg" alt=""/>
+								                <img src="<?php echo base_url();?>images/home/10.jpg" data-thumb="<?php echo base_url();?>images/home/10.jpg" alt=""/>
+								            	<img src="<?php echo base_url();?>images/home/11.jpg" data-thumb="<?php echo base_url();?>images/home/11.jpg" alt=""/>
+	
 								            </div>
 								        </div>
 								    </div>
@@ -145,7 +135,5 @@ function tabInterval(){
 <script type="text/javascript">
 $(window).ready(function() {
 	$('#slider').nivoSlider();
-	now = jQuery.now();
-	tabInterval();
 });
 </script>

@@ -14,13 +14,6 @@ class Controller_books extends CI_Controller {
         $data['titlepage'] = "View all books";
         $this->load->view("user/view_header",$data);
         $this->load->view("user/view_all_books");
-        $this->load->view("user/view_navigation");
-        if($this->session->userdata('logged_in')){
-            $this->load->view("user/view_logged_in");
-        }
-        else{
-             $this->load->view("user/view_not_logged");
-        } 
         $this->load->view("user/view_footer");
     }
 

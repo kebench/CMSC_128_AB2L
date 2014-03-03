@@ -23,6 +23,15 @@
 				background-position: 100% 100%; 
 				background-repeat:no-repeat;
 			}
+			.search_button{
+				background-image: url('<?php echo base_url(); ?>images/icn_search.png');
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				width: 2em;
+			}
+			.clear-right{
+				clear: right;
+			}
 		</style>
   		<?php
   		 if($this->session->userdata('logged_in_type')=='admin')
@@ -58,7 +67,7 @@
 							
 								else if($this->session->userdata('logged_in') ){
 							?>
-							<p style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat"><?php
+							<p class='float-left' style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat"><?php
 								$session_data = $this->session->userdata('logged_in');
             					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
 							?>
@@ -69,6 +78,19 @@
 							}
 							?>
 						</div>
+					</div>
+					<div class='clear-right'>
+							<form class='float-right'>
+								<input type='button' class='float-right search_button' style='margin: 1px 1px 1px 1px;'/>
+								<input type='search' class='background-white float-right' placeholder='Search...' placeceholder='Search...' style='margin: 1px 1px 1px 1px;'/>
+								<select class='width-fit float-right' style='margin: 1px 1px 1px 1px;'>
+									<option value='title'>Title</option>
+									<option value='author'>Author</option>
+									<option value='subject'>Subject</option>
+									<option value='year_of_pub'>Publication</option>
+									<option value='tag_name'>Tag</option>
+								</select>
+							</form>
 					</div>
 				</div>
 			</div>
