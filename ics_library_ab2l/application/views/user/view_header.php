@@ -32,15 +32,12 @@
   		<meta charset="utf-8"/>
 	</head>
 	<body>
-		<div class="width-fill" style="background-image:url('<?php echo base_url();?>images/g.jpg'); background-position: 100% 100%; background-repeat:no-repeat; background-size: cover;">
-			<div class="site-header grad b" style="height: 5px;">
-			</div>
-			<div class="site-header background-red">
+		<div class="width-fill" style="background-image:url('<?php echo base_url();?>images/g.jpg'); background-position: 100% 100%; background-repeat:no-repeat; background-size: cover;">			<div class="site-header background-red">
 				<div class="site-center">
 					<div class="cell width-1of2 float-left">
 						<img src="<?php echo base_url();?>/images/try.png"/>
 					</div>
-					<div class="width-fit grad float-right" style="border-radius: 0px 0px 5px 5px;">
+					<div class="width-fit float-right">
 						<div style="padding: 3px 3px 5px 3px;" class="color-black" >
 							<?php
 								if(!$this->session->userdata('logged_in') ){
@@ -51,6 +48,7 @@
 								<input type="submit" value="Submit" class="login float-left" style="background: #656565; color:white;"/>
 								<br/>
 								<a href="<?php echo base_url(); ?>index.php/user/controller_register" class="float-right" style="color:white;">Not yet a member? Register Here!</a></p>
+								
 							</form>
 							<?php
 								}
@@ -71,7 +69,7 @@
 				</div>
 			</div>
 			<div class="site-header" id="sticker" style="background-image:url('<?php echo base_url();?>images/navigation.png'); box-shadow: 2px 2px 10px -2px #000000;z-index: 5;">
-					<div id="navigation" class="width-5of8 center">
+					<div id="navigation" class="width-6of8 center">
 						<ul>
 							<a  href="<?php echo base_url(); ?>"><li <?php if($titlepage === "ICS Library Home") echo 'id="active"'?> >Home</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_books"><li <?php if($titlepage === "View all books") echo 'id="active"'?>>View Books</li></a>
@@ -79,6 +77,28 @@
 							<a href="<?php echo base_url(); ?>index.php/user/controller_faq"><li <?php if($titlepage === "Frequently Asked Questions") echo 'id="active"'?>>FAQs</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_contact"><li <?php if($titlepage === "Contact Us") echo 'id="active"'?>>Contacts</li></a>
 							<a href="<?php echo base_url(); ?>index.php/user/controller_stat"><li <?php if($titlepage === "Book Statistics") echo 'id="active"'?>>Statistics</li></a>
+							<?php
+								if(!$this->session->userdata('logged_in')){
+							?>
+								<a href="<?php echo base_url(); ?>index.php/user/controller_login"><li <?php if($titlepage === "Login") echo 'id="active"'?>>Login</li></a>
+							<?php
+								}
+								else{
+							?>
+								<a href="#" id="myaccount"><li>My Account
+									<ul class="">
+										<a href=""><li>View Profile</li></a>
+										<a href=""><li>Reserved Books</li></a>
+										<a href=""><li>Borrowed Books</li></a>
+										<a href=""><li>Logout</li></a>
+									</ul>
+								</li>
+								</a>
+								
+								
+							<?php
+								}
+							?>
 						</ul>
 					</div>
 			</div>

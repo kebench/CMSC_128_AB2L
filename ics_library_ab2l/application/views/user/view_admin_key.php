@@ -7,19 +7,19 @@
 	<div class="col width-fill">
 		<p style="text-align:center; font-size:1.2em">Administrator Key Verification</p>
 	</div>
-	<div id="sign" class="col">
-		<div class="col">
+	<div id="sign" class="col" >
+		<div class="col" >
 			<span>
 			<div class="color-red logerror width-fill cell"><?php echo validation_errors(); ?></div>
 		</span>
 	 <?php	$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
      echo form_open('index.php/user/controller_verify_admin_key', $attributes); ?>
      
-			<div class="cell width-1of1">
+			<div class="cell width-1of1" >
 				<div class="cell width-1of1">
 					<label for="emailuser">Administrator Key:</label>
 				</div>
-				<div class="cell width-1of1">
+				<div class="cell width-1of1" >
 					<input type="password" id="emailuser" name="admin_key" required="required" class="background-white"/>
 					<span name ="helpadminkey" class="color-red"/><span>
 				</div>

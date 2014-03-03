@@ -139,7 +139,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="adminkey" class="background-white" id = "admin_key" required placeholder="Administrator's Key"/>&nbsp;<span name="helpadminkey" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="adminkey" class="background-white" id = "admin_key" required placeholder="Administrator's Key"/><br/>&nbsp;<span name="helpadminkey" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -152,7 +152,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="fname" class="background-white" id = "fname" required placeholder="First Name"/>&nbsp;<span name="helpfname" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="fname" class="background-white" id = "fname" required placeholder="First Name"/><br/>&nbsp;<span name="helpfname" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -165,7 +165,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="minit" class="background-white" id = "minit" required placeholder="Middle Initial"/>&nbsp;<span name="helpmname" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="minit" class="background-white" id = "minit" required placeholder="Middle Initial"/><br/>&nbsp;<span name="helpmname" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -178,7 +178,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="lname" class="background-white" id = "lname" required placeholder="Last Name"/>&nbsp;<span name="helplname" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="lname" class="background-white" id = "lname" required placeholder="Last Name"/><br/>&nbsp;<span name="helplname" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -191,7 +191,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="email" name="eadd" class="background-white" id = "eadd" required placeholder="Email Address"/>&nbsp;<span name="helpemail" class="validate color-red"></span><br/>
+                                                                            <input type="email" name="eadd" class="background-white" id = "eadd" required placeholder="Email Address"/><br/>&nbsp;<span name="helpemail" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -204,7 +204,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="uname" class="background-white" id = "uname" required placeholder="Username"/>&nbsp;<span name="helpusername" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="uname" class="background-white" id = "uname" required placeholder="Username"/><br/>&nbsp;<span name="helpusername" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -217,7 +217,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="password" class="background-white" name="pass" id = "pass" required placeholder="Password"/>&nbsp;<span name="helppassword" class="validate color-red"></span><br/>
+                                                                            <input type="password" class="background-white" name="pass" id = "pass" required placeholder="Password"/><br/>&nbsp;<span name="helppassword" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -230,7 +230,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required placeholder="Confirm Password"/>&nbsp;<span name="helpcpassword" class="validate color-red"></span><br/>
+                                                                            <input type="password" class="background-white" name="cpass" id = "cpass" required placeholder="Confirm Password"/><br/>&nbsp;<span name="helpcpassword" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
