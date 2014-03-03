@@ -15,17 +15,23 @@ class Model_reservation extends CI_Model {
 		AND br.status='$status'");
 		return $query->result();
 	}
+	/*
 	
+	*/
 	/*return user account and reservation details*/
 	public function get_overdue_user_info($email){
-		$query= $this->db->query("SELECT ua.first_name, ua.middle_initial, ua.last_name, 
-		br.call_number, br.date_borrowed, br.due_date,
-		bo.title 
-		FROM book_reservation br, user_account ua, book bo
-		WHERE (br.account_number=ua.account_number
-		AND ua.email='{$email}'
-		AND bo.call_number=br.call_number
-		AND br.status='overdue')");
+		$query= $this->db->query("SELECT ua.first_name, ua.middle_initial, ua.last_name, br.call_number, br.date_borrowed, br.due_date, bo.title, bo.id
+			FROM book_reservation br, user_account ua, book bo, book_call_number bcn
+			WHERE (
+			br.account_number = ua.account_number
+			AND ua.email =  '$email'
+			AND (
+			bcn.call_number = br.call_number
+			AND bo.id = bcn.id
+			AND ua.account_number = br.account_number
+			AND br.status =  'overdue'
+			)
+			)");
 		
 		return $query->result();
 	}

@@ -60,18 +60,17 @@ class Controller_outgoing_books extends Controller_log{
                         $authors .= "{$authors_list->author}; ";
                     }
                     $message .= "Author(s): {$authors}<br />";
-//                  $message .= "Call Number: {$row->id}<br />";
                     $message .= "Date Borrowed: {$row->date_borrowed}<br />";
                     $message .= "Due Date: {$row->due_date}<br /><br />";
                 }
                 $message .= "If you've already settled your accountabilities, please ignore this message.<br />";
                 $message .= "For inquiries, please contact the ICS Library librarian.<br /><br />";
-                $message .= "Thank you!<br />ICS Library Administrator<br />";
+                $message .= "Thank you!<br />ICS Library Administrator<hr />";
+				$message .= "The ICS e-Lib will never ever ask or provide confidential account details such as your password. In case you've received messages from us asking for your password, please report them immediately to our administrators. Thank you!<br />Mag-aral ng mabuti!";
 
                 //Composing the email
-                
-                //$this->load->library('email');
                 $this->load->library('email', $config);
+				$this->email->initialize($config);
                 $this->email->set_newline("\r\n");
                 $this->email->from($from_email, $from_name);
                 $this->email->to($to); 
@@ -79,12 +78,14 @@ class Controller_outgoing_books extends Controller_log{
                 $this->email->message($message);
                 //Send the email
                 if($this->email->send()){
-                    unset($_POST['notify_all']);
                     $this->model_reservation->update_user_date_notif($account_number);
                     header("refresh:0;url=../");
-                }
+                }	
             }
+			
+            unset($_POST['notify_all']);
             $date = date("Y-m-d");
+			$session_user = $this->session->userdata('logged_in')['username'];
             $this->add_log("Admin $session_user sent notification email to all borrowers with overdue materials for $date", "Notify Users");
         }//END OF notify_all
     }

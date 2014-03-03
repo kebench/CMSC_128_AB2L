@@ -139,7 +139,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="text" name="adminkey" class="background-white" id = "admin_key" required placeholder="Administrator's Key"/><br/>&nbsp;<span name="helpadminkey" class="validate color-red"></span><br/>
+                                                                            <input type="text" name="admin_key" class="background-white" id = "admin_key" required placeholder="Administrator's Key"/><br/>&nbsp;<span name="helpadminkey" class="validate color-red"></span><br/>
                                                                         </div>
                                                                     </div>
                                                                 </div>

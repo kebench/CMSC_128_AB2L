@@ -42,7 +42,7 @@ class Controller_view_users extends Controller_log {
                  $this->email_confirm_account($_POST['account_number1']);
                  $account_num = $_POST['account_number1'];
                  $message = $account_num;
-                 //$this->call_confirm($message);
+                 $this->call_confirm($message);
              }
              unset($_POST['approve']);
          }
@@ -77,7 +77,7 @@ class Controller_view_users extends Controller_log {
          $config = array(
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
-         'smtp_port' => 25, //465
+         'smtp_port' => 465,
          'smtp_user' => 'samplemail128@gmail.com',
          'smtp_pass' => 'cmsc128ab2l',
          'mailtype'  => 'html', 
@@ -86,41 +86,45 @@ class Controller_view_users extends Controller_log {
          'newline'   => "\r\n",
          'crlf'      => "\n"
          );//config for the email
-         $subject='Re: ICS Library Account Approval';
+         $subject='Re: ICS e-Lib Account Approval';
          $from_email='samplemail128@gmail.com';
          $from_name='Sample ICS Library';
          
          //Get user account in database
          $this->load->model('model_user');
          $query['query'] = $this->model_user->get_acct($account_number);
-		 print_r($query['query'] );
+		 $username = $query['query'][0]->username;
          $first_name= $query['query'][0]->first_name;
          $mi=$query['query'][0]->middle_initial;
          $last_name=$query['query'][0]->last_name;
          $to=$query['query'][0]->email;
  
-         $message = "Dear {$first_name} {$mi}. {$last_name},<br/>";
-         $message .= "&nbsp;Your account has been approved. ";
-         $message .= "Please maximize the use of the site for your needs.<br/>";
-         $message .= "&nbsp;For inquiries, please contact the ICS Library librarian.<br/>";
-         $message .= "&nbsp;Thank you!<br/>";
-         $message .= "&nbsp;ICS Library Administrator";
-			echo $message;
+         $message = "<br />Dear {$first_name} {$mi}. {$last_name},<br/>";
+         $message .= "Your account with the following information has been approved:<br />";
+		 $message .= "<b>Name:</b> {$first_name} {$mi}. {$last_name}<br />";
+		 $message .= "<b>Email:</b> {$to}<br />";
+		 $message .= "<b>Username:</b> {$username}<br />";
+         $message .= "Please remember necessary information such as your username and password used for this account to be able to access your profile in the ICS e-Lib. Please maximize the use of the site for your needs. For inquiries, please contact the ICS Library librarian.<br/><br />";
+         $message .= "Thank you!<br/>";
+         $message .= "ICS Library Administrator<hr />";
+         $message .= "The ICS e-Lib will never ever ask or provide confidential account details such as your password. In case you've received messages from us asking for your password, please report them immediately to our administrators. Thank you!<br />Mag-aral ng mabuti!";
+		//	echo $message;
          $this->load->library('email', $config);
+		 $this->email->initialize($config);
          $this->email->set_newline("\r\n");
          $this->email->from($from_email, $from_name);
          $this->email->to($to); 
          $this->email->subject($subject);
          $this->email->message($message);
          //Send the email
-    /*     if($this->email->send()){
-             $this->load->view("admin/view_success_validate_user");
-             $this->load->model('model_user');
-             $this->model_user->approve_user($_POST['account_number1']);
-			 $session_user = $this->session->userdata('logged_in')['username'];
-             $this->add_log("Admin $session_user verified account of $account_number", "Verify User");
-         }	*/
-        }
+		if($this->email->send()){
+			$this->load->model('model_user');
+			$this->model_user->approve_user($_POST['account_number1']);
+			$session_user = $this->session->userdata('logged_in')['username'];
+			$this->add_log("Admin $session_user verified account of $account_number", "Verify User");
+			echo "<script>alert('Account of $account_number has been successfully validated! User must check email for confirmation.')</script>";
+		}	
+	}
 		
 	function deactivate(){
 		if($this->session->userdata('logged_in_type')!="admin")
@@ -131,11 +135,11 @@ class Controller_view_users extends Controller_log {
 			 $borrowed = count($this->model_reservation->show_all_user_book_reservation("borrowed"));
 			 $count = $overdue + $borrowed;
 			 if($count === 0){	//no more books at hand of users, all books are returned in th library
-             $this->load->model('model_user');
-             $this->model_user->deactivate_users();
-			 echo "<script>alert('You have successfully deactivated the accounts of all users.')</script>";
-			 $session_user = $this->session->userdata('logged_in')['username'];
-             $this->add_log("Admin $session_user deactivated all user accounts.", "Deactivate Users");
+	             $this->load->model('model_user');
+	             $this->model_user->deactivate_users();
+				 echo "<script>alert('You have successfully deactivated the accounts of all users.')</script>";
+				 $session_user = $this->session->userdata('logged_in')['username'];
+	             $this->add_log("Admin $session_user deactivated all user accounts.", "Deactivate Users");
 			 }else{
 				echo "<script>alert('You cannot deactivate all user accounts yet. Some users still have books on loan. Make sure all users have returned their borrowed materials before deactivating all user accounts.')</script>";
 			 }
