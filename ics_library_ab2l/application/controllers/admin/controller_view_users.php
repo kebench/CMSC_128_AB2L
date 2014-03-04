@@ -49,7 +49,6 @@ class Controller_view_users extends Controller_log {
      }
  
      function call_confirm($msg){
-         echo "<script>alert('You have confirmed the account of $msg')</script>";
          redirect('index.php/admin/controller_view_users/viewUser/'.$msg,'refresh');
      }
  

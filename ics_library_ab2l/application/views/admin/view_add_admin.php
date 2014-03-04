@@ -241,7 +241,7 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <input type="hidden" name="parent_key" id = "parent_key" value="<?php echo "cmsccmsc"; ?>"required/>
+                                                                            <input type="hidden" name="parent_key" id = "parent_key" value="<?php echo "{$this->session->userdata('logged_in')['username']}"; ?>"required/>
                                                                         	<input type = "submit" value = "Add Administrator"/>
                                                                         </div>
                                                                     </div>

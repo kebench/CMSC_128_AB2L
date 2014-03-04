@@ -31,11 +31,9 @@
                                         <th style="width: 15%;">Due Date</th>
                                         <th style="width: 15%;"></th>
                                         <th style="width: 15%;"></th>
-                                        <th style="width: 15%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
                                 <?php
                                     $date = date("Y-m-d");
                                     $count = 1;
@@ -47,21 +45,6 @@
                                                 <td>{$row->call_number}</td>
                                                 <td>{$row->date_borrowed}</td>
                                                 <td>{$row->due_date}</td>";
-                                        if(($row->status=="overdue") && ($row->date_notif != $date)){   //If overdue and not yet notified today
-                                            echo "<td>
-                                            <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post'>
-                                                <input type='hidden' name='email' value='{$row->email}' />
-                                                <input type='hidden' name='account_number' value='{$row->account_number}' />
-                                                <input type='submit' class='background-red' name='notify' value='Notify' enabled/>
-                                            </form></td>";
-                                        }elseif(($row->status=="overdue") && ($row->date_notif == $date)){  //If overdue and has already been notified today
-                                            echo "<td>
-                                            <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post'>
-                                                <input type='hidden' name='email' value='{$row->email}' />
-                                                <input type='hidden' name='account_number' value='{$row->account_number}' />
-                                                <input type='submit' name='notify' value='Notified' disabled/>
-                                            </form></td>";
-                                        }
                                         echo "<td><form action='$base/index.php/admin/controller_reservation/extend' method='post'>
                                                 <input type='hidden' name='res_number' value='{$row->res_number}' />
                                                 <input type='submit' class='background-red' name='extend' value='Extend' />

@@ -15,9 +15,9 @@ $holder = $this->input->post('classi');
  
  if($holder === 'student'){
     $data=array(
-    'first_name'=>strtoupper($this->input->post('fname')),
-    'middle_initial'=>strtoupper($this->input->post('minit')),
-    'last_name'=>strtoupper($this->input->post('lname')),
+    'first_name'=>ucfirst($this->input->post('fname')),
+    'middle_initial'=>ucfirst($this->input->post('minit')),
+    'last_name'=>ucfirst($this->input->post('lname')),
     
     'account_number'=>$this->input->post('stdNum'),
     
@@ -48,7 +48,7 @@ $this->db->insert('user_account',$data);
     'email'=>$this->input->post('eadd'),
     'username'=>$this->input->post('uname'),
     'status'=>'pending',
-    'password'=>sha15($this->input->post('pass'))
+    'password'=>sha1($this->input->post('pass'))
   
   );
 
