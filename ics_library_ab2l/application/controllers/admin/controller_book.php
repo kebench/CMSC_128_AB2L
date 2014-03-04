@@ -93,12 +93,12 @@ class Controller_book extends Controller_log {
                                            
                                             //image source: http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png
 			                                if ($row->type == "BOOK"){
-			                                    echo "<td><center><img width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
+			                                    echo "<td><center><img title = 'BOOK' width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
 			                                }
 
 			                                else
                                            		 //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
-			                                	 echo "<td><img width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
+			                                	 echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
 
                                             echo "<td>{$row->no_of_available}/{$row->quantity}</td>
