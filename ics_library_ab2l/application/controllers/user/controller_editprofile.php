@@ -84,7 +84,7 @@ class controller_editprofile extends CI_Controller {
        
         //check if the password is right
         if($this->form_validation->run() == FALSE) {
-           
+            $this->form_validation->set_error_delimiters('<div class="isa_error">', '</div>');
             $var = validation_errors();
             $this->session->set_flashdata('error_username1', $var);
              $this->session->set_flashdata('error_username','error');
@@ -184,7 +184,7 @@ class controller_editprofile extends CI_Controller {
        
         //check if the password is right
         if($this->form_validation->run() == FALSE) {
-           
+           $this->form_validation->set_error_delimiters('<div class="isa_error">', '</div>');
             $var = validation_errors();
             $this->session->set_flashdata('error_email1', $var);
              $this->session->set_flashdata('error_email','error');
@@ -256,7 +256,7 @@ class controller_editprofile extends CI_Controller {
        
         if($this->form_validation->run() == FALSE) {
            
-
+            $this->form_validation->set_error_delimiters('<div class="isa_error">', '</div>');
             $var = validation_errors();
             $this->session->set_flashdata('error_password1', $var);
              $this->session->set_flashdata('error_password','error');

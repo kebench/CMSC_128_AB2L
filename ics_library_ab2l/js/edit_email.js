@@ -1,7 +1,5 @@
        $( document ).ready(function(){   
        
-       
-
          
          //for checking if the new username already exist
           $('#input_email').on('blur', validate_new_email);

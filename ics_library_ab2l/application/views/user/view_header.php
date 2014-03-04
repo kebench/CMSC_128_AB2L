@@ -10,6 +10,10 @@
   		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/slider.css" type="text/css" media="screen" />
   		<link rel="stylesheet" href="<?php echo base_url(); ?>default/default.css" type="text/css" media="screen" />
   		<link rel="icon" href="<?php echo base_url(); ?>images/ics_icon.png"/>
+
+  	<!-- Source:	http://isabelcastillo.com/error-info-messages-css -->
+  		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/custom-style.css" type="text/css"  />
+
   		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
   		<script src="<?php echo  base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
