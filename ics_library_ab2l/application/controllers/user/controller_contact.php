@@ -25,6 +25,7 @@ class Controller_contact extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('sender_name', 'required');                   //form validation
         $this->form_validation->set_rules('sender_email', 'required|valid_email');
+        $this->form_validation->set_rules('contactnum', 'required');
         $this->form_validation->set_rules('subject', 'required');
         $this->form_validation->set_rules('message', 'required');
         if ($this->form_validation->run() == FALSE)
@@ -35,7 +36,7 @@ class Controller_contact extends CI_Controller {
 
         else {
         
-            echo "<script>alert('karacute');</script>";
+            //echo "<script>alert('karacute');</script>";
             $config = Array(
                'protocol' => 'smtp',
                'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -54,7 +55,7 @@ class Controller_contact extends CI_Controller {
             $this->email->to('icsuplblib@gmail.com');
             $this->email->reply_to($this->input->post('sender_email'), $this->input->post('sender_name'));
             $this->email->subject($this->input->post('subject'));
-            $this->email->message($this->input->post('message'));
+            $this->email->message($this->input->post('message')."\n\nContact Number: ".$this->input->post('contactnum'));
             
             if(! $this->email->send())
                 show_error($this->email->print_debugger());
