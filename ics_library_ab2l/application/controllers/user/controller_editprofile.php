@@ -234,7 +234,7 @@ class controller_editprofile extends CI_Controller {
     }
 
     public function email_Regex($email){
-        if (preg_match('/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./', $email) ) {
+        if (preg_match('/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}(\\.[A-Za-z]{2,})$/', $email) ) {
             return TRUE;
           } else {
             return FALSE;

@@ -46,7 +46,7 @@
                                                 echo $this->session->flashdata('error_password1'); 
                                             endif; 
                                          ?>
-                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em> (<a id = "edit_username">Edit</a>)
+                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em> <a id = "edit_username">Edit</a>
                                     
                                      
                                     <form id= 'form_username' method= 'post'  action = 'controller_editprofile/edit_username'>
@@ -62,7 +62,7 @@
                                     <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
                                     <span>College:</span><em><?php echo  $user_details->college?></em><br/>
                                     <span>Course:</span><em><?php echo  $user_details->course?></em><br/>
-                                    <span id="label_email">Email:</span><em id= "email"><?php echo  $user_details->email?></em> (<a id = "edit_email">Edit</a>)<br>
+                                    <span id="label_email">Email:</span><em id= "email"><?php echo  $user_details->email?></em> <a id = "edit_email">Edit</a><br>
 
                                      <?php
                                            
