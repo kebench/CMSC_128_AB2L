@@ -10,10 +10,16 @@
 	<div id="sign" class="col">
 		<div class="col">
 			<span>
+			<?php
+				if(validation_errors()){
+			?>
 			<div class="errormsg" style='margin: 3px 10px 3px 10px;'>
 				<div class="msgwrape">
 					<p class="color-red"><?php echo validation_errors(); ?></p>
 				</div></div>
+			<?php
+				}
+			?>
 		</span>
 	 <?php	$attributes = array('name' =>'user_login', 'id' => 'user_login');
      echo form_open('index.php/user/controller_verify_login', $attributes); ?>

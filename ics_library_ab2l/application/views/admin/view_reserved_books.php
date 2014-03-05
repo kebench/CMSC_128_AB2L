@@ -3,9 +3,15 @@
                         <div class="page-header cell">
                                         <h1>Admin <small>View Borrowed Books</small></h1>
                         </div>
+                        <div id="tabs" style="border:0px solid black; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 1em;">
+                        <ul style="border:0px solid black; border-bottom: 1px solid #aaa; border-radius: 0px;" class="background-white">
+                            <li><a href="#tabs-1">Overdue Books</a></li>
+                            <li><a href="#tabs-2">Borrowed Books</a></li>
+                        </ul>
                         <?php
                             if($overdue != NULL){
                         ?>
+                        <div id='tabs-1'>
 						<div class="panel datasheet cell">
 	                        <div class="header background-red">
 	                            List of overdue books
@@ -69,9 +75,10 @@
                                 echo "<h2 class='color-grey'>There is no currently overdue books!</h2>";
                                 echo "<hr>";
                             }
+                            echo "</div>";
                             if($query != NULL){
                         ?>
-
+                        <div id='tabs-2'>
                         <div class="panel datasheet cell">
                             <div class="header background-red">
                                 List of borrowed books
@@ -139,6 +146,12 @@
                                 echo "<hr>";
 
                             }
+                            echo "</div>";
                         ?>
 	       </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('#tabs').tabs();
+    });
+</script>
