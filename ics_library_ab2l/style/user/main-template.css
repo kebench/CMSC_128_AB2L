@@ -261,6 +261,14 @@ body{
 	box-shadow: 1px 1px 5px black;
 	margin: 0 auto;
 }
+#signbox2{
+	position: relative;
+	border-radius: 5px 5px 0 0;
+	padding: 0.3em 0.3em 0.3em 0.3em;
+	box-shadow: 1px 1px 5px black;
+	margin: 0 auto;
+	top: 6em;
+}
 
 #sign{
 	background-color: white;
@@ -429,4 +437,59 @@ td{
 
 			.login{
 				margin: 1px 3px 1px 3px;
+			}
+
+body,html{
+  				height: 100%;
+  			}
+			#main-body{
+				background-image:url('<?php echo base_url();?>images/g.jpg'); 
+				background-size: 200px 130px;
+				background-position: 100% 100%; 
+				background-repeat:no-repeat;
+				min-height: 74vh;
+			}
+			.search_button{
+				background-image: url('<?php echo base_url(); ?>images/icn_search.png');
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				width: 2em;
+			}
+			.clear-right{
+				clear: right;
+			}
+			#tabs{
+				padding: 5px 5px 5px 5px;
+			}
+			#tabs ul{
+				clear:right;
+				margin-bottom: 2.3em;
+			}
+			#tabs li{
+				float:left;
+				list-style:none;
+			}
+			#tabs div[id|='tabs']{
+				border: 1px solid #eedddd;
+				padding: 10px;
+				border-radius: 5px;
+				height: 250px;
+				overflow-y: scroll;
+			}
+			#tabs li[class='active'] a{
+				background: #b5b4b4;
+				color: black;
+			}
+
+			#tabs li a{
+				font-size: 1em;
+				padding: 5px;
+				border: 1px solid black;
+				color: white;
+				background: #656565;
+			}
+			#tabs h1[id^='news']{
+				font-size: 1.5em;
+				text-align:center;
+				margin-bottom: 1.5em;
 			}

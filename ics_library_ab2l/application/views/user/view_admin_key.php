@@ -3,7 +3,7 @@
 <div class="cell body">
 	<p class="tiny">Administrator Verification</p>
 </div>
-<div id="signbox" class="background-red width-2of5">
+<div id="signbox2" class="background-red width-2of5">
 	<div class="col width-fill">
 		<p style="text-align:center; font-size:1.2em">Administrator Key Verification</p>
 	</div>
