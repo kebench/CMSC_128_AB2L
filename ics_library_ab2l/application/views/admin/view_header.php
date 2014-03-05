@@ -56,7 +56,8 @@
 								$session_data = $this->session->userdata('logged_in');
             					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
             					?>
-					(<a href="<?php echo base_url() ?>index.php/admin/controller_logout">Logout</a>)</p>
+					(<a href="<?php echo base_url() ?>index.php/admin/controller_logout">Logout</a>)
+					<a href="<?php echo base_url() ?>index.php/admin/controller_adminmanual" class="tiny float-right" style="margin-top:1.5em;">Admin Manual</a></p>
 					</div>
 				</div>
 				<div class="col width-fill border-bottom secondary-header shadow-bottom">
