@@ -32,6 +32,9 @@ class Controller_verify_admin_key extends Controller_log {
 			redirect('index.php/admin/controller_admin_home', 'refresh');
 		   
 		   }
+           else{
+                redirect('index.php/user/controller_login', 'refresh');
+           }
         }   
      }
  
