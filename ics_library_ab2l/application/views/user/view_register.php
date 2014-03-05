@@ -115,7 +115,7 @@
                                 <div class="cell">
                                     <br/>
                                     <select id = "college" name = "college" onblur = "courseChecker()"><span name = "valCollege" class= "valClass cell color-red validmsg"></span>
-
+                                    <option value="default" disabled selected="selected">Select College</option>
                                     <option value="CA">CA</option>
                                     <option value="CAS">CAS</option>
                                     <option value="CDC">CDC</option>
@@ -149,7 +149,7 @@
                         <div class="col width-fill">
                                 <div class="cell"><br/>
                                     <select id = "course" name = "course" onfocus = "courseChecker()" >
-
+                                    
                                     </select>
                                 </div>
                             </div>
