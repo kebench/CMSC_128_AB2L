@@ -21,7 +21,6 @@
                         <th style="width: 8%;" nowrap="nowrap">Type</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Due</th>
-                        <th style="width: 13%;" nowrap="nowrap">Date Returned</th>
                     </tr>
                 </thead>
 
@@ -55,7 +54,6 @@
                                     echo "<td><img title = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
                                 echo "<td>".$row->date_borrowed."</td>";
                                 echo "<td>".$row->due_date."</td>";
-                                echo "<td>".$row->date_returned."</td>";
                             echo "</tr>";
                             
                             $count++;
