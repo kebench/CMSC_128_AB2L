@@ -77,8 +77,8 @@ class Controller_view_users extends Controller_log {
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
          'smtp_port' => 465,
-         'smtp_user' => $email,
-         'smtp_pass' => $password,
+         'smtp_user' => "$email",
+         'smtp_pass' => "$password",
          'mailtype'  => 'html', 
          'charset'   => 'utf-8',
          'wordwrap'  => true,
@@ -86,7 +86,7 @@ class Controller_view_users extends Controller_log {
          'crlf'      => "\n"
          );//config for the email
          $subject='Re: ICS e-Lib Account Approval';
-         $from_email= $email;
+         $from_email= "$email";
          $from_name='ICS e-Lib';
          
          //Get user account in database

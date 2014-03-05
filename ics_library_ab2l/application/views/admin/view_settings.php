@@ -1,6 +1,7 @@
 <script type="text/javascript">
 			window.onload=function() {
 				myform.icsmailpw1.onblur=validate_epass;
+				myform.admin_password1.onblur=validate_apass;
 				myform.onsubmit=process_add;
 			}
 					
@@ -72,7 +73,7 @@
                                 		</div>
                                 		<div class="cell"><?php echo $msg;?>
 										<div id="add" class="cell">
-											<form action="<?php echo base_url(); ?>index.php/admin/controller_settings/saveChanges" method="post">
+											<form name="myform" action="<?php echo base_url(); ?>index.php/admin/controller_settings/saveChanges" method="post">
 												<div class="cell panel" style="background: #f6f6f6; margin-top: 1.5em; border: 1px solid #9BA0AF;">
 													<div class="cell">
 													<label>ICS e-Lib Email Address: <?php echo  $email;?></label><br/>
@@ -80,9 +81,9 @@
 													<input type="email" name="icsmail" id="icsmail" placeholder="New Email" class="background-white" style="width: 95%; margin-left: 3%;" />
 													<label>ICS e-Lib Email Password: ********************</label><br/>
 													<input type="password" name="icsmailpw" id="icsmailpw" placeholder="New Password" class="background-white" style="width: 95%; margin-left: 3%;"/><br /><br/>
-													<input type="password" name="icsmailpw1" id="icsmailpw1" placeholder="Retype Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_epass" class="color-red"><br /><br/>
+													<input type="password" name="icsmailpw1" id="icsmailpw1" placeholder="Retype Password" class="background-white" style="width: 95%; margin-left: 3%;"/><br /><br/>
 													<label>Enter your Administrator Password</label><br/>
-													<input type="password" name="admin_pass" id="admin_pass" placeholder="Admin Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_epass" class="color-red"><br /><br/>
+													<input type="password" name="admin_pass" id="admin_pass" placeholder="Admin Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_epass" class="color-red"></span><br /><br/>
 													</div>
 												</div>
 												<br/><br/>
@@ -103,12 +104,12 @@
                                 		</div>
                                 		<div class="cell"><?php echo $msg1;?>
 										<div id="add" class="cell">
-											<form action="<?php echo base_url(); ?>index.php/admin/controller_settings/changeAdminPassword" method="post">
+											<form name="form" action="<?php echo base_url(); ?>index.php/admin/controller_settings/changeAdminPassword" method="post">
 												<div class="cell panel" style="background: #f6f6f6; margin-top: 1.5em; border: 1px solid #9BA0AF;">
 													<div class="cell">
 													<label>Administrator Password: ********************</label><br/>
-													<input type="password" name="admin_password" id="admin_password" placeholder="New Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_content" class="color-red"><br /><br/>
-													<input type="password" name="admin_password1" id="admin_password1" placeholder="Retype Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_content" class="color-red"><br /><br/>
+													<input type="password" name="admin_password" id="admin_password" placeholder="New Password" class="background-white" style="width: 95%; margin-left: 3%;"/><br /><br/>
+													<input type="password" name="admin_password1" id="admin_password1" placeholder="Retype Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_apass" class="color-red"></span><br /><br/>
 													<label>Current Password</label><br/>
 													<input type="password" name="admin_pass" id="admin_pass" placeholder="Current Password" class="background-white" style="width: 95%; margin-left: 3%;"/><span name="help_content" class="color-red"><br /><br/>
 													</div>

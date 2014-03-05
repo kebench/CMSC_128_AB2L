@@ -14,11 +14,9 @@
 	                            <thead>
 	                                <tr>
 	                                    <th style="width: 2%;">#</th>
-	                                    <th style="width: 10%;">Borrower's Acct No</th>
-	                                    <th style="width: 10%;">Borrower's Name</th>
-	                                    <th style="width: 10%;">Book Call Number</th>
+	                                    <th style="width: 20%;">Borrower</th>
+	                                    <th style="width: 40%;">Material</th>
 										<th style="width: 10%;">Status</th>
-										<th style="width: 10%;">Due Date</th>
 	                                    <th style="width: 10%;"></th>
 	                                    <th style="width: 10%;"></th>
 	                                </tr>
@@ -29,11 +27,19 @@
 	                                foreach($query as $row) {
 										echo "<tr>
 											<td>$count</td>
-											<td>{$row->account_number}</td>
-											<td>{$row->first_name} {$row->middle_initial} {$row->last_name}</td>
-											<td>{$row->call_number}</td>
-											<td>{$row->status}</td>
-											<td>{$row->due_date}</td>";
+											<td><b>{$row->first_name} {$row->middle_initial}{$row->last_name}</b><br/>{$row->account_number}</td>
+											<td><b>{$row->title}</b><br/>";
+
+                                                	$data['multi_valued'] = $this->model_reservation->get_book_authors($row->id);
+					                                $authors="";
+					                                foreach($data['multi_valued'] as $authors_list){
+					                                    $authors = $authors."{$authors_list->author},";
+					                                }
+					                                echo "$authors ($row->year_of_pub)<br/>
+					                                Call Number: {$row->call_number}</td>";
+
+                                                echo "</td>
+											<td>{$row->status}</td>";
 										echo "<td><form action='controller_outgoing_books/reserve/' method='post'>
 											<input type='hidden' name='res_number' value='{$row->res_number}' />
 											<input type='submit' class='background-red' name='reserve' value='Confirm' />

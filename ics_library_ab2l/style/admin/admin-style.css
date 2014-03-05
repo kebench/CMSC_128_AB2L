@@ -183,6 +183,10 @@ td{
 		text-align:center;
 }
 
+table th{
+	text-align:center;
+}
+
 table input{
 	height: 2em;
 	position:relative;

@@ -69,7 +69,7 @@
                     <li><a href="#">Next</a></li>
                 </ul>
             </div>
-			<form action='controller_view_users/deactivate' method='POST' class="float-right">
+			<form action='<?php echo base_url();?>index.php/admin/controller_view_users/deactivate' method='POST' class="float-right">
 				<input type ='submit' class='background-white' name='deactivate' value = 'Deactivate All User Accounts' onclick="confirm('Are you sure you want to deactivate all user accounts? This cannot be undone!')">
 			</form>
         </div>

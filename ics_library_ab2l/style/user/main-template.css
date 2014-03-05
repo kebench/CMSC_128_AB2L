@@ -498,13 +498,13 @@ body,html{
         font-weight:bold;
 }
 .successmsg{
-        background: url('<?php echo base_url();?>images/s.png');
+        background: url('../../images/s.png');
         border:1px solid #0f0;
         border-radius: 10px;
         margin-bottom: 3em;
     }
     .msgwraps{
-        background-image: url('<?php echo base_url(); ?>images/check.png');
+        background-image: url('../../images/check.png');
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -526,3 +526,7 @@ body,html{
     .msgwrape p{
         text-indent: 5em;
     }
+
+table th{
+	text-align:center;
+}

@@ -9,9 +9,11 @@ class Model_reservation extends CI_Model {
 	
 	/*Return necessary data from user and their conrresponding book reservations */
 	public function show_all_user_book_reservation($status){
-		$query= $this->db->query("SELECT ua.account_number, ua.first_name, ua.middle_initial, ua.last_name, ua.date_notif, br.res_number,br.call_number, br.date_borrowed, br.due_date, br.date_returned, br.status, ua.email 
-		FROM book_reservation br, user_account ua 
+		$query= $this->db->query("SELECT *
+		FROM book b, book_reservation br, user_account ua, book_call_number cn
 		WHERE br.account_number=ua.account_number
+		AND br.call_number = cn.call_number
+		AND cn.id = b.id
 		AND br.status='$status'");
 		return $query->result();
 	}

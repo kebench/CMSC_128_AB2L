@@ -55,7 +55,7 @@ class Controller_reserve_book extends CI_Controller{
 		}
 	}
 
-	function confirm_reservation(){
+	function confirm_reservation($title){
 		if($this->session->userdata('id') != FALSE && $this->session->userdata('logged_in') != FALSE){
 			$data['id'] = $this->session->userdata('id');
 			$row = $this->model_reserve_book->fetch_user($this->session->userdata('logged_in')['username']);
@@ -73,7 +73,7 @@ class Controller_reserve_book extends CI_Controller{
 				if($no_of_available > 0){
 					$this->model_reserve_book->add_reservation($data);
 					$this->session->unset_userdata('id');
-					redirect('index.php/user/controller_reserve_book/success');
+					redirect('index.php/user/controller_reserve_book/success/'.$title,'refresh');
 				}
 				else{
 					echo "<script>alert('There is not enough book available');</script>";
@@ -94,8 +94,8 @@ class Controller_reserve_book extends CI_Controller{
 		
 	}
 
-	function success(){
+	function success($title){
 		echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
-		redirect('index.php/user/controller_book/user_reserved_list','refresh');
+		redirect('index.php/user/controller_book/user_reserved_list/'.$title,'refresh');
 	}
 }

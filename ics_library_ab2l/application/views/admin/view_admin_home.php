@@ -24,13 +24,12 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 2%;">#</th>
-                                        <th style="width: 15%;">Borrower's Acct no</th>
-                                        <th style="width: 15%;">Borrower's Name</th>
-                                        <th style="width: 15%;">Book Call Number</th>
-                                        <th style="width: 15%;">Date Borrowed</th>
-                                        <th style="width: 15%;">Due Date</th>
-                                        <th style="width: 15%;"></th>
-                                        <th style="width: 15%;"></th>
+                                        <th style="width: 17%;">Borrower</th>
+                                        <th style="width: 40%;">Material</th>
+                                        <th style="width: 12%;">Date Borrowed</th>
+                                        <th style="width: 11%;">Due Date</th>
+                                        <th style="width: 9%;"></th>
+                                        <th style="width: 10%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,9 +39,18 @@
                                     foreach($overdue as $row){
                                         echo "<tr>
                                                 <td>$count</td>
-                                                <td>{$row->account_number}</td>
-                                                <td>{$row->first_name} {$row->middle_initial} {$row->last_name}</td>
-                                                <td>{$row->call_number}</td>
+                                                <td><b>{$row->first_name} {$row->middle_initial} {$row->last_name} </b><br/>{$row->account_number}</td>
+                                                <td><b>{$row->title}</b><br/>";
+
+                                                	$data['multi_valued'] = $this->model_reservation->get_book_authors($row->id);
+					                                $authors="";
+					                                foreach($data['multi_valued'] as $authors_list){
+					                                    $authors = $authors."{$authors_list->author},";
+					                                }
+					                                echo "$authors ($row->year_of_pub)<br/>
+					                                Call Number: {$row->call_number}</td>";
+
+                                                echo "</td>
                                                 <td>{$row->date_borrowed}</td>
                                                 <td>{$row->due_date}</td>";
                                         echo "<td><form action='$base/index.php/admin/controller_reservation/extend' method='post'>
@@ -91,10 +99,10 @@
 	                            <thead>
 	                                <tr>
 	                                    <th style="width: 2%;">#</th>
-	                                    <th style="width: 10%;">Borrower's Acct No</th>
-	                                    <th style="width: 10%;">Borrower's Name</th>
-	                                    <th style="width: 20%;">Book Call Number</th>
+	                                    <th style="width: 20%;">Borrower</th>
+	                                    <th style="width: 40%;">Material</th>
 										<th style="width: 10%;">Status</th>
+	                                    <th style="width: 10%;"></th>
 	                                    <th style="width: 10%;"></th>
 	                                </tr>
 	                            </thead>
@@ -104,15 +112,28 @@
 	                                foreach($reserved as $row) {
 										echo "<tr>
 											<td>$count</td>
-											<td>{$row->account_number}</td>
-											<td>{$row->first_name} {$row->middle_initial} {$row->last_name}</td>
-											<td>{$row->call_number}</td>
+											<td><b>{$row->first_name} {$row->middle_initial}{$row->last_name}</b><br/>{$row->account_number}</td>
+											<td><b>{$row->title}</b><br/>";
+
+                                                	$data['multi_valued'] = $this->model_reservation->get_book_authors($row->id);
+					                                $authors="";
+					                                foreach($data['multi_valued'] as $authors_list){
+					                                    $authors = $authors."{$authors_list->author},";
+					                                }
+					                                echo "$authors ($row->year_of_pub)<br/>
+					                                Call Number: {$row->call_number}</td>";
+
+                                                echo "</td>
 											<td>{$row->status}</td>";
 										echo "<td><form action='$base/index.php/admin/controller_outgoing_books/reserve/' method='post'>
 											<input type='hidden' name='res_number' value='{$row->res_number}' />
 											<input type='submit' class='background-red' name='reserve' value='Confirm' />
 										</form></td>";				//button to be clicked if the reservation will be approved; functionality of this not included
-										echo "</tr>";
+										echo "<td><form action='controller_outgoing_books/cancel/' method='post'>
+											<input type='hidden' name='res_number' value='{$row->res_number}' />
+											<input type='submit' class='background-red' name='cancel' value='Cancel' />
+										</form></td>";	
+										echo "</tr>";echo "</tr>";
 
 										$count++;
 									}
@@ -147,7 +168,7 @@
 				                <thead>
 				                    <tr>
 				                        <th style="width: 2%;">#</th>
-				                        <th style="width: 8%;">Student Number</th>
+				                        <th style="width: 8%;">ID Number</th>
 				                        <th style="width: 20%;">Name</th>
 				                        <th style="width: 5%;">Course</th>
 				                        <th style="width: 20%;">Email</th>
@@ -261,10 +282,10 @@
 					}
 
 
-						echo "<form action='$base/index.php/admin/controller_announcement/deleteAll/' class='float-right' style='margin-left: 5px;' method='post'>
+						echo "<form action='$base"."index.php/admin/controller_announcement/deleteAll/' class='float-right' style='margin-left: 5px;' method='post'>
 								<input type='submit' name='delete_all' value='Delete All Announcements' onclick=\"return confirm('Are you sure you want to delete all announcements?\\nThis cannot be undone!')\"enabled/>
 							</form>
-							<form action='$base/index.php/admin/controller_announcement/viewForm/' class='float-right' method='post'>
+							<form action='$base"."index.php/admin/controller_announcement/viewForm/' class='float-right' method='post'>
 								<input type='submit' name='new' value='Add New Announcement' enabled/>
 							</form>
 
