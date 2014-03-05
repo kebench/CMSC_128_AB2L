@@ -206,7 +206,7 @@ class Controller_book extends Controller_log {
 			'title' => $this->input->post('title'),
 			'year_of_pub' => $this->input->post('year_of_pub'),
 			'no_of_available' => $this->input->post('no_of_available'),
-			'type' => $this->input->post('type'),
+			'type' => strtoupper($this->input->post('type')),
 			'quantity' => sizeof($call_numbers),
 		);
 		//BUG: CHECK IF A COPY OF THE BOOK IS ON LOAN, THEN SUBTRACT NUMBER OF ON LOAN BOOKS IN QUANTITY THEN UPDATE NO. OF AVAILABLE

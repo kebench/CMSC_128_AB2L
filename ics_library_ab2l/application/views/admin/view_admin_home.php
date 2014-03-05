@@ -261,10 +261,10 @@
 					}
 
 
-						echo "<form action='$base/index.php/admin/controller_announcement/deleteAll/' class='float-right' style='margin-left: 5px;' method='post'>
+						echo "<form action='$base"."index.php/admin/controller_announcement/deleteAll/' class='float-right' style='margin-left: 5px;' method='post'>
 								<input type='submit' name='delete_all' value='Delete All Announcements' onclick=\"return confirm('Are you sure you want to delete all announcements?\\nThis cannot be undone!')\"enabled/>
 							</form>
-							<form action='$base/index.php/admin/controller_announcement/viewForm/' class='float-right' method='post'>
+							<form action='$base"."index.php/admin/controller_announcement/viewForm/' class='float-right' method='post'>
 								<input type='submit' name='new' value='Add New Announcement' enabled/>
 							</form>
 
