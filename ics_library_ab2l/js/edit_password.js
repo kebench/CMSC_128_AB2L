@@ -1,8 +1,13 @@
     var toggle="false";
        $( document ).ready(function(){   
+<<<<<<< HEAD
        if(toggle == "false"){
         $('#form_password').hide();
        }
+=======
+       
+         
+>>>>>>> a53018811cd704bc4c1464352b51b2d61923f500
          //for checking if the new username already exist
           $('#current_password').on('blur', validate_password);
            $('#new_password').on('blur', validate_new_password);
