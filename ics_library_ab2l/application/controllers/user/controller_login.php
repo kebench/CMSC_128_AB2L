@@ -21,7 +21,7 @@ class Controller_login extends CI_Controller {
 	        $this->load->helper(array('form','html'));
 	        $data['user'] = $this->session->userdata('logged_in');
            
-            $data['titlepage']= "ICS Library";
+            $data['titlepage']= "Login Page";
             $this->load->view("user/view_header", $data);
             $this->load->view('user/view_login'); //load view for login
             $this->load->view('user/view_footer');
