@@ -28,7 +28,7 @@ class Controller_add_admin extends Controller_log{
                 redirect('index.php/user/controller_login', 'refresh');
             $this->load->library('form_validation');
             // field name, error message, validation rules
-            $this->form_validation->set_rules('admin_key', 'Administrator Key', 'trim|required|alpha|xss_clean');
+            $this->form_validation->set_rules('adminkey', 'Administrator Key', 'trim|required|alpha|xss_clean');
             $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
             $this->form_validation->set_rules('minit', 'Middle Initial', 'trim|required|xss_clean');
             $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|xss_clean');
