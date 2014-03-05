@@ -12,7 +12,7 @@
 		<div class="col width-fill">
 			<div class="cell">
 				<div class="collap-links">
-				<h4 class="nav-title width-fit">Home</h4>
+				<h4 class="nav-title width-fit">HOME</h4>
 				<a class="nav-status float-right">HIDE</a>
 				</div>
 				<div>

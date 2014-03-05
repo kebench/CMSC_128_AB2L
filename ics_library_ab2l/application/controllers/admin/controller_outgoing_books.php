@@ -24,8 +24,8 @@ class Controller_outgoing_books extends Controller_log{
             'protocol'  => 'smtp',
             'smtp_host' => 'ssl://smtp.gmail.com',
             'smtp_port' => 465, //25
-            'smtp_user' => $email,
-            'smtp_pass' => $password,
+            'smtp_user' => "$email",
+            'smtp_pass' => "$password",
             'mailtype'  => 'html', 
             'charset'   => 'utf-8',
             'wordwrap'  => true,
@@ -35,7 +35,7 @@ class Controller_outgoing_books extends Controller_log{
             //$account_number=$_POST['account_number'];
             //$to=$_POST['email'];
             $subject='Re: ICS e-Lib Overdue Materials';
-            $from_email = $email;
+            $from_email = "$email";
             $from_name='ICS e-Lib';
             
             $this->load->model('model_reservation');

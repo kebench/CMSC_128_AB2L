@@ -56,13 +56,15 @@ class Controller_settings extends Controller_log {
 				else
 				{
 					include("./application/controllers/admin/controller_retrieve_email.php");
-					if(srtlen($_POST['icsmail']) > 0){
-						$new_email = $_POST["icsmail"];echo "<script>alert('1$new_email');</script>";
-					}else{	$new_email = $email;echo "<script>alert('$new_email');</script>";
+					if(strlen($_POST['icsmail']) > 0){
+						$new_email = $_POST["icsmail"];
+					}else{	
+						$new_email = $email;
 					}
 					if(strlen($_POST['icsmailpw']) > 0){
-						$new_password = $_POST["icsmailpw"];echo "<script>alert('1$new_password');</script>";
-					}else{	$new_password = $password;echo "<script>alert('$new_password');</script>";
+						$new_password = $_POST["icsmailpw"];
+					}else{
+						$new_password = $password;
 					}
 					//save content to string
 					//overwrite the text file with the new settings
@@ -82,7 +84,7 @@ class Controller_settings extends Controller_log {
 				$this->success($data); 
 			}
 		}
-        redirect('index.php/admin/controller_settings', 'refresh');
+        //redirect('index.php/admin/controller_settings', 'refresh');
     }
 	
 	public function changeAdminPassword()
@@ -121,7 +123,7 @@ class Controller_settings extends Controller_log {
 			}
 			
 		}
-        redirect('index.php/admin/controller_settings', 'refresh');
+        //redirect('index.php/admin/controller_settings', 'refresh');
     }
 
     function success($data) {
