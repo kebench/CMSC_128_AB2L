@@ -17,9 +17,9 @@ class Controller_book extends CI_Controller {
 	public function index()
 	{
 		
-		
+		$this->user_reserved_list(null);
 	}
-	public function user_reserved_list(){
+	public function user_reserved_list($title){
 		$this->load->helper(array('form','html'));
 		if($this->model_check_session->check_session() == TRUE){
 		
@@ -27,9 +27,13 @@ class Controller_book extends CI_Controller {
 		$acc = $session_data['username'];						
 		$data['title'] = $acc." :: Reserved Books";
 		$this->load->model("model_get_list");
-		
+		echo $title;
 		$data['result'] = $this->model_get_list->get_list($acc,"reserved",NULL,0,0);
 		$data['titlepage'] = "Reserved books";
+		if($title !== NULL){
+			$msg = urldecode($title);
+			$data['message'] = 'You have successfully reserved the book '.$msg;
+		}
         $this->load->view("user/view_header",$data);
         $this->load->view("user/view_reserved_books",$data);
         $this->load->view("/user/view_footer");
@@ -73,13 +77,30 @@ class Controller_book extends CI_Controller {
 	public function cancel(){
 		$res_number = $_POST['res_number'];
 		$call_number = $_POST['call_number'];
-		$id = $_POST['id'];
+		//$id = $_POST['id'];
 		$rank = $_POST['rank'];
 		$this->load->model("model_get_list");
 		$this->model_get_list->cancel_reservation($res_number);
 		$this->model_get_list->update_rank($call_number);
 		$this->model_get_list->update_available($call_number);
-		redirect('index.php/user/controller_book/user_reserved_list');
+		
+		$this->load->helper(array('form','html'));
+		if($this->model_check_session->check_session() == TRUE){
+		
+		$session_data = $this->session->userdata('logged_in');
+		$acc = $session_data['username'];						
+		$data['title'] = $acc." :: Reserved Books";
+		$this->load->model("model_get_list");
+		$data['result'] = $this->model_get_list->get_list($acc,"reserved",NULL,0,0);
+		$data['titlepage'] = "Reserved books";
+		$data['message'] = 'You cancelled your book reservation';
+        $this->load->view("user/view_header",$data);
+        $this->load->view("user/view_reserved_books",$data);
+        $this->load->view("/user/view_footer");
+        }else{
+        //If no session, redirect to login page
+            redirect('index.php/user/controller_login', 'refresh');
+        }
 	}
 
 }

@@ -14,7 +14,18 @@
 								</div>
 								 <div class="col">
                                 <div class="cell">
+                                    <?php
+                                        if(isset($message)){
+                                    ?>
+                                    <div class="successmsg" style='margin: 3px 10px 3px 10px;'>
+                                        <div class="msgwraps">
+                                            <p class="color-green">
+                                                <p><?php echo $message; ?></p></p>
+                                        </div>
+                                    </div>
                                     <?php 
+
+                                        }
                                             if($result != null){
                                         ?>
                                     <div class="panel datasheet">
@@ -37,6 +48,7 @@
                                             <tbody>
                                                 <?php
                                                     $count = 1;
+                                                    $base = base_url();
                                                     foreach($result as $row){//subject,title,author,type,status,call_number
                                                         echo "<tr>";
                                                             echo "<td>$count</td>";
@@ -56,15 +68,16 @@
                                                             echo "$authors ($row->year_of_pub)</td>";
 
                                                             if ($row->type == "BOOK"){
-                                                                echo "<td><center><img title = 'BOOK' width = 30px height = 30px src='../../../images/type_book.png'/></center></td>";
+                                                                echo "<td><center><img title = 'BOOK' width = 30px height = 30px src='$base/images/type_book.png'/></center></td>";
                                                             }
                                                             else
                                                                 //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
-                                                                echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
+                                                                echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='$base/images/type_thesis.png' /></td>";
                                                             
                                                             echo "<td>".$row->rank."</td>"; 
+                                                            
                                                             echo "<td> 
-                                                                    <form  action=\"cancel/\" method=\"post\">
+                                                                    <form  action=\"$base/index.php/user/controller_book/cancel/\" method=\"post\">
                                                                         <input type='hidden' name='res_number' value='{$row->res_number}'/>
                                                                         <input type='hidden' name='call_number' value='{$row->call_number}'/>
                                                                         <input type='hidden' name='rank' value='{$row->rank}'/>
