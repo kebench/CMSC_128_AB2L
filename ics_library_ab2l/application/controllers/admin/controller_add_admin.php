@@ -28,7 +28,7 @@ class Controller_add_admin extends Controller_log{
                 redirect('index.php/user/controller_login', 'refresh');
             $this->load->library('form_validation');
             // field name, error message, validation rules
-            $this->form_validation->set_rules('adminkey', 'Administrator Key', 'trim|required|alpha|xss_clean');
+            $this->form_validation->set_rules('adminkey', 'Administrator Key', 'trim|required|alphanumeric|xss_clean');
             $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
             $this->form_validation->set_rules('minit', 'Middle Initial', 'trim|required|xss_clean');
             $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|xss_clean');
@@ -36,19 +36,19 @@ class Controller_add_admin extends Controller_log{
             $this->form_validation->set_rules('uname', 'Username', 'trim|required|min_length[4]|alpha_dash|xss_clean');
             $this->form_validation->set_rules('pass', 'Password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric');
             $this->form_validation->set_rules('cpass', 'Password Confirmation', 'trim|required|matches[pass]');
-            $this->form_validation->set_rules('parent_key', 'Parent Key', 'trim|required|alpha|xss_clean');
+            $this->form_validation->set_rules('parent_key', 'Parent Key', 'trim|required|alphanumeric|xss_clean');
 
             if($this->form_validation->run() == FALSE){
                 echo validation_errors();
                 echo "<script>alert('ERROR!')</script>";
-                //redirect('index.php/admin/controller_add_admin','refresh');
+                redirect('index.php/admin/controller_add_admin','refresh');
             }
             else{
                 $this->model_add_admin->add_admin();
                 echo "<script>alert('You have successfully added another admin account');</script>";
 				$session_user = $this->session->userdata('logged_in')['username'];
 				$this->add_log("Admin $session_user added a new administrator.", "Add Administrator");
-                //redirect('index.php/admin/controller_book', 'refresh');
+                redirect('index.php/admin/controller_admin_home', 'refresh');
             }
         }
     }
