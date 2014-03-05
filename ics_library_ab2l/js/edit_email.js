@@ -1,7 +1,5 @@
        $( document ).ready(function(){   
        
-       
-
          
          //for checking if the new username already exist
           $('#input_email').on('blur', validate_new_email);
@@ -29,7 +27,7 @@
                     msg+="Enter a new email."
                     $("#helpemail").text(msg);
                 }
-               else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./)){
+               else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}(\\.[A-Za-z]{2,})$/)){
                     msg="invalid email.";
                     $("#helpemail").text(msg);
                 }

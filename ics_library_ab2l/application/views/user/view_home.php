@@ -13,7 +13,6 @@
 								                <img src="<?php echo base_url();?>images/home/4.jpg" data-thumb="<?php echo base_url();?>images/home/4.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/5.jpg" data-thumb="<?php echo base_url();?>images/home/5.jpg" alt=""/>
 								            	<img src="<?php echo base_url();?>images/home/6.jpg" data-thumb="<?php echo base_url();?>images/home/6.jpg" alt=""/>
-								                <img src="<?php echo base_url();?>images/home/7.jpg" data-thumb="<?php echo base_url();?>images/home/7.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/8.jpg" data-thumb="<?php echo base_url();?>images/home/8.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/9.jpg" data-thumb="<?php echo base_url();?>images/home/9.jpg" alt=""/>
 								                <img src="<?php echo base_url();?>images/home/10.jpg" data-thumb="<?php echo base_url();?>images/home/10.jpg" alt=""/>

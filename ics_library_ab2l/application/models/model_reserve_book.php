@@ -128,7 +128,6 @@
 				);
 			$this->db->insert('book_reservation', $newdata);
 
-			$no_of_available--;
 			$book_stat++;
 			$newdata2 = array(
 				'no_of_available' => $no_of_available,

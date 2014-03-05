@@ -75,7 +75,7 @@
 																	<label class="color-black" for="message">*Comments/Suggestion/Inquiries:</label>
 																</div>
 																<div class="col">
-																	<textarea name="message" rows="5" cols="50" required="required" class="float-right background-white"></textarea>
+																	<textarea name="message" rows="5" cols="50" required="required" class="float-right width-5of6 background-white"></textarea>
 																</div>
 															</div>
 															<div class="cell">

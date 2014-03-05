@@ -43,7 +43,7 @@
 						<option value="tag_name">Tag</option>
 					</select>
 					<input type="text" required="required" placeholder="Search..." class="form-elements background-white" id="sinput" name="sinput" onkeyup="autosuggest(this.value, category.value, 'user');" />
-					<input type="button" value="Basic Search" class="form-elements" onclick="get_data1('user');"/><br/><br/><br/>
+					<input type="button" value="Basic Search" class="form-elements" onclick="get_data('user', 'search_form');"/><br/><br/><br/>
 					<div class="autosuggest" id="autosuggest_list"></div>
 				</form>
 			</div>
@@ -111,7 +111,7 @@
 						</div>
 					</div>
 					<div class="cell width-1of3">
-						<input type="button" value="Advanced Search" class="form-elements" onclick="get_data2('user');" />
+						<input type="button" value="Advanced Search" class="form-elements" onclick="get_data('user', 'search2_form');" />
 					</div>
 				</form>
 			</div>

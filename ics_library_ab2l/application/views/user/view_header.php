@@ -10,6 +10,10 @@
   		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/slider.css" type="text/css" media="screen" />
   		<link rel="stylesheet" href="<?php echo base_url(); ?>default/default.css" type="text/css" media="screen" />
   		<link rel="icon" href="<?php echo base_url(); ?>images/ics_icon.png"/>
+
+  	<!-- Source:	http://isabelcastillo.com/error-info-messages-css -->
+  		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/custom-style.css" type="text/css"  />
+
   		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
   		<script src="<?php echo  base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
@@ -57,7 +61,7 @@
 							<form action='<?php echo base_url(); ?>index.php/user/controller_verify_login' method="POST">
 								<input type="text" placeholder="Username" name="username" required="required" class="login float-left background-white"/>
 								<input type="password" placeholder="Password" name="password" required="required" class="login float-left background-white"/>
-								<input type="submit" value="Submit" class="login float-left" style="background: #656565; color:white;"/>
+								<input type="submit" value="Login" class="login float-left" style="background: #656565; color:white;"/>
 								<br/>
 								<a href="<?php echo base_url(); ?>index.php/user/controller_register" class="float-right" style="color:white;">Not yet a member? Register Here!</a></p>
 								
@@ -79,19 +83,7 @@
 							?>
 						</div>
 					</div>
-					<div class='clear-right'>
-							<form class='float-right'>
-								<input type='button' class='float-right search_button' style='margin: 1px 1px 1px 1px;'/>
-								<input type='search' class='background-white float-right' placeholder='Search...' placeceholder='Search...' style='margin: 1px 1px 1px 1px;'/>
-								<select class='width-fit float-right' style='margin: 1px 1px 1px 1px;'>
-									<option value='title'>Title</option>
-									<option value='author'>Author</option>
-									<option value='subject'>Subject</option>
-									<option value='year_of_pub'>Publication</option>
-									<option value='tag_name'>Tag</option>
-								</select>
-							</form>
-					</div>
+					
 				</div>
 			</div>
 			<div class="site-header" id="sticker" style="background-image:url('<?php echo base_url();?>images/navigation.png'); box-shadow: 2px 2px 10px -2px #000000;z-index: 5;">

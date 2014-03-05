@@ -89,7 +89,8 @@ class Controller_books extends CI_Controller {
                                             <input type='submit' class='background-red table-button' value='Reserve Book'>                                                       </form>
                                         </td>";
                                 else
-                                    echo "<td>No Available Book</td>";
+                                    echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
+                                            <input type='submit' class='background-red table-button' value='Waitlist'></td>";
                                 
                                 echo "</tr>";
                         $count++;

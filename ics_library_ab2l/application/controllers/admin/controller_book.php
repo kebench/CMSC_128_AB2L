@@ -145,7 +145,7 @@ class Controller_book extends Controller_log {
 			$author = array_unique ($_POST['author']);
 			$subject = array_unique ($_POST['subject']);
 			$year_of_pub = htmlspecialchars($_POST['year_of_pub']);
-			$type = htmlspecialchars($_POST['type1']);
+			$type = strtoupper ($_POST['type1']);
 			$quantity = sizeof($call_number);
 			$no_of_available = $quantity;
 			$book_stat = 0;
@@ -199,16 +199,17 @@ class Controller_book extends Controller_log {
             redirect('index.php/user/controller_login', 'refresh');
 		$this->load->model('model_book');
 		$id = $this->input->post('id');
+		$call_numbers = array_unique ($this->input->post('call_number'));
+		$book_authors = array_unique ($this->input->post('author'));
+		$book_subjects = array_unique ($this->input->post('subject'));
 		$book = array(
 			'title' => $this->input->post('title'),
 			'year_of_pub' => $this->input->post('year_of_pub'),
 			'no_of_available' => $this->input->post('no_of_available'),
 			'type' => $this->input->post('type'),
-			'quantity' => $this->input->post('quantity'),
+			'quantity' => sizeof($call_numbers),
 		);
-		$call_numbers = array_unique ($this->input->post('call_number'));
-		$book_authors = array_unique ($this->input->post('author'));
-		$book_subjects = array_unique ($this->input->post('subject'));
+		//BUG: CHECK IF A COPY OF THE BOOK IS ON LOAN, THEN SUBTRACT NUMBER OF ON LOAN BOOKS IN QUANTITY THEN UPDATE NO. OF AVAILABLE
 		$this->model_book->edit_book($id, $book, $call_numbers, $book_authors, $book_subjects);
 		$this->add_log("Admin $session_user updated book with ID Number: $id", "Update Book");
 		$this->edit_success();

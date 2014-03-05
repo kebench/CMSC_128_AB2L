@@ -46,6 +46,8 @@ class Controller_add_admin extends Controller_log{
             else{
                 $this->model_add_admin->add_admin();
                 echo "<script>alert('You have successfully added another admin account');</script>";
+				$session_user = $this->session->userdata('logged_in')['username'];
+				$this->add_log("Admin $session_user added a new administrator.", "Add Administrator");
                 //redirect('index.php/admin/controller_book', 'refresh');
             }
         }

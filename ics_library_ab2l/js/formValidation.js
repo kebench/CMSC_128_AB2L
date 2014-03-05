@@ -100,7 +100,7 @@
 				msg="Invalid Input: ";
 			
 				if (str=="") msg+="Email is required!";
-				else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}\./))  msg+="Must be in the form: name@domain.extension!<br/>";
+				else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}(\\.[A-Za-z]{2,})$\./))  msg+="Must be in the form: name@domain.extension!<br/>";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valEmail")[0].innerHTML=msg;
 				if(msg=="") return true;

@@ -26,13 +26,27 @@
                                     <div class="cell">
                                         <?php echo validation_errors();
                                             if ($this->session->flashdata('success_username') != ''): 
-                                                echo "<p>".$this->session->flashdata('success_username')."</p>"; 
+                                                echo "<div class= 'isa_success'>".$this->session->flashdata('success_username')."</div>"; 
                                             endif;   
                                             if ($this->session->flashdata('error_username1') != ''): 
                                                 echo $this->session->flashdata('error_username1'); 
                                             endif; 
+
+                                             if ($this->session->flashdata('success_email') != ''): 
+                                                echo "<div class= 'isa_success'>".$this->session->flashdata('success_email')."</div>"; 
+                                            endif;   
+                                            if ($this->session->flashdata('error_email1') != ''): 
+                                                echo $this->session->flashdata('error_email1'); 
+                                            endif; 
+
+                                              if ($this->session->flashdata('success_password') != ''): 
+                                                echo "<div class = 'isa_success'>".$this->session->flashdata('success_password')."</div>"; 
+                                            endif;   
+                                            if ($this->session->flashdata('error_password1') != ''): 
+                                                echo $this->session->flashdata('error_password1'); 
+                                            endif; 
                                          ?>
-                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em> (<a id = "edit_username">Edit</a>)
+                                    <span id="label_username">Username:</span><em id= "username"><?php echo  $user_details->username?></em> <a id = "edit_username">Edit</a>
                                     
                                      
                                     <form id= 'form_username' method= 'post'  action = 'controller_editprofile/edit_username'>
@@ -48,15 +62,10 @@
                                     <span>Classification:</span><em><?php echo  $user_details->classification?></em><br/>
                                     <span>College:</span><em><?php echo  $user_details->college?></em><br/>
                                     <span>Course:</span><em><?php echo  $user_details->course?></em><br/>
-                                    <span id="label_email">Email:</span><em id= "email"><?php echo  $user_details->email?></em> (<a id = "edit_email">Edit</a>)<br>
+                                    <span id="label_email">Email:</span><em id= "email"><?php echo  $user_details->email?></em> <a id = "edit_email">Edit</a><br>
 
-                                     <?php echo validation_errors();
-                                            if ($this->session->flashdata('success_email') != ''): 
-                                                echo "<p>".$this->session->flashdata('success_email')."</p>"; 
-                                            endif;   
-                                            if ($this->session->flashdata('error_email1') != ''): 
-                                                echo $this->session->flashdata('error_email1'); 
-                                            endif; 
+                                     <?php
+                                           
                                          ?>
                                     <form id= 'form_email' method= 'post' action = 'controller_editprofile/edit_email'>
                                     <span id="label_email1">Email Address:</span><input type = 'text' id= 'input_email'name = 'new_email' value="<?php echo  $user_details->email?>" required><span id = "helpemail"></span><br>
@@ -66,22 +75,15 @@
                                     </form>
                                     
                                     <span>Status:</span><em><?php echo  $user_details->status?></em><br/>
-                                    <a>Change Password</a>
-                                    <?php echo validation_errors();
-                                            if ($this->session->flashdata('success_password') != ''): 
-                                                echo "<p>".$this->session->flashdata('success_password')."</p>"; 
-                                            endif;   
-                                            if ($this->session->flashdata('error_password1') != ''): 
-                                                echo $this->session->flashdata('error_password1'); 
-                                            endif; 
-                                         ?>
+                                    <a id ="edit_password">Change Password</a>
+                                 
                                      <form id= 'form_password' method= 'post' action = 'controller_editprofile/edit_password'>
                                    
-                                    <span>Enter current password:</span><input type= 'password' id ='current_password' class="background-white" name ='current_password' required><br>
-                                    <span>Enter new password:</span><input type= 'password' id ='new_password' class="background-white" name ='new_password' required><br>
-                                    <span>Confirm password:</span><input type= 'password' id ='confirm_password' class="background-white" name ='confirm_password' required><br>
+                                    <span>Enter current password:</span><input type= 'password' id ='current_password' class="background-white" name ='current_password' required><span id = "helppassword" class = "color-red"></span><br>
+                                    <span>Enter new password:</span><input type= 'password' id ='new_password' class="background-white" name ='new_password' required><span id = "helpnewpassword" class = "color-red"></span><br>
+                                    <span>Confirm password:</span><input type= 'password' id ='confirm_password' class="background-white" name ='confirm_password' required><span id = "helpcpassword" class = "color-red"></span><br>
                                      <input type='button' id = "cancel_password" value= 'Cancel'>
-                                    <input type='submit'  onclick= "return  validate_password()" value= 'Save'><br/><br/>
+                                    <input type='submit'  onclick= "return  validate_passwords()" value= 'Save'><br/><br/>
                             
 
                                     </div>
@@ -104,9 +106,12 @@
   
     error_email = "<?php echo $this->session->flashdata('error_email')?>";
  
+    error_password = "<?php echo $this->session->flashdata('error_password')?>";
+    success_password= "<?php echo $this->session->flashdata('success_password')?>"
 
 
      </script>
 
 <script src="<?php echo  base_url() ?>js/edit_username.js"></script>
 <script src="<?php echo  base_url() ?>js/edit_email.js"></script>
+<script src="<?php echo  base_url() ?>js/edit_password.js"></script>

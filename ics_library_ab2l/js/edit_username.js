@@ -25,6 +25,14 @@
                 $("#edit_email").hide();
 
           }
+                     if(error_password!= ""){
+                  $('#form_password').show();
+                  toggle= true;
+          }
+        else{
+                  $('#form_password').hide();
+                  toggle= false;
+          }
 
          //if the edit username is clicked, the form for updating the username will be visible
          $("#edit_username").click(function(){
@@ -42,10 +50,9 @@
          $("#cancel_username").click(function(){
 
             $('#form_username').slideUp();
-            $("#label_username").text("Username:");
-            $("#username").show();
-            $("#edit_username").show();
-
+              $("#label_username").text("Username:");
+                $("#username").show();
+                $("#edit_username").show();
         });
          //for checking if the new username already exist
           $('#input_username').on('blur', validate_new_un);

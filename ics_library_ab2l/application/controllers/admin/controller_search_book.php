@@ -44,10 +44,11 @@ class Controller_search_book extends CI_Controller {
 		if($this->input->post('subject')!=="") $data['subject'] = addslashes($this->input->post('subject'));
 		if($this->input->post('tag_name')!=="") $data['tag_name'] = addslashes($this->input->post('tag_name'));
 		
+
 		// getting the number of rows for of a query for computing the total row
 		$row_number=$this->model_search_book->fetch_book_data($data,0,0);
 		//configuration of the ajax pagination  library.
-		$config['base_url'] = base_url().'index.php/admin/controller_search_book/get_book_data';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
+		$config['base_url'] = base_url().'index.php/user/controller_search_book/get_book_data';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
 		$config['total_rows'] = $row_number->num_rows();
 		$config['per_page'] = '10';
 		$config['div'] = '#list_area';

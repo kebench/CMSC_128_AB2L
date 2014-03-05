@@ -31,50 +31,30 @@ class Controller_search_book extends CI_Controller {
 		}
 	}
 
-	public function get_book_data2(){
+	public function refreshpage(){
+		redirect('index.php/user/controller_search_book', 'refresh');
+	}
+
+	public function get_book_data(){
 		$this->input->post('serialised_form');
-		//since input from the form are passed as an empty string, there is no good in using isSet() function
+		//input declaration using POST in form
+		$data['str'] = addslashes($this->input->post('sinput'));
+		$data['category'] = addslashes($this->input->post('category'));
 		if($this->input->post('title')!=="") $data['title'] = addslashes($this->input->post('title'));
 		if($this->input->post('author')!=="") $data['author'] = addslashes($this->input->post('author'));
 		if($this->input->post('year_of_pub')!=="") $data['year_of_pub'] = addslashes($this->input->post('year_of_pub'));
 		if($this->input->post('subject')!=="") $data['subject'] = addslashes($this->input->post('subject'));
 		if($this->input->post('tag_name')!=="") $data['tag_name'] = addslashes($this->input->post('tag_name'));
-		$data['str'] = "";
 		
+
 		// getting the number of rows for of a query for computing the total row
 		$row_number=$this->model_search_book->fetch_book_data($data,0,0);
 		//configuration of the ajax pagination  library.
-		$config['base_url'] = base_url().'index.php/user/controller_search_book/get_book_data2';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
+		$config['base_url'] = base_url().'index.php/user/controller_search_book/get_book_data';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
 		$config['total_rows'] = $row_number->num_rows();
-		$config['per_page'] = '5';
+		$config['per_page'] = '10';
 		$config['div'] = '#list_area';
-		$config['additional_param']  = 'serialize_form2()';
-		$page=$this->uri->segment(4);		// splits the URI segment by /
-		//fetches data from database.
-		$row = $this->model_search_book->fetch_book_data($data,$config['per_page'],$page);
-		$this->print_books($row);
-		//initialize the configuration of the ajax_pagination
-		$this->jquery_pagination->initialize($config);
-		//$this->pagination->initialize($config);
-		//create links for pagination
-		echo $this->jquery_pagination->create_links();
-		//echo $this->pagination->create_links();
-
-	}
-
-	public function get_book_data1(){
-		$this->input->post('serialised_form');
-		//input declaration using POST in form
-		$data['str'] = addslashes($this->input->post('sinput'));
-		$data['category'] = addslashes($this->input->post('category'));
-		// getting the number of rows for of a query for computing the total row
-		$row_number=$this->model_search_book->fetch_book_data($data,0,0);
-		//configuration of the ajax pagination  library.
-		$config['base_url'] = base_url().'index.php/user/controller_search_book/get_book_data1';		//EDIT THIS BASE_URL IF YOU ARE USING A DIFFERENT URL. 
-		$config['total_rows'] = $row_number->num_rows();
-		$config['per_page'] = '5';
-		$config['div'] = '#list_area';
-		$config['additional_param']  = 'serialize_form1()';
+		$config['additional_param']  = 'serialize_form()';
 		$page=$this->uri->segment(4);		// splits the URI segment by /
 		//fetches data from database.
 		$row = $this->model_search_book->fetch_book_data($data,$config['per_page'],$page);
@@ -128,7 +108,9 @@ class Controller_search_book extends CI_Controller {
 					if($book_details->no_of_available == 0){	//if book is not available
 						//put the transaction code here
 						//WAITLIST TRANSACTION CODE HERE
-						echo"NOT AVAILABLE";
+						echo"<form action='controller_reserve_book/verify_login/$book_details->id' method='post'>
+							<input type='submit' class='background-red style='font-size: 1.5em;' value='Waitlist'/>
+						</form>";
 					}else{	
 						//and if book is available
 						//RESERVE TRANSACTION CODE HERE
