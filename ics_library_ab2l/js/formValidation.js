@@ -20,7 +20,7 @@
 		msg="Invalid Input: ";
 		
 		if (str=="") msg+="First name is required!";
-		else if (!str.match(/^[A-Za-z|\s]{3,50}$/))  msg+="Must be between 3-50 alpha character!<br/>";
+		else if (!str.match(/^[A-Za-z|\s]{2,50}$/))  msg+="Must be between 2-50 alpha character!<br/>";
 		else if(msg="Invalid input") msg="";
 		document.getElementsByName("valFname")[0].innerHTML=msg;
 		if(msg=="") return true;
@@ -95,12 +95,12 @@
 				if(msg=="") return true;
 			}	
 			
-	function validateEmail(){
+function validateEmail(){
 				str=regForm.eadd.value;
-				msg="Invalid Input: ";
+				msg="";
 			
-				if (str=="") msg+="Email is required!";
-				else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}(\\.[A-Za-z]{2,})$\./))  msg+="Must be in the form: name@domain.extension!<br/>";
+				if (str=="") msg+="Required";
+				else if (!str.match( /^[A-Za-z][A-Za-z-0-9_]{3,20}@[A-Za-z]{3,8}\.[A-Za-z]{3,5}$/))  msg+="put at least 2 chars before @";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valEmail")[0].innerHTML=msg;
 				if(msg=="") return true;

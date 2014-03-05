@@ -27,7 +27,7 @@
                     msg+="Enter a new email."
                     $("#helpemail").text(msg);
                 }
-               else if (!str.match(/^(\w|\.){6,30}\@([0,9]|[a-z]|[A-Z]){3,}(\\.[A-Za-z]{2,})$/)){
+               else if (!str.match(/^[A-Za-z][A-Za-z-0-9_]{3,20}@[A-Za-z]{3,8}\.[A-Za-z]{3,5}$/)){
                     msg="invalid email.";
                     $("#helpemail").text(msg);
                 }

@@ -13,22 +13,10 @@
                                                 <div class="cell">
                                                     <div class="width-fill" style="font-weight: bold;"><p>
                                                         <?php 
-                                                            if(isset($msg)){
-                                                                if($msg === "You successfully registered an account. You may proceed to ICS library to activate it!"){
-                                                                    echo "<div class='successmsg'>
-                                                                            <div class='cell msgwraps color-green'>
-                                                                                <p>$msg</p>
-                                                                            </div>
-                                                                        </div>";
-                                                                }
-                                                                else{
-                                                                     echo "<div class='errormsg'>
-                                                                        <div class='cell msgwrape color-red'>
-                                                                            <p>$msg</p>
-                                                                        </div>
-                                                                    </div>";
-                                                                }
-                                                             }
+                                                            
+                                                            if(isset($msg))    
+                                                            echo $msg;
+                                                            
 
                                                      ?></p>
                                                     </div>

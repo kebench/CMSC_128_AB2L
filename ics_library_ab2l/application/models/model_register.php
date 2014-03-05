@@ -32,7 +32,7 @@ $holder = $this->input->post('classi');
   
   );
 $this->db->insert('user_account',$data);
-  echo "ADDED STUDENT!";    
+    
  }
  else{
    $data=array(
