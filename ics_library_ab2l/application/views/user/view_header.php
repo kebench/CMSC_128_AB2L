@@ -15,17 +15,20 @@
   		<link rel="stylesheet" href="<?php echo base_url(); ?>style/user/custom-style.css" type="text/css"  />
 
   		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/edit.css" media="all"/>
-  		<script src="<?php echo  base_url() ?>js/module/jquery/jquery-2.0.3.min.js"></script>
+  		<script src="<?php echo  base_url() ?>js/jquery-1.10.2.min.js"></script>
   		<script src="<?php echo  base_url() ?>js/jquery-ui.js"></script>
   		<script src="<?php echo  base_url() ?>js/main.js"></script>
   		<meta name="viewport" content="width=device-width"/>
   		<style type="text/css">
-  			
+  			body,html{
+  				height: 100%;
+  			}
 			#main-body{
 				background-image:url('<?php echo base_url();?>images/g.jpg'); 
 				background-size: 200px 130px;
 				background-position: 100% 100%; 
 				background-repeat:no-repeat;
+				min-height: 74vh;
 			}
 			.search_button{
 				background-image: url('<?php echo base_url(); ?>images/icn_search.png');
@@ -36,16 +39,54 @@
 			.clear-right{
 				clear: right;
 			}
+			#tabs{
+				padding: 5px 5px 5px 5px;
+			}
+			#tabs ul{
+				clear:right;
+				margin-bottom: 2.3em;
+			}
+			#tabs li{
+				float:left;
+				list-style:none;
+			}
+			#tabs div[id|='tabs']{
+				border: 1px solid #eedddd;
+				padding: 10px;
+				border-radius: 5px;
+				height: 250px;
+				overflow-y: scroll;
+			}
+			#tabs li[class='active'] a{
+				background: #b5b4b4;
+				color: black;
+			}
+
+			#tabs li a{
+				font-size: 1em;
+				padding: 5px;
+				border: 1px solid black;
+				color: white;
+				background: #656565;
+			}
+			#tabs h1[id^='news']{
+				font-size: 1.5em;
+				text-align:center;
+				margin-bottom: 1.5em;
+			}
 		</style>
   		<?php
   		 if($this->session->userdata('logged_in_type')=='admin')
             				redirect('index.php/admin/controller_announcement', 'refresh');
           ?>
-          <script type="text/javascript">var base_url= "<?php echo  base_url() ?>"</script>
+          <script type="text/javascript">
+
+          var base_url= "<?php echo  base_url() ?>"</script>
   		<meta charset="utf-8"/>
 	</head>
 	<body>
-		<div class="width-fill" style="background-image:url('<?php echo base_url();?>images/g.jpg'); background-position: 100% 100%; background-repeat:no-repeat; background-size: cover;">			<div class="site-header background-red">
+		<div class="width-fill" style="height:100vh;">			
+			<div class="site-header background-red">
 				<div class="site-center">
 					<div class="cell width-1of2 float-left">
 						<img src="<?php echo base_url();?>/images/try.png"/>
@@ -71,7 +112,7 @@
 							
 								else if($this->session->userdata('logged_in') ){
 							?>
-							<p class='float-left' style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat"><?php
+							<p class='float-left' style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat;"><?php
 								$session_data = $this->session->userdata('logged_in');
             					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
 							?>

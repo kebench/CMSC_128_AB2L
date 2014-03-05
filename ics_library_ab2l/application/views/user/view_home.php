@@ -22,19 +22,15 @@
 								        </div>
 								    </div>
 
-
-
 									<div class="col width-2of5 float-left">
-		                                <div class="cell panel" style="box-shadow: 3px 2px 10px -2px #000000;">
+		                                <div class="cell panel">
 		                                	<div class="header" style="background:#656565;">
 		                                		<h4 id="news" style="color:white;">News and Updates</h4>
 		                                	</div>
 		                                    <div class="body">
 		                                        <div class="cell">
-		                                            <div class="col">
-		                                                <div class="cell tab-block top-nav">
-		                                                    <div class="tabs">
-		                                                        <ul class="nav">
+		                                                    <div id="tabs" class="tabs_rotate">
+																<ul class="background-white">
 		                                                        	
 		                                                        	<?php
 
@@ -71,11 +67,7 @@
 																	?>
 		                                                            
 		                                                        </ul>
-		                
-		                                                    <div class="tab-content">
-		                                                 
-
-		                                                      <?php
+																<?php
 
 																$counter = 0;
 																$count = 1;
@@ -105,12 +97,12 @@
 
 																			if($count==1){
 																				echo "<div class=\"cell\" id=\"tabs-".$count."\">";
-																			echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
+																			echo "<h1 id = \"news1\">{$info[$row1]['title']}</h1>";
 																			echo "<p>{$info[$row1]['content']}</p><br/>";
 																			echo "</div>";
 																		}else{
-																			echo "<div class=\"cell hidden-tab\" id=\"tabs-".$count."\">";
-																			echo "<h4 id = \"news1\">{$info[$row1]['title']}</h3>";
+																			echo "<div class=\"cell\" id=\"tabs-".$count."\">";
+																			echo "<h1 id = \"news$count\">{$info[$row1]['title']}</h1>";
 																			echo "<p>{$info[$row1]['content']}</p><br/>";
 																			echo "</div>";
 																		}
@@ -119,9 +111,7 @@
 																	}
 																}
 																?>
-																</div>
-		                                                    </div>
-		                                                </div>
+															</div>
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -131,8 +121,17 @@
 </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/slider/jquery.nivo.slider.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.tabslet.min.js"></script>
 <script type="text/javascript">
 $(window).ready(function() {
 	$('#slider').nivoSlider();
 });
+$(document).ready(function() {
+	$('.tabs_rotate').tabslet({
+	autorotate: true,
+	delay: 15000,
+	active:1,
+	animation:true
+	});
+	});
 </script>
