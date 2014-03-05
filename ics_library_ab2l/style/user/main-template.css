@@ -474,7 +474,6 @@ body,html{
 				padding: 10px;
 				border-radius: 5px;
 				height: 250px;
-				overflow-y: scroll;
 			}
 			#tabs li[class='active'] a{
 				background: #b5b4b4;
