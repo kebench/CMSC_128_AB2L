@@ -513,13 +513,13 @@ body,html{
     }
 
     .errormsg{
-        background: url('<?php echo base_url();?>images/e.png');
+        background: url('../../images/e.png');
         border:1px solid #F00;
         border-radius: 10px;
         margin-bottom: 3em;
     }
     .msgwrape{
-        background-image: url('<?php echo base_url(); ?>images/x.png');
+        background-image: url('../../images/x.png');
         background-size: contain;
         background-repeat: no-repeat;
     }
