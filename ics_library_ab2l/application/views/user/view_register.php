@@ -15,15 +15,25 @@
                                                         <?php 
                                                             if(isset($msg)){
                                                                 if($msg === "You successfully registered an account. You may proceed to ICS library to activate it!"){
-                                                                    echo "<div class='color-green'>$msg</div>";
+                                                                    echo "<div class='successmsg'>
+                                                                            <div class='cell msgwraps color-green'>
+                                                                                <p>$msg</p>
+                                                                            </div>
+                                                                        </div>";
                                                                 }
                                                                 else{
-                                                                     echo "<div class='color-red'>$msg</div>";
+                                                                     echo "<div class='errormsg'>
+                                                                        <div class='cell msgwrape color-red'>
+                                                                            <p>$msg</p>
+                                                                        </div>
+                                                                    </div>";
                                                                 }
                                                              }
 
                                                      ?></p>
                                                     </div>
+                        
+                        
                          <?php 
                         $attributes = array('name' => 'regForm');
 

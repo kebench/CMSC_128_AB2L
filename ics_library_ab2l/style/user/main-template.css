@@ -497,3 +497,32 @@ body,html{
         color: red;
         font-weight:bold;
 }
+.successmsg{
+        background: url('<?php echo base_url();?>images/s.png');
+        border:1px solid #0f0;
+        border-radius: 10px;
+        margin-bottom: 3em;
+    }
+    .msgwraps{
+        background-image: url('<?php echo base_url(); ?>images/check.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .msgwraps p{
+        text-indent: 5em;
+    }
+
+    .errormsg{
+        background: url('<?php echo base_url();?>images/e.png');
+        border:1px solid #F00;
+        border-radius: 10px;
+        margin-bottom: 3em;
+    }
+    .msgwrape{
+        background-image: url('<?php echo base_url(); ?>images/x.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .msgwrape p{
+        text-indent: 5em;
+    }
