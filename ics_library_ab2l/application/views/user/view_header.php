@@ -93,7 +93,7 @@
 					</div>
 					<div class="width-fit float-right">
 						<div style="padding: 3px 3px 5px 3px;" class="color-black" >
-							<?php if($titlepage !== "Admin Key" AND $title !== "Login Page")
+							<?php if($titlepage !== "Admin Key" AND $titlepage !== "Login Page")
 								{
 							?>
 							<?php
