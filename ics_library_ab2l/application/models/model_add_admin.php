@@ -31,5 +31,18 @@ public function add_admin()
     $query = $this->db->get_where('admin_account', array('username' => $username));
     return $query->row_array();
   }
+  
+  public function change_password($username, $password){
+	$data=array(
+		'password'=>$password 
+    );
+	$query = $this->db->where('username', $username);
+	$this->db->update('admin_account', $data);
+  }
+  
+  public function check_password($username){
+	$query = $this->db->get_where('admin_account', array('username' => $username));
+    return $query->row_array();
+  }
 }
 ?>

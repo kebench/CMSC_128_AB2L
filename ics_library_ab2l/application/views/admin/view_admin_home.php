@@ -65,7 +65,7 @@
                                     <li><a href="#">Next</a></li>
                                 </ul>
                             </div>
-                                <form action='$base/index.php/admin/controller_outgoing_books/send_email' method='post' class="float-right">
+                                <form action="controller_outgoing_books/send_email" method='post' class="float-right">
                                    <input type='submit' name='notify_all' value='Notify All' enabled/>
                                 </form>
 	                    </div>

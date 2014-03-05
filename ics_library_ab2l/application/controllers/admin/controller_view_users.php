@@ -72,13 +72,13 @@ class Controller_view_users extends Controller_log {
      function email_confirm_account($account_number){  
         if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
-         
+		include("./application/controllers/admin/controller_retrieve_email.php");
          $config = array(
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
          'smtp_port' => 465,
-         'smtp_user' => 'samplemail128@gmail.com',
-         'smtp_pass' => 'cmsc128ab2l',
+         'smtp_user' => $email,
+         'smtp_pass' => $password,
          'mailtype'  => 'html', 
          'charset'   => 'utf-8',
          'wordwrap'  => true,
@@ -86,8 +86,8 @@ class Controller_view_users extends Controller_log {
          'crlf'      => "\n"
          );//config for the email
          $subject='Re: ICS e-Lib Account Approval';
-         $from_email='samplemail128@gmail.com';
-         $from_name='Sample ICS Library';
+         $from_email= $email;
+         $from_name='ICS e-Lib';
          
          //Get user account in database
          $this->load->model('model_user');
@@ -106,7 +106,7 @@ class Controller_view_users extends Controller_log {
          $message .= "Please remember necessary information such as your username and password used for this account to be able to access your profile in the ICS e-Lib. Please maximize the use of the site for your needs. For inquiries, please contact the ICS Library librarian.<br/><br />";
          $message .= "Thank you!<br/>";
          $message .= "ICS Library Administrator<hr />";
-         $message .= "The ICS e-Lib will never ever ask or provide confidential account details such as your password. In case you've received messages from us asking for your password, please report them immediately to our administrators. Thank you!<br />Mag-aral ng mabuti!";
+         $message .= "The ICS e-Lib will never ask or provide confidential account details such as your password. In case you've received messages from us asking for your password, please report them immediately to our administrators. Thank you!<br />Mag-aral ng mabuti!";
 		//	echo $message;
          $this->load->library('email', $config);
 		 $this->email->initialize($config);
@@ -120,7 +120,7 @@ class Controller_view_users extends Controller_log {
 			$this->load->model('model_user');
 			$this->model_user->approve_user($_POST['account_number1']);
 			$session_user = $this->session->userdata('logged_in')['username'];
-			$this->add_log("Admin $session_user verified account of $account_number", "Verify User");
+			$this->add_log("Admin $session_user verified account of $account_number.", "Verify User");
 			echo "<script>alert('Account of $account_number has been successfully validated! User must check email for confirmation.')</script>";
 		}	
 	}

@@ -5,7 +5,9 @@
                         </div>
 						<div class="panel datasheet cell">
 	                        <div class="header background-red">
-	                            List of all Logs &nbsp; <!--<a class="float-right" href="<?php echo base_url();?>index.php/admin/controller_log/today"><button style="font-size: 10px;">View Today's Log</button></a>-->
+	                            List of all Logs &nbsp; 
+								<a class="float-right" href="<?php echo base_url();?>index.php/admin/controller_log/today"><button style="font-size: 10px;">View Today's Logs</button></a>
+								<a class="float-right" href="<?php echo base_url();?>index.php/admin/controller_log"><button style="font-size: 10px;">View All Logs</button></a>
 	                        </div>
 	                        <table class="body">
                                 <thead s>
