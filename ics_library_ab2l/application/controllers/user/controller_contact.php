@@ -35,14 +35,14 @@ class Controller_contact extends CI_Controller {
         }
 
         else {
-        
+        include("./application/controllers/admin/controller_retrieve_email.php");
             //echo "<script>alert('karacute');</script>";
             $config = Array(
                'protocol' => 'smtp',
                'smtp_host' => 'ssl://smtp.googlemail.com',
                'smtp_port' => 465,
-               'smtp_user' => 'icsuplblib@gmail.com',
-               'smtp_pass' => 'cmsc128ab2l',
+               'smtp_user' => $email,
+               'smtp_pass' => "$password",
                'mailtype'  => 'text', 
                 'charset'   => 'iso-8859-1'
             ); 
@@ -52,7 +52,7 @@ class Controller_contact extends CI_Controller {
             $this->load->library('form_validation'); 
         
             $this->email->from($this->input->post('sender_email'), $this->input->post('sender_name'));      // set email data
-            $this->email->to('icsuplblib@gmail.com');
+            $this->email->to($email);
             $this->email->reply_to($this->input->post('sender_email'), $this->input->post('sender_name'));
             $this->email->subject($this->input->post('subject'));
             $this->email->message($this->input->post('message')."\n\nContact Number: ".$this->input->post('contactnum'));

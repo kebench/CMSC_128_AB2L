@@ -22,7 +22,7 @@
 												</div>
 												<div class="cell justify">
 													<h5>Website:</h5>
-													<p class="color-black">www.ics.uplb.edu.ph</p>
+													<p class="color-black"><a href="http://www.ics.uplb.edu.ph">www.ics.uplb.edu.ph</a></p>
 												</div>
 											</div>
 										</div>
