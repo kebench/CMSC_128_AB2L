@@ -97,9 +97,9 @@
 			
 function validateEmail(){
 				str=regForm.eadd.value;
-				msg="";
+				msg="Invalid Input: ";
 			
-				if (str=="") msg+="Required";
+				if (str=="") msg+="Email is required";
 				else if (!str.match( /^[A-Za-z][A-Za-z-0-9\._]{3,20}@[A-Za-z]{3,8}\.[A-Za-z]{3,5}$/))  msg+="put at least 2 chars before @";
 				else if(msg="Invalid input") msg="";
 				document.getElementsByName("valEmail")[0].innerHTML=msg;
