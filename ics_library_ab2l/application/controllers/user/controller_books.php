@@ -42,7 +42,7 @@ class Controller_books extends CI_Controller {
     }
 
     public function print_books($result,$links){
-        echo" <table class='body fixed' width = '100px' height = '400px'>
+        echo" <table class='body fixed'>
                 <thead>
                     <tr>
                         <th style='width: 3%;''>#</th>

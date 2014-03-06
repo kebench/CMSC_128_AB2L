@@ -8,7 +8,7 @@ class Controller_add_books extends CI_Controller {
     	$data['parent'] = "Books";
     	$data['current'] = "Add Books";
     	if($msg != null)
-    		$data['message'] = "You have successfully added the book ".$msg;
+    		$data['message'] = "<span class='color-green'>You have successfully added the book: $msg</span>";
 
     	$this->load->helper(array('form','html'));
 	    $this->load->view("admin/view_header",$data);

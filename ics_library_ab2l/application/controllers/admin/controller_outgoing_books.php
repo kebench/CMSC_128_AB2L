@@ -107,7 +107,12 @@ class Controller_outgoing_books extends Controller_log{
     public function reserve(){
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
-        $this->model_reservation->update_book_reservation($res_number, "reserved");
+        if($this->model_reservation->count_user_reservation($res_number) < 3)
+			$this->model_reservation->update_book_reservation($res_number, "reserved");
+		else{
+			echo "<script>alert('Maximum number of allowable books to be borrowed has been reached! Please return other books on hand to be able to borrow new books again.')</script>";
+			$this->model_reservation->delete_book_reservation($res_number);
+		}
 		redirect('index.php/admin/controller_reservation','refresh');
     }//END OF reserve()
     
