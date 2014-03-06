@@ -3,6 +3,7 @@ class Controller_search_book extends CI_Controller {
  	function __construct(){
 		parent::__construct();
 		$this->load->model('model_search_book');
+		$this->load->model('model_reserve_book');
 		$this->load->library('Jquery_pagination');
 		$this->load->library('pagination');
 	}
@@ -122,9 +123,12 @@ class Controller_search_book extends CI_Controller {
 				                                //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
 				                                echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
-				                            echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
-				                            if($row->no_of_available != 0)
-				                                echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
+				                            $row2 = $this->model_reserve_book->fetch_breservation2($row->id);
+				                            $available = $row->no_of_available - $row2->num_rows();
+				                            echo "<td>".$available. "/" . $row->quantity."</td>";
+
+											if($row->no_of_available > $row2->num_rows())
+				                               echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
 				                                        <input type='submit' class='background-red table-button' value='Reserve Book'>                                                       </form>
 				                                    </td>";
 				                            else
