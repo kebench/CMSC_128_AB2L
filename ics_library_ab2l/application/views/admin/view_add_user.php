@@ -13,12 +13,8 @@
                                             <div class="body">
                                                 <div class="cell">
                                                     <div class="color-red width-fill" style="font-weight: bold;"><p>
-                                                        <?php 
-                                                            if(isset($msg)){
-                                                                echo $msg;
-                                                             }
-
-                                                     ?></p>
+                                                      
+                                                      </p>
                                                     </div>
                                                     <div class="col">
                                                         <div class="cell">
@@ -37,7 +33,7 @@
                          <?php 
                         $attributes = array('name' => 'regForm');
 
-                        echo form_open("index.php/user/controller_register/registration", $attributes); ?>
+                        echo form_open("index.php/admin/controller_add_user/registration", $attributes); ?>
                         <div class="col">
                             <div class="col width-1of4">
                                 <div class="cell">

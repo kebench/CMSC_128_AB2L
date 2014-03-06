@@ -12,7 +12,9 @@
 			<span>
 			<div class="color-red logerror width-fill cell"><?php echo validation_errors(); ?></div>
 		</span>
-	 <?php	$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
+	 <?php
+	 	echo validation_errors();
+	 	$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
      echo form_open('index.php/user/controller_verify_admin_key', $attributes); ?>
      
 			<div class="cell width-1of1" >
