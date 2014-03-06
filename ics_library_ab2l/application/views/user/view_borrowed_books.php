@@ -80,7 +80,7 @@
                 <?php
                  if($result2 != null){
             ?>
-        
+        <br/>
         <div class="panel datasheet">
             <div class="header text-center background-red">
                 <?php echo $header2; ?>
@@ -126,7 +126,7 @@
                                 }
                                 else
                                     //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
-                                    echo "<td><imgtitle = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
+                                    echo "<td><img title = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
                                 echo "<td>".$row->date_borrowed."</td>";
                                 echo "<td>".$row->due_date."</td>";
                                 echo "<td>".$row->date_returned."</td>";
@@ -157,6 +157,7 @@
                  if($result3 != null){
             ?>
         
+        <br/>
         <div class="panel datasheet">
             <div class="header text-center background-red">
                 <?php echo $header3; ?>
