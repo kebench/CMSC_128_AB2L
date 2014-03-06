@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>User Manual</title>
+		<title>Admin Manual</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css"><!--source: http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css-->
@@ -87,7 +87,7 @@ var Alert = new CustomAlert();
 	<div id="dialogoverlay"></div>
 		<div id="dialogbox">
 		<div>
-			<div id="dialogboxhead">USER MANUAL</div>
+			<div id="dialogboxhead">ADMINISTRATOR MANUAL</div>
 			<div id="dialogboxbody">
 		<a name="top"></a>
 		<h2>Privileges</h2>

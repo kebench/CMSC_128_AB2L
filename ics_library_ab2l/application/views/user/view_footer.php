@@ -6,6 +6,7 @@
 		                        <ul  class="nav col width-fill">
 		                        	<li class="color-black">&#169 2013 ICS UPLB</li>
 		                            <li><a href="<?php echo base_url(); ?>">ICS Library System</a></li>
+		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_about">About</a></li>
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_search_book">Search</a></li>
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_faq">FAQ</a></li>
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_contact">Contact</a></li>
