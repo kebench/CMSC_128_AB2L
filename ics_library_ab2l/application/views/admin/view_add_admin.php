@@ -67,7 +67,7 @@
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
-                                                                            <label for="firstname">Middle name<span class="color-red"> *</span></label>
+                                                                            <label for="firstname">Middle initial<span class="color-red"> *</span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col width-fill">

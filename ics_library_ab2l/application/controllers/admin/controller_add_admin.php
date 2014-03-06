@@ -21,6 +21,12 @@ class Controller_add_admin extends Controller_log{
         $this->load->view("admin/view_add_admin");
         $this->load->view("admin/view_footer");
     }
+	
+	public function alpha_space($str){
+       $this->form_validation->set_message('alpha_space', 'Invalid input.');
+      return(! preg_match("/^([-a-z\ \-])+$/i", $str))? FALSE: TRUE;
+
+    }
     
     function registration(){
         if($this->model_check_session->check_admin_session() == TRUE){
@@ -29,9 +35,9 @@ class Controller_add_admin extends Controller_log{
             $this->load->library('form_validation');
             // field name, error message, validation rules
             $this->form_validation->set_rules('adminkey', 'Administrator Key', 'trim|required|alphanumeric|xss_clean');
-            $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
+            $this->form_validation->set_rules('fname', 'First Name', 'trim|required|callback_alpha_space|xss_clean');
             $this->form_validation->set_rules('minit', 'Middle Initial', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|xss_clean');
+            $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|callback_alpha_space|xss_clean');
             $this->form_validation->set_rules('eadd', 'Your Email', 'trim|required|valid_email');
             $this->form_validation->set_rules('uname', 'Username', 'trim|required|min_length[4]|alpha_dash|xss_clean');
             $this->form_validation->set_rules('pass', 'Password', 'trim|required|min_length[5]|max_length[32]|alpha_numeric');

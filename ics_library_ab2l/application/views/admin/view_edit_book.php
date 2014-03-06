@@ -4,6 +4,7 @@
                             myform.title1.onblur=validate_title;
                             myform.author.onblur=validate_author;
                             myform.subject.onblur=validate_subject;
+                            myform.isbn.onblur=validate_isbn_key();
                             myform.year_of_pub.onblur=validate_year_pub;
                             myform.quantity.onblur=validate_quantity;
                             myform.onsubmit=process_add;
@@ -27,6 +28,29 @@
                             document.getElementsByName("help_call_number")[0].innerHTML=msg;
                             if(msg=="")
                                 return true;
+                        }
+
+                        function validate_isbn_key(){
+                            msg="Invalid input: ";
+                            str=myform.isbn.value;
+
+                            if(str=="")
+                                msg+="ISBN is required!<br/>";
+                            if( String(x).search(/^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/) != -1
+&&( str<0000000000001 || str>99999999999999 ))
+                                msg+="Must be numbers only and 13 digits.<br/>";
+                            if(msg=="Invalid input: ")
+                            msg="";
+                            else {
+                                document.getElementsByName("help_isbn_key")[0].style.fontSize="10px";
+                                document.getElementsByName("help_isbn_key")[0].style.fontFamily="verdana";
+                                document.getElementsByName("help_isbn_key")[0].style.color="red";
+                            }
+                            document.getElementsByName("help_call_number")[0].innerHTML=msg;
+                            if(msg=="")
+                                return true;
+  
+                            
                         }
 
                         function validate_title() {
@@ -130,7 +154,7 @@
                         
                         
                         function process_add() {
-                            if (validate_call_no() && validate_title() && validate_author() && validate_subject() && validate_year_pub() && validate_quantity()) {
+                            if (validate_call_no() && validate_isbn_key() && validate_title() && validate_author() && validate_subject() && validate_year_pub() && validate_quantity()) {
                                 <?php
                                     if(isset($_POST['submit'])){
                                         
@@ -316,6 +340,20 @@
                                                                     </div>
                                                                 </div>
 
+                                                                <div class="col">
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="isbn">ISBN<span class="color-red"></span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" id="isbn" name = "isbn" placeholder="ISBN" value="<?php echo $book[0]->isbn;?>">&nbsp;
+                                                                            <br/><span name="help_isbn_key" class="color-red"></span><br/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                  <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">

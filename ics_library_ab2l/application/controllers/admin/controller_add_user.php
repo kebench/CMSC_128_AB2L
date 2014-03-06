@@ -18,6 +18,12 @@ class Controller_add_user extends CI_Controller {
 	        $this->load->view("admin/view_add_user");
 	        $this->load->view("admin/view_footer");
     }
+	
+	public function alpha_space($str){
+       $this->form_validation->set_message('alpha_space', 'Invalid input.');
+      return(! preg_match("/^([-a-z\ \-])+$/i", $str))? FALSE: TRUE;
+
+    }
 
     public function registration()
     {
@@ -26,11 +32,11 @@ class Controller_add_user extends CI_Controller {
               redirect('index.php/user/controller_login', 'refresh');
             $this->load->library('form_validation');
             // field name, error message, validation rules
-           $this->form_validation->set_rules('fname', 'First Name', 'trim|required|alpha|xss_clean');
+           $this->form_validation->set_rules('fname', 'First Name', 'trim|required|callback_alpha_space|xss_clean');
           $this->form_validation->set_rules('minit', 'Middle Initial', 'trim|required|xss_clean');
-          $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|alpha|xss_clean');
+          $this->form_validation->set_rules('lname', 'Last Name', 'trim|required|callback_alpha_space|xss_clean');
 
-           $this->form_validation->set_rules('stdNum', 'Student Number', 'trim|required|min_length[10]|alpha_dash|xss_clean');
+           $this->form_validation->set_rules('stdNum', 'Student Number', 'trim|required|min_length[10]|max_length[32]|alpha_dash|xss_clean');
           $this->form_validation->set_rules('college', 'College', 'trim|min_length[2]|alpha|xss_clean');
           $this->form_validation->set_rules('course', 'Course', 'trim|min_length[3]|xss_clean');
           $this->form_validation->set_rules('classi', 'Classification', 'trim|alpha|xss_clean');

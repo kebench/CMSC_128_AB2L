@@ -21,19 +21,19 @@ class Model_book extends CI_Model {
 	}
 	
 	/*ADD Book*/
-	public function insert_book_info($call_number, $title, $year_of_pub, $type, $no_of_available, $quantity, $book_stat, $author, $subject){
-	$this->db->query("INSERT INTO book values(default, '$title', '$year_of_pub', '$type', $no_of_available, $quantity, $book_stat)");
+	public function insert_book_info($call_number, $title, $year_of_pub, $isbn, $type, $no_of_available, $quantity, $book_stat, $author, $subject){
+	$this->db->query("INSERT INTO book values(default, '$title', '$year_of_pub', '$type', $no_of_available, $quantity, $book_stat, $isbn)");
 
 
 	foreach ($author as $value) {
 			$this->db->query("INSERT INTO book_author values((SELECT max(id) FROM book), '$value')");
 		}
-		foreach ($subject as $value2) {
-			$this->db->query("INSERT INTO book_subject values((SELECT max(id) FROM book), '$value2')");
-		}
-		foreach ($call_number as $value3) {
-			$this->db->query("INSERT INTO book_call_number values((SELECT max(id) FROM book), '$value3')");
-		}
+	foreach ($subject as $value2) {
+		$this->db->query("INSERT INTO book_subject values((SELECT max(id) FROM book), '$value2')");
+	}
+	foreach ($call_number as $value3) {
+		$this->db->query("INSERT INTO book_call_number values((SELECT max(id) FROM book), '$value3')");
+	}
 	
 	}
 	
