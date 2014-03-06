@@ -7,6 +7,8 @@ class Controller_view_users extends Controller_log {
     }
 
     function viewUser($msg){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $this->load->model('model_users');
         $data['results']=$this->model_users->getAllUsers();
         $data['parent'] = "Users";
@@ -22,6 +24,8 @@ class Controller_view_users extends Controller_log {
     }
 
     function search_user(){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $this->load->model('model_users');
         $data['results']=$this->model_users->userSearch($this->input->post('s_user'));
         $data['parent'] = "Users";

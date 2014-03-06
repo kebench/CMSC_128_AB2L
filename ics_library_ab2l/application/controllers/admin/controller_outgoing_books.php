@@ -91,13 +91,19 @@ class Controller_outgoing_books extends Controller_log{
     }
     
     public function extend(){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "extend");
+		$session_user = $this->session->userdata('logged_in')['username'];
+            $this->add_log("Admin $session_user extended a book reservation with Reservation Number: $res_number", "Extend Reservation");
         redirect('index.php/admin/controller_reservation','refresh');
     }//END OF extend()
     
     public function return_book(){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->update_book_reservation($res_number, "returned");
@@ -105,11 +111,15 @@ class Controller_outgoing_books extends Controller_log{
     }//END OF return_book()
     
     public function reserve(){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
-        if($this->model_reservation->count_user_reservation($res_number) < 3)
+        if($this->model_reservation->count_user_reservation($res_number) < 3){
 			$this->model_reservation->update_book_reservation($res_number, "reserved");
-		else{
+			$session_user = $this->session->userdata('logged_in')['username'];
+            $this->add_log("Admin $session_user confirmed a book reservation with Reservation Number: $res_number", "Confirm Reservation");
+		}else{
 			echo "<script>alert('Maximum number of allowable books to be borrowed has been reached! Please return other books on hand to be able to borrow new books again.')</script>";
 			$this->model_reservation->delete_book_reservation($res_number);
 		}
@@ -117,6 +127,8 @@ class Controller_outgoing_books extends Controller_log{
     }//END OF reserve()
     
     public function cancel(){
+		if($this->session->userdata('logged_in_type')!="admin")
+                redirect('index.php/user/controller_login', 'refresh');
         $res_number=$_POST['res_number'];
         $this->load->model('model_reservation');
         $this->model_reservation->delete_book_reservation($res_number);
