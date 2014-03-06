@@ -115,7 +115,7 @@
 			<li>TThe privilege of the administrator to approve user accounts is necessary in the development and usage of the system because approved account is their prerequisite to borrow any books in the library. 
 			<li>The requirements for approval of account are: UPLB Validated ID or Employee ID, Form 5 for the current semester (for students only)</li>
 			<li>There will be a queue of pending user accounts. There will be a button for the approval of each account. Upon clicking the button, a pop-up message will appear for the assurance of accepting the account as valid one. After the confirmation, this will automatically send a notification to email of the user. </li>
-</li>
+
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>
@@ -135,7 +135,7 @@
 			<li>The privilege of the administrator to add and update announcements is only an added feature but it is very useful to the visitors and users for them to know what are the updates on the library especially its books.</li>
 			<li>There is a maximum of 5 announcements that will be made available. </li>
 			<li>The posted announcements will appear in the home page, visible for visitors and authenticated users. </li>
-			<li>The administrator is allowed to not put any announcements. <li>
+			<li>The administrator is allowed to not put any announcements. </li>
 			<li>Once he/she reaches the maximum limit of announcements, the system will overwrite the oldest announcement.The first posted announcement will be automatically deleted. The recent announcements will appear chronologically.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
@@ -164,7 +164,7 @@
 		<span>Add Books</span>
 		<ul>
 			<li>The privilege of the administrator to add new books increase the interests of the users to borrow since the list of books is expanding. </li>
-			<li> The administrator needs to fill up necessary information about the book. It will not let the administrator submit it unless all the values entered are correct and all required fields have filled in. <li>
+			<li> The administrator needs to fill up necessary information about the book. It will not let the administrator submit it unless all the values entered are correct and all required fields have filled in. </li>
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
@@ -175,7 +175,7 @@
 		<ul> 
 			<li>The privilege of the administrator to update information about the book is necessary in the development and usage of the system for the maintenance of evolution of the books available.</li>
 			<li>Every book has a corresponding button for edit function. </li>
-			<li>Upon clicking the update button, all previous details will be shown up and it is up to the administrator what details to edit. Validation of field will also be observed. A pop-up message will appear to show assurance of saving all changes he/she made. After this, all data entered will be automatically saved in the database.<li>
+			<li>Upon clicking the update button, all previous details will be shown up and it is up to the administrator what details to edit. Validation of field will also be observed. A pop-up message will appear to show assurance of saving all changes he/she made. After this, all data entered will be automatically saved in the database.</li>
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
@@ -186,7 +186,7 @@
 		<ul> 
 			<li>The privilege of the administrator to delete book is necessary when the book is already obsolete or if a book in the library already has no copy available.</li>
 			<li>Every book has a corresponding button for delete function. </li>
-			<li>Upon clicking the delete button, a pop-up message will appear to show assurance of saving all changes he/she made. <li>
+			<li>Upon clicking the delete button, a pop-up message will appear to show assurance of saving all changes he/she made. </li>
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
