@@ -9,7 +9,7 @@
 			$query = $this->db->query("SELECT DISTINCT b.*
 										FROM book b, book_author ba
 										WHERE b.id = ba.id
-										ORDER BY ba.author $order_by");
+										ORDER BY ba.author $order_by ");
 
 		else if ($sort_by == "subject")
 			$query = $this->db->query("SELECT DISTINCT b.*
@@ -19,20 +19,25 @@
 		
 
 		if($limit>0){	
+			if ($start == NULL)
+					$start = 0;
+
 			if ($sort_by != "author" && $sort_by!="subject") 
 				$query=$this->db->order_by($sort_by,$order_by)->limit($limit,$start)->get('book');
+			
 			else if ($sort_by == "author")
 				$query = $this->db->query("SELECT DISTINCT b.*
 										FROM book b, book_author ba
 										WHERE b.id = ba.id
 										ORDER BY ba.author $order_by
-										");
+										LIMIT $start,$limit");
+			
 			else if ($sort_by == "subject")
 				$query = $this->db->query("SELECT DISTINCT b.*
 										FROM book b, book_subject bs
 										WHERE b.id = bs.id
 										ORDER BY bs.subject $order_by
-										");
+										LIMIT $start,$limit");
 
 
 		}
