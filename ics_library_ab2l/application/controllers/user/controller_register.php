@@ -110,6 +110,20 @@ class Controller_register extends CI_Controller {
           }
     }
 
+    public function check_stdNum( $stdNum){
+            $this->db->where('account_number',$stdNum);
+            $query = $this->db->get('user_account')->num_rows();
+            if($query == 0 ){
+                    $this->db->where('account_number',$stdNum);
+                    $query = $this->db->get('admin_account')->num_rows();
+                     if($query == 0 )
+                       echo 'userOk';
+                     else echo 'userNo';
+              }
+            else echo 'userNo';
+            
+    }    
+
     function success($data) {
         $data['titlepage']= "Register";
         $this->load->helper(array('form','html'));
