@@ -1,5 +1,15 @@
 <?php
-ini_set('date.timezone', 'Asia/Manila');
+/*
+|---------------------------------------------------------------
+| DEFAULT TIMEZONE
+|---------------------------------------------------------------
+|
+| Set the default timezone for date/time functions to use if
+| none is set on the server.
+|
+*/
+
+	ini_set('date.timezone', 'Asia/Manila');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
