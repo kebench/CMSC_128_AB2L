@@ -69,8 +69,11 @@
 		<a name="add_user"></a>
 		<span>Add User</span>
 		<ul>
-			<li>The administrator can add new users who want to access the online library and borrow materials from the library given that the student opts to register manually (filling the form in a paper). </li>
-			<li>Allows the administrator to fill the information neede to create a new user.</li>
+			<li> The administrator can add new users in two ways: </li>
+			<ul>
+				<li> By approving the user's manual registration; and</li>
+				<li> By filling out the information needed to create a new user.</li>
+			</ul>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>
@@ -100,7 +103,7 @@
 		<ul>
 			<li>The administrator or the librarian-in-charge will send a notification to the user's email whenever he/she passed all the requirements and whenever he/she has overdue books. </li>
 			<li>The privilege of the administrator to notify the borrower in their emails is necessary in the development and usage of the system because it is for the benefit of the users to get reminded of the things they tend to forget, for them to borrow any books in the library.</li>
-			<li>A notification will be sent to user's email if he/she approves his/her account. </li>
+			<li>A notification will be sent to the user's email if he/she approves his/her account. </li>
 			<li>There is a button to signal the system that it needs to use the e-mailer application to send notification to the email of the borrowers.</li>
 			<li>On the other hand, the administrator will know if the borrower has overdue books, thus a button for notification will appear to notify the borrower.</li>  
 			<li>The user should have old transaction of the current time before administrator checks if he/she has overdue books.</li>
@@ -112,7 +115,7 @@
 		<a name="approve"></a>
 		<span>Approve User Account</span>
 		<ul>
-			<li>TThe privilege of the administrator to approve user accounts is necessary in the development and usage of the system because approved account is their prerequisite to borrow any books in the library. 
+			<li>The privilege of the administrator to approve user accounts is necessary in the development and usage of the system because approved account is their prerequisite to borrow any books in the library. 
 			<li>The requirements for approval of account are: UPLB Validated ID or Employee ID, Form 5 for the current semester (for students only)</li>
 			<li>There will be a queue of pending user accounts. There will be a button for the approval of each account. Upon clicking the button, a pop-up message will appear for the assurance of accepting the account as valid one. After the confirmation, this will automatically send a notification to email of the user. </li>
 

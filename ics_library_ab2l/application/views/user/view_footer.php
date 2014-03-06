@@ -9,7 +9,7 @@
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_search_book">Search</a></li>
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_faq">FAQ</a></li>
 		                            <li><a href="<?php echo base_url(); ?>index.php/user/controller_contact">Contact</a></li>
-		                            <li><a href="<?php echo base_url(); ?>/index.php/user/controller_usermanual">User Manual</a></li>
+		                            <li><a href="<?php echo base_url(); ?>/index.php/user/controller_usermanual" target="_blank">User Manual</a></li>
 		                        </ul>
 	                   		 </div>
                 		</div>
