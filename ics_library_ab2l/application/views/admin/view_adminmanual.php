@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Administrator Manual</title>
+		<title>User Manual</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/build-full.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>style/user/main-template.css" media="all"/>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/jquery-ui.css"><!--source: http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css-->
@@ -12,19 +12,87 @@
 		<style type="text/css">
 			* {font-family: Arial;}
 			span {font-size: 20px;}
-			#sub {font-size: 15px;}
-			h2, span, hr, #sub, .sub {color: #BF0A0A;}
+			h2, span, hr, .sub {color: #BF0A0A;}
 			h2 {font-weight: bold;}
 			body{
 				margin: 30px;
+				
 			}
+			
+#dialogoverlay{
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 90%;
+	
+
+}
+#dialogbox{
+	margin-top: 80px;
+	margin-left:200px;
+	background: #8B0000;
+	border-radius:7px; 
+	width:70%;
+	height: 80%;
+	z-index: 10;
+}
+
+#dialogboxbody{
+	width:95.7%;
+	height: 380px;
+	overflow-x:auto;
+	background: white;
+}
+
+
+
+#dialogbox > div{ background:#8B0000; margin:8px; }
+#dialogbox > div > #dialogboxhead{ background: #B22222; font-size:19px; padding:10px; color:white; }
+#dialogbox > div > #dialogboxbody{ padding:20px; color:black; }
+#dialogbox > div > #dialogboxfoot{ background: #B22222; padding:10px; text-align:right;color:white; }
+
+<script>
+function CustomAlert(){
+	this.render = function(){
+		var winW = window.innerWidth;
+	    var winH = window.innerHeight;
+		var dialogoverlay = document.getElementById('dialogoverlay');
+	    var dialogbox = document.getElementById('dialogbox');
+		dialogoverlay.style.display = "block";
+	    dialogoverlay.style.height = winH+"px";
+		dialogbox.style.left = (winW/2) - (550 * .5)+"px";
+	    dialogbox.style.top = "100px";
+	    dialogbox.style.display = "block";
+	//	document.getElementById('dialogboxhead').innerHTML = "USER MANUAL";
+	//    document.getElementById('dialogboxbody').innerHTML = "Do you want to add these information in the database?";
+	//	document.getElementById('dialogboxfoot').innerHTML = '© 2013 ICS UPLB';
+	}
+	this.ok = function(){
+		document.getElementById('dialogbox').style.display = "none";
+		document.getElementById('dialogoverlay').style.display = "none";
+		proceed_add();
+	}
+	
+	this.no = function(){
+		document.getElementById('dialogbox').style.display = "none";
+		document.getElementById('dialogoverlay').style.display = "none";
+	}
+}
+var Alert = new CustomAlert();
+</script>
 		</style>
 	</head>
-	<body>
+	<body onload="Alert.render()">
+	<div id="dialogoverlay"></div>
+		<div id="dialogbox">
+		<div>
+			<div id="dialogboxhead">USER MANUAL</div>
+			<div id="dialogboxbody">
 		<a name="top"></a>
 		<h2>Privileges</h2>
 		<a href="<?php echo base_url() ?>index.php/admin/controller_admin_home" class="tiny">Back to Home</a>	<!-- Cla, palagay na lang nung link :D -->
-		<hr><br/>
+		<hr width="450px;"><br/>
 		<span>Table of Contents</span>
 		<div id="sub">User</div>
 		<ul>
@@ -56,7 +124,7 @@
 			</li>
 		</ul>			
 
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 		<a name="view_users"></a>
 		<span>View Users</span>
 		<ul>
@@ -64,19 +132,16 @@
 			<li>This can display the information of all the accounts of users of the system.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="add_user"></a>
 		<span>Add User</span>
 		<ul>
-			<li> The administrator can add new users in two ways: </li>
-			<ul>
-				<li> By approving the user's manual registration; and</li>
-				<li> By filling out the information needed to create a new user.</li>
-			</ul>
+			<li>The administrator can add new users who want to access the online library and borrow materials from the library given that the student opts to register manually (filling the form in a paper). </li>
+			<li>Allows the administrator to fill the information neede to create a new user.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="deactivate"></a>
 		<span>Deactivate all Borrowers' Account</span>
@@ -85,7 +150,7 @@
 			<li> Deactivated users will not be able to borrow books but still can use other features such as search.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="search_user"></a>
 		<span>Search Users</span>
@@ -95,7 +160,7 @@
 
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 
 		<a name="notify"></a>
@@ -103,25 +168,25 @@
 		<ul>
 			<li>The administrator or the librarian-in-charge will send a notification to the user's email whenever he/she passed all the requirements and whenever he/she has overdue books. </li>
 			<li>The privilege of the administrator to notify the borrower in their emails is necessary in the development and usage of the system because it is for the benefit of the users to get reminded of the things they tend to forget, for them to borrow any books in the library.</li>
-			<li>A notification will be sent to the user's email if he/she approves his/her account. </li>
+			<li>A notification will be sent to user's email if he/she approves his/her account. </li>
 			<li>There is a button to signal the system that it needs to use the e-mailer application to send notification to the email of the borrowers.</li>
 			<li>On the other hand, the administrator will know if the borrower has overdue books, thus a button for notification will appear to notify the borrower.</li>  
 			<li>The user should have old transaction of the current time before administrator checks if he/she has overdue books.</li>
 
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="approve"></a>
 		<span>Approve User Account</span>
 		<ul>
-			<li>The privilege of the administrator to approve user accounts is necessary in the development and usage of the system because approved account is their prerequisite to borrow any books in the library. 
+			<li>TThe privilege of the administrator to approve user accounts is necessary in the development and usage of the system because approved account is their prerequisite to borrow any books in the library. 
 			<li>The requirements for approval of account are: UPLB Validated ID or Employee ID, Form 5 for the current semester (for students only)</li>
 			<li>There will be a queue of pending user accounts. There will be a button for the approval of each account. Upon clicking the button, a pop-up message will appear for the assurance of accepting the account as valid one. After the confirmation, this will automatically send a notification to email of the user. </li>
 
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="add_admin"></a>
 		<span>Add Administrator</span>
@@ -130,7 +195,7 @@
 			<li>Allows the administrator to fill up the fields for new administrator.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 		
 		<a name="announcement"></a>
 		<span>Add/Update Announcements</span>
@@ -142,7 +207,7 @@
 			<li>Once he/she reaches the maximum limit of announcements, the system will overwrite the oldest announcement.The first posted announcement will be automatically deleted. The recent announcements will appear chronologically.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="stat"></a>
 		<span>View Statistics</span>
@@ -150,7 +215,7 @@
 			<li>Displays in a chart the top 10 most borrowed books.</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="log"></a>
 		<span>View Logs</span>
@@ -161,7 +226,7 @@
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="add_book"></a>
 		<span>Add Books</span>
@@ -171,7 +236,7 @@
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="update"></a>
 		<span>Update Book Information </span>
@@ -182,7 +247,7 @@
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="delete"></a>
 		<span>Delete Book</span>
@@ -193,7 +258,7 @@
 			
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
 
 		<a name="books"></a>
 		<span>Records of Books</span>
@@ -222,6 +287,12 @@
 			</li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
-		<br/><hr><br/>
+		<br/><hr width="450px;"><br/>
+		
+		</div>
+			<div id="dialogboxfoot">© 2013 ICS UPLB</div>
+			
+		</div>
+	</div>
 	</body>
 </html>

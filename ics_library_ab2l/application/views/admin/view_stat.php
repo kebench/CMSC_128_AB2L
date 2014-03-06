@@ -33,10 +33,11 @@
 				};
 				chart.legend = {
 					"markerType": "circle",
-					"position": "right",
+					"position": "left",
 					"showEntries": true,
 					"switchable":true,
-					"position": "top"
+					"position": "top",
+
 				};
 				chart.exportConfig ={
 					menuItems: [{
@@ -48,14 +49,14 @@
                 chart.write("piechart");
             });
         </script>
-<div id="main-body" class="site-body" style = "height:600px">
-                <div class="site-center" style="height:72vh;">
+<div id="thisbody" class="body width-fill">
+                    <div class="cell">
     <div class="cell body">
-        <div class="cell">
-                  <p class="tiny">Statistics</p>
+        <div class="page-header cell">
+            <h1>Admin <small>Book Statistics</small></h1>
         </div>
     </div>
-	<h2 style = "position: Center;">Book Statistics - Top 10 Most Borrowed Books</h2>
-    <div id="piechart" class="width-fill" style="height: 500px;"></div>
+	<h2 style = "text-align:center;">Book Statistics - Top 10 Most Borrowed Books</h2>
+    <div id="piechart" class="cell width-fill" style="height: 500px;"></div>
 </div>
 </div>
