@@ -50,8 +50,8 @@ function serialize_form1()
                          <center><form method="post" id="sort_list" name="sort_list" action="<?php echo site_url("application/controllers/user/controller_books/sort_by()"); ?>">
                                         <b> Sort List By: </b> 
                                         <select id = "sort_by" name ="sort_by" onchange = "get_data1();" onload = "get_data1();">
-                                              <option value="id">Subject</option>
-                                              <option value="id">Author</option>
+                                              <option value="subject">Subject</option>
+                                              <option value="author">Author</option>
                                               <option selected="selected"value="title">Title</option>
                                               <option value="type">Type</option>
                                               <option value="no_of_available">Availability</option>

@@ -46,6 +46,7 @@ class Controller_books extends CI_Controller {
                 <thead>
                     <tr>
                         <th style='width: 3%;''>#</th>
+                        <th style='width: 15%;' nowrap='nowrap'>ISBN</th>
                         <th style='width: 15%;' nowrap='nowrap'>Subject</th>
                         <th style='width: 50%;' nowrap='nowrap'>Material</th>
                         <th style='width: 5%;' nowrap='nowrap'>Type</th>
@@ -60,6 +61,7 @@ class Controller_books extends CI_Controller {
                                 $this->load->model('model_get_list');
                                 echo "<tr>";
                                 echo "<td>$count</td>";
+                                echo "<td>$row->isbn</td>";
 
                                 $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
                                 $subject="";

@@ -56,7 +56,7 @@ class Controller_book extends Controller_log {
                 <thead>
                     <tr>
                         <th style'width: 5%;'>#</th>
-                        <th style='width: 10%;'><center>Call Number</center></th>
+                        				<th style='width: 10%;'><center>Call Number</center></th>
                                         <th style='width: 10%;'><center>Subject</center></th>
                                         <th style='width: 50%;'><center>Material</center></th>
                                         <th style='width: 7%;'><center>Type</center></th>
@@ -89,7 +89,10 @@ class Controller_book extends Controller_log {
                                             foreach($data['query1'] as $authors_list){
                                                 $authors .= "{$authors_list->author},";
                                             }
-                                           	echo"{$authors} ({$row->year_of_pub})</td>";
+                                           	echo"{$authors} ({$row->year_of_pub})<br/>";
+                                           		if ($row->isbn != NULL)
+                                           			echo "ISBN:{$row->isbn}";
+                                           echo"</td>";
                                            
                                             //image source: http://3.bp.blogspot.com/-hUGEJQbn1Hk/ULY_bdWVgdI/AAAAAAAAAd0/Z2vFFfsae_4/s1600/Red_book_cover.png
 			                                if ($row->type == "BOOK"){
