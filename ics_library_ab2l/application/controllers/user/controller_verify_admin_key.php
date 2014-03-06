@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-include_once("/application/controllers/admin/controller_log.php");	//necessary para malagay sa ADMIN_LOGS yung paglog-in ng admin
+include_once("/application/controllers/admin/controller_log.php");  //necessary para malagay sa ADMIN_LOGS yung paglog-in ng admin
 class Controller_verify_admin_key extends Controller_log {
     function __construct() {
         parent::__construct();
@@ -12,10 +12,13 @@ class Controller_verify_admin_key extends Controller_log {
     function index() {
          $this->form_validation->set_rules('admin_key', 'Administrator Key', 'trim|required|xss_clean|callback_check_database');
          $data['i']= "fds";
-           
 
-        if($this->form_validation->run() == FALSE) {
-          $data['titlepage']= "Administrator Verification";
+         if(!($this->session->userdata('count'))){  //checks is session already exists
+            $this->session->set_userdata('count',0);
+         }
+
+        if($this->form_validation->run() == FALSE) {        
+            $data['titlepage']= "Administrator Verification";
             $this->load->view('user/view_header',$data);
             $this->load->view('user/view_admin_key',$data); //load view for login
             $this->load->view('user/view_footer');
@@ -23,17 +26,27 @@ class Controller_verify_admin_key extends Controller_log {
         else {
                 //Go to private area
            if($this->session->userdata('logged_in_type')=="admin"){
+            $this->session->unset_userdata('count');
             
-			$session_user = $this->session->userdata('logged_in')['username'];
-			$this->add_log("Admin $session_user logged in.", "Admin Login");
-			//the remove_unclaimed() and update_reservation_status() are better implemented as procedures in the database
-			$this->remove_unclaimed();
-			$this->update_reservation_status();
-			redirect('index.php/admin/controller_admin_home', 'refresh');
-		   
-		   }
+            $session_user = $this->session->userdata('logged_in')['username'];
+            $this->add_log("Admin $session_user logged in.", "Admin Login");
+            //the remove_unclaimed() and update_reservation_status() are better implemented as procedures in the database
+            $this->remove_unclaimed();
+            $this->update_reservation_status();
+            redirect('index.php/admin/controller_admin_home', 'refresh');
+           
+           }
            else{
-                redirect('index.php/user/controller_login', 'refresh');
+                $sess_enterKey = $this->session->userdata('count'); 
+                if($sess_enterKey == 2){                    //limits the incorrect admin key to 3 inputs
+                    $this->session->unset_userdata('count');//destroys the created session
+                    redirect('index.php/user/controller_login', 'refresh');
+                }
+                else{
+                    $sess_enterKey++;
+                    $this->session->set_userdata('count',$sess_enterKey);
+                    redirect('index.php/user/controller_admin_key', 'refresh');
+                }
            }
         }   
      }
