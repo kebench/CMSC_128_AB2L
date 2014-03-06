@@ -95,7 +95,7 @@
                          <div class="col" id= "numDiv">
                             <div class="col width-1of4">
                                 <div class="cell">
-                                    <label for="studno" id = "labelNum">Student Number<span class="color-red"> *</span></label>
+                                    <label for="studno" id = "labelNum">Student Number<span id="labelNum" class="color-red"> *</span></label>
                                 </div>
                             </div>
                             <div class="col width-fill">

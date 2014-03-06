@@ -76,11 +76,11 @@ class Controller_settings extends Controller_log {
 					$session_user = $this->session->userdata('logged_in')['username'];
 					$this->add_log("Admin $session_user changed ICS e-Lib settings.", "System Settings");
 
-					$data['msg'] = "You have successfully changed ICS e-Lib settings.";
+					$data['msg'] = "<span class='color-green'>You have successfully changed ICS e-Lib settings.</span>";
 					$this->success($data);
 				}
 			}else{
-				$data['msg'] = "Administrator password mismatched with the one stored in the database.";
+				$data['msg'] = "<span class='color-red'>Administrator password mismatched with the one stored in the database.</span>";
 				$this->success($data); 
 			}
 		}
@@ -106,7 +106,7 @@ class Controller_settings extends Controller_log {
 			if($this->model_add_admin->check_password($session_user)['password'] == sha1($_POST['admin_pass'])){
 				if($this->form_validation->run() == FALSE)
 				{
-					$data['msg1'] = validation_errors(); echo validation_errors();
+					$data['msg1'] = validation_errors();
 					$this->success($data); 
 				}
 				else
@@ -114,11 +114,11 @@ class Controller_settings extends Controller_log {
 					$new_pass = sha1($_POST["admin_password"]);
 					$this->load->model('model_add_admin');
 					$this->model_add_admin->change_password($session_user, $new_pass);
-					$data['msg1'] = "You have successfully changed your administrator password.";
+					$data['msg1'] = "<span class='color-green'>You have successfully changed your administrator password.</span>";
 					$this->success($data);
 				}
 			}else{
-				$data['msg1'] = "Administrator password mismatched with the one stored in the database.";
+				$data['msg'] = "<span class='color-red'>Administrator password mismatched with the one stored in the database.</span>";
 				$this->success($data); 
 			}
 			

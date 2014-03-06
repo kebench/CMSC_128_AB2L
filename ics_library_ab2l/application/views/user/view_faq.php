@@ -5,7 +5,7 @@
 								</div>
 					<div id ="panel">
 				            <div id="accordion">
-											<h3>1.) Can Non-UPLB student or faculty borrow books?</h3>
+											<h3 >1.) Can Non-UPLB student or faculty borrow books?</h3>
 											<div>
 												<p>Sorry, but the ICS library only allows UPLB student or faculty to borrow books.</p>
 											</div>
@@ -31,7 +31,7 @@
 											</div>
 											<h3>7.) What do I need to do after reserving the book online?</h3>
 											<div>
-												<p>Go to the ICS library, confirm and get the book from Ms. ___.</p>
+												<p>Go to the ICS library, confirm and get the book from Ma'am Mayet.</p>
 											</div>
 											<h3>8.) How to borrow a copy of SPs and theses?</h3>
 											<div>

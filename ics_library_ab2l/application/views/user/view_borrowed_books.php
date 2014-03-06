@@ -20,7 +20,7 @@
                         <th style="width: 45%;" nowrap="nowrap">Material</th>
                         <th style="width: 8%;" nowrap="nowrap">Type</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
-                        <th style="width: 13%;" nowrap="nowrap">Date Due</th>
+                        <th style="width: 13%;" nowrap="nowrap">Due Date</th>
                     </tr>
                 </thead>
 
@@ -80,7 +80,7 @@
                 <?php
                  if($result2 != null){
             ?>
-        
+        <br/>
         <div class="panel datasheet">
             <div class="header text-center background-red">
                 <?php echo $header2; ?>
@@ -94,8 +94,7 @@
                         <th style="width: 45%;" nowrap="nowrap">Material</th>
                         <th style="width: 8%;" nowrap="nowrap">Type</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
-                        <th style="width: 13%;" nowrap="nowrap">Date Due</th>
-                        <th style="width: 13%;" nowrap="nowrap">Date Returned</th>
+                        <th style="width: 13%;" nowrap="nowrap">Due Date</th>
                     </tr>
                 </thead>
 
@@ -126,10 +125,9 @@
                                 }
                                 else
                                     //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
-                                    echo "<td><imgtitle = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
+                                    echo "<td><img title = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
                                 echo "<td>".$row->date_borrowed."</td>";
                                 echo "<td>".$row->due_date."</td>";
-                                echo "<td>".$row->date_returned."</td>";
                             echo "</tr>";
                             
                             $count++;
@@ -157,6 +155,7 @@
                  if($result3 != null){
             ?>
         
+        <br/>
         <div class="panel datasheet">
             <div class="header text-center background-red">
                 <?php echo $header3; ?>
@@ -170,7 +169,6 @@
                         <th style="width: 45%;" nowrap="nowrap">Material</th>
                         <th style="width: 8%;" nowrap="nowrap">Type</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Borrowed</th>
-                        <th style="width: 13%;" nowrap="nowrap">Date Due</th>
                         <th style="width: 13%;" nowrap="nowrap">Date Returned</th>
                     </tr>
                 </thead>
@@ -204,7 +202,6 @@
                                     //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
                                     echo "<td><img title = 'THESIS/SP'  width = 30px height = 30px src='../../../images/type_thesis.png' /></td>";
                                 echo "<td>".$row->date_borrowed."</td>";
-                                echo "<td>".$row->due_date."</td>";
                                 echo "<td>".$row->date_returned."</td>";
                             echo "</tr>";
                             

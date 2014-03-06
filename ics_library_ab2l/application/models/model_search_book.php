@@ -11,28 +11,28 @@
 			if($category == "author"){
 				$this->db->select("DISTINCT $category
 					FROM book_author 
-					WHERE $category LIKE '%$str%'
+					WHERE $category LIKE '$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else if($category == "subject"){
 				$this->db->select("DISTINCT $category
 					FROM book_subject 
-					WHERE $category LIKE '%$str%'
+					WHERE $category LIKE '$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else if($category == "tag_name"){
 				$this->db->select("DISTINCT $category
 					FROM tag 
-					WHERE $category LIKE '%$str%'
+					WHERE $category LIKE '$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else{
 				$this->db->select("DISTINCT $category
 					FROM book 
-					WHERE $category LIKE '%$str%'
+					WHERE $category LIKE '$str%'
 					LIMIT 5
 					", FALSE);
 			}
@@ -57,7 +57,7 @@
 			}
 			//querry for the data fetching
 			//As long as the $data['str'] is not an empty string, it will dominate over the advance search forms,
-			$query='id, title, year_of_pub, type, no_of_available
+			$query='*
 				FROM book
 				WHERE ';
 			$str = $data['str'];
@@ -67,7 +67,7 @@
 						(SELECT id
 						FROM book_author
 						WHERE author LIKE '%$str%'
-						ORDER BY levenshtein(".$data['category'].", '$str'))";
+						ORDER BY author LIKE 'str%' DESC";
 					
 				}
 				else if($data['category'] == "subject"){
@@ -75,18 +75,18 @@
 						(SELECT id
 						FROM book_subject
 						WHERE subject LIKE '%$str%'
-						ORDER BY levenshtein(".$data['category'].", '$str'))";
+						ORDER BY subject LIKE 'str%' DESC";
 				}
 				else if($data['category'] == "tag_name"){
 					$query=$query."id in
 						(SELECT id
 						FROM tag
 						WHERE tag_name LIKE '%$str%'
-						ORDER BY levenshtein(".$data['category'].", '$str'))";
+						ORDER BY tag_name LIKE 'str%' DESC";
 				}
 				else{
 					$query=$query.$data['category']." LIKE '%$str%'
-						ORDER BY levenshtein(".$data['category'].", '$str')";	
+						ORDER BY ".$data['category']." LIKE '$str%' DESC";	
 				}
 			}
 				
@@ -140,6 +140,16 @@
 		function fetch_book_author($id){
 			$query="author
 			FROM book_author
+			WHERE id LIKE '".$id."'";
+			//execute query
+			$this->db->select($query,FALSE);
+			
+			return $this->db->get();
+		}
+
+		function fetch_book_subject($id){
+			$query="subject
+			FROM book_subject
 			WHERE id LIKE '".$id."'";
 			//execute query
 			$this->db->select($query,FALSE);

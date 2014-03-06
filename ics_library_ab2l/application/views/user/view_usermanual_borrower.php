@@ -63,7 +63,7 @@
 			<a name="basicSearch"></a>
 			<li><span>Basic Search</span>
 				<ul>
-					<li>Allows the user to search for a book by providing information on any of its fields.</li>
+					<li>Allows the user to search for a book by choosing a category from the select box and providing the information in the textbox provided.</li>
 					<li>Shows the detailed list of books matching the specified query</li>
 				</ul>
 			</li>
@@ -82,8 +82,9 @@
 		<span>View Books</span>
 		<ul>
 			<li>Displays a list of all books present in the database.</li>
-			<li>Allows user to see the books' details and their current availability in the library.</li>
+			<li>Allows the user to see the books' details and their current availability in the library.</li>
 			<li>Allows the user to reserve his preferred book as he sees it in the list.</li>
+			<li>Allows the user to sort the Subject, Author, Title, Type, or Availability in ascending or descending order. </li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>
@@ -101,6 +102,10 @@
 		<ul>
 			<li>Allows user to reserve a book. The reserve button can be found in the list of books. </li>
 			<li>Reservation function is subjected to the availability of the book.</li>
+				<ul>
+					<li> If the book is available, the request will be granted and the user will be waiting for the confirmation of the administrator. </li>
+					<li> If there is no available copy of the book yet, the user will be waitlisted for the borrowing of that book. </li>
+				</ul>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>

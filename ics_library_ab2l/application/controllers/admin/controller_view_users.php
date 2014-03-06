@@ -12,7 +12,7 @@ class Controller_view_users extends Controller_log {
         $data['parent'] = "Users";
         $data['current'] = "View Users";
         if($msg != null)
-            $data['message'] = "You have successfully approved the account of a user with account_number:".$msg;
+            $data['message'] = "<span class='color-green'>You have successfully approved the account of a user with account_number: $msg </span>";
 
         $this->load->helper(array('form','html'));
         $this->load->view("admin/view_header",$data);

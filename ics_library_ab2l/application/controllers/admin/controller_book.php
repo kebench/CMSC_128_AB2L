@@ -147,6 +147,7 @@ class Controller_book extends Controller_log {
 			$title = htmlspecialchars($_POST['title1']);
 			$author = array_unique ($_POST['author']);
 			$subject = array_unique ($_POST['subject']);
+			$isbn = $_POST['isbn'];
 			$year_of_pub = htmlspecialchars($_POST['year_of_pub']);
 			$type = strtoupper ($_POST['type1']);
 			$quantity = sizeof($call_number);
@@ -154,14 +155,11 @@ class Controller_book extends Controller_log {
 			$book_stat = 0;
 			
 			$this->load->model("model_book");
-			$this->model_book->insert_book_info($call_number, $title, $year_of_pub, $type, $no_of_available, $quantity, $book_stat, $author, $subject);
-			
-			
+			$this->model_book->insert_book_info($call_number, $title, $year_of_pub, $isbn, $type, $no_of_available, $quantity, $book_stat, $author, $subject);
+
 			$type = "Add Book";
-			foreach ($call_number as $value) {
-				$message = "Admin $session_user added a new book with Call Number: $value";
-				$this->add_log($message,$type);	
-			}
+			$message = "Admin $session_user added a new book with ISBN: $isbn";
+			$this->add_log($message,$type);	
 			$this->call_success();
 		}
 	}
@@ -210,6 +208,7 @@ class Controller_book extends Controller_log {
 			'year_of_pub' => $this->input->post('year_of_pub'),
 			'no_of_available' => $this->input->post('no_of_available'),
 			'type' => strtoupper($this->input->post('type')),
+			'isbn' => $this->input->post('isbn'),
 			'quantity' => sizeof($call_numbers),
 		);
 		//BUG: CHECK IF A COPY OF THE BOOK IS ON LOAN, THEN SUBTRACT NUMBER OF ON LOAN BOOKS IN QUANTITY THEN UPDATE NO. OF AVAILABLE

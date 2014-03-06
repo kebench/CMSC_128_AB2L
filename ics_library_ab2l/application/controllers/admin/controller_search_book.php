@@ -4,7 +4,7 @@ class Controller_search_book extends CI_Controller {
 		parent::__construct();
 		$this->load->model('model_search_book');
 		$this->load->library('Jquery_pagination');
-		//$this->load->library('pagination');
+		$this->load->library('pagination');
 	}
 
     function index() {
@@ -57,57 +57,85 @@ class Controller_search_book extends CI_Controller {
 		//fetches data from database.
 		$row = $this->model_search_book->fetch_book_data($data,$config['per_page'],$page);
 		//display data from database
-		$this->print_books($row);
 		
 		//initialize the configuration of the ajax_pagination
 		$this->jquery_pagination->initialize($config);
 		//$this->pagination->initialize($config);
 		//create links for pagination
-		echo $this->jquery_pagination->create_links();
+		$data['links'] = $this->jquery_pagination->create_links();
+        $this->print_books($row, $data['links']);
 		//echo $this->pagination->create_links();
 
 	}
 
-	public function print_books($row){
+	public function print_books($row, $links){
 		//display data from database
 		if($row->num_rows()>0){
-			echo "<div class='book_details'><table border='5'>";
-			echo "<tr><td>Title</td>";
-			echo "<td>Author/s</td>";
-			echo "<td>Year of Publication</td>";
-			echo "<td>Type</td>";
-			echo "<td></td></tr>";
-			foreach($row->result() as $book_details){
-				echo "<tr><td>$book_details->title</td>";
-				echo "<td>";
-				$arow = $this->model_search_book->fetch_book_author($book_details->id);
-				//display data from database
-				if($arow->num_rows()>0){
-					foreach($arow->result() as $abook_details){
-						echo "$abook_details->author<br/>";
-					}
-				}
-				echo "</td>";
-				echo "<td>$book_details->year_of_pub</td>";
-				echo "<td>$book_details->type</td>";
-				echo "<td>";
-				if($this->session->userdata('borrower')){
-					if($book_details->no_of_available == 0){	//if book is not available
-						//put the transaction code here
-						//WAITLIST TRANSACTION CODE HERE
-						echo"NOT AVAILABLE";
-					}else{	
-						//and if book is available
-						//RESERVE TRANSACTION CODE HERE
-						echo "<a href='".base_url()."index.php/admin/controller_reserve_book/verify_login/$book_details->id'><input type='button' name='reservebutton' id='reservebutton' value='Reserve Book'></a>";
-					}
-					
-				}
-				echo "</td></tr>";
-			}
-			echo "</table></div>";
-		}else{
-			echo "Book does not exist in out library";
+			echo"<div class='panel datasheet'>
+                <div class='header text-center background-red'>
+                    Search Results
+                </div>
+                <table class='body fixed'>
+                <thead>
+                    <tr>
+                        <th style='width: 3%;''>#</th>
+                        <th style='width: 15%;' nowrap='nowrap'>ISBN</th>
+                        <th style='width: 15%;' nowrap='nowrap'>Subject</th>
+                        <th style='width: 50%;' nowrap='nowrap'>Material</th>
+                        <th style='width: 5%;' nowrap='nowrap'>Type</th>
+                        <th style='width: 8%;' nowrap='nowrap'>Availability</th>
+                        <th style='width: 13%;' nowrap='nowrap'>Action</th>
+                    </tr>
+                </thead>
+                                            
+                <tbody>";
+	            	$count=1;
+			        foreach($row->result() as $row){
+						$this->load->model('model_get_list');
+						echo "<tr>
+								<td>$count</td>
+								<td>$row->isbn</td>";
+						
+						$data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
+		                $subject="";
+		                foreach($data['multi_valued'] as $subject_list){
+		                $subject = $subject."{$subject_list->subject}<br/>";
+		                }
+		                echo "<td>".$subject."</td>";
+
+		                
+				                            echo "<td><b>$row->title</b> <br/>";
+				                            $data['multi_valued'] = $this->model_get_list->get_book_authors($row->id);
+				                            $authors="";
+				                            foreach($data['multi_valued'] as $authors_list){
+				                                $authors = $authors."{$authors_list->author},";
+				                            }
+				                            echo "$authors ($row->year_of_pub)</td>";
+
+				                            if ($row->type == "BOOK"){
+				                                echo "<td><center><img title = 'BOOK' width = 30px height = 30px src='../../images/type_book.png'/></center></td>";
+				                            }
+				                            else
+				                                //image source: http://www.webweaver.nu/clipart/img/education/diploma.png
+				                                echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
+
+				                            echo "<td>".$row->no_of_available. "/" . $row->quantity."</td>";
+				                            if($row->no_of_available != 0)
+				                                echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
+				                                        <input type='submit' class='background-red table-button' value='Reserve Book'>                                                       </form>
+				                                    </td>";
+				                            else
+				                                echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
+				                                        <input type='submit' class='background-red table-button' value='Waitlist'></td>";
+				                            
+				                            echo "</tr>";
+				                    $count++;
+				                        }
+				        echo" </tbody>
+				    </table><div class='footer pagination'>";
+				    echo $links;
+
+	                "</div></div>";
 		}
 		
 	}

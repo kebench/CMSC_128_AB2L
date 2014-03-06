@@ -16,7 +16,7 @@
 	                                    <th style="width: 2%;">#</th>
 	                                    <th style="width: 20%;">Borrower</th>
 	                                    <th style="width: 40%;">Material</th>
-										<th style="width: 10%;">Status</th>
+										<th style="width: 10%;">Due Date</th>
 	                                    <th style="width: 10%;"></th>
 	                                    <th style="width: 10%;"></th>
 	                                </tr>
@@ -39,7 +39,7 @@
 					                                Call Number: {$row->call_number}</td>";
 
                                                 echo "</td>
-											<td>{$row->status}</td>";
+											<td>{$row->due_date}</td>";
 										echo "<td><form action='controller_outgoing_books/reserve/' method='post'>
 											<input type='hidden' name='res_number' value='{$row->res_number}' />
 											<input type='submit' class='background-red' name='reserve' value='Confirm' />

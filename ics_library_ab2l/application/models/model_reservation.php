@@ -144,6 +144,20 @@ class Model_reservation extends CI_Model {
 		$this->db->where('res_number', $res_number);
 		$this->db->delete('book_reservation');
 	}
+	
+	public function count_user_reservation($res_number){
+			$this->db->select('account_number');
+			$this->db->where('res_number', $res_number);
+			$account_number = $this->db->get('book_reservation')->result();
+			$query= $this->db->query("SELECT res_number
+			FROM book_reservation br
+			WHERE (
+			br.account_number = '{$account_number[0]->account_number}'
+			AND (br.status =  'overdue' OR br.status =  'borrowed')
+			)");
+			
+			return count($query->result());
+	}
 }
 
 ?>

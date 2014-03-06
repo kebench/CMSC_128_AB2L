@@ -1,5 +1,15 @@
 <?php
+/*
+|---------------------------------------------------------------
+| DEFAULT TIMEZONE
+|---------------------------------------------------------------
+|
+| Set the default timezone for date/time functions to use if
+| none is set on the server.
+|
+*/
 
+	ini_set('date.timezone', 'Asia/Manila');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -121,7 +131,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 	// $assign_to_config['name_of_config_item'] = 'value of config item';
-
+	
 
 
 // --------------------------------------------------------------------

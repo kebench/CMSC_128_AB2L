@@ -17,10 +17,10 @@
      
 			<div class="cell width-1of1" >
 				<div class="cell width-1of1">
-					<label for="emailuser">Administrator Key:</label>
+					<label for="admin_key">Administrator Key:</label>
 				</div>
 				<div class="cell width-1of1" >
-					<input type="password" id="emailuser" name="admin_key" required="required" class="background-white"/>
+					<input type="password" id="admin_key" name="admin_key" required="required" class="background-white"/>
 					<span name ="helpadminkey" class="color-red"/><span>
 				</div>
 			</div>

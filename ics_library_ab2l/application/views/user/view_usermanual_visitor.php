@@ -57,7 +57,7 @@
 		<a name="basicSearch"></a>
 			<li><span>Basic Search</span>
 				<ul>
-					<li>Allows the user to search for a book by providing information on any of its fields.</li>
+					<li>Allows the user to search for a book by choosing a category from the select box and providing the information in the textbox provided.</li>
 					<li>Shows the detailed list of books matching the specified query</li>
 				</ul>
 			</li>
@@ -77,6 +77,7 @@
 			<li>Displays the list of all books present in the ICS Library.</li>
 			<li>Allows user to see the books' details and their current availability in the library.</li>
 			<li>Allows the user to reserve a book displayed on the list.</li>
+			<li>Allows the user to sort the Subject, Author, Title, Type, or Availability in ascending or descending order. </li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>
@@ -110,7 +111,8 @@
 		<a name="login"></a>
 		<span>Login</span>
 		<ul>
-			<li>Establishes the user's identity which gives him a higher privilege that allows him to do certain operations.</li>
+			<li>Establishes the user's identity which gives him a higher privilege that allows him to do certain operations such as reserving/borrowing a book. <br/>
+				Unregistered users are allowed to search for the books available in the library. But they need to have a validated account to be able to borrow a book. </li>
 		</ul>
 		<a href="#top" class="tiny">Back to Top</a>
 		<br/><hr><br/>

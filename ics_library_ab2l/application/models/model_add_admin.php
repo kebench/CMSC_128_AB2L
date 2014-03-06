@@ -12,7 +12,7 @@ public function add_admin()
     $data['query'] = $this->model_add_admin->get_adminkey($parent_key);
     
     $data=array(
-    'admin_key'=>$this->input->post('admin_key'),
+    'admin_key'=>$this->input->post('adminkey'),
     'first_name'=>$this->input->post('fname'),
     'middle_name'=>$this->input->post('minit'),
     'last_name'=>$this->input->post('lname'),
