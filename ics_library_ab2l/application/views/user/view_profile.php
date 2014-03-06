@@ -3,6 +3,10 @@
             span {font-size: 20px;
                     font-weight: bold;}
             em{font-size: 17px;}
+            #helpusername, #helpemail, #helppassword, #helpnewpassword,#helpcpassword{
+                font-size: 13px;
+                color: red;
+            }
             
         </style>
 <div id="main-body" class="site-body">
@@ -26,7 +30,7 @@
 
                                  ?>
 
-                                  <h4><?php echo $name?></h4>
+                                  <h2><?php echo $name?></h2>
                                 </div>
                                
                                 <div class="col">
