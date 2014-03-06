@@ -57,7 +57,7 @@
 			}
 			//querry for the data fetching
 			//As long as the $data['str'] is not an empty string, it will dominate over the advance search forms,
-			$query='id, title, year_of_pub, type, no_of_available
+			$query='*
 				FROM book
 				WHERE ';
 			$str = $data['str'];
@@ -67,7 +67,7 @@
 						(SELECT id
 						FROM book_author
 						WHERE author LIKE '%$str%'
-						ORDER BY author LIKE 'str%' DESC, levenshtein(".$data['category'].", '$str'))";
+						ORDER BY author LIKE 'str%' DESC";
 					
 				}
 				else if($data['category'] == "subject"){
@@ -140,6 +140,16 @@
 		function fetch_book_author($id){
 			$query="author
 			FROM book_author
+			WHERE id LIKE '".$id."'";
+			//execute query
+			$this->db->select($query,FALSE);
+			
+			return $this->db->get();
+		}
+
+		function fetch_book_subject($id){
+			$query="subject
+			FROM book_subject
 			WHERE id LIKE '".$id."'";
 			//execute query
 			$this->db->select($query,FALSE);

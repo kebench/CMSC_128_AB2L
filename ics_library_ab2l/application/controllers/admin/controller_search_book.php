@@ -4,7 +4,7 @@ class Controller_search_book extends CI_Controller {
 		parent::__construct();
 		$this->load->model('model_search_book');
 		$this->load->library('Jquery_pagination');
-		//$this->load->library('pagination');
+		$this->load->library('pagination');
 	}
 
     function index() {
