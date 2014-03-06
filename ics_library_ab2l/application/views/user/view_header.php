@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<script src="<?php echo  base_url() ?>js/module/jquery/global.js" type="text/javascript"></script>
 
+<script type = "text/javascript">
+	var base_url = "<?php echo base_url() ?>";
+</script>
 <html>
 	<head>
 		<title><?php echo $titlepage?></title>
@@ -122,6 +126,19 @@
 								}
 							}
 							?>
+							<!---<div class='clear-right'>
+		 							<form action='<?php //echo base_url(); ?>index.php/user/controller_search_book/' class='float-right'>
+		 								<input type='button' class='float-right search_button' style='margin: 1px 1px 1px 1px;'/>
+		 								<input type='search' id='headersinput' name='headersinput' class='background-white float-right' placeholder='Search...' placeceholder='Search...' style='margin: 1px 1px 1px 1px;'/>
+		 								<select id='headercategory' name='headercategory' class='width-fit float-right' style='margin: 1px 1px 1px 1px;'>
+		 									<option value='title'>Title</option>
+		 									<option value='author'>Author</option>
+		 									<option value='subject'>Subject</option>
+		 									<option value='year_of_pub'>Publication</option>
+		 									<option value='tag_name'>Tag</option>
+		 								</select>
+		 							</form>
+		 					</div>-->
 						</div>
 					</div>
 					
@@ -147,7 +164,7 @@
 								<a href="#" id="myaccount"><li>My Account
 									<ul class="">
 										<a href="<?php echo base_url(); ?>index.php/user/controller_editprofile"><li>View Profile</li></a>
-										<a href="<?php echo base_url(); ?>index.php/user/controller_book"><li>Reserved Books</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_reserved_list"><li>Reserved Books</li></a>
 										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_borrowed_list"><li>Borrowed Books</li></a>
 										<a href="<?php echo base_url(); ?>index.php/user/controller_logout"><li>Logout</li></a>
 									</ul>
