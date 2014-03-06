@@ -16,7 +16,10 @@
 								<div id="info_area">
 
 									<li><b>Borrower: </b><?=$borrower;?></li>
-									<li><b>Title: </b><?=$title;?></li>
+									<li><b>Title: </b><?=$title;
+										$title = urldecode($title);
+										$tbook = urlencode($title);
+									?></li>
 									<li><b>Author/s: </b>
 									<?php
 										foreach ($author as $value) {
@@ -27,7 +30,7 @@
 									<li><b>Type: </b><?=$type?></li>
 									<li><b>Current Date (DD/MM/YYYY): </b><?=$date_reserved['mday']."/".$date_reserved['mon']."/".$date_reserved['year'];?></li>
 									<li><b>Expected Expiration Date of Reservation (if book is reserved now): </b><?=$date_expire['mday']."/".$date_expire['mon']."/".$date_expire['year']?></li><br/>
-									<a href="<?php echo base_url().'index.php/user/controller_reserve_book/confirm_reservation/'.$title; ?>"><input type="button" value="Confirm Reservation" id="confirmButton"></a>
+									<a id="confirmButton" href="<?php echo base_url().'index.php/user/controller_reserve_book/confirm_reservation/'.$tbook; ?>"><input type="button" value="Confirm Reservation"></a>
 								</div>
 							</form>
 						</div>
@@ -39,4 +42,8 @@
 </div>
 </div>
 </div>
+</div>
+
+<div id="dialog" title="Book Confirmation Dialog">
+  <h5>Do you really wish to reserved this book?</h5>
 </div>

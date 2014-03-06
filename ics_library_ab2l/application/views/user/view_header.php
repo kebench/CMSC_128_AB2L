@@ -159,15 +159,42 @@
             s.css("position","relative");
         }
     });
-    $( "#dialog" ).dialog({
+    $( "#canceldialog" ).dialog({
       autoOpen: false,
+      modal: true,
+      closeOnEscape: true,
+      closeText: true,
       show: {
-        effect: "explode",
-        duration: 1000
+        effect: "fadeIn",
+        duration: 500
       },
       hide: {
-        effect: "blind",
-        duration: 1000
+        effect: "fadeOut",
+        duration: 500
+      },
+      draggable: false,
+      buttons : {
+      	"Yes": function() {
+      		document.getElementById(form).submit();
+      	},
+      	"No": function() {
+      		$(this).dialog('close');
+      	}
+      }
+    });
+
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      closeOnEscape: true,
+      closeText: true,
+      show: {
+        effect: "fadeIn",
+        duration: 500
+      },
+      hide: {
+        effect: "fadeOut",
+        duration: 500
       },
       draggable: false,
       buttons : {
@@ -179,14 +206,19 @@
       	}
       }
     });
- 
+
+     $( "form[id^='cancel']" ).submit(function (e) {
+    	e.preventDefault();
+    	form = $(this).get(0).id;
+      $( "#canceldialog" ).dialog( "open" );
+    });
+
     $( "#confirmButton" ).click(function (e) {
     	e.preventDefault();
     	 link = $(this).attr('href');
-    	 console.log(link);
       $( "#dialog" ).dialog( "open" );
     });
 });
-
+	var form;
 	var link;
 </script>

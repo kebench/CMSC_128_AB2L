@@ -119,5 +119,5 @@
 			</div>
 		</div>
     </div>
-	<div id="list_area"></div>
+	<div id="list_area" class="cell"></div>
 </div>
