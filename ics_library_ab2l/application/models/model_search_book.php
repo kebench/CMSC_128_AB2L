@@ -11,28 +11,28 @@
 			if($category == "author"){
 				$this->db->select("DISTINCT $category
 					FROM book_author 
-					WHERE $category LIKE '$str%'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else if($category == "subject"){
 				$this->db->select("DISTINCT $category
 					FROM book_subject 
-					WHERE $category LIKE '$str%'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else if($category == "tag_name"){
 				$this->db->select("DISTINCT $category
 					FROM tag 
-					WHERE $category LIKE '$str%'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
 					", FALSE);
 			}
 			else{
 				$this->db->select("DISTINCT $category
 					FROM book 
-					WHERE $category LIKE '$str%'
+					WHERE $category LIKE '%$str%'
 					LIMIT 5
 					", FALSE);
 			}

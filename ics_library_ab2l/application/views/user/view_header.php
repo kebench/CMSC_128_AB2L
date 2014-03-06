@@ -39,7 +39,7 @@
 				clear: right;
 			}
 			
-			.itemhover { background-color:black !important; color:#ffffff !important; width: 500px !important;}
+			.itemhover { background-color:black !important; color:#ffffff !important;}
 			#selectItems ul { width:500px; font-size:14px; line-height:28px; list-style:none;}
 			#selectItems ul li { }
 			#selectItems ul li a { display:block; color:black; text-decoration:none; padding:0; }
