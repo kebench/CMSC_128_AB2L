@@ -1,72 +1,41 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-include_once("/application/controllers/admin/controller_log.php");	//necessary para malagay sa ADMIN_LOGS yung paglog-in ng admin
-class Controller_verify_admin_key extends Controller_log {
-    function __construct() {
-        parent::__construct();
-        //load session and connect to database
-        $this->load->model('user_model','login',TRUE);
-        $this->load->helper(array('form', 'url','html'));
-        $this->load->library(array('form_validation','session'));
-    }
- 
-    function index() {
-         $this->form_validation->set_rules('admin_key', 'Administrator Key', 'trim|required|xss_clean|callback_check_database');
-         $data['i']= "fds";
-           
+<div id="main-body" class="site-body" ><!--style="background-image:url('<?php echo base_url();?>images/library.jpg'); height:100vh;"-->
+                <div class="site-center">
+<div class="cell body">
+	<p class="tiny">Administrator Verification</p>
+</div>
+<div id="signbox2" class="background-red width-2of5">
+	<div class="col width-fill">
+		<p style="text-align:center; font-size:1.2em">Administrator Key Verification</p>
+	</div>
+	<div id="sign" class="col" >
+		<div class="col" >
+			<span>
+			<div class="color-red logerror width-fill cell"><?php echo validation_errors(); ?></div>
+		</span>
+	 <?php
+	 	echo validation_errors();
+	 	$attributes = array('name' =>'admin_login', 'id' => 'admin_login');
+     echo form_open('index.php/user/controller_verify_admin_key', $attributes); ?>
+     
+			<div class="cell width-1of1" >
+				<div class="cell width-1of1">
+					<label for="admin_key">Administrator Key:</label>
+				</div>
+				<div class="cell width-1of1" >
+					<input type="password" id="admin_key" name="admin_key" required="required" class="background-white"/>
+					<span name ="helpadminkey" class="color-red"/><span>
+				</div>
+			</div>
+			
+<div class="cell">
+	<input type="submit" value= "Enter" onclick= "validate_admin_key()" name = "admin_key_button" class="cell float-right"/>
+	
+</div>
+				
+			</form>
+		</div>
+	</div>
 
-        if($this->form_validation->run() == FALSE) {
-          $data['titlepage']= "Administrator Verification";
-            $this->load->view('user/view_header',$data);
-            $this->load->view('user/view_admin_key',$data); //load view for login
-            $this->load->view('user/view_footer');
-            } 
-        else {
-                //Go to private area
-           if($this->session->userdata('logged_in_type')=="admin"){
-            
-			$session_user = $this->session->userdata('logged_in')['username'];
-			$this->add_log("Admin $session_user logged in.", "Admin Login");
-			//the remove_unclaimed() and update_reservation_status() are better implemented as procedures in the database
-			$this->remove_unclaimed();
-			$this->update_reservation_status();
-			redirect('index.php/admin/controller_admin_home', 'refresh');
-		   
-		   }
-           else{
-                redirect('index.php/user/controller_login', 'refresh');
-           }
-        }   
-     }
- 
-     function check_database() {
-         //Field validation succeeded.  Validate against database
-         $admin_key = $this->input->post('admin_key');
-         //query the database
-         $result = $this->login->admin_key($admin_key);
-         if($result) {
-            
-                         $sess_array = array();
-                         foreach($result as $row) {
-                             //create the session
-                             $sess_array = array(
-                                 'username' => $row->username,
-                                 'fname' => $row->first_name,
-                                 'mname' =>$row->middle_name,
-                                 'lname'=>$row->last_name);
-                             //set session with value from database
-                             $this->session->set_userdata('logged_in', $sess_array);
-                             $this->session->set_userdata('logged_in_type', "admin");
-
-                             }
-                         return TRUE;
-                        
-
-
-              //if form validate false
-              $this->form_validation->set_message('check_database', 'Invalid Administrator Key');
-              return FALSE;
-          }
-      }
-}
-/* End of file controller_verify_login.php */
-/* Location: ./application/controllers/user/controller_verify_login.php */
+</div>
+</div>
+</div>
