@@ -43,41 +43,6 @@
 			.clear-right{
 				clear: right;
 			}
-			#tabs{
-				padding: 5px 5px 5px 5px;
-			}
-			#tabs ul{
-				clear:right;
-				margin-bottom: 2.3em;
-			}
-			#tabs li{
-				float:left;
-				list-style:none;
-			}
-			#tabs div[id|='tabs']{
-				border: 1px solid #eedddd;
-				padding: 10px;
-				border-radius: 5px;
-				height: 250px;
-				overflow-y: scroll;
-			}
-			#tabs li[class='active'] a{
-				background: #b5b4b4;
-				color: black;
-			}
-
-			#tabs li a{
-				font-size: 1em;
-				padding: 5px;
-				border: 1px solid black;
-				color: white;
-				background: #656565;
-			}
-			#tabs h1[id^='news']{
-				font-size: 1.5em;
-				text-align:center;
-				margin-bottom: 1.5em;
-			}
 		</style>
   		<?php
   		 if($this->session->userdata('logged_in_type')=='admin')
@@ -116,12 +81,14 @@
 							
 								else if($this->session->userdata('logged_in') ){
 							?>
-							<p class='float-left' style="color:white;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat;"><?php
-								$session_data = $this->session->userdata('logged_in');
-            					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
-							?>
-							(<a href='<?php echo base_url(); ?>index.php/user/controller_logout'>Logout</a>)
-							</p>
+							<div style = "background-color: #E7E7E1; box-shadow: 10px; margin-top:-3px; border-radius:5px;">
+								<p class='float-left' style="margin-left: 5px; margin-right: 5px; margin-top: 4px; color:black;background-image:url('<?php echo base_url();?>images/icn_user.png'); text-indent: 1.5em; background-size: contain; background-position: 0% 0%; background-repeat: no-repeat; font-weight: bold;"><?php
+									$session_data = $this->session->userdata('logged_in');
+	            					 echo $session_data['fname']." ".$session_data['mname'].". ".$session_data['lname'];
+								?>
+								(<a href='<?php echo base_url(); ?>index.php/user/controller_logout'>Logout</a>)
+								</p>
+							</div>
 							<?php
 								}
 							}
@@ -164,7 +131,7 @@
 								<a href="#" id="myaccount"><li>My Account
 									<ul class="">
 										<a href="<?php echo base_url(); ?>index.php/user/controller_editprofile"><li>View Profile</li></a>
-										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_reserved_list"><li>Reserved Books</li></a>
+										<a href="<?php echo base_url(); ?>index.php/user/controller_book"><li>Reserved Books</li></a>
 										<a href="<?php echo base_url(); ?>index.php/user/controller_book/user_borrowed_list"><li>Borrowed Books</li></a>
 										<a href="<?php echo base_url(); ?>index.php/user/controller_logout"><li>Logout</li></a>
 									</ul>
@@ -192,5 +159,34 @@
             s.css("position","relative");
         }
     });
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "explode",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      },
+      draggable: false,
+      buttons : {
+      	"Yes": function() {
+      		window.location.replace(link);
+      	},
+      	"No": function() {
+      		$(this).dialog('close');
+      	}
+      }
+    });
+ 
+    $( "#confirmButton" ).click(function (e) {
+    	e.preventDefault();
+    	 link = $(this).attr('href');
+    	 console.log(link);
+      $( "#dialog" ).dialog( "open" );
+    });
 });
+
+	var link;
 </script>
