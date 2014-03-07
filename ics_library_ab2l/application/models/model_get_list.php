@@ -45,6 +45,38 @@
 		return $query->result();
 		
 	}
+
+
+public function select_returned_books($account,$sort_by,$order_by,$data, $limit,$start){
+	
+	if ($sort_by == "due_date")
+			$query= $this->db->query("SELECT *
+			FROM book_reservation br, book b, user_account u, book_call_number cn
+			WHERE u.username='".$account."' 
+			AND br.call_number = cn.call_number
+			AND u.account_number = br.account_number
+			AND cn.id = b.id
+			AND br.status='returned'
+			GROUP BY br.call_number
+			ORDER BY br.due_date");
+
+	if($limit>0){	
+		if ($start == NULL)
+				$start = 0;
+		if ($sort_by == "due_date")
+			$query= $this->db->query("SELECT * FROM book_reservation br, book b, user_account u, book_call_number cn
+					WHERE u.username='".$account."' 
+					AND br.call_number = cn.call_number
+					AND u.account_number = br.account_number
+					AND cn.id = b.id
+					AND br.status='returned'
+					GROUP BY br.call_number
+					ORDER BY br.due_date
+					LIMIT $start,$limit");
+		}
+		return $query->result();
+}
+
 	
 	public function get_book_authors($id){
 	 	$query = $this->db->get_where('book_author', array('id' => $id));
@@ -67,21 +99,7 @@
 		GROUP BY br.call_number
 		ORDER BY br.due_date");
 
-		if($limit>0){
-		$query= $this->db->query("SELECT *
-		FROM book_reservation br, book b, user_account u, book_call_number cn
-		WHERE u.username='".$account."' 
-		AND br.call_number = cn.call_number
-		AND u.account_number = br.account_number
-		AND cn.id = b.id
-		AND br.status='".$status."'
-		GROUP BY br.call_number
-		ORDER BY br.due_date
-		LIMIT ".$limit." OFFSET ".$start." ");
-
-		}
-
-
+		
 
 		return $query->result();
 	}

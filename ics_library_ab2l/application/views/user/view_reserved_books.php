@@ -38,6 +38,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 2%;">#</th>
+                                                    <th style="width: 10%;" nowrap="nowrap">ISBN</th>
                                                     <th style="width: 10%;" nowrap="nowrap">Subject</th>
                                                     <th style="width: 45%;" nowrap="nowrap">Material</th>
                                                     <th style="width: 6%;" nowrap="nowrap">Type</th>
@@ -52,6 +53,7 @@
                                                     foreach($result as $row){//subject,title,author,type,status,call_number
                                                         echo "<tr>";
                                                             echo "<td>$count</td>";
+                                                            echo "<td>$row->isbn</td>";
 
                                                             $data['multi_valued'] = $this->model_get_list->get_book_subjects($row->id);
                                                             $subjects = "";
