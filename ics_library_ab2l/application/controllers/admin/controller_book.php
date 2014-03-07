@@ -147,7 +147,7 @@ class Controller_book extends Controller_log {
 			$title = htmlspecialchars($_POST['title1']);
 			$author = array_unique ($_POST['author']);
 			$subject = array_unique ($_POST['subject']);
-			$isbn = $_POST['isbn'];
+			$isbn = htmlspecialchars($_POST['isbn']);
 			$year_of_pub = htmlspecialchars($_POST['year_of_pub']);
 			$type = strtoupper ($_POST['type1']);
 			$quantity = sizeof($call_number);
@@ -166,7 +166,7 @@ class Controller_book extends Controller_log {
 
 	public function call_success(){
 			echo "<script>
-				alert('You have successfully add a book');
+				alert('You have successfully add a material');
 			</script>";
 			redirect('index.php/admin/controller_add_books', 'refresh');
 	}

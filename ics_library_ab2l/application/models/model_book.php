@@ -22,7 +22,7 @@ class Model_book extends CI_Model {
 	
 	/*ADD Book*/
 	public function insert_book_info($call_number, $title, $year_of_pub, $isbn, $type, $no_of_available, $quantity, $book_stat, $author, $subject){
-	$this->db->query("INSERT INTO book values(default, '$title', '$year_of_pub', '$type', $no_of_available, $quantity, $book_stat, $isbn)");
+	$this->db->query("INSERT INTO book values(default, '$title', '$year_of_pub', '$type', $no_of_available, $quantity, $book_stat, '$isbn')");
 
 
 	foreach ($author as $value) {

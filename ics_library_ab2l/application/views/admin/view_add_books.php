@@ -5,11 +5,23 @@
                             myform.author.onblur=validate_author;
                             myform.subject.onblur=validate_subject;
                             myform.callno.onblur=validate_call_no;
-                            myform.isbn.onblure=validate_isbn_key;
+                            myform.isbn.onblur=validate_isbn_key;
                             myform.year_of_pub.onblur=validate_year_pub;
                             myform.onsubmit=process_add;
                         }
-                                
+                              
+                        function checker(){
+
+                        var selected = document.getElementById('type_book').value;
+
+                        if(selected === 'BOOK')
+                            $('#isbn_div').show();
+                        
+                        else
+                            $('#isbn_div').hide();
+
+                        } 
+  
 
                         function validate_title() {
                             msg="Invalid input: ";
@@ -95,14 +107,14 @@
 
 
                         function validate_isbn_key(){
+                            var selected = document.getElementById('type_book').value;
                             msg="Invalid input: ";
                             str=myform.isbn.value;
-
                             if(str=="")
                                 msg+="ISBN is required!<br/>";
-                            if( String(x).search(/^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/) != -1
-&&( str<0000000000001 || str>99999999999999 ))
-                                msg+="Must be numbers only and 13 digits.<br/>";
+                            if(!str.match(/^[0-9][0-9\-]+[0-9]$/))
+                                msg+="Must start and end in number and 13 digits.<br/>";
+
                             if(msg=="Invalid input: ")
                             msg="";
                             else {
@@ -110,12 +122,14 @@
                                 document.getElementsByName("help_isbn_key")[0].style.fontFamily="verdana";
                                 document.getElementsByName("help_isbn_key")[0].style.color="red";
                             }
-                            document.getElementsByName("help_call_number")[0].innerHTML=msg;
-                            if(msg=="")
+                            document.getElementsByName("help_isbn_key")[0].innerHTML=msg;
+
+                            if(msg=="" || selected != "BOOK")
                                 return true;
   
                             
                         }
+
 
 
                         function validate_year_pub() {
@@ -364,19 +378,6 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col">
-                                                                    <div class="col width-1of4">
-                                                                        <div class="cell">
-                                                                            <label for="isbn">ISBN<span class="color-red"></span></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col width-fill">
-                                                                        <div class="cell">
-                                                                            <input type="text" id="isbn" name = "isbn" placeholder="ISBN">&nbsp;
-                                                                            <br/><span name="help_isbn_key" class="color-red"></span><br/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
                                                                  <div class="col">
                                                                     <div class="col width-1of4">
                                                                         <div class="cell">
@@ -398,15 +399,30 @@
                                                                     </div>
                                                                     <div class="col width-fill">
                                                                         <div class="cell">
-                                                                            <select name="type1">
-                                                                                <option value="Book">BOOK</option>
+                                                                            <select id = "type_book" name="type1" onchange = "checker()">
+                                                                                <option value="BOOK">BOOK</option>
                                                                                 <option value="SP">SP</option>
-                                                                                <option value="Thesis">THESIS</option>
+                                                                                <option value="THESIS">THESIS</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
+                                                                    <br/>
                                                                 </div>
 
+
+                                                                <div class="col" id ='isbn_div'>
+                                                                    <div class="col width-1of4">
+                                                                        <div class="cell">
+                                                                            <label for="isbn">ISBN<span class="color-red"> *</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col width-fill">
+                                                                        <div class="cell">
+                                                                            <input type="text" id="isbn" name = "isbn" placeholder="ISBN">&nbsp;
+                                                                            <br/><span name="help_isbn_key" class="color-red"></span><br/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
                                                                 <div class="col">
                                                                     <div class="col width-1of4">
