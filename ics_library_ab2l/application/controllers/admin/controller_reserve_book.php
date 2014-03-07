@@ -4,9 +4,15 @@ class Controller_reserve_book extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('model_reserve_book');
+        $this->load->library(array('form_validation','session'));
+        $this->load->helper(array('form','html'));
+        $this->load->model('model_check_session');
 	}
 
 	function index(){
+		if($this->session->userdata('id') == FALSE){
+			redirect('index.php/admin/controller_view_users', 'refresh');
+		}
 		$data['page_title'] = 'Reservation Page';
 		$data['id'] = urldecode($this->session->userdata('id'));
 		$row=$this->model_reserve_book->fetch_book($data['id']);
@@ -42,77 +48,80 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function verify_login($id){
-		if($this->session->userdata('logged_in_type')!="admin")
-            redirect('index.php/user/controller_login', 'refresh');
-		if($this->session->userdata('logged_in') == FALSE){
-			echo "This should redirect to login page";
-		}
+        if($this->model_check_session->check_admin_session() != TRUE)
+            redirect('index.php/user/controller_home', 'refresh');
 		else{
 			$id = urldecode($id);
-			$newdata = array(
-				'id' => $id
-				);
+				$newdata = array(
+					'id' => $id
+					);
 			$this->session->set_userdata($newdata);
-			redirect('index.php/admin/controller_reserve_book');
+			if($this->session->userdata('borrower')){
+				redirect('index.php/admin/controller_reserve_book', 'refresh');
+			}
+			else{
+				redirect('index.php/admin/controller_view_users', 'refresh');
+			}
 		}
 	}
 
 	function confirm_reservation(){
-		if($this->session->userdata('logged_in_type')!="admin")
-            redirect('index.php/user/controller_login', 'refresh');
-		if($this->session->userdata('id') != FALSE && $this->session->userdata('borrower') != FALSE){
-			$data['id'] = $this->session->userdata('id');
-			$data['borrower'] = $this->session->userdata('borrower');
-			$row = $this->model_reserve_book->fetch_user($data['borrower']);
-			foreach ($row->result() as $value) {
-				$data['borrower'] = $value->account_number;
-			}
-			$num_borrowed = $this->model_reserve_book->fetch_user_reservation($data['borrower'])->num_rows();
-			if($num_borrowed < 3){
-				$row = $this->model_reserve_book->fetch_book($data['id']);
-				if($row->num_rows() == 1){
-					foreach ($row->result() as $value) {
-						$no_of_available = $value->no_of_available;
-					}
+        if($this->model_check_session->check_admin_session() != TRUE)
+            redirect('index.php/user/controller_home', 'refresh');
+        else{
+        	if($this->session->userdata('id') != FALSE && $this->session->userdata('borrower') != FALSE){
+				$data['id'] = $this->session->userdata('id');
+				$data['borrower'] = $this->session->userdata('borrower');
+				$this->session->unset_userdata('id');
+				$this->session->unset_userdata('borrower');
+				$row = $this->model_reserve_book->fetch_user($data['borrower']);
+				foreach ($row->result() as $value) {
+					$data['borrower'] = $value->account_number;
 				}
-				if($no_of_available > 0){
-					$this->model_reserve_book->add_reservation($data);
-					$this->session->unset_userdata('call_number');
-					if($this->session->userdata('logged_as_admin')){
-						$this->session->unset_userdata('borrower');
+				$num_borrowed = $this->model_reserve_book->fetch_user_reservation($data['borrower'])->num_rows();
+				if($num_borrowed < 3){
+					$row = $this->model_reserve_book->fetch_book($data['id']);
+					if($row->num_rows() == 1){
+						foreach ($row->result() as $value) {
+							$no_of_available = $value->no_of_available;
+						}
 					}
-					redirect('index.php/admin/controller_reserve_book/success');
+					$row2 = $this->model_reserve_book->fetch_breservation2($data['id']);
+	                $available = 0;
+	                foreach($row2->result() as $val){
+	                	if($val->rank == 1)
+	                		$available++;
+	                }
+	                $available = $no_of_available - $available;
+	                
+					if($available > 0){
+						$this->model_reserve_book->add_reservation($data);
+						echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
+						redirect('index.php/admin/controller_outgoing_books','refresh');
+					}
+					else{
+						$this->model_reserve_book->waitlist_reservation($data);
+						echo "<script>alert('There is not enough number of books available. You are waitlisted.');</script>";
+						redirect('index.php/admin/controller_admin_home', 'refresh');
+
+					}
 				}
 				else{
-					echo "<script>alert('There is not enough book available');</script>";
-					redirect('index.php/admin/controller_reserve_book', 'refresh');
+					echo "<script>alert('A user is allowed to borrow at most 3 books');</script>";
+						redirect('index.php/admin/controller_admin_home', 'refresh');
+				}
+				
+			}
+			else{
+				if($this->session->userdata('borrower')){
+					redirect('index.php/admin/controller_search_book', 'refresh');
+				}
+				else{
+					redirect('index.php/admin/controller_view_users', 'refresh');
 				}
 			}
-			else{
-				echo "<script>alert('A user is allowed to borrow at most 3 books');</script>";
-					redirect('index.php/admin/controller_reserve_book', 'refresh');
-			}
-		}
-		else{
-			if($this->session->userdata('logged_as_admin')){
-				$this->session->unset_userdata('call_number');
-				$this->session->unset_userdata('borrower');
-				redirect('controller_search_book/logged_as_admin');
-			}
-			else if($this->session->userdata('logged_as_user')){
-				$this->session->unset_userdata('call_number');
-				redirect('controller_search_book/logged_as_user');
-			}
-			else{
-				$this->session->unset_userdata('call_number');
-				$this->session->unset_userdata('borrower');
-				redirect('controller_search_book');
-			}
-		}
+        }
 		
-	}
-
-	function success(){
-		redirect('index.php/admin/controller_outgoing_books','refresh');
+		
 	}
 }

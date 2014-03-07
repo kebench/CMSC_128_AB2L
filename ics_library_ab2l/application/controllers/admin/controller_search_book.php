@@ -8,6 +8,9 @@ class Controller_search_book extends CI_Controller {
 	}
 
     function index() {
+    	if($this->session->userdata('id') && $this->session->userdata('borrower')){
+    		redirect('index.php/admin/controller_reserve_book/verify_login/'.$this->session->userdata('id'), 'refresh');
+    	}
     	$data['parent'] = "Books";
     	$data['current'] = "Search";
 
@@ -137,6 +140,15 @@ class Controller_search_book extends CI_Controller {
 
 	                "</div></div>";
 		}
+
+		else if($row->num_rows() == 0){
+			echo"<div class='panel datasheet'>
+                <div class='header text-center background-red'>
+                    No results found.
+                </div></div>";
+
+		}
+
 		
 	}
 }

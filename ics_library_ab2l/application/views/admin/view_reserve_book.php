@@ -20,8 +20,8 @@
 			<b>Year of Publication: </b><?=$year_of_pub?><br />
 			<b>Type: </b><?=$type?><br />
 			<b>Expiration Date of Reservation (if book is reserved now): </b><?=$date_expire['mday']."/".$date_expire['mon']."/".$date_expire['year']?><br />
-			<input type="button" value="Confirm Reservation" id="confirmButton">
-			
+			<a id="confirmButton" href="<?php echo base_url().'index.php/admin/controller_reserve_book/confirm_reservation/'.$title; ?>"><input type="button" value="Confirm Reservation"></a>
+								
 		</div>
 	</form>
 </div>

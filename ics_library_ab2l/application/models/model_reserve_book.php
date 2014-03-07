@@ -146,7 +146,7 @@
 			$row = $this->model_reserve_book->fetch_book($data['id']);
 			foreach ($row->result() as $value) {
 				$no_of_available = $value->no_of_available;
-				$book_stat = $book_details->book_stat;
+				$book_stat = $value->book_stat;
 			}
 			$row = $this->model_reserve_book->fetch_book_borrow($data['id']);
 			foreach ($row->result() as $book_details) {

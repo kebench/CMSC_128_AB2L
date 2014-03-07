@@ -3,12 +3,10 @@ include_once('controller_log.php');
 class Controller_view_users extends Controller_log {
  
     function index() {
-    	$this->viewUser(null);
+        $this->viewUser(null);
     }
 
     function viewUser($msg){
-		if($this->session->userdata('logged_in_type')!="admin")
-                redirect('index.php/user/controller_login', 'refresh');
         $this->load->model('model_users');
         $data['results']=$this->model_users->getAllUsers();
         $data['parent'] = "Users";
@@ -24,8 +22,6 @@ class Controller_view_users extends Controller_log {
     }
 
     function search_user(){
-		if($this->session->userdata('logged_in_type')!="admin")
-                redirect('index.php/user/controller_login', 'refresh');
         $this->load->model('model_users');
         $data['results']=$this->model_users->userSearch($this->input->post('s_user'));
         $data['parent'] = "Users";
@@ -76,7 +72,7 @@ class Controller_view_users extends Controller_log {
      function email_confirm_account($account_number){  
         if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
-		include("./application/controllers/admin/controller_retrieve_email.php");
+        include("./application/controllers/admin/controller_retrieve_email.php");
          $config = array(
          'protocol'  => 'smtp',
          'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -96,7 +92,7 @@ class Controller_view_users extends Controller_log {
          //Get user account in database
          $this->load->model('model_user');
          $query['query'] = $this->model_user->get_acct($account_number);
-		 $username = $query['query'][0]->username;
+         $username = $query['query'][0]->username;
          $first_name= $query['query'][0]->first_name;
          $mi=$query['query'][0]->middle_initial;
          $last_name=$query['query'][0]->last_name;
@@ -104,61 +100,78 @@ class Controller_view_users extends Controller_log {
  
          $message = "<br />Dear {$first_name} {$mi}. {$last_name},<br/>";
          $message .= "Your account with the following information has been approved:<br />";
-		 $message .= "<b>Name:</b> {$first_name} {$mi}. {$last_name}<br />";
-		 $message .= "<b>Email:</b> {$to}<br />";
-		 $message .= "<b>Username:</b> {$username}<br />";
+         $message .= "<b>Name:</b> {$first_name} {$mi}. {$last_name}<br />";
+         $message .= "<b>Email:</b> {$to}<br />";
+         $message .= "<b>Username:</b> {$username}<br />";
          $message .= "Please remember necessary information such as your username and password used for this account to be able to access your profile in the ICS e-Lib. Please maximize the use of the site for your needs. For inquiries, please contact the ICS Library librarian.<br/><br />";
          $message .= "Thank you!<br/>";
          $message .= "ICS Library Administrator<hr />";
          $message .= "The ICS e-Lib will never ask or provide confidential account details such as your password. In case you've received messages from us asking for your password, please report them immediately to our administrators. Thank you!<br />Mag-aral ng mabuti!";
-		//	echo $message;
+        //  echo $message;
          $this->load->library('email', $config);
-		 $this->email->initialize($config);
+         $this->email->initialize($config);
          $this->email->set_newline("\r\n");
          $this->email->from($from_email, $from_name);
          $this->email->to($to); 
          $this->email->subject($subject);
          $this->email->message($message);
          //Send the email
-		if($this->email->send()){
-			$this->load->model('model_user');
-			$this->model_user->approve_user($_POST['account_number1']);
-			$session_user = $this->session->userdata('logged_in')['username'];
-			$this->add_log("Admin $session_user verified account of $account_number.", "Verify User");
-			echo "<script>alert('Account of $account_number has been successfully validated! User must check email for confirmation.')</script>";
-		}	
-	}
-		
-	function deactivate(){
-		if($this->session->userdata('logged_in_type')!="admin")
-            redirect('index.php/user/controller_login', 'refresh');
-		if(isset($_POST['deactivate'])){
-             $this->load->model('model_reservation');
-			 $overdue = count($this->model_reservation->show_all_user_book_reservation("overdue"));
-			 $borrowed = count($this->model_reservation->show_all_user_book_reservation("borrowed"));
-			 $count = $overdue + $borrowed;
-			 if($count === 0){	//no more books at hand of users, all books are returned in th library
-	             $this->load->model('model_user');
-	             $this->model_user->deactivate_users();
-				 echo "<script>alert('You have successfully deactivated the accounts of all users.')</script>";
-				 $session_user = $this->session->userdata('logged_in')['username'];
-	             $this->add_log("Admin $session_user deactivated all user accounts.", "Deactivate Users");
-			 }else{
-				echo "<script>alert('You cannot deactivate all user accounts yet. Some users still have books on loan. Make sure all users have returned their borrowed materials before deactivating all user accounts.')</script>";
-			 }
-             unset($_POST['deactivate']);
-         }
-		redirect('index.php/admin/controller_view_users','refresh');
-	}
-	
-    function borrow($borrower){
+        if($this->email->send()){
+            $this->load->model('model_user');
+            $this->model_user->approve_user($_POST['account_number1']);
+            $session_user = $this->session->userdata('logged_in')['username'];
+            $this->add_log("Admin $session_user verified account of $account_number.", "Verify User");
+            echo "<script>alert('Account of $account_number has been successfully validated! User must check email for confirmation.')</script>";
+        }   
+    }
+        
+    function deactivate(){
         if($this->session->userdata('logged_in_type')!="admin")
             redirect('index.php/user/controller_login', 'refresh');
-        $arr = array(
-            'borrower' => $borrower
-            );
-        $this->session->set_userdata($arr);
-        redirect('index.php/admin/controller_search_book');
+        if(isset($_POST['deactivate'])){
+             $this->load->model('model_reservation');
+             $overdue = count($this->model_reservation->show_all_user_book_reservation("overdue"));
+             $borrowed = count($this->model_reservation->show_all_user_book_reservation("borrowed"));
+             $count = $overdue + $borrowed;
+             if($count === 0){  //no more books at hand of users, all books are returned in th library
+                 $this->load->model('model_user');
+                 $this->model_user->deactivate_users();
+                 echo "<script>alert('You have successfully deactivated the accounts of all users.')</script>";
+                 $session_user = $this->session->userdata('logged_in')['username'];
+                 $this->add_log("Admin $session_user deactivated all user accounts.", "Deactivate Users");
+             }else{
+                echo "<script>alert('You cannot deactivate all user accounts yet. Some users still have books on loan. Make sure all users have returned their borrowed materials before deactivating all user accounts.')</script>";
+             }
+             unset($_POST['deactivate']);
+         }
+        redirect('index.php/admin/controller_view_users','refresh');
+    }
+    
+    function borrow($borrower){
+        $this->load->library(array('form_validation','session'));
+        $this->load->model('model_check_session');
+        $this->load->helper(array('form','html'));
+        if($this->model_check_session->check_admin_session() != TRUE)
+            redirect('index.php/user/controller_home', 'refresh');
+        else{
+
+            $this->load->model('model_users');
+            $data['results']=$this->model_users->userSearch($borrower);
+            $count = 0;
+            foreach ($data['results'] as $key) {
+                $count++;
+            }
+            if($count > 0){
+                $arr = array(
+                    'borrower' => $borrower
+                );
+                $this->session->set_userdata($arr);
+                redirect('index.php/admin/controller_search_book', 'refresh');
+            
+            }
+            else
+                redirect('index.php/admin/controller_view_users', 'refresh');
+        }
     }
 }
 /* End of file home_controller.php */
