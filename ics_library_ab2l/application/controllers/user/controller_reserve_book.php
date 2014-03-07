@@ -75,8 +75,14 @@ class Controller_reserve_book extends CI_Controller{
 					}
 				}
 				$row2 = $this->model_reserve_book->fetch_breservation2($data['id']);
-
-				if($no_of_available > $row2->num_rows()){
+                $available = 0;
+                foreach($row2->result() as $val){
+                	if($val->rank == 1)
+                		$available++;
+                }
+                $available = $no_of_available - $available;
+                
+				if($available > 0){
 					$this->model_reserve_book->add_reservation($data);
 					$this->session->unset_userdata('id');
 					echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";

@@ -124,10 +124,15 @@ class Controller_search_book extends CI_Controller {
 				                                echo "<td><img title = 'THESIS/SP' width = 30px height = 30px src='../../images/type_thesis.png' /></td>";
 
 				                            $row2 = $this->model_reserve_book->fetch_breservation2($row->id);
-				                            $available = $row->no_of_available - $row2->num_rows();
+				                            $available = 0;
+				                            foreach($row2->result() as $val){
+				                            	if($val->rank == 1)
+				                            		$available++;
+				                            }
+				                            $available = $row->no_of_available - $available;
 				                            echo "<td>".$available. "/" . $row->quantity."</td>";
 
-											if($row->no_of_available > $row2->num_rows())
+											if($available > 0)
 				                               echo "<td><form method='POST' action='controller_reserve_book/verify_login/$row->id'>
 				                                        <input type='submit' class='background-red table-button' value='Reserve Book'>                                                       </form>
 				                                    </td>";

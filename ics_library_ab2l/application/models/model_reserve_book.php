@@ -100,21 +100,15 @@
 			if($row->num_rows() > 0){
 				foreach ($row->result() as $book_details) {
 					$row2 = $this->model_reserve_book->fetch_breservation($book_details->call_number);
-					echo "<script>alert('".$row2->num_rows()."')</script>";
 					if($rank > $row2->num_rows()){
 						foreach ($row2->result() as $cnum_details) {
 							$call_number = $book_details->call_number;
 						}
 						$rank = $row2->num_rows();
-
-						if($row2->num_rows() < 1){
-							$call_number = $book_details->call_number;
-							$rank = 0;
-						}
 					}
 				}
 			}
-			$status = "waitlist";
+			$status = "reserved";
 			$rank++;
 			$newdata = array(
 				'rank' => $rank,
@@ -163,7 +157,7 @@
 				}
 			}
 			$status = "reserved";
-			$rank = NULL;
+			$rank = 1;
 			$call_number = $data['call_number'];
 			$newdata = array(
 				'rank' => $rank,
@@ -188,7 +182,7 @@
 			$query="*
 			FROM book_reservation
 			WHERE call_number LIKE '".$call_number."'
-			AND status LIKE 'waitlist'";
+			AND status LIKE 'reserved'";
 			//execute query
 			$this->db->select($query,FALSE);
 			
@@ -197,7 +191,7 @@
 
 
 		function fetch_breservation2($id){
-			$query="call_number
+			$query="*
 			FROM book_reservation
 			WHERE status LIKE 'reserved'
 			AND call_number IN
