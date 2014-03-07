@@ -7,6 +7,9 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function index(){
+		if($this->session->userdata('id') == FALSE){
+			redirect('index.php/user/controller_search_book', 'refresh');
+		}
 		$data['titlepage'] = 'Reservation Page';
 		$data['id'] = urldecode($this->session->userdata('id'));
 		$row=$this->model_reserve_book->fetch_book($data['id']);
@@ -48,7 +51,7 @@ class Controller_reserve_book extends CI_Controller{
 			$this->session->set_userdata($newdata);
 			
 		if($this->session->userdata('logged_in') == FALSE){
-			redirect('index.php/user/controller_login');
+			redirect('index.php/user/controller_login', 'refresh');
 		}
 		else{
 			redirect('index.php/user/controller_reserve_book');
@@ -58,6 +61,7 @@ class Controller_reserve_book extends CI_Controller{
 	function confirm_reservation($title){
 		if($this->session->userdata('id') != FALSE && $this->session->userdata('logged_in') != FALSE){
 			$data['id'] = $this->session->userdata('id');
+			$this->session->unset_userdata('id');
 			$row = $this->model_reserve_book->fetch_user($this->session->userdata('logged_in')['username']);
 			foreach ($row->result() as $value) {
 				$data['borrower'] = $value->account_number;
@@ -88,7 +92,7 @@ class Controller_reserve_book extends CI_Controller{
 		}
 		else{
 				$this->session->unset_userdata('id');
-				redirect('index.php/user/controller_reserve_book', 'refresh');
+				redirect('index.php/user/controller_reserve_book/verify_login', 'refresh');
 			
 		}
 		
