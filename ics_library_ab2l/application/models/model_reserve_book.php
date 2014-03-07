@@ -12,8 +12,7 @@
 			AND call_number NOT IN
 			(SELECT call_number
 			FROM book_reservation
-			WHERE status LIKE 'waitlist'
-			or status LIKE 'reserved'
+			WHERE status LIKE 'borrowed'
 			or status LIKE 'overdue')";
 			//execute query
 			$this->db->select($query,FALSE);
@@ -21,8 +20,19 @@
 			return $this->db->get();
 		}
 		
+		function fetch_book_borrow2($id){
+			$query="call_number
+			FROM book_call_number
+			WHERE id LIKE $id";
+			//execute query
+			$this->db->select($query,FALSE);
+			
+			return $this->db->get();
+		}
+		
+
 		function fetch_book($id){
-			$query="title, id, year_of_pub, type, no_of_available, book_stat
+			$query="*
 			FROM book
 			WHERE id LIKE $id";
 			//execute query
@@ -83,9 +93,56 @@
 			return $expired_date;
 		}
 
+		function waitlist_reservation($data){
+			$row = $this->model_reserve_book->fetch_book_borrow2($data['id']);
+			$rank = 1000;
+			$call_number;
+			if($row->num_rows() > 0){
+				foreach ($row->result() as $book_details) {
+					$row2 = $this->model_reserve_book->fetch_breservation($book_details->call_number);
+					echo "<script>alert('".$row2->num_rows()."')</script>";
+					if($rank > $row2->num_rows()){
+						foreach ($row2->result() as $cnum_details) {
+							$call_number = $book_details->call_number;
+						}
+						$rank = $row2->num_rows();
+
+						if($row2->num_rows() < 1){
+							$call_number = $book_details->call_number;
+							$rank = 0;
+						}
+					}
+				}
+			}
+			$status = "waitlist";
+			$rank++;
+			$newdata = array(
+				'rank' => $rank,
+				'status' => $status,
+				'due_date' => NULL,
+				'date_borrowed' => NULL,
+				'date_returned' => NULL,
+				'call_number' => $call_number,
+				'account_number' => $data['borrower']
+				);
+
+			$this->db->insert('book_reservation', $newdata);
+
+			$row = $this->model_reserve_book->fetch_book($data['id']);
+			if($row->num_rows() > 0){
+				foreach ($row->result() as $book_details) {
+					$book_stat = $book_details->book_stat;
+				}
+			}
+			$book_stat++;
+			$newdata2 = array(
+				'book_stat' => $book_stat
+				);
+			$this->db->where('id', $data['id']);
+			$this->db->update('book', $newdata2);
+		}
+
 		function add_reservation($data){
-			
-			
 			$date_reserved = getdate();
 			$date_expired = $this->model_reserve_book->getExpiration($date_reserved);
 			$due_date = $date_expired['year']."-".$date_expired['mon']."-".$date_expired['mday'];
@@ -105,17 +162,8 @@
 					$book_stat = $book_details->book_stat;
 				}
 			}
-
-			if($no_of_available <= 0){
-				$row = $this->model_reserve_book->fetch_breservation_rank($data['call_number']);
-				$rank = $row->num_rows();
-				$status = "waitlist";
-				$rank++;
-			}
-			else{
-				$status = "reserved";
-				$rank = NULL;
-			}
+			$status = "reserved";
+			$rank = NULL;
 			$call_number = $data['call_number'];
 			$newdata = array(
 				'rank' => $rank,
@@ -130,18 +178,32 @@
 
 			$book_stat++;
 			$newdata2 = array(
-				'no_of_available' => $no_of_available,
 				'book_stat' => $book_stat
 				);
 			$this->db->where('id', $data['id']);
 			$this->db->update('book', $newdata2);
 		}
 
-		function fetch_breservation_rank($call_number){
-			$query="status
+		function fetch_breservation($call_number){
+			$query="*
 			FROM book_reservation
 			WHERE call_number LIKE '".$call_number."'
 			AND status LIKE 'waitlist'";
+			//execute query
+			$this->db->select($query,FALSE);
+			
+			return $this->db->get();
+		}
+
+
+		function fetch_breservation2($id){
+			$query="call_number
+			FROM book_reservation
+			WHERE status LIKE 'reserved'
+			AND call_number IN
+				(SELECT call_number
+				FROM book_call_number
+				WHERE id LIKE $id)";
 			//execute query
 			$this->db->select($query,FALSE);
 			
@@ -163,7 +225,9 @@
 			$query="*
 			FROM book_reservation
 			WHERE account_number LIKE '".$account_number."'
-			AND status LIKE 'borrowed'";
+			AND
+			(status LIKE 'borrowed'
+			OR status LIKE 'overdue')";
 			//execute query
 			$this->db->select($query,FALSE);
 			

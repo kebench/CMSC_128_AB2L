@@ -74,19 +74,25 @@ class Controller_reserve_book extends CI_Controller{
 						$no_of_available = $value->no_of_available;
 					}
 				}
-				if($no_of_available > 0){
+				$row2 = $this->model_reserve_book->fetch_breservation2($data['id']);
+
+				if($no_of_available > $row2->num_rows()){
 					$this->model_reserve_book->add_reservation($data);
 					$this->session->unset_userdata('id');
-					redirect('index.php/user/controller_reserve_book/success/'.$title,'refresh');
+					echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
+					redirect('index.php/user/controller_book/user_reserved_list/'.$title,'refresh');
 				}
 				else{
-					echo "<script>alert('There is not enough book available');</script>";
-					redirect('index.php/user/controller_reserve_book', 'refresh');
+					$this->model_reserve_book->waitlist_reservation($data);
+					$this->session->unset_userdata('id');
+					echo "<script>alert('There is not enough number of books available. You are waitlisted.');</script>";
+					redirect('index.php/user/controller_book/user_borrowed_list', 'refresh');
+
 				}
 			}
 			else{
 				echo "<script>alert('A user is allowed to borrow at most 3 books');</script>";
-					redirect('index.php/user/controller_reserve_book', 'refresh');
+					redirect('index.php/user/controller_book/user_borrowed_list', 'refresh');
 			}
 			
 		}
@@ -99,7 +105,5 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function success($title){
-		echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
-		redirect('index.php/user/controller_book/user_reserved_list/'.$title,'refresh');
 	}
 }
