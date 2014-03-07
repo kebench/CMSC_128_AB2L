@@ -13,7 +13,8 @@
 			(SELECT call_number
 			FROM book_reservation
 			WHERE status LIKE 'borrowed'
-			or status LIKE 'overdue')";
+			or status LIKE 'overdue'
+			or status LIKE 'reserved')";
 			//execute query
 			$this->db->select($query,FALSE);
 			
@@ -142,20 +143,16 @@
 			$due_date = $date_expired['year']."-".$date_expired['mon']."-".$date_expired['mday'];
 			$due_date = date("Y-m-d", strtotime($due_date));
 			
+			$row = $this->model_reserve_book->fetch_book($data['id']);
+			foreach ($row->result() as $value) {
+				$no_of_available = $value->no_of_available;
+				$book_stat = $book_details->book_stat;
+			}
 			$row = $this->model_reserve_book->fetch_book_borrow($data['id']);
-			$no_of_available = $row->num_rows();
-			if($no_of_available > 0){
-				foreach ($row->result() as $book_details) {
-					$data['call_number'] = $book_details->call_number;
-				}
+			foreach ($row->result() as $book_details) {
+				$data['call_number'] = $book_details->call_number;
 			}
 
-			$row = $this->model_reserve_book->fetch_book($data['id']);
-			if($row->num_rows() > 0){
-				foreach ($row->result() as $book_details) {
-					$book_stat = $book_details->book_stat;
-				}
-			}
 			$status = "reserved";
 			$rank = 1;
 			$call_number = $data['call_number'];
@@ -171,7 +168,9 @@
 			$this->db->insert('book_reservation', $newdata);
 
 			$book_stat++;
+			$no_of_available--;
 			$newdata2 = array(
+				'no_of_available' => $no_of_available,
 				'book_stat' => $book_stat
 				);
 			$this->db->where('id', $data['id']);

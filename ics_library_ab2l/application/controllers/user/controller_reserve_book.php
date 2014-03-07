@@ -74,23 +74,14 @@ class Controller_reserve_book extends CI_Controller{
 						$no_of_available = $value->no_of_available;
 					}
 				}
-				$row2 = $this->model_reserve_book->fetch_breservation2($data['id']);
-                $available = 0;
-                foreach($row2->result() as $val){
-                	if($val->rank == 1)
-                		$available++;
-                }
-                $available = $no_of_available - $available;
-                
-				if($available > 0){
+				
+				if($no_of_available > 0){
 					$this->model_reserve_book->add_reservation($data);
-					$this->session->unset_userdata('id');
 					echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
 					redirect('index.php/user/controller_book/user_reserved_list/'.$title,'refresh');
 				}
 				else{
 					$this->model_reserve_book->waitlist_reservation($data);
-					$this->session->unset_userdata('id');
 					echo "<script>alert('There is not enough number of books available. You are waitlisted.');</script>";
 					redirect('index.php/user/controller_book/user_borrowed_list', 'refresh');
 
