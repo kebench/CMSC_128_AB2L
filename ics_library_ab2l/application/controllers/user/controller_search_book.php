@@ -3,6 +3,8 @@ class Controller_search_book extends CI_Controller {
  	function __construct(){
 		parent::__construct();
 		$this->load->model('model_search_book');
+
+		$this->load->model('model_get_list');
 		$this->load->model('model_reserve_book');
 		$this->load->library('Jquery_pagination');
 		$this->load->library('pagination');
@@ -25,11 +27,11 @@ class Controller_search_book extends CI_Controller {
 		$category = addslashes($this->input->post('category'));
 		$row = $this->model_search_book->find_suggestion($str, $category);
 		// echo a list where each li has a set_activity function bound to its onclick() event
-		
+		echo "<div id='selectItems'><ul>";
 		foreach ($row->result() as $activity) {
-			echo '<li onclick="set_activity(\''.addslashes($activity->$category).'\'';
-			echo ');" class="suggested_list">'.$activity->$category.'</li>'; 
+			echo '<li id="'.$activity->$category.'" onclick="setActivity(\''.$activity->$category.'\',\'search_form\')"><a>'.$activity->$category.'</a></li>'; 
 		}
+		echo "</ul></div>";
 	}
 
 	public function refreshpage(){
@@ -149,6 +151,15 @@ class Controller_search_book extends CI_Controller {
 
 	                "</div></div>";
 		}
+		
+		else if($row->num_rows() == 0){
+			echo"<div class='panel datasheet'>
+                <div class='header text-center background-red'>
+                    No results found.
+                </div></div>";
+
+		}
+
 		
 	}
 }

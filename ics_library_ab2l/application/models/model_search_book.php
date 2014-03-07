@@ -63,26 +63,23 @@
 			$str = $data['str'];
 			if($data['str'] !== ""){
 				if($data['category'] == "author"){
-					$query=$query."id in
-						(SELECT id
-						FROM book_author
-						WHERE author LIKE '%$str%'
-						ORDER BY author LIKE 'str%' DESC";
+					$query="DISTINCT b.*
+						FROM book b, book_author ba
+						WHERE b.id=ba.id
+						ORDER BY ba.author LIKE '$str%' DESC";
 					
 				}
 				else if($data['category'] == "subject"){
-					$query=$query."id in
-						(SELECT id
-						FROM book_subject
-						WHERE subject LIKE '%$str%'
-						ORDER BY subject LIKE 'str%' DESC";
+					$query="DISTINCT b.*
+						FROM book b, book_subject bs
+						WHERE b.id=bs.id
+						ORDER BY bs.subject LIKE '$str%' DESC";
 				}
 				else if($data['category'] == "tag_name"){
-					$query=$query."id in
-						(SELECT id
-						FROM tag
-						WHERE tag_name LIKE '%$str%'
-						ORDER BY tag_name LIKE 'str%' DESC";
+					$query="DISTINCT b.*
+						FROM book b, tag t
+						WHERE b.id=t.id
+						ORDER BY t.tag_name LIKE '$str%' DESC";
 				}
 				else{
 					$query=$query.$data['category']." LIKE '%$str%'
