@@ -48,8 +48,8 @@
                 chart.write("piechart");
             });
         </script>
-<div id="main-body" class="site-body" style = "height:600px">
-                <div class="site-center" style="height:72vh;">
+<div id="main-body" class="site-body">
+                <div class="site-center">
     <div class="cell body">
         <div class="cell">
                   <p class="tiny">Statistics</p>

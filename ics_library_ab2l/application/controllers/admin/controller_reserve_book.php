@@ -113,7 +113,6 @@ class Controller_reserve_book extends CI_Controller{
 	}
 
 	function success(){
-		echo "<script>alert('You have successfully reserved a book. Please confirm it to the administrator.');</script>";
 		redirect('index.php/admin/controller_outgoing_books','refresh');
 	}
 }

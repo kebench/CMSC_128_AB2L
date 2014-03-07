@@ -77,11 +77,11 @@
                                                             echo "<td>".$row->rank."</td>"; 
                                                             
                                                             echo "<td> 
-                                                                    <form  action=\"$base/index.php/user/controller_book/cancel/\" method=\"post\">
+                                                                    <form  action=\"$base/index.php/user/controller_book/cancel/\" id='cancel$count' method=\"post\">
                                                                         <input type='hidden' name='res_number' value='{$row->res_number}'/>
                                                                         <input type='hidden' name='call_number' value='{$row->call_number}'/>
                                                                         <input type='hidden' name='rank' value='{$row->rank}'/>
-                                                                        <input type=\"submit\" onClick=\"return doconfirm();\" class='background-red table-button' name=\"cancel_reservation\" value=\"Cancel\" /></td>
+                                                                        <input type=\"submit\" class='background-red table-button' name=\"cancel_reservation\" value=\"Cancel\" /></td>
                                                                     </form>
                                                                 </td>";
                                                         echo "</tr>";
@@ -107,3 +107,6 @@
                             </div>
                         </div>
                     </div>
+<div id="canceldialog" title="Reserved Book Cancellation Dialog">
+  <h5>Do you really wish to cancel your book reservation?</h5>
+</div>
